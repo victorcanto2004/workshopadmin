@@ -9,6 +9,8 @@ import Administrador.JFMenuAdministrador;
 import Clases.Conexion;
 import Clases.TextPrompt;
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.Toolkit;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -40,7 +42,16 @@ public class JFInicioAdministrador extends javax.swing.JFrame {
         jLabelOcultar.setVisible(false);
         TextPrompt usuario = new TextPrompt("22070011",jTextNoControl);
         TextPrompt contrasenia = new TextPrompt("victor1901",jPasswordContraseña);
+        
+        setIconImage(getIconImage());
     }
+    
+    //Icono del JFrame
+    @Override
+    public Image getIconImage(){
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("workshopadmin/Imagenes/LogoIcono.png"));
+        return retValue;
+    }    
 
     /**
      * This method is called from within the constructor to initialize the form.

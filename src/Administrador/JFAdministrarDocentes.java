@@ -5,6 +5,8 @@
 package Administrador;
 
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,6 +20,14 @@ public class JFAdministrarDocentes extends javax.swing.JFrame {
      */
     public JFAdministrarDocentes() {
         initComponents();
+        setIconImage(getIconImage());
+    }
+    
+    //Icono del JFrame
+    @Override
+    public Image getIconImage(){
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("workshopadmin/Imagenes/LogoIcono.png"));
+        return retValue;
     }
 
     /**

@@ -7,6 +7,8 @@ package Administrador;
 import Clases.CargarAlumnos;
 import java.awt.Color;
 import Clases.Conexion;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -39,8 +41,15 @@ public class JFBajaAlumnos extends javax.swing.JFrame {
         jTextField1.setVisible(false);
         jTextField2.setVisible(false);
         jTextFieldidalumno.setVisible(false);
+        
+        setIconImage(getIconImage());
     }
-
+    //Icono del JFrame
+    @Override
+    public Image getIconImage(){
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("workshopadmin/Imagenes/LogoIcono.png"));
+        return retValue;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

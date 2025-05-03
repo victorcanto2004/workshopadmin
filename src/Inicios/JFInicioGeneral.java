@@ -6,6 +6,8 @@ package Inicios;
 
 import Clases.Conexion;
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JOptionPane;
@@ -24,6 +26,15 @@ public class JFInicioGeneral extends javax.swing.JFrame {
         setLocationRelativeTo(null); // Centra la ventana en la pantalla
         //tranparenciabutton();
         cerrar();
+        
+        setIconImage(getIconImage());
+    }
+    
+    //Icono del JFrame
+    @Override
+    public Image getIconImage(){
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("workshopadmin/Imagenes/LogoIcono.png"));
+        return retValue;
     }
 
     /**

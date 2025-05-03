@@ -4,20 +4,15 @@
  */
 package Administrador;
 
-import Clases.Conexion;
 import Clases.ConsultarAlumnos;
 import Clases.TextPrompt;
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -40,8 +35,15 @@ public class JFConsultarAlumnos extends javax.swing.JFrame {
         initComponents();
         
         TextPrompt matricula = new TextPrompt("22070065",jTextMatricula);
+        
+        setIconImage(getIconImage());
     }
-
+    //Icono del JFrame
+    @Override
+    public Image getIconImage(){
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("workshopadmin/Imagenes/LogoIcono.png"));
+        return retValue;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

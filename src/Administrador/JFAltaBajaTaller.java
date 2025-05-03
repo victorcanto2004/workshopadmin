@@ -8,6 +8,8 @@ import Clases.Talleres;
 import Clases.CargarTalleres;
 import Clases.TextPrompt;
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import javax.swing.JOptionPane;
@@ -38,8 +40,14 @@ public class JFAltaBajaTaller extends javax.swing.JFrame {
         jTextField2.setVisible(false);
         
         TextPrompt taller = new TextPrompt("Carpintería",jTextNombre);
+        setIconImage(getIconImage());
     }
-
+    //Icono del JFrame
+    @Override
+    public Image getIconImage(){
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("workshopadmin/Imagenes/LogoIcono.png"));
+        return retValue;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

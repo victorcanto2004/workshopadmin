@@ -10,6 +10,8 @@ import Clases.ConsultarDocente;
 import Clases.Docentes;
 import Clases.TextPrompt;
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -53,8 +55,15 @@ public class JFAltaDocentes extends javax.swing.JFrame {
         TextPrompt edad = new TextPrompt("30",jTextEdad);
         TextPrompt campo = new TextPrompt("Danza",jTextCampo);
         TextPrompt contacto = new TextPrompt("Correo, telefóno, otros...",jTextContacto);
+        
+        setIconImage(getIconImage());
     }
-
+    //Icono del JFrame
+    @Override
+    public Image getIconImage(){
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("workshopadmin/Imagenes/LogoIcono.png"));
+        return retValue;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

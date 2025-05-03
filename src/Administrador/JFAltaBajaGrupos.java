@@ -9,6 +9,8 @@ import Clases.Conexion;
 import Clases.Grupos;
 import Clases.TextPrompt;
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -49,8 +51,15 @@ public class JFAltaBajaGrupos extends javax.swing.JFrame {
         jComboBox1.setVisible(false);
         
         TextPrompt grupo = new TextPrompt("A",jTextNombre);
+        
+        setIconImage(getIconImage());
     }
-
+    //Icono del JFrame
+    @Override
+    public Image getIconImage(){
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("workshopadmin/Imagenes/LogoIcono.png"));
+        return retValue;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

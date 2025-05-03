@@ -7,6 +7,8 @@ package Administrador;
 import Clases.ConsultarTalleres;
 import Clases.TextPrompt;
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
@@ -23,8 +25,15 @@ public class JFConsultarTaller extends javax.swing.JFrame {
         initComponents();
   
         TextPrompt taller = new TextPrompt("Inglés",jTextNombre);
+        
+        setIconImage(getIconImage());
     }
-
+    //Icono del JFrame
+    @Override
+    public Image getIconImage(){
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("workshopadmin/Imagenes/LogoIcono.png"));
+        return retValue;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

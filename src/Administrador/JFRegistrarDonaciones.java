@@ -8,6 +8,8 @@ import Clases.CargarAlumnos;
 import Clases.Conexion;
 import Clases.TextPrompt;
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -49,8 +51,15 @@ public class JFRegistrarDonaciones extends javax.swing.JFrame {
         TextPrompt costo = new TextPrompt("$1520.00",jTextMonto);
         TextPrompt apellido = new TextPrompt("Lucia Sarahi",jTextApellido);
         TextPrompt nombre = new TextPrompt("Ortegon Estrella",jTextNombre);
+        
+        setIconImage(getIconImage());
     }
-
+    //Icono del JFrame
+    @Override
+    public Image getIconImage(){
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("workshopadmin/Imagenes/LogoIcono.png"));
+        return retValue;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

@@ -10,6 +10,8 @@ import Clases.Conexion;
 import Clases.ConsultarAlumnos;
 import Clases.TextPrompt;
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -52,8 +54,15 @@ public class JFAltaAlumnos extends javax.swing.JFrame {
         TextPrompt edad = new TextPrompt("21",jTextEdad);
         TextPrompt tutor = new TextPrompt("Rodolfo Israel Pech Sosa",jTextTutor);
         TextPrompt contacto = new TextPrompt("Correo, telefóno, otros...",jTextContactoTutor);
+        
+        setIconImage(getIconImage());
     }
-
+    //Icono del JFrame
+    @Override
+    public Image getIconImage(){
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("workshopadmin/Imagenes/LogoIcono.png"));
+        return retValue;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

@@ -9,6 +9,8 @@ import Clases.TextPrompt;
 import javax.swing.JOptionPane;
 import Docente.JFMenuDocente;
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -40,6 +42,15 @@ public class JFInicioDocente extends javax.swing.JFrame {
         jLabelOcultar.setVisible(false);
         TextPrompt usuario = new TextPrompt("12345678",jTextNoControl);
         TextPrompt contrasenia = new TextPrompt("unodos12",jPasswordContraseña);
+        
+        setIconImage(getIconImage());
+    }
+    
+    //Icono del JFrame
+    @Override
+    public Image getIconImage(){
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("workshopadmin/Imagenes/LogoIcono.png"));
+        return retValue;
     }
 
     /**

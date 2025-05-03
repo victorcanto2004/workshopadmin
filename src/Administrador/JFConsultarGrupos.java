@@ -9,6 +9,8 @@ import Clases.Conexion;
 import Clases.ConsultarGrupos;
 import Clases.TextPrompt;
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -40,8 +42,15 @@ public class JFConsultarGrupos extends javax.swing.JFrame {
         ct.cargarTalleres();  
         jTextField1.setVisible(false);
         jTextidgrupo.setVisible(false);
+        
+        setIconImage(getIconImage());
     }
-
+    //Icono del JFrame
+    @Override
+    public Image getIconImage(){
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("workshopadmin/Imagenes/LogoIcono.png"));
+        return retValue;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
