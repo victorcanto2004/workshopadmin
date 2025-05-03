@@ -32,7 +32,6 @@ public class JFAdministrarPagos extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jButtonCursos = new javax.swing.JButton();
-        jButtonLibros = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jButtonRegresar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -46,7 +45,7 @@ public class JFAdministrarPagos extends javax.swing.JFrame {
         jButtonCursos.setBackground(java.awt.Color.lightGray);
         jButtonCursos.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jButtonCursos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/Cursos.png"))); // NOI18N
-        jButtonCursos.setText("Cursos");
+        jButtonCursos.setText("Cursos o Libros");
         jButtonCursos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jButtonCursosMouseEntered(evt);
@@ -61,43 +60,21 @@ public class JFAdministrarPagos extends javax.swing.JFrame {
             }
         });
 
-        jButtonLibros.setBackground(java.awt.Color.lightGray);
-        jButtonLibros.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jButtonLibros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/Libros.png"))); // NOI18N
-        jButtonLibros.setText("Libros");
-        jButtonLibros.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButtonLibrosMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButtonLibrosMouseExited(evt);
-            }
-        });
-        jButtonLibros.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonLibrosActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButtonCursos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonLibros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(155, 155, 155))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(79, 79, 79)
+                .addComponent(jButtonCursos)
+                .addContainerGap(82, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(103, 103, 103)
+                .addGap(163, 163, 163)
                 .addComponent(jButtonCursos)
-                .addGap(55, 55, 55)
-                .addComponent(jButtonLibros)
-                .addContainerGap(139, Short.MAX_VALUE))
+                .addContainerGap(188, Short.MAX_VALUE))
         );
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/Informacion.png"))); // NOI18N
@@ -149,7 +126,7 @@ public class JFAdministrarPagos extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGap(96, 96, 96)
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 322, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel5)))
                 .addGap(37, 37, 37))
         );
@@ -222,28 +199,9 @@ public class JFAdministrarPagos extends javax.swing.JFrame {
         jButtonCursos.setBackground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_jButtonCursosMouseExited
 
-    private void jButtonLibrosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonLibrosMouseEntered
-        // TODO add your handling code here:
-        jButtonLibros.setBackground(Color.GREEN);
-    }//GEN-LAST:event_jButtonLibrosMouseEntered
-
-    private void jButtonLibrosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonLibrosMouseExited
-        // TODO add your handling code here:
-        jButtonLibros.setBackground(Color.LIGHT_GRAY);
-    }//GEN-LAST:event_jButtonLibrosMouseExited
-
-    private void jButtonLibrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLibrosActionPerformed
-        // TODO add your handling code here:
-        JFPagosLibros JFPagosLibros =new JFPagosLibros();
-        JFPagosLibros.setDefaultCloseOperation(JFPagosLibros.EXIT_ON_CLOSE);
-        JFPagosLibros.setVisible(true);
-        JFPagosLibros.setLocationRelativeTo(null); // Centra la ventana en la pantalla
-        this.setVisible(false);
-    }//GEN-LAST:event_jButtonLibrosActionPerformed
-
     private void jButtonCursosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCursosActionPerformed
         // TODO add your handling code here:
-        JFPagosCursos JFPagosCursos =new JFPagosCursos();
+        JFPagosCursosLibros JFPagosCursos =new JFPagosCursosLibros();
         JFPagosCursos.setDefaultCloseOperation(JFPagosCursos.EXIT_ON_CLOSE);
         JFPagosCursos.setVisible(true);
         JFPagosCursos.setLocationRelativeTo(null); // Centra la ventana en la pantalla
@@ -288,7 +246,6 @@ public class JFAdministrarPagos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCursos;
-    private javax.swing.JButton jButtonLibros;
     private javax.swing.JButton jButtonRegresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

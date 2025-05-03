@@ -152,4 +152,45 @@ try {
         JOptionPane.showMessageDialog(null, "Error al cargar los datos: " + e.getMessage());
             }       
         }
+    
+    public void CargarDocentes(){
+    try {
+            // Verificar que el TextField no esté vacío
+            if (idguardado2 != null && !idguardado2.trim().isEmpty()) {
+                // Establecer la conexión a la base de datos
+                Class.forName(driver);
+                cx = DriverManager.getConnection(url + bd, user, password);
+
+                // Consulta SQL para obtener los grupos asociados a ese id_taller
+                String query = "SELECT no_usuario FROM docentes WHERE id_grupo = ?";
+                PreparedStatement stmt = cx.prepareStatement(query);
+                stmt.setString(1, idguardado2);  // Establecer el parámetro id_taller
+
+                // Ejecutar la consulta
+                var rs = stmt.executeQuery();
+
+                // Limpiar el JComboBox antes de agregar nuevos elementos
+                jComboBox3.removeAllItems();
+
+                // Agregar la opción "Grupo"
+                jComboBox3.addItem("No_Usuario");
+
+                // Agregar los grupos al JComboBox
+                while (rs.next()) {
+                    jComboBox3.addItem(rs.getString("no_usuario"));
+                }
+
+                // Cerrar los recursos
+                rs.close();
+                stmt.close();
+                cx.close();
+
+                jComboBox3.updateUI();  // Refrescar el JComboBox visualmente
+            } else {
+                // Si el TextField está vacío, mostrar un mensaje
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al cargar los datos: " + e.getMessage());
+                }       
+        }
     }

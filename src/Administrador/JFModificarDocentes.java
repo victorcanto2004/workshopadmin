@@ -4,7 +4,9 @@
  */
 package Administrador;
 
+import Clases.ConsultarDocente;
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 /**
@@ -29,6 +31,8 @@ public class JFModificarDocentes extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableTalleresGrupos = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -36,14 +40,10 @@ public class JFModificarDocentes extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextTaller = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextGrupo = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextContactoTutor = new javax.swing.JTextField();
+        jTextContacto = new javax.swing.JTextField();
         jButtonActualizar = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jTextNombres = new javax.swing.JTextField();
         jTextApellidos = new javax.swing.JTextField();
@@ -54,7 +54,22 @@ public class JFModificarDocentes extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jTextNOUsuario = new javax.swing.JTextField();
         jTextContraseña = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTableTalleresGrupos1 = new javax.swing.JTable();
         jButtonRegresarInicio = new javax.swing.JButton();
+
+        jTableTalleresGrupos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTableTalleresGrupos);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Actualizar datos de docentes");
@@ -94,17 +109,13 @@ public class JFModificarDocentes extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel2.setText("Nombres");
 
-        jTextTaller.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel3.setText("Apellidos");
-
-        jTextGrupo.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel4.setText("Edad");
 
-        jTextContactoTutor.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jTextContacto.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
         jButtonActualizar.setBackground(java.awt.Color.lightGray);
         jButtonActualizar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -123,12 +134,6 @@ public class JFModificarDocentes extends javax.swing.JFrame {
                 jButtonActualizarActionPerformed(evt);
             }
         });
-
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel6.setText("Taller");
-
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel7.setText("Grupo");
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel8.setText("Contacto");
@@ -151,8 +156,26 @@ public class JFModificarDocentes extends javax.swing.JFrame {
         jLabel13.setText("Contraseña");
 
         jTextNOUsuario.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jTextNOUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextNOUsuarioKeyReleased(evt);
+            }
+        });
 
         jTextContraseña.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+
+        jTableTalleresGrupos1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTableTalleresGrupos1);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -161,19 +184,10 @@ public class JFModificarDocentes extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel7)
-                                .addComponent(jLabel6))
-                            .addGap(37, 37, 37)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTextTaller)
-                                .addComponent(jTextGrupo)))
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addComponent(jLabel8)
-                            .addGap(7, 7, 7)
-                            .addComponent(jTextContactoTutor, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addGap(7, 7, 7)
+                        .addComponent(jTextContacto, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(jPanel2Layout.createSequentialGroup()
                             .addComponent(jLabel12)
@@ -202,7 +216,9 @@ public class JFModificarDocentes extends javax.swing.JFrame {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(jTextCampo)))))
                     .addComponent(jButtonActualizar))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,26 +240,20 @@ public class JFModificarDocentes extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(jTextApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(jTextCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel11)
+                        .addComponent(jTextCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jTextEdad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jTextContactoTutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jTextTaller, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
-                    .addComponent(jTextGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(jTextContacto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(112, 112, 112)
                 .addComponent(jButtonActualizar)
                 .addGap(26, 26, 26))
         );
@@ -374,6 +384,8 @@ public class JFModificarDocentes extends javax.swing.JFrame {
             JOptionPane.QUESTION_MESSAGE);
         if (respuesta == JOptionPane.YES_OPTION) {
             // Aquí colocas la lógica para dar de alta al alumno
+        ConsultarDocente cd = new ConsultarDocente();
+        cd.Modificar(jTextNOUsuario, jTextContraseña, jTextNombres, jTextApellidos, jTextEdad, jTextContacto, jTextCampo);
             JOptionPane.showMessageDialog(null, "Alumno dado de alta exitosamente.");
         } else {
             // Si el usuario elige "No", simplemente no hace nada o muestra otro mensaje
@@ -402,6 +414,15 @@ public class JFModificarDocentes extends javax.swing.JFrame {
             JOptionPane.INFORMATION_MESSAGE);
         this.setVisible(false);
     }//GEN-LAST:event_jButtonRegresarInicioActionPerformed
+
+    private void jTextNOUsuarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextNOUsuarioKeyReleased
+        // TODO add your handling code here:
+                if(evt.getKeyCode()==KeyEvent.VK_ENTER)
+        {
+        ConsultarDocente cd = new ConsultarDocente();
+        cd.Consultar(jTextNOUsuario, jTextContraseña, jTextNombres, jTextApellidos, jTextEdad, jTextContacto, jTextCampo, jTableTalleresGrupos);
+        }
+    }//GEN-LAST:event_jTextNOUsuarioKeyReleased
 
     /**
      * @param args the command line arguments
@@ -450,20 +471,20 @@ public class JFModificarDocentes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTableTalleresGrupos;
+    private javax.swing.JTable jTableTalleresGrupos1;
     private javax.swing.JTextField jTextApellidos;
     private javax.swing.JTextField jTextCampo;
-    private javax.swing.JTextField jTextContactoTutor;
+    private javax.swing.JTextField jTextContacto;
     private javax.swing.JTextField jTextContraseña;
     private javax.swing.JTextField jTextEdad;
-    private javax.swing.JTextField jTextGrupo;
     private javax.swing.JTextField jTextNOUsuario;
     private javax.swing.JTextField jTextNombres;
-    private javax.swing.JTextField jTextTaller;
     // End of variables declaration//GEN-END:variables
 }

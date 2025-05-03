@@ -8,8 +8,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -107,4 +110,81 @@ try {
         JOptionPane.showMessageDialog(null, "Error al cargar los datos: " + e.getMessage());
     }
 }
+    public void Modificar(JTextField jTextidgrupo,
+            JTextField jTextNuevoNombre){
+          try
+            {
+                if(jTextidgrupo.getText().isEmpty())
+                {
+                    JOptionPane.showMessageDialog(null,"Primero debe buscar al estudiante para poder actualizar");
+                    jTextidgrupo.requestFocus();
+                }
+                else
+                {         
+                    Class.forName(driver); 
+                    cx=DriverManager.getConnection(url+bd,user, password); 
+                    PreparedStatement consulta;
+                    consulta=cx.prepareStatement("UPDATE grupos "
+                                                + "SET nombre=? "
+                                                + "WHERE id_grupo=?");
+                    
+                consulta.setString(1, jTextNuevoNombre.getText());      
+                consulta.setString(2, jTextidgrupo.getText()); // Para el WHERE
+
+                consulta.executeUpdate();
+                consulta.close();
+                cx.close();
+                
+                cargarTalleres();
+                
+                JOptionPane.showMessageDialog(null, "El estudiante se ha actualizado con éxito");
+                jTextidgrupo.requestFocus();
+                }
+                
+       
+            }
+                catch (ClassNotFoundException | SQLException ex) {
+                System.out.println("No se conectó a la BD " + ex.getMessage());
+                Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    }
+    
+    public void ModificarTalleres(JTextField jTextidgrupo,
+            JTextField jTextNuevoNombre){
+          try
+            {
+                if(jTextidgrupo.getText().isEmpty())
+                {
+                    JOptionPane.showMessageDialog(null,"Primero debe buscar al estudiante para poder actualizar");
+                    jTextidgrupo.requestFocus();
+                }
+                else
+                {         
+                    Class.forName(driver); 
+                    cx=DriverManager.getConnection(url+bd,user, password); 
+                    PreparedStatement consulta;
+                    consulta=cx.prepareStatement("UPDATE talleres "
+                                                + "SET nombre=? "
+                                                + "WHERE id_taller=?");
+                    
+                consulta.setString(1, jTextNuevoNombre.getText());      
+                consulta.setString(2, jTextidgrupo.getText()); // Para el WHERE
+
+                consulta.executeUpdate();
+                consulta.close();
+                cx.close();
+                
+                cargarTalleres();
+                
+                JOptionPane.showMessageDialog(null, "El estudiante se ha actualizado con éxito");
+                jTextidgrupo.requestFocus();
+                }
+                
+       
+            }
+                catch (ClassNotFoundException | SQLException ex) {
+                System.out.println("No se conectó a la BD " + ex.getMessage());
+                Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    }
 }  

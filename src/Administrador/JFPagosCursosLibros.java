@@ -22,10 +22,10 @@ import javax.swing.JOptionPane;
  *
  * @author canto
  */
-public class JFRegistrarDonaciones extends javax.swing.JFrame {
+public class JFPagosCursosLibros extends javax.swing.JFrame {
 
     /**
-     * Creates new form JFRegistrarDonaciones
+     * Creates new form JFPagosCursosLibros
      */
     
         String bd="workshopadmin";
@@ -36,11 +36,10 @@ public class JFRegistrarDonaciones extends javax.swing.JFrame {
     Connection cx=null;
     PreparedStatement ps=null;
     
-    public JFRegistrarDonaciones() {
+    public JFPagosCursosLibros() {
         initComponents();
-        
-     CargarAlumnos al = new CargarAlumnos(jComboBoxTalleres, jComboBoxGrupos,jComboBoxAlumnos, jTextField1.getText(),jTextField2.getText());
-        al.cargarTalleres();
+        CargarAlumnos al = new CargarAlumnos(jComboBoxTalleres, jComboBoxGrupos,jComboBoxAlumnos, jTextField1.getText(),jTextField2.getText());
+        al.cargarTalleres(); 
     }
 
     /**
@@ -53,60 +52,46 @@ public class JFRegistrarDonaciones extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButtonRegresar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextNombre = new javax.swing.JTextField();
+        jTextMotivo = new javax.swing.JTextField();
         jTextMonto = new javax.swing.JTextField();
         jButtonRegistrar = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
-        jTextApellido = new javax.swing.JTextField();
+        jButtonHistorial = new javax.swing.JButton();
         jComboBoxTalleres = new javax.swing.JComboBox<>();
-        jComboBoxGrupos = new javax.swing.JComboBox<>();
         jTextField1 = new javax.swing.JTextField();
+        jComboBoxGrupos = new javax.swing.JComboBox<>();
         jTextField2 = new javax.swing.JTextField();
         jComboBoxAlumnos = new javax.swing.JComboBox<>();
+        jTextField3 = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jTextNombre = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jTexApellido = new javax.swing.JTextField();
         jDateChooserFecha = new com.toedter.calendar.JDateChooser();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jButtonRegresar = new javax.swing.JButton();
         jButtonRegresarInicio = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Registrar donaciones");
+        setTitle("Registrar pagos de cursos");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jButtonRegresar.setBackground(java.awt.Color.lightGray);
-        jButtonRegresar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButtonRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/Atras.png"))); // NOI18N
-        jButtonRegresar.setText("Regresar");
-        jButtonRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButtonRegresarMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButtonRegresarMouseExited(evt);
-            }
-        });
-        jButtonRegresar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonRegresarActionPerformed(evt);
-            }
-        });
-
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel2.setText("Nombre");
+        jLabel2.setText("Motivo");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel3.setText("Monto");
+        jLabel3.setText("Costo");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel4.setText("Fecha");
 
-        jTextNombre.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jTextMotivo.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
         jTextMonto.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
@@ -128,10 +113,18 @@ public class JFRegistrarDonaciones extends javax.swing.JFrame {
             }
         });
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel7.setText("Apellido");
-
-        jTextApellido.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jButtonHistorial.setBackground(java.awt.Color.lightGray);
+        jButtonHistorial.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jButtonHistorial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/Historial.png"))); // NOI18N
+        jButtonHistorial.setText("Historial");
+        jButtonHistorial.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonHistorialMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonHistorialMouseExited(evt);
+            }
+        });
 
         jComboBoxTalleres.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBoxTalleres.addActionListener(new java.awt.event.ActionListener() {
@@ -140,6 +133,8 @@ public class JFRegistrarDonaciones extends javax.swing.JFrame {
             }
         });
 
+        jTextField1.setText("jTextField1");
+
         jComboBoxGrupos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBoxGrupos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -147,11 +142,26 @@ public class JFRegistrarDonaciones extends javax.swing.JFrame {
             }
         });
 
-        jTextField1.setText("jTextField1");
-
         jTextField2.setText("jTextField2");
 
         jComboBoxAlumnos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxAlumnos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxAlumnosActionPerformed(evt);
+            }
+        });
+
+        jTextField3.setText("jTextField3");
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel6.setText("Nombre");
+
+        jTextNombre.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel7.setText("Apellido");
+
+        jTexApellido.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
         jDateChooserFecha.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
@@ -160,76 +170,85 @@ public class JFRegistrarDonaciones extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jButtonHistorial)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addComponent(jButtonRegistrar)
+                .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jComboBoxGrupos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(133, 133, 133)
-                        .addComponent(jButtonRegistrar))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jComboBoxTalleres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jComboBoxGrupos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(26, 26, 26)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addComponent(jDateChooserFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jTextMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(34, 34, 34)
-                                        .addComponent(jComboBoxAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(49, Short.MAX_VALUE))
+                            .addComponent(jLabel2)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel6))
+                            .addComponent(jComboBoxTalleres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBoxAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextMotivo, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
+                            .addComponent(jTextMonto)
+                            .addComponent(jTextNombre)
+                            .addComponent(jTexApellido)
+                            .addComponent(jDateChooserFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBoxAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextMotivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(jTextMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel4)
+                    .addComponent(jDateChooserFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(22, 22, 22))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jDateChooserFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jTextNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(jTexApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxTalleres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxGrupos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
-                .addComponent(jButtonRegistrar)
-                .addGap(32, 32, 32))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonRegistrar)
+                    .addComponent(jButtonHistorial))
+                .addGap(33, 33, 33))
         );
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Imagenes/Pagos.png"))); // NOI18N
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel5.setText("Registra el pago de los cursos o libros");
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/Informacion.png"))); // NOI18N
         jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -238,10 +257,23 @@ public class JFRegistrarDonaciones extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
-        jLabel5.setText("Registra las donaciones");
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Imagenes/Pagos.png"))); // NOI18N
+        jButtonRegresar.setBackground(java.awt.Color.lightGray);
+        jButtonRegresar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jButtonRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/Atras.png"))); // NOI18N
+        jButtonRegresar.setText("Regresar");
+        jButtonRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonRegresarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonRegresarMouseExited(evt);
+            }
+        });
+        jButtonRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRegresarActionPerformed(evt);
+            }
+        });
 
         jButtonRegresarInicio.setBackground(java.awt.Color.lightGray);
         jButtonRegresarInicio.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -270,13 +302,13 @@ public class JFRegistrarDonaciones extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButtonRegresar)
-                        .addGap(27, 27, 27)
+                        .addGap(35, 35, 35)
                         .addComponent(jButtonRegresarInicio))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(44, 44, 44)
+                        .addGap(56, 56, 56)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(54, 54, 54)
                 .addComponent(jLabel5)
@@ -293,13 +325,13 @@ public class JFRegistrarDonaciones extends javax.swing.JFrame {
                     .addComponent(jLabel10))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonRegresar)
-                    .addComponent(jButtonRegresarInicio))
-                .addGap(30, 30, 30))
+                    .addComponent(jButtonRegresarInicio)
+                    .addComponent(jButtonRegresar))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -315,25 +347,6 @@ public class JFRegistrarDonaciones extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButtonRegresarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegresarMouseEntered
-        // TODO add your handling code here:
-        jButtonRegresar.setBackground(Color.GREEN);
-    }//GEN-LAST:event_jButtonRegresarMouseEntered
-
-    private void jButtonRegresarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegresarMouseExited
-        // TODO add your handling code here:
-        jButtonRegresar.setBackground(Color.LIGHT_GRAY);
-    }//GEN-LAST:event_jButtonRegresarMouseExited
-
-    private void jButtonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegresarActionPerformed
-        // TODO add your handling code here:
-        JFAdministrarDonaciones JFAdministrarDonaciones =new JFAdministrarDonaciones();
-        JFAdministrarDonaciones.setDefaultCloseOperation(JFAdministrarDonaciones.EXIT_ON_CLOSE);
-        JFAdministrarDonaciones.setVisible(true);
-        JFAdministrarDonaciones.setLocationRelativeTo(null); // Centra la ventana en la pantalla
-        this.setVisible(false);
-    }//GEN-LAST:event_jButtonRegresarActionPerformed
 
     private void jButtonRegistrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegistrarMouseEntered
         // TODO add your handling code here:
@@ -352,26 +365,23 @@ public class JFRegistrarDonaciones extends javax.swing.JFrame {
             JOptionPane.YES_NO_OPTION,
             JOptionPane.QUESTION_MESSAGE);
         if (respuesta == JOptionPane.YES_OPTION) {
-            // Aquí colocas la lógica para dar de alta al alumno
-                      try
+          try
             {    
                 Date  fecha=(Date) jDateChooserFecha.getDate();
                 DateFormat f1=new SimpleDateFormat("yyyy-MM-dd");
-                String fechadonacion=f1.format(fecha);
-               
+                String fechapago=f1.format(fecha);
                 
                     Class.forName(driver); 
                     cx=DriverManager.getConnection(url+bd,user, password); 
                     PreparedStatement consulta;
-                    consulta=cx.prepareStatement("INSERT INTO donaciones (nombre, apellido, monto, fecha_donacion, id_grupo) "
-                                               + "VALUES (?, ?, ?, ?, ?)");
+                    consulta=cx.prepareStatement("INSERT INTO pagos (motivo, monto, fecha_pago, id_alumno) "
+                                               + "VALUES (?, ?, ?, ?)");
                     // Establecer los valores para la consulta (debes obtenerlos de los JTextField)
                     
-                    consulta.setString(1, jTextNombre.getText()); // motivo
-                    consulta.setString(2, jTextApellido.getText()); // monto
-                     consulta.setDouble(3, Double.parseDouble(jTextMonto.getText())); // monto
-                    consulta.setDate(4, java.sql.Date.valueOf(fechadonacion)); // fecha_pago
-                    consulta.setInt(5, Integer.parseInt(jTextField2.getText())); // id_alumno
+                    consulta.setString(1, jTextMotivo.getText()); // motivo
+                    consulta.setDouble(2, Double.parseDouble(jTextMonto.getText())); // monto
+                    consulta.setDate(3, java.sql.Date.valueOf(fechapago)); // fecha_pago
+                    consulta.setInt(4, Integer.parseInt(jTextField3.getText())); // id_alumno
                     consulta.executeUpdate();
                     consulta.close();
                     cx.close();     
@@ -380,7 +390,8 @@ public class JFRegistrarDonaciones extends javax.swing.JFrame {
             {
                 System.out.println("No se conectó a la BD " + ex.getMessage());
                 Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
-            } 
+            }      
+            // Aquí colocas la lógica para dar de alta al alumno
             JOptionPane.showMessageDialog(null, "Alumno dado de alta exitosamente.");
         } else {
             // Si el usuario elige "No", simplemente no hace nada o muestra otro mensaje
@@ -388,12 +399,41 @@ public class JFRegistrarDonaciones extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonRegistrarActionPerformed
 
+    private void jButtonHistorialMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonHistorialMouseEntered
+        // TODO add your handling code here:
+        jButtonHistorial.setBackground(Color.GREEN);
+    }//GEN-LAST:event_jButtonHistorialMouseEntered
+
+    private void jButtonHistorialMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonHistorialMouseExited
+        // TODO add your handling code here:
+        jButtonHistorial.setBackground(Color.LIGHT_GRAY);
+    }//GEN-LAST:event_jButtonHistorialMouseExited
+
     private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
         // TODO add your handling code here:
         JOptionPane.showMessageDialog(null,"Has click en lo que deseas administrar",
             "Información",
             JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jLabel10MouseClicked
+
+    private void jButtonRegresarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegresarMouseEntered
+        // TODO add your handling code here:
+        jButtonRegresar.setBackground(Color.GREEN);
+    }//GEN-LAST:event_jButtonRegresarMouseEntered
+
+    private void jButtonRegresarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegresarMouseExited
+        // TODO add your handling code here:
+        jButtonRegresar.setBackground(Color.LIGHT_GRAY);
+    }//GEN-LAST:event_jButtonRegresarMouseExited
+
+    private void jButtonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegresarActionPerformed
+        // TODO add your handling code here:
+        JFAdministrarPagos JFAdministrarPagos =new JFAdministrarPagos();
+        JFAdministrarPagos.setDefaultCloseOperation(JFAdministrarPagos.EXIT_ON_CLOSE);
+        JFAdministrarPagos.setVisible(true);
+        JFAdministrarPagos.setLocationRelativeTo(null); // Centra la ventana en la pantalla
+        this.setVisible(false);
+    }//GEN-LAST:event_jButtonRegresarActionPerformed
 
     private void jButtonRegresarInicioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegresarInicioMouseEntered
         // TODO add your handling code here:
@@ -476,10 +516,7 @@ public class JFRegistrarDonaciones extends javax.swing.JFrame {
             jComboBoxAlumnos.removeAllItems();
             jComboBoxAlumnos.addItem("Matriculas");
             jTextNombre.setText("");
-            jTextApellido.setText("");
-            jTextMonto.setText("");
-            jDateChooserFecha.setDate(null);
-
+            jTexApellido.setText("");
         }
     }//GEN-LAST:event_jComboBoxTalleresActionPerformed
 
@@ -542,6 +579,71 @@ public class JFRegistrarDonaciones extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jComboBoxGruposActionPerformed
 
+    private void jComboBoxAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxAlumnosActionPerformed
+        // TODO add your handling code here:
+        String seleccionado = (String) jComboBoxAlumnos.getSelectedItem();
+
+        // Verificar si el valor seleccionado no es "Taller"
+        if (seleccionado != null && !seleccionado.equals("Matriculas")) {
+            // Establecer el nombre del taller en el JTextField
+            jTextField3.setText(seleccionado);
+
+            try {
+                // Establecer la conexión a la base de datos
+                Class.forName(driver);
+                cx = DriverManager.getConnection(url + bd, user, password);
+
+                // Preparar la consulta para obtener el id_taller
+                PreparedStatement consulta = cx.prepareStatement("SELECT id_alumno, "
+                        + "nombre, "
+                        + "apellido, "
+                        + "edad, tutor, "
+                        + "contacto_tutor "
+                        + "FROM alumnos WHERE matricula=? AND id_grupo=?");
+
+                // Establecer el parámetro de la consulta
+                consulta.setString(1, seleccionado);  // Usamos directamente el nombre seleccionado
+                consulta.setString(2, jTextField2.getText());
+                
+                // Ejecutar la consulta
+                var rs = consulta.executeQuery();
+
+                // Verificar si el ResultSet tiene resultados
+                if (rs.next()) {
+                    // Obtener el id_taller desde el ResultSet
+                    int idAlumno = rs.getInt("id_alumno");
+                    // Establecer el id_taller en otro JTextField
+                    // Si quieres mostrar el id_taller en otro JTextField
+                    jTextField3.setText(String.valueOf(idAlumno));  
+                    jTextNombre.setText(rs.getString("nombre"));
+                    jTexApellido.setText(rs.getString("apellido"));
+ 
+                } else {
+                    // Si no se encuentra el taller, mostrar un mensaje
+                    JOptionPane.showMessageDialog(null, "Taller no encontrado.");
+                }
+
+                // Cerrar los recursos
+                rs.close();
+                consulta.close();
+                cx.close();
+
+            } catch (ClassNotFoundException | SQLException ex) {
+                System.out.println("No se conectó a la BD " + ex.getMessage());
+                Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            // Si se selecciona "Taller" o si el valor es null, limpiar el JTextField
+            jTextField3.setText("");
+            jTextNombre.setText("");
+            jTexApellido.setText("");
+ 
+            // Limpiar el JComboBox de grupos y agregar solo "Grupos"
+            //jComboBoxGrupos.removeAllItems();
+            //jComboBoxGrupos.addItem("Grupos");
+        }
+    }//GEN-LAST:event_jComboBoxAlumnosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -559,25 +661,27 @@ public class JFRegistrarDonaciones extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JFRegistrarDonaciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFPagosCursosLibros.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JFRegistrarDonaciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFPagosCursosLibros.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JFRegistrarDonaciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFPagosCursosLibros.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JFRegistrarDonaciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFPagosCursosLibros.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JFRegistrarDonaciones().setVisible(true);
+                new JFPagosCursosLibros().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonHistorial;
     private javax.swing.JButton jButtonRegistrar;
     private javax.swing.JButton jButtonRegresar;
     private javax.swing.JButton jButtonRegresarInicio;
@@ -591,13 +695,16 @@ public class JFRegistrarDonaciones extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextApellido;
+    private javax.swing.JTextField jTexApellido;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextMonto;
+    private javax.swing.JTextField jTextMotivo;
     private javax.swing.JTextField jTextNombre;
     // End of variables declaration//GEN-END:variables
 }

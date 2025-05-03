@@ -7,7 +7,9 @@ package Administrador;
 import Clases.Alumnos;
 import Clases.CargarTalleres;
 import Clases.Conexion;
+import Clases.ConsultarAlumnos;
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -72,6 +74,8 @@ public class JFAltaAlumnos extends javax.swing.JFrame {
         jComboBoxGrupos = new javax.swing.JComboBox<>();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableTalleresGrupos = new javax.swing.JTable();
         jButtonRegresar = new javax.swing.JButton();
         jButtonRegresarInicio = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -119,6 +123,11 @@ public class JFAltaAlumnos extends javax.swing.JFrame {
         jLabel8.setText("Contacto");
 
         jTextMatricula.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jTextMatricula.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextMatriculaKeyReleased(evt);
+            }
+        });
 
         jTextNombres.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
@@ -148,6 +157,19 @@ public class JFAltaAlumnos extends javax.swing.JFrame {
         jTextField1.setText("jTextField1");
 
         jTextField2.setText("jTextField2");
+
+        jTableTalleresGrupos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTableTalleresGrupos);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -193,7 +215,9 @@ public class JFAltaAlumnos extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(256, 256, 256)
                         .addComponent(jButtonRegistrar)))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -215,9 +239,11 @@ public class JFAltaAlumnos extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(jTextEdad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jTextTutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel5)
+                        .addComponent(jTextTutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
@@ -558,6 +584,15 @@ public class JFAltaAlumnos extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_jComboBoxGruposActionPerformed
 
+    private void jTextMatriculaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextMatriculaKeyReleased
+        // TODO add your handling code here:
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER)
+        {
+          ConsultarAlumnos ca = new ConsultarAlumnos();
+          ca.Consultar(jTextMatricula, jTextNombres, jTextApellidos, jTextEdad, jTextTutor, jTextContactoTutor, jTableTalleresGrupos);
+        }
+    }//GEN-LAST:event_jTextMatriculaKeyReleased
+
     
     /**
      * @param args the command line arguments
@@ -674,6 +709,8 @@ public class JFAltaAlumnos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTableTalleresGrupos;
     private javax.swing.JTextField jTextApellidos;
     private javax.swing.JTextField jTextContactoTutor;
     private javax.swing.JTextField jTextEdad;

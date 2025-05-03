@@ -241,62 +241,64 @@ public class JFInicioAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonRegresarActionPerformed
 
     private void jButtonIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIngresarActionPerformed
-        // TODO add your handling code here:
-        if(jTextNoControl.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null,"Inserte su número de control",
+        // Método que se ejecuta al presionar el botón "Ingresar"
+        if(jTextNoControl.getText().isEmpty()){ //Verifica que el usuario no este vacío
+            JOptionPane.showMessageDialog(null,"Inserte su número de control", //Muestra mensaje en caso de estar vacío
             "Error",
             JOptionPane.ERROR_MESSAGE);
-            jTextNoControl.requestFocus();
-        } else {
+            jTextNoControl.requestFocus(); //Regresa el cursor al campo del usuario
+        } else { //Si no esta vacío comprueba que la contraseña no este vacía 
             if(jPasswordContraseña.getPassword().length == 0){
-                JOptionPane.showMessageDialog(null,"Inserte su contraseña",
+                JOptionPane.showMessageDialog(null,"Inserte su contraseña", //Muestra mensaje en caso de estar vacío 
                 "Error",
                 JOptionPane.ERROR_MESSAGE);
-                jPasswordContraseña.requestFocus();
+                jPasswordContraseña.requestFocus(); //Regresa el cursor al campo de contraseña
             }else{  
-                try
+                try // Si ambos campos están llenos
                 {
-                    Class.forName(driver); 
+                    Class.forName(driver);  // Carga el driver JDBC necesario para conectar con la base de datos
                     cx=DriverManager.getConnection(url+bd,user, password); 
-                    PreparedStatement consulta;
+                    
+                    PreparedStatement consulta; // Prepara una consulta SQL segura
                     consulta=cx.prepareStatement("SELECT usuario, contrasenia FROM usuarios WHERE usuario = ?");
-                    consulta.setString(1, jTextNoControl.getText());
-                    ResultSet resultado = consulta.executeQuery();
-                   // cx.close();
-                    String contraseniaReal = "";
+                    consulta.setString(1, jTextNoControl.getText()); // Inserta el valor ingresado como parámetro para evitar inyecciones SQL
+                    
+                    ResultSet resultado = consulta.executeQuery(); // Ejecuta la consulta y guarda el resultado
+                    String contraseniaReal = ""; // Variable donde se guardará la contraseña almacenada en la base de datos
 
-                    if(resultado.next())
-                    {
-                        contraseniaReal=resultado.getString("contrasenia");
-                        String contraseniaCapturada = new String(jPasswordContraseña.getPassword());
                         
-                    if (contraseniaReal.equals(contraseniaCapturada))
+                    if(resultado.next())  // Verifica si se encontró un usuario con ese número de control
                     {
-                        //JOptionPane.showMessageDialog(null, "Bienvenido al sistema");
-                        JFMenuAdministrador JFMenuAdministrador =new JFMenuAdministrador();  
-                        JFMenuAdministrador.setDefaultCloseOperation(JFMenuAdministrador.EXIT_ON_CLOSE); 
-                        JFMenuAdministrador.setVisible(true);
-                        JFMenuAdministrador.setLocationRelativeTo(null); // Centra la ventana en la pantalla
-                        this.setVisible(false); 
+                        contraseniaReal=resultado.getString("contrasenia");// Obtiene la contraseña real desde la base de datos
+                        String contraseniaCapturada = new String(jPasswordContraseña.getPassword());// Convierte la contraseña ingresada a String
+
+                        
+                    if (contraseniaReal.equals(contraseniaCapturada))// Compara la contraseña real con la ingresada
+                    {                        
+                        JFMenuAdministrador JFMenuAdministrador =new JFMenuAdministrador();   // Crea una instancia del menú de administrador
+                        JFMenuAdministrador.setDefaultCloseOperation(JFMenuAdministrador.EXIT_ON_CLOSE);  // Define que al cerrar se finalice la aplicación
+                        JFMenuAdministrador.setVisible(true);// Muestra la ventana de administrador
+                        JFMenuAdministrador.setLocationRelativeTo(null);  // Centra la ventana en pantalla
+                        this.setVisible(false); // Oculta la ventana de inicio de sesión
                     }
-                    else
+                    else // Si la contraseña no coincide
                     {
-                        JOptionPane.showMessageDialog(null,"Contraseña incorrecta",
+                        JOptionPane.showMessageDialog(null,"Contraseña incorrecta", // Muestra mensaje de error
                         "Error",
                         JOptionPane.ERROR_MESSAGE);
                         }
                     }
                     else{
-                            JOptionPane.showMessageDialog(null,"Usuario incorrecto",
+                            JOptionPane.showMessageDialog(null,"Usuario incorrecto", // Muestra mensaje de error
                             "Error",
                             JOptionPane.ERROR_MESSAGE);
                             }
                 }
-                catch(ClassNotFoundException | SQLException ex)
+                catch(ClassNotFoundException | SQLException ex) // Captura errores de clase no encontrada o de base de datos
                 {
-                    System.out.println("No se conectó a la BD" + ex.getMessage());
-                    JOptionPane.showMessageDialog(null, "No se conectó a la BD" + ex.getMessage());
-                    Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+                    System.out.println("No se conectó a la BD" + ex.getMessage());// Muestra el error en consola
+                    JOptionPane.showMessageDialog(null, "No se conectó a la BD" + ex.getMessage());// Muestra mensaje de error al usuario
+                    Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);// Registra el error en el log con nivel SEVERE
                         } 
                     }
                 }

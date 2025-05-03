@@ -11,12 +11,13 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
  * @author canto
  */
-public class Alumnos {
+public class Docentes {
     //Atributos
     String bd="workshopadmin";
     String url="jdbc:mysql://localhost:3306/";
@@ -26,30 +27,29 @@ public class Alumnos {
     Connection cx=null;
     PreparedStatement ps=null;
 
-    private String matriculaguardada;
+    private String nousuarioguardado;
+    private String contraguardado;
     private String nombreguardado;
     private String apellidoguardado;
     private int edadguardada;
-    private String tutorguardado;
     private String contactoguardado;
+    private String especialiadadguardado;
     private int idgrupo;
     
-    
-    //Este es el método constructor
-    public Alumnos( String matricularecibida, String nombrerecibido, String apellidorecibido, int edadrecibida, String tutorrecibido,
-            String contactorecibido, int idgrupo)
-    {
-        this.matriculaguardada = matricularecibida;
+    public Docentes(String nousuariorecibido, String contrarecibido, String nombrerecibido, String apellidorecibido, int edadrecibida, String contactorecibido,
+            String especialiadadrecibido, int idgrupo){
+     
+        this.nousuarioguardado = nousuariorecibido;
+        this.contraguardado = contrarecibido;
         this.nombreguardado = nombrerecibido;
         this.apellidoguardado = apellidorecibido;
         this.edadguardada = edadrecibida;
-        this.tutorguardado = tutorrecibido;
         this.contactoguardado = contactorecibido;
+        this.especialiadadguardado = especialiadadrecibido;
         this.idgrupo = idgrupo;
     }
-
-    public void AltaAlumno(){
-    // Obtener el nombre del grupo seleccionado del JComboBox
+    
+    public void AltaDocentes(){
         try {
             // Establecer la conexión a la base de datos
             Class.forName(driver);
@@ -72,16 +72,17 @@ public class Alumnos {
 
             // Paso 2: Insertar el alumno con el id_grupo recibido
             PreparedStatement consulta = cx.prepareStatement(
-                "INSERT INTO alumnos(matricula, nombre, apellido, edad, tutor, contacto_tutor, id_grupo) " +
-                "VALUES(?, ?, ?, ?, ?, ?, ?)"
+                "INSERT INTO docentes(no_usuario, contra_docente, nombre, apellido, edad, contacto_docente, especialidad, id_grupo) " +
+                "VALUES(?, ?, ?, ?, ?, ?, ?, ?)"
             );
-            consulta.setString(1, matriculaguardada);
-            consulta.setString(2, nombreguardado);
-            consulta.setString(3, apellidoguardado);
-            consulta.setInt(4, edadguardada);
-            consulta.setString(5, tutorguardado);
+            consulta.setString(1, nousuarioguardado);
+            consulta.setString(2, contraguardado);
+            consulta.setString(3, nombreguardado);
+            consulta.setString(4, apellidoguardado);
+            consulta.setInt(5, edadguardada);
             consulta.setString(6, contactoguardado);
-            consulta.setInt(7, idgrupo);  // Usar el id_grupo que se pasó al constructor
+            consulta.setString(7, especialiadadguardado);
+            consulta.setInt(8, idgrupo);  // Usar el id_grupo que se pasó al constructor
             consulta.executeUpdate();
             consulta.close();
             cx.close();
@@ -90,5 +91,5 @@ public class Alumnos {
             System.out.println("No se conectó a la BD: " + ex.getMessage());
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
+    }    
 }

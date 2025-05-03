@@ -4,7 +4,9 @@
  */
 package Administrador;
 
+import Clases.ConsultarTalleres;
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 /**
@@ -32,16 +34,12 @@ public class JFConsultarTaller extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        jTextDocente = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
         jButtonConsultar = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
         jTextNombre = new javax.swing.JTextField();
-        jTextNOUsuario = new javax.swing.JTextField();
         jButtonHorario = new javax.swing.JButton();
         jButtonGenerarListas = new javax.swing.JButton();
-        jTextHorario = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableTalleresGrupos = new javax.swing.JTable();
         jButtonRegresar = new javax.swing.JButton();
         jButtonRegresarInicio = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -55,11 +53,6 @@ public class JFConsultarTaller extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel7.setText("Nombre");
-
-        jTextDocente.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel8.setText("No. Usuario");
 
         jButtonConsultar.setBackground(java.awt.Color.lightGray);
         jButtonConsultar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -79,12 +72,12 @@ public class JFConsultarTaller extends javax.swing.JFrame {
             }
         });
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel9.setText("Docente");
-
         jTextNombre.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-
-        jTextNOUsuario.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jTextNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextNombreKeyReleased(evt);
+            }
+        });
 
         jButtonHorario.setBackground(java.awt.Color.lightGray);
         jButtonHorario.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -117,10 +110,18 @@ public class JFConsultarTaller extends javax.swing.JFrame {
             }
         });
 
-        jTextHorario.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel2.setText("Horario");
+        jTableTalleresGrupos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTableTalleresGrupos);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -133,20 +134,15 @@ public class JFConsultarTaller extends javax.swing.JFrame {
                     .addComponent(jButtonHorario, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(65, 65, 65)
                 .addComponent(jButtonConsultar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(39, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(7, 7, 7)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextNOUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
-                    .addComponent(jTextNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
-                    .addComponent(jTextDocente, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
-                    .addComponent(jTextHorario))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
+                        .addComponent(jTextNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(33, 33, 33))
         );
         jPanel2Layout.setVerticalGroup(
@@ -156,18 +152,8 @@ public class JFConsultarTaller extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jTextNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(jTextNOUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(jTextDocente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonHorario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -309,7 +295,16 @@ public class JFConsultarTaller extends javax.swing.JFrame {
             JOptionPane.YES_NO_OPTION,
             JOptionPane.QUESTION_MESSAGE);
         if (respuesta == JOptionPane.YES_OPTION) {
-            // Aquí colocas la lógica para dar de alta al alumno
+        
+        String nombreTaller = jTextNombre.getText(); 
+        if (!nombreTaller.isEmpty()) {
+
+        ConsultarTalleres consultar = new ConsultarTalleres();
+      
+        consultar.Consultar(nombreTaller, jTableTalleresGrupos);
+    } else {
+        JOptionPane.showMessageDialog(null, "Por favor ingrese el nombre del taller.");
+    }            
             JOptionPane.showMessageDialog(null, "Alumno dado de alta exitosamente.");
         } else {
             // Si el usuario elige "No", simplemente no hace nada o muestra otro mensaje
@@ -389,6 +384,20 @@ public class JFConsultarTaller extends javax.swing.JFrame {
         jButtonGenerarListas.setBackground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_jButtonGenerarListasMouseExited
 
+    private void jTextNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextNombreKeyReleased
+        // TODO add your handling code here:
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER)
+        {
+        String nombreTaller = jTextNombre.getText(); 
+        if (!nombreTaller.isEmpty()) {
+
+        ConsultarTalleres consultar = new ConsultarTalleres();
+      
+        consultar.Consultar(nombreTaller, jTableTalleresGrupos);
+        }
+        }
+    }//GEN-LAST:event_jTextNombreKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -434,15 +443,11 @@ public class JFConsultarTaller extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextDocente;
-    private javax.swing.JTextField jTextHorario;
-    private javax.swing.JTextField jTextNOUsuario;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTableTalleresGrupos;
     private javax.swing.JTextField jTextNombre;
     // End of variables declaration//GEN-END:variables
 }

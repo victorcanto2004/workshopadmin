@@ -4,7 +4,16 @@
  */
 package Administrador;
 
+import Clases.CargarGrupos;
+import Clases.Conexion;
 import java.awt.Color;
+import java.awt.event.KeyEvent;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,8 +25,18 @@ public class JFModificarGrupos extends javax.swing.JFrame {
     /**
      * Creates new form JFModificarGrupos
      */
+       String bd="workshopadmin";
+    String url="jdbc:mysql://localhost:3306/";
+    String user="root";
+    String password="sqloracle";
+    String driver="com.mysql.cj.jdbc.Driver";
+    Connection cx=null;
+    PreparedStatement ps=null; 
+   
     public JFModificarGrupos() {
         initComponents();
+        CargarGrupos cg = new CargarGrupos(jComboBox1, jComboBox2, jTextField1.getText());
+        cg.cargarTalleres();
     }
 
     /**
@@ -38,15 +57,13 @@ public class JFModificarGrupos extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jTextHorario = new javax.swing.JTextField();
         jButtonActualizar = new javax.swing.JButton();
-        jLabel12 = new javax.swing.JLabel();
         jTextNombre = new javax.swing.JTextField();
-        jTextNoDocente = new javax.swing.JTextField();
-        jTextNombreTaller = new javax.swing.JTextField();
-        jLabel13 = new javax.swing.JLabel();
-        jTextDocente = new javax.swing.JTextField();
+        jTextNuevoNombre = new javax.swing.JTextField();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jTextField1 = new javax.swing.JTextField();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jTextField2 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Actualizar datos de un grupo");
@@ -105,12 +122,7 @@ public class JFModificarGrupos extends javax.swing.JFrame {
         jLabel6.setText("Nombre");
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel7.setText("No. Docente");
-
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel8.setText("Taller");
-
-        jTextHorario.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel7.setText("Nuevo nombre");
 
         jButtonActualizar.setBackground(java.awt.Color.lightGray);
         jButtonActualizar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -130,76 +142,84 @@ public class JFModificarGrupos extends javax.swing.JFrame {
             }
         });
 
-        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel12.setText("Horario");
-
         jTextNombre.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
-        jTextNoDocente.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jTextNuevoNombre.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jTextNuevoNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextNuevoNombreKeyReleased(evt);
+            }
+        });
 
-        jTextNombreTaller.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
-        jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel13.setText("Docente");
+        jTextField1.setText("jTextField1");
 
-        jTextDocente.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
+
+        jTextField2.setText("jTextField2");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(37, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel6)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel8))
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel7)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(7, 7, 7)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextNombreTaller, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
-                                    .addComponent(jTextNoDocente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
-                                    .addComponent(jTextHorario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
-                                    .addComponent(jTextNombre, javax.swing.GroupLayout.Alignment.TRAILING)))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextDocente))
+                                    .addComponent(jTextNuevoNombre, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jTextNombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButtonActualizar))))
-                    .addComponent(jLabel12))
-                .addContainerGap(42, Short.MAX_VALUE))
+                                .addComponent(jButtonActualizar)))))
+                .addGap(35, 35, 35))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addGap(31, 31, 31)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addComponent(jTextNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jTextNoDocente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(jTextDocente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(jTextNombreTaller, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(jTextHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(161, 161, 161)
+                    .addComponent(jTextNuevoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jButtonActualizar)
-                .addGap(33, 33, 33))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -237,7 +257,7 @@ public class JFModificarGrupos extends javax.swing.JFrame {
                 .addComponent(jButtonRegresar)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonRegresarInicio)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(69, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -328,12 +348,139 @@ public class JFModificarGrupos extends javax.swing.JFrame {
             JOptionPane.QUESTION_MESSAGE);
         if (respuesta == JOptionPane.YES_OPTION) {
             // Aquí colocas la lógica para dar de alta al alumno
+            CargarGrupos cg = new CargarGrupos(jComboBox1, jComboBox2, jTextField1.getText());
+            cg.Modificar(jTextField2, jTextNuevoNombre);
             JOptionPane.showMessageDialog(null, "Alumno dado de alta exitosamente.");
         } else {
             // Si el usuario elige "No", simplemente no hace nada o muestra otro mensaje
             JOptionPane.showMessageDialog(null, "Operación cancelada.");
         }
     }//GEN-LAST:event_jButtonActualizarActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+        String seleccionado = (String) jComboBox1.getSelectedItem();
+
+        // Verificar si el valor seleccionado no es "Taller"
+        if (seleccionado != null && !seleccionado.equals("Taller")) {
+            // Establecer el nombre del taller en el JTextField
+            jTextField1.setText(seleccionado);
+
+            try {
+                // Establecer la conexión a la base de datos
+                Class.forName(driver);
+                cx = DriverManager.getConnection(url + bd, user, password);
+
+                // Preparar la consulta para obtener el id_taller
+                PreparedStatement consulta = cx.prepareStatement("SELECT id_taller FROM talleres WHERE nombre=?");
+
+                // Establecer el parámetro de la consulta
+                consulta.setString(1, seleccionado);  // Usamos directamente el nombre seleccionado
+
+                // Ejecutar la consulta
+                var rs = consulta.executeQuery();
+
+                // Verificar si el ResultSet tiene resultados
+                if (rs.next()) {
+                    // Obtener el id_taller desde el ResultSet
+                    int idTaller = rs.getInt("id_taller");
+
+                    // Establecer el id_taller en otro JTextField
+                    // Si quieres mostrar el id_taller en otro JTextField
+                    jTextField1.setText(String.valueOf(idTaller));
+
+                    // Llamar a cargarGrupos() pasando el id del taller y el JComboBox2 para cargar los grupos
+                    CargarGrupos cg = new CargarGrupos(jComboBox1, jComboBox2, jTextField1.getText());
+                    cg.cargarGrupos(); // Pasar el id del taller
+
+                } else {
+                    // Si no se encuentra el taller, mostrar un mensaje
+                    JOptionPane.showMessageDialog(null, "Taller no encontrado.");
+                }
+
+                // Cerrar los recursos
+                rs.close();
+                consulta.close();
+                cx.close();
+
+            } catch (ClassNotFoundException | SQLException ex) {
+                System.out.println("No se conectó a la BD " + ex.getMessage());
+                Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            // Si se selecciona "Taller" o si el valor es null, limpiar el JTextField
+            jTextField1.setText("");
+            // Limpiar el JComboBox de grupos y agregar solo "Grupos"
+            jComboBox2.removeAllItems();
+            jComboBox2.addItem("Grupos");
+        }
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        // TODO add your handling code here:
+        String seleccionado = (String) jComboBox2.getSelectedItem();
+
+        // Verificar si el valor seleccionado no es "Taller"
+        if (seleccionado != null && !seleccionado.equals("Grupos")) {
+            // Establecer el nombre del taller en el JTextField
+            jTextField2.setText(seleccionado);
+            jTextNombre.setText(seleccionado);
+
+            try {
+                // Establecer la conexión a la base de datos
+                Class.forName(driver);
+                cx = DriverManager.getConnection(url + bd, user, password);
+
+                // Preparar la consulta para obtener el id_taller
+                PreparedStatement consulta = cx.prepareStatement("SELECT id_grupo FROM grupos WHERE nombre=?");
+
+                // Establecer el parámetro de la consulta
+                consulta.setString(1, seleccionado);  // Usamos directamente el nombre seleccionado
+
+                // Ejecutar la consulta
+                var rs = consulta.executeQuery();
+
+                // Verificar si el ResultSet tiene resultados
+                if (rs.next()) {
+                    // Obtener el id_taller desde el ResultSet
+                    int idGrupo = rs.getInt("id_grupo");
+
+                    // Establecer el id_taller en otro JTextField
+                    // Si quieres mostrar el id_taller en otro JTextField
+                    jTextField2.setText(String.valueOf(idGrupo));
+
+                } else {
+                    // Si no se encuentra el taller, mostrar un mensaje
+                    JOptionPane.showMessageDialog(null, "Taller no encontrado.");
+                }
+
+                // Cerrar los recursos
+                rs.close();
+                consulta.close();
+                cx.close();
+
+            } catch (ClassNotFoundException | SQLException ex) {
+                System.out.println("No se conectó a la BD " + ex.getMessage());
+                Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            // Si se selecciona "Taller" o si el valor es null, limpiar el JTextField
+            jTextNombre.setText("");
+            jTextField2.setText("");
+            // Limpiar el JComboBox de grupos y agregar solo "Grupos"
+            //jComboBox2.removeAllItems();
+            //jComboBox2.addItem("Grupos");
+        }
+    }//GEN-LAST:event_jComboBox2ActionPerformed
+
+    private void jTextNuevoNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextNuevoNombreKeyReleased
+        // TODO add your handling code here:
+         if(evt.getKeyCode()==KeyEvent.VK_ENTER)
+        {
+            CargarGrupos cg = new CargarGrupos(jComboBox1, jComboBox2, jTextField1.getText());
+            cg.Modificar(jTextField2, jTextNuevoNombre);
+        }
+    }//GEN-LAST:event_jTextNuevoNombreKeyReleased
 
     /**
      * @param args the command line arguments
@@ -374,20 +521,18 @@ public class JFModificarGrupos extends javax.swing.JFrame {
     private javax.swing.JButton jButtonActualizar;
     private javax.swing.JButton jButtonRegresar;
     private javax.swing.JButton jButtonRegresarInicio;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField jTextDocente;
-    private javax.swing.JTextField jTextHorario;
-    private javax.swing.JTextField jTextNoDocente;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextNombre;
-    private javax.swing.JTextField jTextNombreTaller;
+    private javax.swing.JTextField jTextNuevoNombre;
     // End of variables declaration//GEN-END:variables
 }
