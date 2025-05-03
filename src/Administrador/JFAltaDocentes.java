@@ -8,6 +8,7 @@ import Clases.CargarTalleres;
 import Clases.Conexion;
 import Clases.ConsultarDocente;
 import Clases.Docentes;
+import Clases.TextPrompt;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
@@ -44,6 +45,14 @@ public class JFAltaDocentes extends javax.swing.JFrame {
         
         jTextField1.setVisible(false);
         jTextField2.setVisible(false);
+ 
+        TextPrompt nousuario = new TextPrompt("22070065",jTextNOUsuario);
+        TextPrompt contrasenia = new TextPrompt("Contra1234",jTextContraseña);
+        TextPrompt nombres = new TextPrompt("Regina Noemi",jTextNombres);
+        TextPrompt apellidos = new TextPrompt("Canul Dzib",jTextApellidos);
+        TextPrompt edad = new TextPrompt("30",jTextEdad);
+        TextPrompt campo = new TextPrompt("Danza",jTextCampo);
+        TextPrompt contacto = new TextPrompt("Correo, telefóno, otros...",jTextContacto);
     }
 
     /**

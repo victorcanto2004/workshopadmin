@@ -289,6 +289,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="jTextContacto">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="24" style="0"/>
                 </Property>
@@ -323,6 +324,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="jTextNombres">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="24" style="0"/>
                 </Property>
@@ -330,6 +332,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="jTextApellidos">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="24" style="0"/>
                 </Property>
@@ -337,6 +340,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="jTextEdad">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="24" style="0"/>
                 </Property>
@@ -352,6 +356,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="jTextCampo">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="24" style="0"/>
                 </Property>
@@ -385,6 +390,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="jTextContrase&#xf1;a">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="24" style="0"/>
                 </Property>

@@ -6,6 +6,7 @@ package Administrador;
 
 import Clases.CargarAlumnos;
 import Clases.Conexion;
+import Clases.TextPrompt;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -39,8 +40,15 @@ public class JFRegistrarDonaciones extends javax.swing.JFrame {
     public JFRegistrarDonaciones() {
         initComponents();
         
+        jTextField1.setVisible(false);
+        jTextField2.setVisible(false);
+        jComboBoxAlumnos.setVisible(false);
+        
      CargarAlumnos al = new CargarAlumnos(jComboBoxTalleres, jComboBoxGrupos,jComboBoxAlumnos, jTextField1.getText(),jTextField2.getText());
         al.cargarTalleres();
+        TextPrompt costo = new TextPrompt("$1520.00",jTextMonto);
+        TextPrompt apellido = new TextPrompt("Lucia Sarahi",jTextApellido);
+        TextPrompt nombre = new TextPrompt("Ortegon Estrella",jTextNombre);
     }
 
     /**

@@ -6,6 +6,7 @@ package Administrador;
 
 import Clases.CargarGrupos;
 import Clases.Conexion;
+import Clases.TextPrompt;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
@@ -37,6 +38,11 @@ public class JFModificarGrupos extends javax.swing.JFrame {
         initComponents();
         CargarGrupos cg = new CargarGrupos(jComboBox1, jComboBox2, jTextField1.getText());
         cg.cargarTalleres();
+      
+        jTextField1.setVisible(false);
+        jTextField2.setVisible(false);
+        
+        TextPrompt nuevonombre = new TextPrompt("A1",jTextNuevoNombre);
     }
 
     /**
@@ -142,6 +148,7 @@ public class JFModificarGrupos extends javax.swing.JFrame {
             }
         });
 
+        jTextNombre.setEditable(false);
         jTextNombre.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
         jTextNuevoNombre.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N

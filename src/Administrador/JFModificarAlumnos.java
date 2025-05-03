@@ -5,6 +5,7 @@
 package Administrador;
 
 import Clases.ConsultarAlumnos;
+import Clases.TextPrompt;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
@@ -30,6 +31,8 @@ public class JFModificarAlumnos extends javax.swing.JFrame {
     public JFModificarAlumnos() {
         initComponents();
         jTableTalleresGrupos.setVisible(false);
+ 
+        TextPrompt matricula = new TextPrompt("22070011",jTextMatricula);
     }
 
     /**
@@ -294,7 +297,7 @@ public class JFModificarAlumnos extends javax.swing.JFrame {
                         .addComponent(jButtonRegresar)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonRegresarInicio)))
-                .addGap(439, 439, 439))
+                .addGap(32, 32, 32))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -305,7 +308,7 @@ public class JFModificarAlumnos extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -354,7 +357,7 @@ public class JFModificarAlumnos extends javax.swing.JFrame {
 
     private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null,"Has click en lo que deseas administrar",
+        JOptionPane.showMessageDialog(null,"Coloca la matrícula del alumno cuyos datos deseas modificar y presiona Enter.",
             "Información",
             JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jLabel10MouseClicked

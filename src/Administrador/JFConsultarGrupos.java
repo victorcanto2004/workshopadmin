@@ -7,6 +7,7 @@ package Administrador;
 import Clases.CargarTalleres;
 import Clases.Conexion;
 import Clases.ConsultarGrupos;
+import Clases.TextPrompt;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
@@ -100,13 +101,16 @@ public class JFConsultarGrupos extends javax.swing.JFrame {
             }
         });
 
+        jTextNombre.setEditable(false);
         jTextNombre.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
+        jTextApellidos.setEditable(false);
         jTextApellidos.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel13.setText("Apellido");
 
+        jTextNoDocente.setEditable(false);
         jTextNoDocente.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
         jButtonGenerarListas.setBackground(java.awt.Color.lightGray);

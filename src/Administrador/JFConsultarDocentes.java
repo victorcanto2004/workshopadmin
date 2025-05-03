@@ -5,6 +5,7 @@
 package Administrador;
 
 import Clases.ConsultarDocente;
+import Clases.TextPrompt;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
@@ -20,6 +21,8 @@ public class JFConsultarDocentes extends javax.swing.JFrame {
      */
     public JFConsultarDocentes() {
         initComponents();
+       
+        TextPrompt nousuario = new TextPrompt("12345678",jTextNOUsuario);
     }
 
     /**
@@ -101,6 +104,7 @@ public class JFConsultarDocentes extends javax.swing.JFrame {
         jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel15.setText("Edad");
 
+        jTextContacto.setEditable(false);
         jTextContacto.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
         jButtonConsultar.setBackground(java.awt.Color.lightGray);
@@ -124,15 +128,19 @@ public class JFConsultarDocentes extends javax.swing.JFrame {
         jLabel18.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel18.setText("Contacto");
 
+        jTextNombres.setEditable(false);
         jTextNombres.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
+        jTextApellidos.setEditable(false);
         jTextApellidos.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
+        jTextEdad.setEditable(false);
         jTextEdad.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
         jLabel19.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel19.setText("Campo");
 
+        jTextCampo.setEditable(false);
         jTextCampo.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
         jLabel20.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -148,6 +156,7 @@ public class JFConsultarDocentes extends javax.swing.JFrame {
             }
         });
 
+        jTextContraseña.setEditable(false);
         jTextContraseña.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
         jButtonHorario.setBackground(java.awt.Color.lightGray);

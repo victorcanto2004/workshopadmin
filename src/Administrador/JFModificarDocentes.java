@@ -5,6 +5,7 @@
 package Administrador;
 
 import Clases.ConsultarDocente;
+import Clases.TextPrompt;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
@@ -20,6 +21,8 @@ public class JFModificarDocentes extends javax.swing.JFrame {
      */
     public JFModificarDocentes() {
         initComponents();
+  
+        TextPrompt nousuario = new TextPrompt("12345678",jTextNOUsuario);
     }
 
     /**
@@ -361,7 +364,7 @@ public class JFModificarDocentes extends javax.swing.JFrame {
 
     private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null,"Has click en lo que deseas administrar",
+        JOptionPane.showMessageDialog(null,"Coloca el número de usuario del docente cuyos datos deseas modificar y presiona Enter.",
             "Información",
             JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jLabel10MouseClicked

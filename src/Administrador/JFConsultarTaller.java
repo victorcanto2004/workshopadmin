@@ -5,6 +5,7 @@
 package Administrador;
 
 import Clases.ConsultarTalleres;
+import Clases.TextPrompt;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
@@ -20,6 +21,8 @@ public class JFConsultarTaller extends javax.swing.JFrame {
      */
     public JFConsultarTaller() {
         initComponents();
+  
+        TextPrompt taller = new TextPrompt("Inglés",jTextNombre);
     }
 
     /**

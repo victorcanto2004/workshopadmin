@@ -132,7 +132,7 @@
                                   <Component id="jTextMotivo" alignment="0" pref="219" max="32767" attributes="0"/>
                                   <Component id="jTextMonto" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jTextNombre" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jTexApellido" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jTextApellido" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jDateChooserFecha" max="32767" attributes="0"/>
                               </Group>
                           </Group>
@@ -172,7 +172,7 @@
                       <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTexApellido" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextApellido" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -349,6 +349,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="jTextNombre">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="24" style="0"/>
                 </Property>
@@ -362,8 +363,9 @@
                 <Property name="text" type="java.lang.String" value="Apellido"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTexApellido">
+            <Component class="javax.swing.JTextField" name="jTextApellido">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="24" style="0"/>
                 </Property>

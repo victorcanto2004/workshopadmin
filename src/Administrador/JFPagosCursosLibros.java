@@ -6,6 +6,7 @@ package Administrador;
 
 import Clases.CargarAlumnos;
 import Clases.Conexion;
+import Clases.TextPrompt;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -38,8 +39,16 @@ public class JFPagosCursosLibros extends javax.swing.JFrame {
     
     public JFPagosCursosLibros() {
         initComponents();
+        
         CargarAlumnos al = new CargarAlumnos(jComboBoxTalleres, jComboBoxGrupos,jComboBoxAlumnos, jTextField1.getText(),jTextField2.getText());
-        al.cargarTalleres(); 
+        al.cargarTalleres();
+        
+        jTextField1.setVisible(false);
+        jTextField2.setVisible(false);
+        jTextField3.setVisible(false);
+        
+        TextPrompt motivo = new TextPrompt("Pago curso o libro",jTextMotivo);
+        TextPrompt costo = new TextPrompt("$520.00",jTextMonto);
     }
 
     /**
@@ -69,7 +78,7 @@ public class JFPagosCursosLibros extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jTextNombre = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTexApellido = new javax.swing.JTextField();
+        jTextApellido = new javax.swing.JTextField();
         jDateChooserFecha = new com.toedter.calendar.JDateChooser();
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -156,12 +165,14 @@ public class JFPagosCursosLibros extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel6.setText("Nombre");
 
+        jTextNombre.setEditable(false);
         jTextNombre.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel7.setText("Apellido");
 
-        jTexApellido.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jTextApellido.setEditable(false);
+        jTextApellido.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
         jDateChooserFecha.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
@@ -199,7 +210,7 @@ public class JFPagosCursosLibros extends javax.swing.JFrame {
                             .addComponent(jTextMotivo, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
                             .addComponent(jTextMonto)
                             .addComponent(jTextNombre)
-                            .addComponent(jTexApellido)
+                            .addComponent(jTextApellido)
                             .addComponent(jDateChooserFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -229,7 +240,7 @@ public class JFPagosCursosLibros extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jTexApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxTalleres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -516,7 +527,7 @@ public class JFPagosCursosLibros extends javax.swing.JFrame {
             jComboBoxAlumnos.removeAllItems();
             jComboBoxAlumnos.addItem("Matriculas");
             jTextNombre.setText("");
-            jTexApellido.setText("");
+            jTextApellido.setText("");
         }
     }//GEN-LAST:event_jComboBoxTalleresActionPerformed
 
@@ -616,7 +627,7 @@ public class JFPagosCursosLibros extends javax.swing.JFrame {
                     // Si quieres mostrar el id_taller en otro JTextField
                     jTextField3.setText(String.valueOf(idAlumno));  
                     jTextNombre.setText(rs.getString("nombre"));
-                    jTexApellido.setText(rs.getString("apellido"));
+                    jTextApellido.setText(rs.getString("apellido"));
  
                 } else {
                     // Si no se encuentra el taller, mostrar un mensaje
@@ -636,7 +647,7 @@ public class JFPagosCursosLibros extends javax.swing.JFrame {
             // Si se selecciona "Taller" o si el valor es null, limpiar el JTextField
             jTextField3.setText("");
             jTextNombre.setText("");
-            jTexApellido.setText("");
+            jTextApellido.setText("");
  
             // Limpiar el JComboBox de grupos y agregar solo "Grupos"
             //jComboBoxGrupos.removeAllItems();
@@ -699,7 +710,7 @@ public class JFPagosCursosLibros extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTexApellido;
+    private javax.swing.JTextField jTextApellido;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;

@@ -37,6 +37,11 @@ public class JFBajaDocentes extends javax.swing.JFrame {
         initComponents();
         CargarAlumnos al = new CargarAlumnos(jComboBoxTalleres, jComboBoxGrupos,jComboBoxDocentes, jTextField1.getText(),jTextField2.getText());
         al.cargarTalleres(); 
+        
+        jTextField3.setVisible(false);
+        jTextNOUsuario.setVisible(false);
+        jTextField1.setVisible(false);
+        jTextField2.setVisible(false);
     }
 
     /**
@@ -95,6 +100,7 @@ public class JFBajaDocentes extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel4.setText("Edad");
 
+        jTextContacto.setEditable(false);
         jTextContacto.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
         jButtonDarDeBaja.setBackground(java.awt.Color.lightGray);
@@ -124,15 +130,19 @@ public class JFBajaDocentes extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel8.setText("Contacto");
 
+        jTextNombres.setEditable(false);
         jTextNombres.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
+        jTextApellidos.setEditable(false);
         jTextApellidos.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
+        jTextEdad.setEditable(false);
         jTextEdad.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel11.setText("Campo");
 
+        jTextCampo.setEditable(false);
         jTextCampo.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -141,6 +151,7 @@ public class JFBajaDocentes extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel13.setText("Contraseña");
 
+        jTextContraseña.setEditable(false);
         jTextContraseña.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
         jComboBoxDocentes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));

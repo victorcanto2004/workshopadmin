@@ -7,6 +7,7 @@ package Administrador;
 import Clases.CargarGrupos;
 import Clases.Conexion;
 import Clases.Grupos;
+import Clases.TextPrompt;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -42,9 +43,12 @@ public class JFAltaBajaGrupos extends javax.swing.JFrame {
         CargarGrupos cg = new CargarGrupos(jComboBoxTalleresEliminar, jComboBoxGrupos, jTextidtaller.getText());
         cg.cargarTalleres();
         
-        jTextIDTALLER.setVisible(true);
-        jTextidtaller.setVisible(true);
-        jTextidgrupo.setVisible(true);
+        jTextIDTALLER.setVisible(false);
+        jTextidtaller.setVisible(false);
+        jTextidgrupo.setVisible(false);
+        jComboBox1.setVisible(false);
+        
+        TextPrompt grupo = new TextPrompt("A",jTextNombre);
     }
 
     /**

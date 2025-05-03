@@ -6,6 +6,7 @@ package Administrador;
 
 import Clases.Talleres;
 import Clases.CargarTalleres;
+import Clases.TextPrompt;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -35,6 +36,8 @@ public class JFAltaBajaTaller extends javax.swing.JFrame {
         ct.cargarTalleres();
         jComboBox2.setVisible(false);
         jTextField2.setVisible(false);
+        
+        TextPrompt taller = new TextPrompt("Carpintería",jTextNombre);
     }
 
     /**

@@ -99,6 +99,7 @@ public class JFBajaAlumnos extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel4.setText("Edad");
 
+        jTextContactoTutor.setEditable(false);
         jTextContactoTutor.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -125,13 +126,16 @@ public class JFBajaAlumnos extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel8.setText("Contacto");
 
+        jTextEdad.setEditable(false);
         jTextEdad.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
+        jTextTutor.setEditable(false);
         jTextTutor.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel11.setText("Apellidos");
 
+        jTextApellidos.setEditable(false);
         jTextApellidos.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
         jComboBoxTalleres.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Taller" }));
@@ -161,6 +165,7 @@ public class JFBajaAlumnos extends javax.swing.JFrame {
 
         jTextFieldidalumno.setText("jTextField3");
 
+        jTextFieldNombre.setEditable(false);
         jTextFieldNombre.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);

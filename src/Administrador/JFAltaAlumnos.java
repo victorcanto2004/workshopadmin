@@ -8,6 +8,7 @@ import Clases.Alumnos;
 import Clases.CargarTalleres;
 import Clases.Conexion;
 import Clases.ConsultarAlumnos;
+import Clases.TextPrompt;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
@@ -44,6 +45,13 @@ public class JFAltaAlumnos extends javax.swing.JFrame {
         
         jTextField1.setVisible(false);
         jTextField2.setVisible(false);
+        
+        TextPrompt matricula = new TextPrompt("22070065",jTextMatricula);
+        TextPrompt nombres = new TextPrompt("Juan Adolfo",jTextNombres);
+        TextPrompt apellidos = new TextPrompt("Pech Batun",jTextApellidos);
+        TextPrompt edad = new TextPrompt("21",jTextEdad);
+        TextPrompt tutor = new TextPrompt("Rodolfo Israel Pech Sosa",jTextTutor);
+        TextPrompt contacto = new TextPrompt("Correo, telefóno, otros...",jTextContactoTutor);
     }
 
     /**

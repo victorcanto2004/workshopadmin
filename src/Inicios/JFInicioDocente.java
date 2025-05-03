@@ -5,6 +5,7 @@
 package Inicios;
 
 import Clases.Conexion;
+import Clases.TextPrompt;
 import javax.swing.JOptionPane;
 import Docente.JFMenuDocente;
 import java.awt.Color;
@@ -37,6 +38,8 @@ public class JFInicioDocente extends javax.swing.JFrame {
     public JFInicioDocente() {
         initComponents();
         jLabelOcultar.setVisible(false);
+        TextPrompt usuario = new TextPrompt("12345678",jTextNoControl);
+        TextPrompt contrasenia = new TextPrompt("unodos12",jPasswordContraseña);
     }
 
     /**
@@ -90,7 +93,6 @@ public class JFInicioDocente extends javax.swing.JFrame {
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 172, -1, -1));
 
         jTextNoControl.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTextNoControl.setText("12345678");
         jPanel2.add(jTextNoControl, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 150, 30));
 
         jButtonIngresar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -111,7 +113,6 @@ public class JFInicioDocente extends javax.swing.JFrame {
         jPanel2.add(jButtonIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 230, -1, -1));
 
         jPasswordContraseña.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPasswordContraseña.setText("unodos12");
         jPanel2.add(jPasswordContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, 150, 30));
 
         jLabelVer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/Visible.png"))); // NOI18N
