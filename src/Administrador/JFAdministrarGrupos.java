@@ -4,10 +4,12 @@
  */
 package Administrador;
 
-import java.awt.Color;
-import java.awt.Image;
-import java.awt.Toolkit;
-import javax.swing.JOptionPane;
+// Paquetes a utilizar
+import java.awt.Color; // Importa la clase Color para manejar colores
+import java.awt.Image; // Importa la clase Image para trabajar con imágenes
+import java.awt.Toolkit; // Importa la clase Toolkit para obtener imágenes del sistema
+import javax.swing.JFrame;
+import javax.swing.JOptionPane; // Importa JOptionPane para mostrar cuadros de diálogo
 
 /**
  *
@@ -19,16 +21,19 @@ public class JFAdministrarGrupos extends javax.swing.JFrame {
      * Creates new form JFAdministrarGrupos
      */
     public JFAdministrarGrupos() {
-        initComponents();
-        setIconImage(getIconImage());
+        initComponents(); // Método que configura y organiza todos los componentes gráficos en la ventana.
+        setIconImage(getIconImage()); // Establece un ícono personalizado para la ventana.
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // Desactiva la X de cierre
     }
 
     //Icono del JFrame
-    @Override
-    public Image getIconImage(){
+    @Override // Indica que este método sobrescribe el método getIconImage() de la clase JFrame
+    // Usa Toolkit (una clase de utilidades gráficas de AWT) para obtener una imagen ubicada en la ruta interna del proyecto
+    // ClassLoader.getSystemResource() localiza el archivo dentro del classpath (dentro de src o el .jar).
+    public Image getIconImage(){ 
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("workshopadmin/Imagenes/LogoIcono.png"));
-        return retValue;
-    }
+        return retValue; // Devuelve la imagen para que sea usada como ícono del JFrame
+    } 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -42,14 +47,15 @@ public class JFAdministrarGrupos extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jButtonConsultar = new javax.swing.JButton();
         jButtonModificar = new javax.swing.JButton();
-        jButtonAlta = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
+        jButtonAltaBaja = new javax.swing.JButton();
+        jLabelnformacion = new javax.swing.JLabel();
         jButtonRegresar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Administrar grupos");
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -89,21 +95,21 @@ public class JFAdministrarGrupos extends javax.swing.JFrame {
             }
         });
 
-        jButtonAlta.setBackground(java.awt.Color.lightGray);
-        jButtonAlta.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButtonAlta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/AltaBaja.png"))); // NOI18N
-        jButtonAlta.setText("<html>Dar de alta o baja</html>");
-        jButtonAlta.addMouseListener(new java.awt.event.MouseAdapter() {
+        jButtonAltaBaja.setBackground(java.awt.Color.lightGray);
+        jButtonAltaBaja.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jButtonAltaBaja.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/AltaBaja.png"))); // NOI18N
+        jButtonAltaBaja.setText("<html>Dar de alta o baja</html>");
+        jButtonAltaBaja.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButtonAltaMouseEntered(evt);
+                jButtonAltaBajaMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButtonAltaMouseExited(evt);
+                jButtonAltaBajaMouseExited(evt);
             }
         });
-        jButtonAlta.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAltaBaja.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAltaActionPerformed(evt);
+                jButtonAltaBajaActionPerformed(evt);
             }
         });
 
@@ -114,7 +120,7 @@ public class JFAdministrarGrupos extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(136, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButtonAlta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonAltaBaja, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonConsultar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonModificar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(129, 129, 129))
@@ -123,7 +129,7 @@ public class JFAdministrarGrupos extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(76, 76, 76)
-                .addComponent(jButtonAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonAltaBaja, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
                 .addComponent(jButtonConsultar)
                 .addGap(43, 43, 43)
@@ -131,10 +137,10 @@ public class JFAdministrarGrupos extends javax.swing.JFrame {
                 .addContainerGap(82, Short.MAX_VALUE))
         );
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/Informacion.png"))); // NOI18N
-        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelnformacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/Informacion.png"))); // NOI18N
+        jLabelnformacion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel5MouseClicked(evt);
+                jLabelnformacionMouseClicked(evt);
             }
         });
 
@@ -167,39 +173,37 @@ public class JFAdministrarGrupos extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButtonRegresar)
+                                .addGap(203, 203, 203))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(21, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel5))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jButtonRegresar)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(31, Short.MAX_VALUE))
+                        .addComponent(jLabelnformacion)
+                        .addGap(31, 31, 31))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
+                    .addComponent(jLabelnformacion)
                     .addComponent(jLabel1))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addComponent(jButtonRegresar)
-                        .addContainerGap(44, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(jButtonRegresar))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -218,85 +222,90 @@ public class JFAdministrarGrupos extends javax.swing.JFrame {
 
     private void jButtonConsultarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonConsultarMouseEntered
         // TODO add your handling code here:
+         // Cambia el fondo del botón a verde cuando el mouse pasa por encima.
         jButtonConsultar.setBackground(Color.GREEN);
     }//GEN-LAST:event_jButtonConsultarMouseEntered
 
     private void jButtonConsultarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonConsultarMouseExited
         // TODO add your handling code here:
+        // Restaura el fondo del botón a gris claro cuando el mouse sale.
         jButtonConsultar.setBackground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_jButtonConsultarMouseExited
 
     private void jButtonConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarActionPerformed
         // TODO add your handling code here:
-        JFConsultarGrupos JFConsultarGrupos =new JFConsultarGrupos();
-        JFConsultarGrupos.setDefaultCloseOperation(JFConsultarGrupos.EXIT_ON_CLOSE);
-        JFConsultarGrupos.setVisible(true);
+        JFConsultarGrupos JFConsultarGrupos =new JFConsultarGrupos(); // Llama a la ventana 
+        JFConsultarGrupos.setVisible(true); // Muestra la ventana
         JFConsultarGrupos.setLocationRelativeTo(null); // Centra la ventana en la pantalla
-        this.setVisible(false);
+        this.setVisible(false); // Oculta la ventana actual
     }//GEN-LAST:event_jButtonConsultarActionPerformed
 
     private void jButtonModificarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonModificarMouseEntered
-        // TODO add your handling code here:
+        // TODO add your handling code here:}
+         // Cambia el fondo del botón a verde cuando el mouse pasa por encima.
         jButtonModificar.setBackground(Color.GREEN);
     }//GEN-LAST:event_jButtonModificarMouseEntered
 
     private void jButtonModificarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonModificarMouseExited
         // TODO add your handling code here:
+        // Restaura el fondo del botón a gris claro cuando el mouse sale.
         jButtonModificar.setBackground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_jButtonModificarMouseExited
 
     private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
         // TODO add your handling code here:
-        JFModificarGrupos JFModificarGrupos =new JFModificarGrupos();
-        JFModificarGrupos.setDefaultCloseOperation(JFModificarGrupos.EXIT_ON_CLOSE);
-        JFModificarGrupos.setVisible(true);
+        JFModificarGrupos JFModificarGrupos =new JFModificarGrupos(); // Llama a la ventana 
+        JFModificarGrupos.setVisible(true); // Muestra la ventana
         JFModificarGrupos.setLocationRelativeTo(null); // Centra la ventana en la pantalla
-        this.setVisible(false);
+        this.setVisible(false); // Oculta la ventana actual
     }//GEN-LAST:event_jButtonModificarActionPerformed
 
-    private void jButtonAltaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonAltaMouseEntered
+    private void jButtonAltaBajaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonAltaBajaMouseEntered
         // TODO add your handling code here:
-        jButtonAlta.setBackground(Color.GREEN);
-    }//GEN-LAST:event_jButtonAltaMouseEntered
+         // Cambia el fondo del botón a verde cuando el mouse pasa por encima.
+        jButtonAltaBaja.setBackground(Color.GREEN);
+    }//GEN-LAST:event_jButtonAltaBajaMouseEntered
 
-    private void jButtonAltaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonAltaMouseExited
+    private void jButtonAltaBajaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonAltaBajaMouseExited
         // TODO add your handling code here:
-        jButtonAlta.setBackground(Color.LIGHT_GRAY);
-    }//GEN-LAST:event_jButtonAltaMouseExited
+        // Restaura el fondo del botón a gris claro cuando el mouse sale.
+        jButtonAltaBaja.setBackground(Color.LIGHT_GRAY);
+    }//GEN-LAST:event_jButtonAltaBajaMouseExited
 
-    private void jButtonAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAltaActionPerformed
+    private void jButtonAltaBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAltaBajaActionPerformed
         // TODO add your handling code here:
-        JFAltaBajaGrupos JFAltaGrupos =new JFAltaBajaGrupos();
-        JFAltaGrupos.setDefaultCloseOperation(JFAltaGrupos.EXIT_ON_CLOSE);
-        JFAltaGrupos.setVisible(true);
+        JFAltaBajaGrupos JFAltaGrupos =new JFAltaBajaGrupos(); // Llama a la ventana 
+        JFAltaGrupos.setVisible(true); // Muestra la ventana
         JFAltaGrupos.setLocationRelativeTo(null); // Centra la ventana en la pantalla
-        this.setVisible(false);
-    }//GEN-LAST:event_jButtonAltaActionPerformed
+        this.setVisible(false); // Oculta la ventana actual
+    }//GEN-LAST:event_jButtonAltaBajaActionPerformed
 
-    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+    private void jLabelnformacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelnformacionMouseClicked
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null,"Has click en lo que deseas administrar",
+        // Este método se ejecuta cuando el usuario hace clic en el label de información.
+        JOptionPane.showMessageDialog(null,"Selecciona la acción que deseas realizar respecto a los grupos",
             "Información",
             JOptionPane.INFORMATION_MESSAGE);
-    }//GEN-LAST:event_jLabel5MouseClicked
+    }//GEN-LAST:event_jLabelnformacionMouseClicked
 
     private void jButtonRegresarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegresarMouseEntered
         // TODO add your handling code here:
+         // Cambia el fondo del botón a verde cuando el mouse pasa por encima.
         jButtonRegresar.setBackground(Color.GREEN);
     }//GEN-LAST:event_jButtonRegresarMouseEntered
 
     private void jButtonRegresarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegresarMouseExited
         // TODO add your handling code here:
+        // Restaura el fondo del botón a gris claro cuando el mouse sale.
         jButtonRegresar.setBackground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_jButtonRegresarMouseExited
 
     private void jButtonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegresarActionPerformed
         // TODO add your handling code here:
         JFMenuAdministrador JFAdministrador =new JFMenuAdministrador();
-        JFAdministrador.setDefaultCloseOperation(JFAdministrador.EXIT_ON_CLOSE);
         JFAdministrador.setVisible(true);
         JFAdministrador.setLocationRelativeTo(null); // Centra la ventana en la pantalla
-        this.setVisible(false);
+        this.setVisible(false); // Oculta la ventana actual
     }//GEN-LAST:event_jButtonRegresarActionPerformed
 
     /**
@@ -335,13 +344,13 @@ public class JFAdministrarGrupos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonAlta;
+    private javax.swing.JButton jButtonAltaBaja;
     private javax.swing.JButton jButtonConsultar;
     private javax.swing.JButton jButtonModificar;
     private javax.swing.JButton jButtonRegresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabelnformacion;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables

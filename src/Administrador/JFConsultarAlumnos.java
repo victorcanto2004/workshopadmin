@@ -4,15 +4,15 @@
  */
 package Administrador;
 
-import Clases.ConsultarAlumnos;
-import Clases.TextPrompt;
-import java.awt.Color;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.event.KeyEvent;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import javax.swing.JOptionPane;
+import Clases.ConsultarAlumnos; // Importa la clase ConsultarAlumnos
+import Clases.TextPrompt; // Importa la clase TextPrompt para utilizar placeholders
+import java.awt.Color; // Permite usar la clase Color para cambiar colores en componentes gráficos.
+import java.awt.Image; // Permite manejar imágenes, por ejemplo, para íconos o imágenes en la interfaz.
+import java.awt.Toolkit; // Proporciona acceso a recursos del sistema como imágenes, sonidos, etc.
+import java.awt.event.KeyEvent; // Permite detectar y manejar eventos del teclado, como presionar, soltar o escribir una tecla.
+import javax.swing.JFrame;
+import javax.swing.JOptionPane; // Permite mostrar cuadros de diálogo (mensajes, confirmaciones, entradas de texto, etc.).
+import javax.swing.table.DefaultTableModel; // Permite trabajar con la tabla
 
 /**
  *
@@ -23,26 +23,22 @@ public class JFConsultarAlumnos extends javax.swing.JFrame {
     /**
      * Creates new form JFConsultarAlumno
      */
-    String bd="workshopadmin";
-    String url="jdbc:mysql://localhost:3306/";
-    String user="root";
-    String password="sqloracle";
-    String driver="com.mysql.cj.jdbc.Driver";
-    Connection cx=null;
-    PreparedStatement ps=null;
     
     public JFConsultarAlumnos() {
-        initComponents();
+        initComponents(); // Método que configura y organiza todos los componentes gráficos en la ventana.
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // Desactiva la X de cierre
         
-        TextPrompt matricula = new TextPrompt("22070065",jTextMatricula);
+        TextPrompt matricula = new TextPrompt("22070065",jTextMatricula); // Establece textos de sugerencia ("placeholders")
         
-        setIconImage(getIconImage());
+        setIconImage(getIconImage()); // Establece un ícono personalizado para la ventana.
     }
     //Icono del JFrame
-    @Override
-    public Image getIconImage(){
+    @Override // Indica que este método sobrescribe el método getIconImage() de la clase JFrame
+    // Usa Toolkit (una clase de utilidades gráficas de AWT) para obtener una imagen ubicada en la ruta interna del proyecto
+    // ClassLoader.getSystemResource() localiza el archivo dentro del classpath (dentro de src o el .jar).
+    public Image getIconImage(){ 
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("workshopadmin/Imagenes/LogoIcono.png"));
-        return retValue;
+        return retValue; // Devuelve la imagen para que sea usada como ícono del JFrame
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -58,14 +54,14 @@ public class JFConsultarAlumnos extends javax.swing.JFrame {
         jButtonRegresarInicio = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        jLabelnformacion = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jTextContactoTutor = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jButtonConsultar = new javax.swing.JButton();
+        jButtonConsultarActivo = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jTextMatricula = new javax.swing.JTextField();
         jTextNombres = new javax.swing.JTextField();
@@ -77,9 +73,12 @@ public class JFConsultarAlumnos extends javax.swing.JFrame {
         jButtonGenerarCredencial = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableTalleresGrupos = new javax.swing.JTable();
+        jButtonConsultarInactivo = new javax.swing.JButton();
+        jButtonLimpiar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Consula de alumnos");
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -124,10 +123,10 @@ public class JFConsultarAlumnos extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setText("Consulta un alumno");
 
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/Informacion.png"))); // NOI18N
-        jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelnformacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/Informacion.png"))); // NOI18N
+        jLabelnformacion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel10MouseClicked(evt);
+                jLabelnformacionMouseClicked(evt);
             }
         });
 
@@ -146,21 +145,21 @@ public class JFConsultarAlumnos extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel5.setText("Tutor");
 
-        jButtonConsultar.setBackground(java.awt.Color.lightGray);
-        jButtonConsultar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButtonConsultar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/Buscar_1.png"))); // NOI18N
-        jButtonConsultar.setText("Consultar");
-        jButtonConsultar.addMouseListener(new java.awt.event.MouseAdapter() {
+        jButtonConsultarActivo.setBackground(java.awt.Color.lightGray);
+        jButtonConsultarActivo.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jButtonConsultarActivo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/Buscar_1.png"))); // NOI18N
+        jButtonConsultarActivo.setText("<html>Consultar Activo</html>");
+        jButtonConsultarActivo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButtonConsultarMouseEntered(evt);
+                jButtonConsultarActivoMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButtonConsultarMouseExited(evt);
+                jButtonConsultarActivoMouseExited(evt);
             }
         });
-        jButtonConsultar.addActionListener(new java.awt.event.ActionListener() {
+        jButtonConsultarActivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonConsultarActionPerformed(evt);
+                jButtonConsultarActivoActionPerformed(evt);
             }
         });
 
@@ -169,8 +168,11 @@ public class JFConsultarAlumnos extends javax.swing.JFrame {
 
         jTextMatricula.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jTextMatricula.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextMatriculaKeyReleased(evt);
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextMatriculaKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextMatriculaKeyTyped(evt);
             }
         });
 
@@ -217,16 +219,48 @@ public class JFConsultarAlumnos extends javax.swing.JFrame {
 
         jTableTalleresGrupos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2"
+                "Taller", "Grupo"
             }
         ));
         jScrollPane2.setViewportView(jTableTalleresGrupos);
+
+        jButtonConsultarInactivo.setBackground(java.awt.Color.lightGray);
+        jButtonConsultarInactivo.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jButtonConsultarInactivo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/Buscar_1.png"))); // NOI18N
+        jButtonConsultarInactivo.setText("<html>Consultar Inactivo</html>");
+        jButtonConsultarInactivo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonConsultarInactivoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonConsultarInactivoMouseExited(evt);
+            }
+        });
+        jButtonConsultarInactivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConsultarInactivoActionPerformed(evt);
+            }
+        });
+
+        jButtonLimpiar.setBackground(java.awt.Color.lightGray);
+        jButtonLimpiar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jButtonLimpiar.setText("Limpiar");
+        jButtonLimpiar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonLimpiarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonLimpiarMouseExited(evt);
+            }
+        });
+        jButtonLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLimpiarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -261,11 +295,14 @@ public class JFConsultarAlumnos extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(2, 2, 2)))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButtonHistorial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonConsultar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonGenerarCredencial, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonHistorial, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonConsultarActivo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonGenerarCredencial, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonConsultarInactivo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonLimpiar, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(18, 18, 18))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -297,14 +334,17 @@ public class JFConsultarAlumnos extends javax.swing.JFrame {
                             .addComponent(jLabel8)
                             .addComponent(jTextContactoTutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButtonConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(jButtonConsultarActivo, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonConsultarInactivo, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonHistorial)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonGenerarCredencial)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jButtonGenerarCredencial)))
                 .addGap(29, 29, 29)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonLimpiar))
                 .addGap(22, 22, 22))
         );
 
@@ -326,13 +366,12 @@ public class JFConsultarAlumnos extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(45, 45, 45)
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel10)
-                        .addGap(35, 35, 35))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 283, Short.MAX_VALUE)
+                        .addComponent(jLabelnformacion))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(60, Short.MAX_VALUE))))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(35, 35, 35))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -348,7 +387,7 @@ public class JFConsultarAlumnos extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10)
+                            .addComponent(jLabelnformacion)
                             .addComponent(jLabel1))
                         .addGap(18, 18, 18)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -371,106 +410,205 @@ public class JFConsultarAlumnos extends javax.swing.JFrame {
 
     private void jButtonRegresarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegresarMouseEntered
         // TODO add your handling code here:
+        // Cambia el fondo del botón a verde cuando el mouse pasa por encima.
         jButtonRegresar.setBackground(Color.GREEN);
     }//GEN-LAST:event_jButtonRegresarMouseEntered
 
     private void jButtonRegresarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegresarMouseExited
         // TODO add your handling code here:
+         // Restaura el fondo del botón a gris claro cuando el mouse sale.
         jButtonRegresar.setBackground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_jButtonRegresarMouseExited
 
     private void jButtonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegresarActionPerformed
         // TODO add your handling code here:
-        JFAdministrarAlumnos JFAdministrarAlumnos =new JFAdministrarAlumnos();
-        JFAdministrarAlumnos.setDefaultCloseOperation(JFAdministrarAlumnos.EXIT_ON_CLOSE);
-        JFAdministrarAlumnos.setVisible(true);
+        JFAdministrarAlumnos JFAdministrarAlumnos =new JFAdministrarAlumnos(); // Crea una nueva instancia
+        JFAdministrarAlumnos.setVisible(true); // Muestra la ventana de inicio
         JFAdministrarAlumnos.setLocationRelativeTo(null); // Centra la ventana en la pantalla
-        this.setVisible(false);
+        this.setVisible(false); // Oculta la ventana actual.
     }//GEN-LAST:event_jButtonRegresarActionPerformed
 
     private void jButtonRegresarInicioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegresarInicioMouseEntered
         // TODO add your handling code here:
+        // Cambia el fondo del botón a verde cuando el mouse pasa por encima.
         jButtonRegresarInicio.setBackground(Color.GREEN);
     }//GEN-LAST:event_jButtonRegresarInicioMouseEntered
 
     private void jButtonRegresarInicioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegresarInicioMouseExited
         // TODO add your handling code here:
+         // Restaura el fondo del botón a gris claro cuando el mouse sale.
         jButtonRegresarInicio.setBackground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_jButtonRegresarInicioMouseExited
 
     private void jButtonRegresarInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegresarInicioActionPerformed
         // TODO add your handling code here:
-        JFMenuAdministrador JFMenuAdministrador =new JFMenuAdministrador();
-        JFMenuAdministrador.setDefaultCloseOperation(JFMenuAdministrador.EXIT_ON_CLOSE);
-        JFMenuAdministrador.setVisible(true);
+        JFMenuAdministrador JFMenuAdministrador =new JFMenuAdministrador(); // Crea una nueva instancia
+        JFMenuAdministrador.setVisible(true); // Muestra la ventana de inicio 
         JFMenuAdministrador.setLocationRelativeTo(null); // Centra la ventana en la pantalla
-        JOptionPane.showMessageDialog(null,"Has regresado al inicio",
-            "Informacion",
-            JOptionPane.INFORMATION_MESSAGE);
-        this.setVisible(false);
+        this.setVisible(false); // Oculta la ventana actual.
     }//GEN-LAST:event_jButtonRegresarInicioActionPerformed
 
-    private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
+    private void jLabelnformacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelnformacionMouseClicked
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null,"Has click en lo que deseas administrar",
+        // Este método se ejecuta cuando el usuario hace clic en el label de información.
+        JOptionPane.showMessageDialog(null,"Escribe la matricula del alumno que deseas consultar"
+                + "\nPuedes usar Enter para consultar alumnos activos",
             "Información",
             JOptionPane.INFORMATION_MESSAGE);
-    }//GEN-LAST:event_jLabel10MouseClicked
+    }//GEN-LAST:event_jLabelnformacionMouseClicked
 
-    private void jButtonConsultarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonConsultarMouseEntered
+    private void jButtonConsultarActivoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonConsultarActivoMouseEntered
         // TODO add your handling code here:
-        jButtonConsultar.setBackground(Color.GREEN);
-    }//GEN-LAST:event_jButtonConsultarMouseEntered
+        // Cambia el fondo del botón a verde cuando el mouse pasa por encima.
+        jButtonConsultarActivo.setBackground(Color.GREEN);
+    }//GEN-LAST:event_jButtonConsultarActivoMouseEntered
 
-    private void jButtonConsultarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonConsultarMouseExited
+    private void jButtonConsultarActivoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonConsultarActivoMouseExited
         // TODO add your handling code here:
-        jButtonConsultar.setBackground(Color.LIGHT_GRAY);
-    }//GEN-LAST:event_jButtonConsultarMouseExited
+         // Restaura el fondo del botón a gris claro cuando el mouse sale.
+        jButtonConsultarActivo.setBackground(Color.LIGHT_GRAY);
+    }//GEN-LAST:event_jButtonConsultarActivoMouseExited
 
-    private void jButtonConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarActionPerformed
+    private void jButtonConsultarActivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarActivoActionPerformed
         // TODO add your handling code here:
+        // Muestra un cuadro de diálogo para confirmar si el usuario realmente desea 
         int respuesta = JOptionPane.showConfirmDialog(null, "Realmente desea dar de alta a este alumno?",
             "Confirmar salida",
             JOptionPane.YES_NO_OPTION,
             JOptionPane.QUESTION_MESSAGE);
-        if (respuesta == JOptionPane.YES_OPTION) {
-            // Aquí colocas la lógica para dar de alta al alumno
-            ConsultarAlumnos ca = new ConsultarAlumnos();
-            ca.Consultar(jTextMatricula, jTextNombres, jTextApellidos, jTextEdad, jTextTutor, jTextContactoTutor, jTableTalleresGrupos);          
-        } else {
+        if (respuesta == JOptionPane.NO_OPTION) {
             // Si el usuario elige "No", simplemente no hace nada o muestra otro mensaje
             JOptionPane.showMessageDialog(null, "Operación cancelada.");
+            } else {
+                // Validación: Verifica si algún campo obligatorio está vacío o si no se ha seleccionado taller y grupo
+            if (jTextMatricula.getText().trim().isEmpty()){ 
+            
+            JOptionPane.showMessageDialog(null,"Por favor, escribe una matrícula",
+                        "ADVERTENCIA",
+                        JOptionPane.ERROR_MESSAGE);
+            } else {
+            ConsultarAlumnos ca = new ConsultarAlumnos();
+            ca.Consultar(jTextMatricula, jTextNombres, jTextApellidos, jTextEdad, jTextTutor, jTextContactoTutor, jTableTalleresGrupos);          
+            }    
         }
-    }//GEN-LAST:event_jButtonConsultarActionPerformed
+    }//GEN-LAST:event_jButtonConsultarActivoActionPerformed
 
     private void jButtonHistorialMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonHistorialMouseEntered
         // TODO add your handling code here:
+         // Cambia el fondo del botón a verde cuando el mouse pasa por encima.
         jButtonHistorial.setBackground(Color.GREEN);
     }//GEN-LAST:event_jButtonHistorialMouseEntered
 
     private void jButtonHistorialMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonHistorialMouseExited
         // TODO add your handling code here:
+        // Restaura el fondo del botón a gris claro cuando el mouse sale.
         jButtonHistorial.setBackground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_jButtonHistorialMouseExited
 
     private void jButtonGenerarCredencialMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonGenerarCredencialMouseEntered
         // TODO add your handling code here:
+         // Cambia el fondo del botón a verde cuando el mouse pasa por encima.
         jButtonGenerarCredencial.setBackground(Color.GREEN);
     }//GEN-LAST:event_jButtonGenerarCredencialMouseEntered
 
     private void jButtonGenerarCredencialMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonGenerarCredencialMouseExited
         // TODO add your handling code here:
+        // Restaura el fondo del botón a gris claro cuando el mouse sale.
         jButtonGenerarCredencial.setBackground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_jButtonGenerarCredencialMouseExited
 
-    private void jTextMatriculaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextMatriculaKeyReleased
+    private void jButtonConsultarInactivoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonConsultarInactivoMouseEntered
         // TODO add your handling code here:
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER)
-        {
-          ConsultarAlumnos ca = new ConsultarAlumnos();
-          ca.Consultar(jTextMatricula, jTextNombres, jTextApellidos, jTextEdad, jTextTutor, jTextContactoTutor, jTableTalleresGrupos); 
+        // Cambia el fondo del botón a verde cuando el mouse pasa por encima.
+        jButtonConsultarInactivo.setBackground(Color.GREEN);
+    }//GEN-LAST:event_jButtonConsultarInactivoMouseEntered
+
+    private void jButtonConsultarInactivoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonConsultarInactivoMouseExited
+        // TODO add your handling code here:
+        // Restaura el fondo del botón a gris claro cuando el mouse sale.
+        jButtonConsultarInactivo.setBackground(Color.LIGHT_GRAY);
+    }//GEN-LAST:event_jButtonConsultarInactivoMouseExited
+
+    private void jButtonConsultarInactivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarInactivoActionPerformed
+        // TODO add your handling code here:
+        // Muestra un cuadro de diálogo para confirmar si el usuario realmente desea 
+        int respuesta = JOptionPane.showConfirmDialog(null, "Realmente desea consultar este alumno dado de baja?",
+            "Confirmar salida",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.QUESTION_MESSAGE);
+        if (respuesta == JOptionPane.NO_OPTION) {
+            // Si el usuario elige "No", simplemente no hace nada o muestra otro mensaje
+            JOptionPane.showMessageDialog(null, "Operación cancelada.");
+            } else {
+            // Validación: Verifica si algún campo obligatorio está vacío o si no se ha seleccionado taller y grupo
+            if (jTextMatricula.getText().trim().isEmpty()){ 
+            
+            JOptionPane.showMessageDialog(null,"Por favor, escribe una matrícula",
+                        "ADVERTENCIA",
+                        JOptionPane.ERROR_MESSAGE);
+            } else {
+            ConsultarAlumnos ca = new ConsultarAlumnos();
+            ca.ConsultarInactivo(jTextMatricula, jTextNombres, jTextApellidos, jTextEdad, jTextTutor, jTextContactoTutor, jTableTalleresGrupos);    
+            }
         }
-    }//GEN-LAST:event_jTextMatriculaKeyReleased
+    }//GEN-LAST:event_jButtonConsultarInactivoActionPerformed
+
+    private void jTextMatriculaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextMatriculaKeyTyped
+        // TODO add your handling code here:
+        //Validamos que en el campo no se puedan ingresar letras.
+        char c = evt.getKeyChar(); //llamamos al evento
+            if (Character.isLetter(c)){ //comparamos si ingresamos una letra
+                evt.consume(); //evitar que se capture la letra
+                JOptionPane.showMessageDialog(null,"Solo puedes ingresar números en este campo",
+                        "ADVERTENCIA",
+                        JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jTextMatriculaKeyTyped
+
+    private void jTextMatriculaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextMatriculaKeyPressed
+            // TODO add your handling code here:
+            //Presiona enter para consultar alumnos activos
+            // Validación: Verifica si algún campo obligatorio está vacío 
+            if(evt.getKeyCode()==KeyEvent.VK_ENTER)
+                {
+                if (jTextMatricula.getText().trim().isEmpty()){ 
+
+                JOptionPane.showMessageDialog(null,"Por favor, escribe una matrícula",
+                            "ADVERTENCIA",
+                            JOptionPane.ERROR_MESSAGE);
+                } else {
+
+                      ConsultarAlumnos ca = new ConsultarAlumnos();
+                      ca.Consultar(jTextMatricula, jTextNombres, jTextApellidos, jTextEdad, jTextTutor, jTextContactoTutor, jTableTalleresGrupos); 
+                    }
+            }
+    }//GEN-LAST:event_jTextMatriculaKeyPressed
+
+    private void jButtonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimpiarActionPerformed
+        // TODO add your handling code here:
+        // Limpiar campos
+        jTextMatricula.setText("");
+        jTextNombres.setText("");
+        jTextApellidos.setText("");
+        jTextEdad.setText("");
+        jTextTutor.setText("");
+        jTextContactoTutor.setText("");
+        DefaultTableModel model = (DefaultTableModel) jTableTalleresGrupos.getModel();
+        model.setRowCount(0);
+        jTextMatricula.requestFocus();
+    }//GEN-LAST:event_jButtonLimpiarActionPerformed
+
+    private void jButtonLimpiarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonLimpiarMouseEntered
+        // TODO add your handling code here:
+        // Cambia el fondo del botón a verde cuando el mouse pasa por encima.
+        jButtonLimpiar.setBackground(Color.GREEN);
+    }//GEN-LAST:event_jButtonLimpiarMouseEntered
+
+    private void jButtonLimpiarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonLimpiarMouseExited
+        // TODO add your handling code here:
+        // Restaura el fondo del botón a gris claro cuando el mouse sale.
+        jButtonLimpiar.setBackground(Color.LIGHT_GRAY);
+    }//GEN-LAST:event_jButtonLimpiarMouseExited
 
     /**
      * @param args the command line arguments
@@ -509,13 +647,14 @@ public class JFConsultarAlumnos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonConsultar;
+    private javax.swing.JButton jButtonConsultarActivo;
+    private javax.swing.JButton jButtonConsultarInactivo;
     private javax.swing.JButton jButtonGenerarCredencial;
     private javax.swing.JButton jButtonHistorial;
+    private javax.swing.JButton jButtonLimpiar;
     private javax.swing.JButton jButtonRegresar;
     private javax.swing.JButton jButtonRegresarInicio;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -523,6 +662,7 @@ public class JFConsultarAlumnos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelnformacion;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;

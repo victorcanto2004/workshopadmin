@@ -4,13 +4,14 @@
  */
 package Administrador;
 
-import Clases.ConsultarDocente;
-import Clases.TextPrompt;
-import java.awt.Color;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.event.KeyEvent;
-import javax.swing.JOptionPane;
+import Clases.ConsultarDocente; // Importa la clase ConsultarDocentes
+import Clases.TextPrompt; // Importa la clase TextPrompt para utilizar placeholders
+import java.awt.Color; // Permite usar la clase Color para cambiar colores en componentes gráficos.
+import java.awt.Image; // Permite manejar imágenes, por ejemplo, para íconos o imágenes en la interfaz.
+import java.awt.Toolkit; // Proporciona acceso a recursos del sistema como imágenes, sonidos, etc.
+import java.awt.event.KeyEvent; // Permite detectar y manejar eventos del teclado, como presionar, soltar o escribir una tecla.
+import javax.swing.JFrame;
+import javax.swing.JOptionPane; // Permite mostrar cuadros de diálogo (mensajes, confirmaciones, entradas de texto, etc.).
 
 /**
  *
@@ -23,16 +24,18 @@ public class JFModificarDocentes extends javax.swing.JFrame {
      */
     public JFModificarDocentes() {
         initComponents();
-  
-        TextPrompt nousuario = new TextPrompt("12345678",jTextNOUsuario);
+  setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // Desactiva la X de cierre
+        TextPrompt nousuario = new TextPrompt("12345678",jTextNOUsuario); // Establece textos de sugerencia ("placeholders")
         
-        setIconImage(getIconImage());
+        setIconImage(getIconImage()); // Establece un ícono personalizado para la ventana.
     }
     //Icono del JFrame
-    @Override
-    public Image getIconImage(){
+    @Override // Indica que este método sobrescribe el método getIconImage() de la clase JFrame
+    // Usa Toolkit (una clase de utilidades gráficas de AWT) para obtener una imagen ubicada en la ruta interna del proyecto
+    // ClassLoader.getSystemResource() localiza el archivo dentro del classpath (dentro de src o el .jar).
+    public Image getIconImage(){ 
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("workshopadmin/Imagenes/LogoIcono.png"));
-        return retValue;
+        return retValue; // Devuelve la imagen para que sea usada como ícono del JFrame
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -49,7 +52,7 @@ public class JFModificarDocentes extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jButtonRegresar = new javax.swing.JButton();
-        jLabel10 = new javax.swing.JLabel();
+        jLabelnformacion = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -68,6 +71,7 @@ public class JFModificarDocentes extends javax.swing.JFrame {
         jTextContraseña = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableTalleresGrupos1 = new javax.swing.JTable();
+        jButtonLimpiar = new javax.swing.JButton();
         jButtonRegresarInicio = new javax.swing.JButton();
 
         jTableTalleresGrupos.setModel(new javax.swing.table.DefaultTableModel(
@@ -85,6 +89,7 @@ public class JFModificarDocentes extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Actualizar datos de docentes");
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -111,10 +116,10 @@ public class JFModificarDocentes extends javax.swing.JFrame {
             }
         });
 
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/Informacion.png"))); // NOI18N
-        jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelnformacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/Informacion.png"))); // NOI18N
+        jLabelnformacion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel10MouseClicked(evt);
+                jLabelnformacionMouseClicked(evt);
             }
         });
 
@@ -151,15 +156,35 @@ public class JFModificarDocentes extends javax.swing.JFrame {
         jLabel8.setText("Contacto");
 
         jTextNombres.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jTextNombres.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextNombresKeyTyped(evt);
+            }
+        });
 
         jTextApellidos.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jTextApellidos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextApellidosKeyTyped(evt);
+            }
+        });
 
         jTextEdad.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jTextEdad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextEdadKeyTyped(evt);
+            }
+        });
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel11.setText("Campo");
 
         jTextCampo.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jTextCampo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextCampoKeyTyped(evt);
+            }
+        });
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel12.setText("No. Usuario");
@@ -169,8 +194,8 @@ public class JFModificarDocentes extends javax.swing.JFrame {
 
         jTextNOUsuario.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jTextNOUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextNOUsuarioKeyReleased(evt);
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextNOUsuarioKeyPressed(evt);
             }
         });
 
@@ -189,6 +214,23 @@ public class JFModificarDocentes extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jTableTalleresGrupos1);
 
+        jButtonLimpiar.setBackground(java.awt.Color.lightGray);
+        jButtonLimpiar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jButtonLimpiar.setText("Limpiar");
+        jButtonLimpiar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonLimpiarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonLimpiarMouseExited(evt);
+            }
+        });
+        jButtonLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLimpiarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -196,10 +238,6 @@ public class JFModificarDocentes extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGap(7, 7, 7)
-                        .addComponent(jTextContacto, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(jPanel2Layout.createSequentialGroup()
                             .addComponent(jLabel12)
@@ -227,7 +265,13 @@ public class JFModificarDocentes extends javax.swing.JFrame {
                                 .addGroup(jPanel2Layout.createSequentialGroup()
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(jTextCampo)))))
-                    .addComponent(jButtonActualizar))
+                    .addComponent(jButtonActualizar)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButtonLimpiar)
+                            .addComponent(jLabel8))
+                        .addGap(7, 7, 7)
+                        .addComponent(jTextContacto, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(29, Short.MAX_VALUE))
@@ -257,7 +301,7 @@ public class JFModificarDocentes extends javax.swing.JFrame {
                         .addComponent(jLabel11)
                         .addComponent(jTextCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jTextEdad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -265,8 +309,10 @@ public class JFModificarDocentes extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jTextContacto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(112, 112, 112)
-                .addComponent(jButtonActualizar)
+                .addGap(128, 128, 128)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButtonActualizar)
+                    .addComponent(jButtonLimpiar))
                 .addGap(26, 26, 26))
         );
 
@@ -310,7 +356,7 @@ public class JFModificarDocentes extends javax.swing.JFrame {
                 .addGap(132, 132, 132)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel10)
+                .addComponent(jLabelnformacion)
                 .addGap(29, 29, 29))
         );
         jPanel1Layout.setVerticalGroup(
@@ -319,7 +365,7 @@ public class JFModificarDocentes extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
-                        .addComponent(jLabel10))
+                        .addComponent(jLabelnformacion))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addComponent(jLabel1)))
@@ -354,71 +400,103 @@ public class JFModificarDocentes extends javax.swing.JFrame {
 
     private void jButtonRegresarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegresarMouseEntered
         // TODO add your handling code here:
+        // Cambia el fondo del botón a verde cuando el mouse pasa por encima.
         jButtonRegresar.setBackground(Color.GREEN);
     }//GEN-LAST:event_jButtonRegresarMouseEntered
 
     private void jButtonRegresarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegresarMouseExited
         // TODO add your handling code here:
+         // Restaura el fondo del botón a gris claro cuando el mouse sale.
         jButtonRegresar.setBackground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_jButtonRegresarMouseExited
 
     private void jButtonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegresarActionPerformed
         // TODO add your handling code here:
+         // Para regresar al menu
         JFAdministrarDocentes JFAdministrarDocentes =new JFAdministrarDocentes();
-        JFAdministrarDocentes.setDefaultCloseOperation(JFAdministrarDocentes.EXIT_ON_CLOSE);
         JFAdministrarDocentes.setVisible(true);
         JFAdministrarDocentes.setLocationRelativeTo(null); // Centra la ventana en la pantalla
         this.setVisible(false);
     }//GEN-LAST:event_jButtonRegresarActionPerformed
 
-    private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
+    private void jLabelnformacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelnformacionMouseClicked
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null,"Coloca el número de usuario del docente cuyos datos deseas modificar y presiona Enter.",
+        // Este método se ejecuta cuando el usuario hace clic en el label de información.
+        JOptionPane.showMessageDialog(null,"Utiliza esta ventana para modificar la información de un deocente existente.\n" +
+                    "Selecciona el deocente que deseas actualizar, escribiendo su número de usuario y dando click en enter para cargar su información.\n" +
+                    "Revisa y edita los campos necesarios. Verifica que los datos sean correctos.\n" +
+                    "Haz clic en Actualizar para guardar los cambios.",
             "Información",
             JOptionPane.INFORMATION_MESSAGE);
-    }//GEN-LAST:event_jLabel10MouseClicked
+    }//GEN-LAST:event_jLabelnformacionMouseClicked
 
     private void jButtonActualizarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonActualizarMouseEntered
         // TODO add your handling code here:
+        // Cambia el fondo del botón a verde cuando el mouse pasa por encima.
         jButtonActualizar.setBackground(Color.GREEN);
     }//GEN-LAST:event_jButtonActualizarMouseEntered
 
     private void jButtonActualizarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonActualizarMouseExited
         // TODO add your handling code here:
+         // Restaura el fondo del botón a gris claro cuando el mouse sale.
         jButtonActualizar.setBackground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_jButtonActualizarMouseExited
 
     private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
         // TODO add your handling code here:
-        int respuesta = JOptionPane.showConfirmDialog(null, "Realmente desea dar de alta a este alumno?",
+        int respuesta = JOptionPane.showConfirmDialog(null, "Realmente desea actualizar la informacion de este docente?",
             "Confirmar salida",
             JOptionPane.YES_NO_OPTION,
             JOptionPane.QUESTION_MESSAGE);
-        if (respuesta == JOptionPane.YES_OPTION) {
-            // Aquí colocas la lógica para dar de alta al alumno
-        ConsultarDocente cd = new ConsultarDocente();
-        cd.Modificar(jTextNOUsuario, jTextContraseña, jTextNombres, jTextApellidos, jTextEdad, jTextContacto, jTextCampo);
-            JOptionPane.showMessageDialog(null, "Alumno dado de alta exitosamente.");
-        } else {
+        if (respuesta == JOptionPane.NO_OPTION) {
             // Si el usuario elige "No", simplemente no hace nada o muestra otro mensaje
             JOptionPane.showMessageDialog(null, "Operación cancelada.");
+        }else {
+            // Validación: Verifica si algún campo obligatorio está vacío
+            if (jTextNOUsuario.getText().trim().isEmpty()||
+                    jTextContraseña.getText().trim().isEmpty()||
+                    jTextNombres.getText().trim().isEmpty()||
+                    jTextApellidos.getText().trim().isEmpty()||
+                    jTextEdad.getText().trim().isEmpty()||
+                    jTextCampo.getText().trim().isEmpty()||
+                    jTextContacto.getText().trim().isEmpty()){ 
+            
+            JOptionPane.showMessageDialog(null,"Por favor, completa todos los campos correctamente",
+                        "ADVERTENCIA",
+                        JOptionPane.ERROR_MESSAGE);
+            } else {
+            ConsultarDocente cd = new ConsultarDocente();
+            cd.Modificar(jTextNOUsuario, jTextContraseña, jTextNombres, jTextApellidos, jTextEdad, jTextContacto, jTextCampo);
+            jTextNOUsuario.setText("");
+            jTextContraseña.setText("");
+            jTextNombres.setText("");
+            jTextApellidos.setText("");
+            jTextEdad.setText("");
+            jTextCampo.setText("");
+            jTextContacto.setText("");
+            jTextNOUsuario.setEditable(true);
+            jTextContraseña.setEditable(true);
+            jTextNOUsuario.requestFocus();
+            }
         }
     }//GEN-LAST:event_jButtonActualizarActionPerformed
 
     private void jButtonRegresarInicioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegresarInicioMouseEntered
         // TODO add your handling code here:
+        // Cambia el fondo del botón a verde cuando el mouse pasa por encima.
         jButtonRegresarInicio.setBackground(Color.GREEN);
     }//GEN-LAST:event_jButtonRegresarInicioMouseEntered
 
     private void jButtonRegresarInicioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegresarInicioMouseExited
         // TODO add your handling code here:
+         // Restaura el fondo del botón a gris claro cuando el mouse sale.
         jButtonRegresarInicio.setBackground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_jButtonRegresarInicioMouseExited
 
     private void jButtonRegresarInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegresarInicioActionPerformed
         // TODO add your handling code here:
+        // Para regresar al inicio
         JFMenuAdministrador JFMenuAdministrador =new JFMenuAdministrador();
-        JFMenuAdministrador.setDefaultCloseOperation(JFMenuAdministrador.EXIT_ON_CLOSE);
         JFMenuAdministrador.setVisible(true);
         JFMenuAdministrador.setLocationRelativeTo(null); // Centra la ventana en la pantalla
         JOptionPane.showMessageDialog(null,"Has regresado al inicio",
@@ -427,14 +505,101 @@ public class JFModificarDocentes extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButtonRegresarInicioActionPerformed
 
-    private void jTextNOUsuarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextNOUsuarioKeyReleased
+    private void jTextNOUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextNOUsuarioKeyPressed
         // TODO add your handling code here:
-                if(evt.getKeyCode()==KeyEvent.VK_ENTER)
+        // Para cargar información del alumno
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER)
         {
-        ConsultarDocente cd = new ConsultarDocente();
-        cd.Consultar(jTextNOUsuario, jTextContraseña, jTextNombres, jTextApellidos, jTextEdad, jTextContacto, jTextCampo, jTableTalleresGrupos);
+            // Validación: Verifica si algún campo obligatorio está vacío 
+            if (jTextNOUsuario.getText().trim().isEmpty()){ 
+            
+            JOptionPane.showMessageDialog(null,"Por favor, escribe un número de usuario",
+                        "ADVERTENCIA",
+                        JOptionPane.ERROR_MESSAGE);
+            } else {
+                ConsultarDocente cd = new ConsultarDocente();
+                cd.Consultar(jTextNOUsuario, jTextContraseña, jTextNombres, jTextApellidos, jTextEdad, jTextContacto, jTextCampo, jTableTalleresGrupos);
+
+                jTextNOUsuario.setEditable(false); // Desabilita la edición de este campo
+                jTextContraseña.setEditable(false);
+                }
+            }
+    }//GEN-LAST:event_jTextNOUsuarioKeyPressed
+
+    private void jButtonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimpiarActionPerformed
+            // TODO add your handling code here:
+            // Limpiar los campos
+            jTextNOUsuario.setText("");
+            jTextContraseña.setText("");
+            jTextNombres.setText("");
+            jTextApellidos.setText("");
+            jTextEdad.setText("");
+            jTextCampo.setText("");
+            jTextContacto.setText("");
+            jTextNOUsuario.setEditable(true);
+            jTextContraseña.setEditable(true);
+            jTextNOUsuario.requestFocus();
+    }//GEN-LAST:event_jButtonLimpiarActionPerformed
+
+    private void jButtonLimpiarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonLimpiarMouseEntered
+        // TODO add your handling code here:
+        // Cambia el fondo del botón a verde cuando el mouse pasa por encima.
+        jButtonLimpiar.setBackground(Color.GREEN);
+    }//GEN-LAST:event_jButtonLimpiarMouseEntered
+
+    private void jButtonLimpiarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonLimpiarMouseExited
+        // TODO add your handling code here:
+         // Restaura el fondo del botón a gris claro cuando el mouse sale.
+        jButtonLimpiar.setBackground(Color.LIGHT_GRAY);
+    }//GEN-LAST:event_jButtonLimpiarMouseExited
+
+    private void jTextEdadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextEdadKeyTyped
+        // TODO add your handling code here:
+        //Validamos que en el campo no se puedan ingresar letras.
+        char c = evt.getKeyChar(); //llamamos al evento
+            if (Character.isLetter(c)){ //comparamos si ingresamos una letra
+                evt.consume(); //evitar que se capture la letra
+                JOptionPane.showMessageDialog(null,"Solo puedes ingresar números en este campo",
+                        "ADVERTENCIA",
+                        JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_jTextNOUsuarioKeyReleased
+    }//GEN-LAST:event_jTextEdadKeyTyped
+
+    private void jTextNombresKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextNombresKeyTyped
+        // TODO add your handling code here:
+            //Validamos que en el campo no se puedan ingresar números.
+            char c = evt.getKeyChar(); //llamamos al evento
+            if (Character.isDigit(c)){ //comparamos si ingresamos un digito
+                evt.consume(); //evitar que se capture el digito
+                JOptionPane.showMessageDialog(null,"No puedes ingresar números en este campo",
+                        "ADVERTENCIA",
+                        JOptionPane.ERROR_MESSAGE);
+       }
+    }//GEN-LAST:event_jTextNombresKeyTyped
+
+    private void jTextApellidosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextApellidosKeyTyped
+        // TODO add your handling code here:
+            //Validamos que en el campo no se puedan ingresar números.
+            char c = evt.getKeyChar(); //llamamos al evento
+            if (Character.isDigit(c)){ //comparamos si ingresamos un digito
+                evt.consume(); //evitar que se capture el digito
+                JOptionPane.showMessageDialog(null,"No puedes ingresar números en este campo",
+                        "ADVERTENCIA",
+                        JOptionPane.ERROR_MESSAGE);
+       }
+    }//GEN-LAST:event_jTextApellidosKeyTyped
+
+    private void jTextCampoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextCampoKeyTyped
+        // TODO add your handling code here:
+            //Validamos que en el campo no se puedan ingresar números.
+            char c = evt.getKeyChar(); //llamamos al evento
+            if (Character.isDigit(c)){ //comparamos si ingresamos un digito
+                evt.consume(); //evitar que se capture el digito
+                JOptionPane.showMessageDialog(null,"No puedes ingresar números en este campo",
+                        "ADVERTENCIA",
+                        JOptionPane.ERROR_MESSAGE);
+       }
+    }//GEN-LAST:event_jTextCampoKeyTyped
 
     /**
      * @param args the command line arguments
@@ -473,10 +638,10 @@ public class JFModificarDocentes extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonActualizar;
+    private javax.swing.JButton jButtonLimpiar;
     private javax.swing.JButton jButtonRegresar;
     private javax.swing.JButton jButtonRegresarInicio;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -485,6 +650,7 @@ public class JFModificarDocentes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelnformacion;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

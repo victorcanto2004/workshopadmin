@@ -4,45 +4,50 @@
  */
 package Administrador;
 
-import Clases.ConsultarAlumnos;
-import Clases.TextPrompt;
-import java.awt.Color;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.event.KeyEvent;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import javax.swing.JOptionPane;
+import Clases.ConsultarAlumnos; // Importa la clase ConsultarAlumnos
+import Clases.TextPrompt; // Importa la clase TextPrompt para utilizar placeholders
+import java.awt.Color; // Permite usar la clase Color para cambiar colores en componentes gráficos.
+import java.awt.Image; // Permite manejar imágenes, por ejemplo, para íconos o imágenes en la interfaz.
+import java.awt.Toolkit; // Proporciona acceso a recursos del sistema como imágenes, sonidos, etc.
+import java.awt.event.KeyEvent; // Permite detectar y manejar eventos del teclado, como presionar, soltar o escribir una tecla.
+import java.sql.Connection; // Importa Connection, que representa la conexión activa con la base de datos.
+import java.sql.PreparedStatement; // Importa PreparedStatement, que permite ejecutar consultas SQL seguras con parámetros.
+import javax.swing.JFrame;
+import javax.swing.JOptionPane; // Permite mostrar cuadros de diálogo (mensajes, confirmaciones, entradas de texto, etc.).
 
 /**
  *
  * @author canto
  */
 public class JFModificarAlumnos extends javax.swing.JFrame {
-    String bd="workshopadmin";
-    String url="jdbc:mysql://localhost:3306/";
-    String user="root";
-    String password="sqloracle";
-    String driver="com.mysql.cj.jdbc.Driver";
-    Connection cx=null;
-    PreparedStatement ps=null;
+    // Datos de configuración para la conexión con la base de datos
+    String bd="workshopadmin"; // Nombre de la base de datos a la que se desea conectar.
+    String url="jdbc:mysql://localhost:3306/"; // URL de conexión para MySQL. Incluye el host (localhost) y el puerto (3306), pero no la base de datos todavía.
+    String user="root"; // Usuario de la base de datos. En muchos entornos locales, "root" es el usuario por defecto.
+    String password="sqloracle"; // Contraseña del usuario "root". Aquí se ha puesto "sqloracle", pero debe coincidir con la contraseña real en tu servidor MySQL.
+    String driver="com.mysql.cj.jdbc.Driver"; // Nombre del driver JDBC que se utiliza para conectar a MySQL. Este driver debe estar incluido en el classpath del proyecto.
+    Connection cx=null; // Objeto de conexión. Se utilizará para establecer la conexión con la base de datos.
+    PreparedStatement ps=null; // Objeto que permite ejecutar sentencias SQL con parámetros (consultas preparadas)
 
     /**
      * Creates new form JFModificarAlumnos
      */
     public JFModificarAlumnos() {
         initComponents();
-        jTableTalleresGrupos.setVisible(false);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // Desactiva la X de cierre
+        jTableTalleresGrupos.setVisible(false); // Oculta inicialmente el jTextField
  
-        TextPrompt matricula = new TextPrompt("22070011",jTextMatricula);
+        TextPrompt matricula = new TextPrompt("22070011",jTextMatricula); // Establece textos de sugerencia ("placeholders")
         
-        setIconImage(getIconImage());
+        setIconImage(getIconImage()); // Establece un ícono personalizado para la ventana.
     }
     //Icono del JFrame
-    @Override
-    public Image getIconImage(){
+    @Override // Indica que este método sobrescribe el método getIconImage() de la clase JFrame
+    // Usa Toolkit (una clase de utilidades gráficas de AWT) para obtener una imagen ubicada en la ruta interna del proyecto
+    // ClassLoader.getSystemResource() localiza el archivo dentro del classpath (dentro de src o el .jar).
+    public Image getIconImage(){ 
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("workshopadmin/Imagenes/LogoIcono.png"));
-        return retValue;
+        return retValue; // Devuelve la imagen para que sea usada como ícono del JFrame
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -58,7 +63,7 @@ public class JFModificarAlumnos extends javax.swing.JFrame {
         jButtonRegresarInicio = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        jLabelnformacion = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -75,9 +80,11 @@ public class JFModificarAlumnos extends javax.swing.JFrame {
         jTextApellidos = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableTalleresGrupos = new javax.swing.JTable();
+        jButtonLimpiar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Actualizar datos de alumnos");
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -122,10 +129,10 @@ public class JFModificarAlumnos extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setText("Actualiza datos de un alumno");
 
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/Informacion.png"))); // NOI18N
-        jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelnformacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/Informacion.png"))); // NOI18N
+        jLabelnformacion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel10MouseClicked(evt);
+                jLabelnformacionMouseClicked(evt);
             }
         });
 
@@ -166,21 +173,41 @@ public class JFModificarAlumnos extends javax.swing.JFrame {
 
         jTextMatricula.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jTextMatricula.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextMatriculaKeyReleased(evt);
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextMatriculaKeyPressed(evt);
             }
         });
 
         jTextNombres.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jTextNombres.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextNombresKeyTyped(evt);
+            }
+        });
 
         jTextEdad.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jTextEdad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextEdadKeyTyped(evt);
+            }
+        });
 
         jTextTutor.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jTextTutor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextTutorKeyTyped(evt);
+            }
+        });
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel11.setText("Apellidos");
 
         jTextApellidos.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jTextApellidos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextApellidosKeyTyped(evt);
+            }
+        });
 
         jTableTalleresGrupos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -194,6 +221,23 @@ public class JFModificarAlumnos extends javax.swing.JFrame {
             }
         ));
         jScrollPane1.setViewportView(jTableTalleresGrupos);
+
+        jButtonLimpiar.setBackground(java.awt.Color.lightGray);
+        jButtonLimpiar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jButtonLimpiar.setText("Limpiar");
+        jButtonLimpiar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonLimpiarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonLimpiarMouseExited(evt);
+            }
+        });
+        jButtonLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLimpiarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -226,7 +270,8 @@ public class JFModificarAlumnos extends javax.swing.JFrame {
                                             .addComponent(jTextContactoTutor, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextApellidos)))))
+                                        .addComponent(jTextApellidos))))
+                            .addComponent(jButtonLimpiar))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(34, Short.MAX_VALUE))
@@ -262,7 +307,9 @@ public class JFModificarAlumnos extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addComponent(jButtonActualizar)
-                .addGap(110, 110, 110))
+                .addGap(51, 51, 51)
+                .addComponent(jButtonLimpiar)
+                .addGap(21, 21, 21))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -287,7 +334,7 @@ public class JFModificarAlumnos extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabel1)
                         .addGap(108, 108, 108)
-                        .addComponent(jLabel10)))
+                        .addComponent(jLabelnformacion)))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -295,7 +342,7 @@ public class JFModificarAlumnos extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel10)
+                    .addComponent(jLabelnformacion)
                     .addComponent(jLabel1))
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -325,18 +372,20 @@ public class JFModificarAlumnos extends javax.swing.JFrame {
 
     private void jButtonRegresarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegresarMouseEntered
         // TODO add your handling code here:
+        // Cambia el fondo del botón a verde cuando el mouse pasa por encima.
         jButtonRegresar.setBackground(Color.GREEN);
     }//GEN-LAST:event_jButtonRegresarMouseEntered
 
     private void jButtonRegresarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegresarMouseExited
         // TODO add your handling code here:
+        // Restaura el fondo del botón a gris claro cuando el mouse sale.
         jButtonRegresar.setBackground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_jButtonRegresarMouseExited
 
     private void jButtonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegresarActionPerformed
         // TODO add your handling code here:
+        // Para regresar al menu
         JFAdministrarAlumnos JFAdministrarAlumnos =new JFAdministrarAlumnos();
-        JFAdministrarAlumnos.setDefaultCloseOperation(JFAdministrarAlumnos.EXIT_ON_CLOSE);
         JFAdministrarAlumnos.setVisible(true);
         JFAdministrarAlumnos.setLocationRelativeTo(null); // Centra la ventana en la pantalla
         this.setVisible(false);
@@ -344,68 +393,177 @@ public class JFModificarAlumnos extends javax.swing.JFrame {
 
     private void jButtonRegresarInicioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegresarInicioMouseEntered
         // TODO add your handling code here:
+        // Cambia el fondo del botón a verde cuando el mouse pasa por encima.
         jButtonRegresarInicio.setBackground(Color.GREEN);
     }//GEN-LAST:event_jButtonRegresarInicioMouseEntered
 
     private void jButtonRegresarInicioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegresarInicioMouseExited
         // TODO add your handling code here:
+        // Restaura el fondo del botón a gris claro cuando el mouse sale.
         jButtonRegresarInicio.setBackground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_jButtonRegresarInicioMouseExited
 
     private void jButtonRegresarInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegresarInicioActionPerformed
         // TODO add your handling code here:
+        // Para regresar al inicio
         JFMenuAdministrador JFMenuAdministrador =new JFMenuAdministrador();
-        JFMenuAdministrador.setDefaultCloseOperation(JFMenuAdministrador.EXIT_ON_CLOSE);
         JFMenuAdministrador.setVisible(true);
         JFMenuAdministrador.setLocationRelativeTo(null); // Centra la ventana en la pantalla
-        JOptionPane.showMessageDialog(null,"Has regresado al inicio",
-            "Informacion",
-            JOptionPane.INFORMATION_MESSAGE);
         this.setVisible(false);
     }//GEN-LAST:event_jButtonRegresarInicioActionPerformed
 
-    private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
+    private void jLabelnformacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelnformacionMouseClicked
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null,"Coloca la matrícula del alumno cuyos datos deseas modificar y presiona Enter.",
+        // Este método se ejecuta cuando el usuario hace clic en el label de información.
+        JOptionPane.showMessageDialog(null,"Utiliza esta ventana para modificar la información de un alumno existente.\n" +
+                    "Selecciona el alumno que deseas actualizar, escribiendo su matrícula y dando click en enter para cargar su información.\n" +
+                    "Revisa y edita los campos necesarios. Verifica que los datos sean correctos.\n" +
+                    "Haz clic en Actualizar para guardar los cambios.",
             "Información",
             JOptionPane.INFORMATION_MESSAGE);
-    }//GEN-LAST:event_jLabel10MouseClicked
+    }//GEN-LAST:event_jLabelnformacionMouseClicked
 
     private void jButtonActualizarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonActualizarMouseEntered
         // TODO add your handling code here:
+        // Cambia el fondo del botón a verde cuando el mouse pasa por encima.
         jButtonActualizar.setBackground(Color.GREEN);
     }//GEN-LAST:event_jButtonActualizarMouseEntered
 
     private void jButtonActualizarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonActualizarMouseExited
         // TODO add your handling code here:
+        // Restaura el fondo del botón a gris claro cuando el mouse sale.
         jButtonActualizar.setBackground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_jButtonActualizarMouseExited
 
     private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
         // TODO add your handling code here:
-        int respuesta = JOptionPane.showConfirmDialog(null, "Realmente desea dar de alta a este alumno?",
+        // Muestra un cuadro de diálogo para confirmar si el usuario realmente desea
+        int respuesta = JOptionPane.showConfirmDialog(null, "Realmente desea actualizar la información de este alumno?",
             "Confirmar salida",
             JOptionPane.YES_NO_OPTION,
             JOptionPane.QUESTION_MESSAGE);
-        if (respuesta == JOptionPane.YES_OPTION) {
-            // Aquí colocas la lógica para dar de alta al alumno
-            ConsultarAlumnos ca = new ConsultarAlumnos();
-            ca.Modificar(jTextMatricula, jTextNombres, jTextApellidos, jTextEdad, jTextTutor, jTextContactoTutor); 
-            JOptionPane.showMessageDialog(null, "Alumno dado de alta exitosamente.");
-        } else {
+        if (respuesta == JOptionPane.NO_OPTION) {
             // Si el usuario elige "No", simplemente no hace nada o muestra otro mensaje
             JOptionPane.showMessageDialog(null, "Operación cancelada.");
+        } else {
+            // Validación: Verifica si algún campo obligatorio está vacío
+            if (jTextMatricula.getText().trim().isEmpty()||
+                    jTextNombres.getText().trim().isEmpty()||
+                    jTextApellidos.getText().trim().isEmpty()||
+                    jTextEdad.getText().trim().isEmpty()||
+                    jTextTutor.getText().trim().isEmpty()||
+                    jTextContactoTutor.getText().trim().isEmpty()){ 
+            
+            JOptionPane.showMessageDialog(null,"Por favor, completa todos los campos correctamente",
+                        "ADVERTENCIA",
+                        JOptionPane.ERROR_MESSAGE);
+            } else {
+                ConsultarAlumnos ca = new ConsultarAlumnos();
+                ca.Modificar(jTextMatricula, jTextNombres, jTextApellidos, jTextEdad, jTextTutor, jTextContactoTutor); 
+                jTextMatricula.setText("");
+                jTextNombres.setText("");
+                jTextApellidos.setText("");
+                jTextEdad.setText("");
+                jTextTutor.setText("");
+                jTextContactoTutor.setText("");
+                jTextMatricula.setEditable(true);
+                jTextMatricula.requestFocus();
+            }
         }
     }//GEN-LAST:event_jButtonActualizarActionPerformed
 
-    private void jTextMatriculaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextMatriculaKeyReleased
+    private void jTextMatriculaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextMatriculaKeyPressed
         // TODO add your handling code here:
-                if(evt.getKeyCode()==KeyEvent.VK_ENTER)
+        // Para cargar información del alumno
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER)
         {
-          ConsultarAlumnos ca = new ConsultarAlumnos();
-          ca.Consultar(jTextMatricula, jTextNombres, jTextApellidos, jTextEdad, jTextTutor, jTextContactoTutor, jTableTalleresGrupos); 
+            // Validación: Verifica si algún campo obligatorio está vacío 
+            if (jTextMatricula.getText().trim().isEmpty()){ 
+            
+            JOptionPane.showMessageDialog(null,"Por favor, escribe una matrícula",
+                        "ADVERTENCIA",
+                        JOptionPane.ERROR_MESSAGE);
+            } else {
+                ConsultarAlumnos ca = new ConsultarAlumnos();
+                ca.Consultar(jTextMatricula, jTextNombres, jTextApellidos, jTextEdad, jTextTutor, jTextContactoTutor, jTableTalleresGrupos); 
+
+                jTextMatricula.setEditable(false); // Desabilita la edición de este campo
+            }
         }
-    }//GEN-LAST:event_jTextMatriculaKeyReleased
+    }//GEN-LAST:event_jTextMatriculaKeyPressed
+
+    private void jButtonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimpiarActionPerformed
+        // TODO add your handling code here:
+        // Limpa los campos
+        jTextMatricula.setText("");
+        jTextNombres.setText("");
+        jTextApellidos.setText("");
+        jTextEdad.setText("");
+        jTextTutor.setText("");
+        jTextContactoTutor.setText("");
+        jTextMatricula.setEditable(true);
+        jTextMatricula.requestFocus();
+    }//GEN-LAST:event_jButtonLimpiarActionPerformed
+
+    private void jButtonLimpiarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonLimpiarMouseEntered
+        // TODO add your handling code here:
+        // Cambia el fondo del botón a verde cuando el mouse pasa por encima.
+        jButtonLimpiar.setBackground(Color.GREEN);
+    }//GEN-LAST:event_jButtonLimpiarMouseEntered
+
+    private void jButtonLimpiarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonLimpiarMouseExited
+        // TODO add your handling code here:
+        // Restaura el fondo del botón a gris claro cuando el mouse sale.
+        jButtonLimpiar.setBackground(Color.LIGHT_GRAY);
+    }//GEN-LAST:event_jButtonLimpiarMouseExited
+
+    private void jTextEdadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextEdadKeyTyped
+        // TODO add your handling code here:
+        //Validamos que en el campo no se puedan ingresar letras.
+        char c = evt.getKeyChar(); //llamamos al evento
+            if (Character.isLetter(c)){ //comparamos si ingresamos una letra
+                evt.consume(); //evitar que se capture la letra
+                JOptionPane.showMessageDialog(null,"Solo puedes ingresar números en este campo",
+                        "ADVERTENCIA",
+                        JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jTextEdadKeyTyped
+
+    private void jTextNombresKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextNombresKeyTyped
+        // TODO add your handling code here:
+            //Validamos que en el campo no se puedan ingresar números.
+            char c = evt.getKeyChar(); //llamamos al evento
+            if (Character.isDigit(c)){ //comparamos si ingresamos un digito
+                evt.consume(); //evitar que se capture el digito
+                JOptionPane.showMessageDialog(null,"No puedes ingresar números en este campo",
+                        "ADVERTENCIA",
+                        JOptionPane.ERROR_MESSAGE);
+       }
+    }//GEN-LAST:event_jTextNombresKeyTyped
+
+    private void jTextApellidosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextApellidosKeyTyped
+        // TODO add your handling code here:
+            //Validamos que en el campo no se puedan ingresar números.
+            char c = evt.getKeyChar(); //llamamos al evento
+            if (Character.isDigit(c)){ //comparamos si ingresamos un digito
+                evt.consume(); //evitar que se capture el digito
+                JOptionPane.showMessageDialog(null,"No puedes ingresar números en este campo",
+                        "ADVERTENCIA",
+                        JOptionPane.ERROR_MESSAGE);
+       }
+    }//GEN-LAST:event_jTextApellidosKeyTyped
+
+    private void jTextTutorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextTutorKeyTyped
+        // TODO add your handling code here:
+            //Validamos que en el campo no se puedan ingresar números.
+            char c = evt.getKeyChar(); //llamamos al evento
+            if (Character.isDigit(c)){ //comparamos si ingresamos un digito
+                evt.consume(); //evitar que se capture el digito
+                JOptionPane.showMessageDialog(null,"No puedes ingresar números en este campo",
+                        "ADVERTENCIA",
+                        JOptionPane.ERROR_MESSAGE);
+       }
+    }//GEN-LAST:event_jTextTutorKeyTyped
 
     /**
      * @param args the command line arguments
@@ -444,10 +602,10 @@ public class JFModificarAlumnos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonActualizar;
+    private javax.swing.JButton jButtonLimpiar;
     private javax.swing.JButton jButtonRegresar;
     private javax.swing.JButton jButtonRegresarInicio;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -455,6 +613,7 @@ public class JFModificarAlumnos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelnformacion;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

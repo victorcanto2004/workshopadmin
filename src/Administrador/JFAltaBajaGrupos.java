@@ -4,20 +4,22 @@
  */
 package Administrador;
 
-import Clases.CargarGrupos;
-import Clases.Conexion;
-import Clases.Grupos;
-import Clases.TextPrompt;
-import java.awt.Color;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import Clases.CargarGrupos; // Importa la clase CargarGrupos
+import Clases.Conexion; // Importa la clase conexion para gestionar la conexion con la base de datos
+import Clases.Grupos; // Importa la clase Grupos
+import Clases.TextPrompt; // Importa la clase TextPrompt para utilizar placeholders
+import java.awt.Color; // Permite usar la clase Color para cambiar colores en componentes gráficos.
+import java.awt.Image; // Permite manejar imágenes, por ejemplo, para íconos o imágenes en la interfaz.
+import java.awt.Toolkit; // Proporciona acceso a recursos del sistema como imágenes, sonidos, etc.
+import java.sql.Connection; // Importa Connection, que representa la conexión activa con la base de datos.
+import java.sql.DriverManager; // Importa DriverManager, que se usa para establecer conexiones con la base de datos.
+import java.sql.PreparedStatement; // Importa PreparedStatement, que permite ejecutar consultas SQL seguras con parámetros.
+import java.sql.SQLException;  // Importa SQLException, que captura errores relacionados con la base de datos.
+// Importa Logger y Level, herramientas para registrar mensajes en la consola o en archivos de log.
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane; // Permite mostrar cuadros de diálogo (mensajes, confirmaciones, entradas de texto, etc.).
 
 /**
  *
@@ -29,36 +31,42 @@ public class JFAltaBajaGrupos extends javax.swing.JFrame {
      * Creates new form JFAltaBajaGrupos
      */
     
-    String bd="workshopadmin";
-    String url="jdbc:mysql://localhost:3306/";
-    String user="root";
-    String password="sqloracle";
-    String driver="com.mysql.cj.jdbc.Driver";
-    Connection cx=null;
-    PreparedStatement ps=null;
+    // Datos de configuración para la conexión con la base de datos
+    String bd="workshopadmin"; // Nombre de la base de datos a la que se desea conectar.
+    String url="jdbc:mysql://localhost:3306/"; // URL de conexión para MySQL. Incluye el host (localhost) y el puerto (3306), pero no la base de datos todavía.
+    String user="root"; // Usuario de la base de datos. En muchos entornos locales, "root" es el usuario por defecto.
+    String password="sqloracle"; // Contraseña del usuario "root". Aquí se ha puesto "sqloracle", pero debe coincidir con la contraseña real en tu servidor MySQL.
+    String driver="com.mysql.cj.jdbc.Driver"; // Nombre del driver JDBC que se utiliza para conectar a MySQL. Este driver debe estar incluido en el classpath del proyecto.
+    Connection cx=null; // Objeto de conexión. Se utilizará para establecer la conexión con la base de datos.
+    PreparedStatement ps=null; // Objeto que permite ejecutar sentencias SQL con parámetros (consultas preparadas)
     
     public JFAltaBajaGrupos() {
         initComponents();
-        Grupos ct = new Grupos(jComboBoxTALLER, jTextIDTALLER.getText(), jTextIDTALLER.getText(),jComboBox1);
-        ct.cargarTalleres();
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // Desactiva la X de cierre
+        // Llamar a Grupos
+        Grupos ct = new Grupos(jComboBoxTALLER, jTextIDTALLER.getText(), jTextIDTALLER.getText(),jComboBoxGrupoRegistrar);
+        ct.cargarTalleres(); // Método que configura y organiza todos los componentes gráficos en la ventana.
         
+        // Llamar a CargarGrupos
         CargarGrupos cg = new CargarGrupos(jComboBoxTalleresEliminar, jComboBoxGrupos, jTextidtaller.getText());
         cg.cargarTalleres();
         
-        jTextIDTALLER.setVisible(false);
-        jTextidtaller.setVisible(false);
-        jTextidgrupo.setVisible(false);
-        jComboBox1.setVisible(false);
+        jTextIDTALLER.setVisible(false); // Oculta inicialmente el jTextField
+        jTextidtaller.setVisible(false); // Oculta inicialmente el jTextField
+        jTextidgrupo.setVisible(false); // Oculta inicialmente el jTextField
+        jComboBoxGrupoRegistrar.setVisible(false); // Oculta inicialmente el jComboBox
         
-        TextPrompt grupo = new TextPrompt("A",jTextNombre);
+        TextPrompt grupo = new TextPrompt("A",jTextNombre); // Establece texto de sugerencia ("placeholder")
         
-        setIconImage(getIconImage());
+        setIconImage(getIconImage()); // Establece un ícono personalizado para la ventana.
     }
     //Icono del JFrame
-    @Override
-    public Image getIconImage(){
+    @Override // Indica que este método sobrescribe el método getIconImage() de la clase JFrame
+    // Usa Toolkit (una clase de utilidades gráficas de AWT) para obtener una imagen ubicada en la ruta interna del proyecto
+    // ClassLoader.getSystemResource() localiza el archivo dentro del classpath (dentro de src o el .jar).
+    public Image getIconImage(){ 
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("workshopadmin/Imagenes/LogoIcono.png"));
-        return retValue;
+        return retValue; // Devuelve la imagen para que sea usada como ícono del JFrame
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -70,14 +78,14 @@ public class JFAltaBajaGrupos extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel14 = new javax.swing.JLabel();
+        jLabelnformacion = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jButtonRegresarInicio = new javax.swing.JButton();
         jButtonRegresar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTextNombreEliminar = new javax.swing.JTextField();
         jButtonEliminar = new javax.swing.JButton();
         jTextidgrupo = new javax.swing.JTextField();
         jComboBoxTalleresEliminar = new javax.swing.JComboBox<>();
@@ -89,17 +97,18 @@ public class JFAltaBajaGrupos extends javax.swing.JFrame {
         jTextNombre = new javax.swing.JTextField();
         jComboBoxTALLER = new javax.swing.JComboBox<>();
         jTextIDTALLER = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBoxGrupoRegistrar = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registro un grupos");
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/Informacion.png"))); // NOI18N
-        jLabel14.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelnformacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/Informacion.png"))); // NOI18N
+        jLabelnformacion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel14MouseClicked(evt);
+                jLabelnformacionMouseClicked(evt);
             }
         });
 
@@ -149,8 +158,8 @@ public class JFAltaBajaGrupos extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel2.setText("Grupo");
 
-        jTextField1.setEditable(false);
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jTextNombreEliminar.setEditable(false);
+        jTextNombreEliminar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
         jButtonEliminar.setBackground(java.awt.Color.lightGray);
         jButtonEliminar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -196,7 +205,7 @@ public class JFAltaBajaGrupos extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextNombreEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(132, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jComboBoxTalleresEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -219,7 +228,7 @@ public class JFAltaBajaGrupos extends javax.swing.JFrame {
                     .addComponent(jTextidgrupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextNombreEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addComponent(jButtonEliminar)
@@ -261,7 +270,7 @@ public class JFAltaBajaGrupos extends javax.swing.JFrame {
 
         jTextIDTALLER.setText("jTextField2");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxGrupoRegistrar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -278,7 +287,7 @@ public class JFAltaBajaGrupos extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jComboBoxTALLER, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(80, 80, 80)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBoxGrupoRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jTextIDTALLER, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(23, 23, 23))))
@@ -295,7 +304,7 @@ public class JFAltaBajaGrupos extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jComboBoxTALLER, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jComboBoxGrupoRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
@@ -325,10 +334,10 @@ public class JFAltaBajaGrupos extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel14))
+                        .addComponent(jLabelnformacion))
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -347,7 +356,7 @@ public class JFAltaBajaGrupos extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(21, 21, 21)
-                        .addComponent(jLabel14)))
+                        .addComponent(jLabelnformacion)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -369,79 +378,92 @@ public class JFAltaBajaGrupos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseClicked
+    private void jLabelnformacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelnformacionMouseClicked
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null,"Has click en lo que deseas administrar",
+        // Este método se ejecuta cuando el usuario hace clic en el label de información.
+        JOptionPane.showMessageDialog(null,"Dar de alta un grupo:\n" +
+                                    "Primero elige el taller al que deseas agregar el nuevo grupo.\n" +
+                                    "Luego ingresa el nombre del grupo y confírmalo con Registrar.\n"
+                                    + "Dar de baja un grupo:\n" +
+                                    "Selecciona el taller y luego el grupo que deseas eliminar\n"
+                                    + "y confirmalo con el boton Eliminar",
             "Información",
             JOptionPane.INFORMATION_MESSAGE);
-    }//GEN-LAST:event_jLabel14MouseClicked
+    }//GEN-LAST:event_jLabelnformacionMouseClicked
 
     private void jButtonRegresarInicioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegresarInicioMouseEntered
         // TODO add your handling code here:
+        // Cambia el fondo del botón a verde cuando el mouse pasa por encima.
         jButtonRegresarInicio.setBackground(Color.GREEN);
     }//GEN-LAST:event_jButtonRegresarInicioMouseEntered
 
     private void jButtonRegresarInicioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegresarInicioMouseExited
         // TODO add your handling code here:
+        // Restaura el fondo del botón a gris claro cuando el mouse sale.
         jButtonRegresarInicio.setBackground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_jButtonRegresarInicioMouseExited
 
     private void jButtonRegresarInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegresarInicioActionPerformed
         // TODO add your handling code here:
-        JFMenuAdministrador JFMenuAdministrador =new JFMenuAdministrador();
-        JFMenuAdministrador.setDefaultCloseOperation(JFMenuAdministrador.EXIT_ON_CLOSE);
-        JFMenuAdministrador.setVisible(true);
+        JFMenuAdministrador JFMenuAdministrador =new JFMenuAdministrador(); // Crea una nueva instancia
+        JFMenuAdministrador.setVisible(true); // Muestra la ventana.
         JFMenuAdministrador.setLocationRelativeTo(null); // Centra la ventana en la pantalla
-        JOptionPane.showMessageDialog(null,"Has regresado al inicio",
-            "Informacion",
-            JOptionPane.INFORMATION_MESSAGE);
-        this.setVisible(false);
+        this.setVisible(false); // Oculta la ventana actual.
     }//GEN-LAST:event_jButtonRegresarInicioActionPerformed
 
     private void jButtonRegresarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegresarMouseEntered
         // TODO add your handling code here:
+        // Cambia el fondo del botón a verde cuando el mouse pasa por encima.
         jButtonRegresar.setBackground(Color.GREEN);
     }//GEN-LAST:event_jButtonRegresarMouseEntered
 
     private void jButtonRegresarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegresarMouseExited
         // TODO add your handling code here:
+        // Restaura el fondo del botón a gris claro cuando el mouse sale.
         jButtonRegresar.setBackground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_jButtonRegresarMouseExited
 
     private void jButtonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegresarActionPerformed
         // TODO add your handling code here:
-        JFAdministrarGrupos JFAdministrarGrupos =new JFAdministrarGrupos();
-        JFAdministrarGrupos.setDefaultCloseOperation(JFAdministrarGrupos.EXIT_ON_CLOSE);
-        JFAdministrarGrupos.setVisible(true);
+        JFAdministrarGrupos JFAdministrarGrupos =new JFAdministrarGrupos(); // Crea una nueva instancia
+        JFAdministrarGrupos.setVisible(true); // Muestra la ventana 
         JFAdministrarGrupos.setLocationRelativeTo(null); // Centra la ventana en la pantalla
-        this.setVisible(false);
+        this.setVisible(false); // Oculta la ventana actual.
     }//GEN-LAST:event_jButtonRegresarActionPerformed
 
     private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
         // TODO add your handling code here:
-        int respuesta = JOptionPane.showConfirmDialog(null, "Realmente desea eliminar este taller?",
+        // Muestra un cuadro de diálogo para confirmar si el usuario realmente desea dar de dar de baja un grupo
+        int respuesta = JOptionPane.showConfirmDialog(null, "Realmente desea eliminar este grupo?",
             "Confirmar salida",
             JOptionPane.YES_NO_OPTION,
             JOptionPane.QUESTION_MESSAGE);
-        if (respuesta == JOptionPane.YES_OPTION) {
-
-            String nombreIngresado = jTextField1.getText();
+        if (respuesta == JOptionPane.NO_OPTION) {
+            JOptionPane.showMessageDialog(null, "Operación cancelada."); // Si el usuario elige "No", simplemente no hace nada o muestra otro mensaje
+        } else {
+            // Validación: Verifica si no se ha seleccionado taller y grupo
+            if (jComboBoxTalleresEliminar.getSelectedItem().toString().equals("Taller") ||
+                    jComboBoxGrupos.getSelectedItem().toString().equals("Grupos")){          
+            JOptionPane.showMessageDialog(null,"Por favor, selecciona un taller y grupo que necesita eliminar.",
+                        "ADVERTENCIA",
+                        JOptionPane.ERROR_MESSAGE);
+            } else {
+            // Si todas las validaciones son correctas, se extraen los datos de los campos
+            String nombreIngresado = jTextNombreEliminar.getText();
             String idtaller = jTextIDTALLER.getText();
             // Llamar a la clase
             Grupos ag = new Grupos(jComboBoxTalleresEliminar, nombreIngresado,idtaller, jComboBoxGrupos );
             ag.BajaGrupos();
 
-            jTextField1.setText("");
+            jTextNombreEliminar.setText("");
             jTextNombre.requestFocus();
 
-        } else {
-            // Si el usuario elige "No", simplemente no hace nada o muestra otro mensaje
-            JOptionPane.showMessageDialog(null, "Operación cancelada.");
-        }
+        } }
     }//GEN-LAST:event_jButtonEliminarActionPerformed
 
     private void jButtonRegistrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegistrarMouseEntered
         // TODO add your handling code here:
+        // Cambia el fondo del botón a verde cuando el mouse pasa por encima.
         jButtonRegistrar.setBackground(Color.GREEN);
     }//GEN-LAST:event_jButtonRegistrarMouseEntered
 
@@ -452,27 +474,34 @@ public class JFAltaBajaGrupos extends javax.swing.JFrame {
 
     private void jButtonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarActionPerformed
         // TODO add your handling code here:
-        int respuesta = JOptionPane.showConfirmDialog(null, "Realmente desea dar de alta a este alumno?",
+        // Muestra un cuadro de diálogo para confirmar si el usuario realmente desea dar de dar de alta un grupo
+        int respuesta = JOptionPane.showConfirmDialog(null, "Realmente desea dar de alta a este grupo?",
             "Confirmar salida",
             JOptionPane.YES_NO_OPTION,
             JOptionPane.QUESTION_MESSAGE);
-        if (respuesta == JOptionPane.YES_OPTION) {
-
-            String nombreIngresado = jTextNombre.getText();
-            
+        if (respuesta == JOptionPane.NO_OPTION) {
+            // Si el usuario elige "No", simplemente no hace nada o muestra otro mensaje
+            JOptionPane.showMessageDialog(null, "Operación cancelada.");
+        }else {
+            // Validación: Verifica si no se ha seleccionado taller y grupo
+            if (jComboBoxTALLER.getSelectedItem().toString().equals("Taller") ||
+                jTextNombre.getText().trim().isEmpty()){          
+            JOptionPane.showMessageDialog(null,"Por favor, selecciona un taller escribe el nombre del grupo que desea agregar.",
+                        "ADVERTENCIA",
+                        JOptionPane.ERROR_MESSAGE);
+            } else {
+            // Si todas las validaciones son correctas, se extraen los datos de los campos
+            String nombreIngresado = jTextNombre.getText();   
             String idtaller = jTextIDTALLER.getText();
 
             // Llamar a la clase
-            Grupos ag = new Grupos(jComboBoxTALLER, nombreIngresado,idtaller, jComboBox1);
+            Grupos ag = new Grupos(jComboBoxTALLER, nombreIngresado,idtaller, jComboBoxGrupoRegistrar);
             ag.AltaGrupos();
 
             jTextNombre.setText("");
             jTextNombre.requestFocus();
-
-        } else {
-            // Si el usuario elige "No", simplemente no hace nada o muestra otro mensaje
-            JOptionPane.showMessageDialog(null, "Operación cancelada.");
-        }
+            }
+        } 
     }//GEN-LAST:event_jButtonRegistrarActionPerformed
 
     private void jComboBoxTALLERActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTALLERActionPerformed
@@ -491,7 +520,7 @@ public class JFAltaBajaGrupos extends javax.swing.JFrame {
             cx = DriverManager.getConnection(url + bd, user, password);
             
             // Preparar la consulta para obtener el id_taller
-            PreparedStatement consulta = cx.prepareStatement("SELECT id_taller FROM talleres WHERE nombre=?");
+            PreparedStatement consulta = cx.prepareStatement("SELECT id_taller FROM talleres WHERE nombre=? AND activo = TRUE");
 
             // Establecer el parámetro de la consulta
             consulta.setString(1, seleccionado);  // Usamos directamente el nombre seleccionado
@@ -505,7 +534,6 @@ public class JFAltaBajaGrupos extends javax.swing.JFrame {
                 int idTaller = rs.getInt("id_taller");
 
                 // Establecer el id_taller en otro JTextField
-                // Si quieres mostrar el id_taller en otro JTextField
                 jTextIDTALLER.setText(String.valueOf(idTaller));           
 
             } else {
@@ -545,7 +573,7 @@ public class JFAltaBajaGrupos extends javax.swing.JFrame {
                 cx = DriverManager.getConnection(url + bd, user, password);
 
                 // Preparar la consulta para obtener el id_taller
-                PreparedStatement consulta = cx.prepareStatement("SELECT id_taller FROM talleres WHERE nombre=?");
+                PreparedStatement consulta = cx.prepareStatement("SELECT id_taller FROM talleres WHERE nombre=? AND activo = TRUE");
 
                 // Establecer el parámetro de la consulta
                 consulta.setString(1, seleccionado);  // Usamos directamente el nombre seleccionado
@@ -559,7 +587,6 @@ public class JFAltaBajaGrupos extends javax.swing.JFrame {
                     int idTaller = rs.getInt("id_taller");
 
                     // Establecer el id_taller en otro JTextField
-                    // Si quieres mostrar el id_taller en otro JTextField
                     jTextidtaller.setText(String.valueOf(idTaller));
 
                     // Llamar a cargarGrupos() pasando el id del taller y el JComboBox2 para cargar los grupos
@@ -597,7 +624,7 @@ public class JFAltaBajaGrupos extends javax.swing.JFrame {
         // Verificar si el valor seleccionado no es "Taller"
         if (seleccionado != null && !seleccionado.equals("Grupos")) {
             // Establecer el nombre del taller en el JTextField
-            jTextField1.setText(seleccionado);
+            jTextNombreEliminar.setText(seleccionado);
             jTextidgrupo.setText(seleccionado);
 
             try {
@@ -606,7 +633,7 @@ public class JFAltaBajaGrupos extends javax.swing.JFrame {
                 cx = DriverManager.getConnection(url + bd, user, password);
 
                 // Preparar la consulta para obtener el id_taller
-                PreparedStatement consulta = cx.prepareStatement("SELECT id_grupo FROM grupos WHERE nombre=?");
+                PreparedStatement consulta = cx.prepareStatement("SELECT id_grupo FROM grupos WHERE nombre=? AND activo = TRUE");
 
                 // Establecer el parámetro de la consulta
                 consulta.setString(1, seleccionado);  // Usamos directamente el nombre seleccionado
@@ -620,7 +647,6 @@ public class JFAltaBajaGrupos extends javax.swing.JFrame {
                     int idGrupo = rs.getInt("id_grupo");
 
                     // Establecer el id_taller en otro JTextField
-                    // Si quieres mostrar el id_taller en otro JTextField
                     jTextidgrupo.setText(String.valueOf(idGrupo));
 
                 } else {
@@ -640,10 +666,7 @@ public class JFAltaBajaGrupos extends javax.swing.JFrame {
         } else {
             // Si se selecciona "Taller" o si el valor es null, limpiar el JTextField
             jTextidgrupo.setText("");
-            jTextField1.setText("");
-            // Limpiar el JComboBox de grupos y agregar solo "Grupos"
-            //jComboBoxGrupos.removeAllItems();
-            //jComboBoxGrupos.addItem("Grupos");
+            jTextNombreEliminar.setText("");
         }
     }//GEN-LAST:event_jComboBoxGruposActionPerformed
 
@@ -688,21 +711,21 @@ public class JFAltaBajaGrupos extends javax.swing.JFrame {
     private javax.swing.JButton jButtonRegistrar;
     private javax.swing.JButton jButtonRegresar;
     private javax.swing.JButton jButtonRegresarInicio;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBoxGrupoRegistrar;
     private javax.swing.JComboBox<String> jComboBoxGrupos;
     private javax.swing.JComboBox<String> jComboBoxTALLER;
     public javax.swing.JComboBox<String> jComboBoxTalleresEliminar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabelnformacion;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextIDTALLER;
     private javax.swing.JTextField jTextNombre;
+    private javax.swing.JTextField jTextNombreEliminar;
     private javax.swing.JTextField jTextidgrupo;
     private javax.swing.JTextField jTextidtaller;
     // End of variables declaration//GEN-END:variables

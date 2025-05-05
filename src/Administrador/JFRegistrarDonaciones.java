@@ -4,22 +4,24 @@
  */
 package Administrador;
 
-import Clases.CargarAlumnos;
-import Clases.Conexion;
-import Clases.TextPrompt;
-import java.awt.Color;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import Clases.CargarAlumnos; // Importa la clase CargarAlumnos
+import Clases.Conexion; // Importa la clase conexion para gestionar la conexion con la base de datos
+import Clases.TextPrompt; // Importa la clase TextPrompt para utilizar placeholders
+import java.awt.Color; // Permite usar la clase Color para cambiar colores en componentes gráficos.
+import java.awt.Image; // Permite manejar imágenes, por ejemplo, para íconos o imágenes en la interfaz.
+import java.awt.Toolkit; // Proporciona acceso a recursos del sistema como imágenes, sonidos, etc.
+import java.sql.Connection; // Importa Connection, que representa la conexión activa con la base de datos.
+import java.sql.DriverManager; // Importa DriverManager, que se usa para establecer conexiones con la base de datos.
+import java.sql.PreparedStatement; // Importa PreparedStatement, que permite ejecutar consultas SQL seguras con parámetros.
+import java.sql.SQLException;  // Importa SQLException, que captura errores relacionados con la base de datos.
+import java.text.DateFormat; // Clase base para formateo de fechas genérico
+import java.text.SimpleDateFormat; // Clase concreta que permite definir el formato de la fecha (por ejemplo: dd/MM/yyyy)
+import java.util.Date; // Clase que representa una fecha y hora
+// Importa Logger y Level, herramientas para registrar mensajes en la consola o en archivos de log.
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane; // Permite mostrar cuadros de diálogo (mensajes, confirmaciones, entradas de texto, etc.).
 
 /**
  *
@@ -31,34 +33,41 @@ public class JFRegistrarDonaciones extends javax.swing.JFrame {
      * Creates new form JFRegistrarDonaciones
      */
     
-        String bd="workshopadmin";
-    String url="jdbc:mysql://localhost:3306/";
-    String user="root";
-    String password="sqloracle";
-    String driver="com.mysql.cj.jdbc.Driver";
-    Connection cx=null;
-    PreparedStatement ps=null;
+    // Datos de configuración para la conexión con la base de datos
+    String bd="workshopadmin"; // Nombre de la base de datos a la que se desea conectar.
+    String url="jdbc:mysql://localhost:3306/"; // URL de conexión para MySQL. Incluye el host (localhost) y el puerto (3306), pero no la base de datos todavía.
+    String user="root"; // Usuario de la base de datos. En muchos entornos locales, "root" es el usuario por defecto.
+    String password="sqloracle"; // Contraseña del usuario "root". Aquí se ha puesto "sqloracle", pero debe coincidir con la contraseña real en tu servidor MySQL.
+    String driver="com.mysql.cj.jdbc.Driver"; // Nombre del driver JDBC que se utiliza para conectar a MySQL. Este driver debe estar incluido en el classpath del proyecto.
+    Connection cx=null; // Objeto de conexión. Se utilizará para establecer la conexión con la base de datos.
+    PreparedStatement ps=null; // Objeto que permite ejecutar sentencias SQL con parámetros (consultas preparadas) 
     
     public JFRegistrarDonaciones() {
         initComponents();
-        
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // Desactiva la X de cierre
+        // Oculta inicialmente el jTextField
         jTextField1.setVisible(false);
         jTextField2.setVisible(false);
         jComboBoxAlumnos.setVisible(false);
         
-     CargarAlumnos al = new CargarAlumnos(jComboBoxTalleres, jComboBoxGrupos,jComboBoxAlumnos, jTextField1.getText(),jTextField2.getText());
+        // Llamar a CargarAlumnos
+        CargarAlumnos al = new CargarAlumnos(jComboBoxTalleres, jComboBoxGrupos,jComboBoxAlumnos, jTextField1.getText(),jTextField2.getText());
         al.cargarTalleres();
+        
+        // Establece textos de sugerencia ("placeholders")
         TextPrompt costo = new TextPrompt("$1520.00",jTextMonto);
         TextPrompt apellido = new TextPrompt("Lucia Sarahi",jTextApellido);
         TextPrompt nombre = new TextPrompt("Ortegon Estrella",jTextNombre);
         
-        setIconImage(getIconImage());
+        setIconImage(getIconImage()); // Establece un ícono personalizado para la ventana.
     }
     //Icono del JFrame
-    @Override
-    public Image getIconImage(){
+    @Override // Indica que este método sobrescribe el método getIconImage() de la clase JFrame
+    // Usa Toolkit (una clase de utilidades gráficas de AWT) para obtener una imagen ubicada en la ruta interna del proyecto
+    // ClassLoader.getSystemResource() localiza el archivo dentro del classpath (dentro de src o el .jar).
+    public Image getIconImage(){ 
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("workshopadmin/Imagenes/LogoIcono.png"));
-        return retValue;
+        return retValue; // Devuelve la imagen para que sea usada como ícono del JFrame
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -86,13 +95,14 @@ public class JFRegistrarDonaciones extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         jComboBoxAlumnos = new javax.swing.JComboBox<>();
         jDateChooserFecha = new com.toedter.calendar.JDateChooser();
-        jLabel10 = new javax.swing.JLabel();
+        jLabelnformacion = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jButtonRegresarInicio = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registrar donaciones");
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -124,8 +134,18 @@ public class JFRegistrarDonaciones extends javax.swing.JFrame {
         jLabel4.setText("Fecha");
 
         jTextNombre.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jTextNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextNombreKeyTyped(evt);
+            }
+        });
 
         jTextMonto.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jTextMonto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextMontoKeyTyped(evt);
+            }
+        });
 
         jButtonRegistrar.setBackground(java.awt.Color.lightGray);
         jButtonRegistrar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -149,6 +169,11 @@ public class JFRegistrarDonaciones extends javax.swing.JFrame {
         jLabel7.setText("Apellido");
 
         jTextApellido.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jTextApellido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextApellidoKeyTyped(evt);
+            }
+        });
 
         jComboBoxTalleres.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBoxTalleres.addActionListener(new java.awt.event.ActionListener() {
@@ -248,10 +273,10 @@ public class JFRegistrarDonaciones extends javax.swing.JFrame {
                 .addGap(32, 32, 32))
         );
 
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/Informacion.png"))); // NOI18N
-        jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelnformacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/Informacion.png"))); // NOI18N
+        jLabelnformacion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel10MouseClicked(evt);
+                jLabelnformacionMouseClicked(evt);
             }
         });
 
@@ -298,7 +323,7 @@ public class JFRegistrarDonaciones extends javax.swing.JFrame {
                 .addGap(54, 54, 54)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel10)
+                .addComponent(jLabelnformacion)
                 .addGap(39, 39, 39))
         );
         jPanel1Layout.setVerticalGroup(
@@ -307,7 +332,7 @@ public class JFRegistrarDonaciones extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
-                    .addComponent(jLabel10))
+                    .addComponent(jLabelnformacion))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
@@ -335,18 +360,19 @@ public class JFRegistrarDonaciones extends javax.swing.JFrame {
 
     private void jButtonRegresarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegresarMouseEntered
         // TODO add your handling code here:
+        // Cambia el fondo del botón a verde cuando el mouse pasa por encima.
         jButtonRegresar.setBackground(Color.GREEN);
     }//GEN-LAST:event_jButtonRegresarMouseEntered
 
     private void jButtonRegresarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegresarMouseExited
         // TODO add your handling code here:
+        // Restaura el fondo del botón a gris claro cuando el mouse sale.
         jButtonRegresar.setBackground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_jButtonRegresarMouseExited
 
     private void jButtonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegresarActionPerformed
         // TODO add your handling code here:
         JFAdministrarDonaciones JFAdministrarDonaciones =new JFAdministrarDonaciones();
-        JFAdministrarDonaciones.setDefaultCloseOperation(JFAdministrarDonaciones.EXIT_ON_CLOSE);
         JFAdministrarDonaciones.setVisible(true);
         JFAdministrarDonaciones.setLocationRelativeTo(null); // Centra la ventana en la pantalla
         this.setVisible(false);
@@ -354,78 +380,108 @@ public class JFRegistrarDonaciones extends javax.swing.JFrame {
 
     private void jButtonRegistrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegistrarMouseEntered
         // TODO add your handling code here:
+        // Cambia el fondo del botón a verde cuando el mouse pasa por encima.
         jButtonRegistrar.setBackground(Color.GREEN);
     }//GEN-LAST:event_jButtonRegistrarMouseEntered
 
     private void jButtonRegistrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegistrarMouseExited
         // TODO add your handling code here:
+        // Restaura el fondo del botón a gris claro cuando el mouse sale.
         jButtonRegistrar.setBackground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_jButtonRegistrarMouseExited
 
     private void jButtonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarActionPerformed
         // TODO add your handling code here:
-        int respuesta = JOptionPane.showConfirmDialog(null, "Realmente desea dar de alta a este alumno?",
+        int respuesta = JOptionPane.showConfirmDialog(null, "Realmente desea registrar esta donación?",
             "Confirmar salida",
             JOptionPane.YES_NO_OPTION,
             JOptionPane.QUESTION_MESSAGE);
-        if (respuesta == JOptionPane.YES_OPTION) {
-            // Aquí colocas la lógica para dar de alta al alumno
-                      try
-            {    
-                Date  fecha=(Date) jDateChooserFecha.getDate();
-                DateFormat f1=new SimpleDateFormat("yyyy-MM-dd");
-                String fechadonacion=f1.format(fecha);
-               
-                
-                    Class.forName(driver); 
-                    cx=DriverManager.getConnection(url+bd,user, password); 
-                    PreparedStatement consulta;
-                    consulta=cx.prepareStatement("INSERT INTO donaciones (nombre, apellido, monto, fecha_donacion, id_grupo) "
-                                               + "VALUES (?, ?, ?, ?, ?)");
-                    // Establecer los valores para la consulta (debes obtenerlos de los JTextField)
-                    
-                    consulta.setString(1, jTextNombre.getText()); // motivo
-                    consulta.setString(2, jTextApellido.getText()); // monto
-                     consulta.setDouble(3, Double.parseDouble(jTextMonto.getText())); // monto
-                    consulta.setDate(4, java.sql.Date.valueOf(fechadonacion)); // fecha_pago
-                    consulta.setInt(5, Integer.parseInt(jTextField2.getText())); // id_alumno
-                    consulta.executeUpdate();
-                    consulta.close();
-                    cx.close();     
+        if (respuesta == JOptionPane.NO_OPTION) {
+            // Si el usuario elige "No", simplemente no hace nada o muestra otro mensaje
+            JOptionPane.showMessageDialog(null, "Operación cancelada.");
+            } else {
+                // Validación: Verifica si algún campo obligatorio está vacío
+                if (jComboBoxTalleres.getSelectedItem().toString().equals("Taller") ||
+                    jComboBoxGrupos.getSelectedItem().toString().equals("Grupos")||
+                    jTextNombre.getText().trim().isEmpty()||
+                    jTextApellido.getText().trim().isEmpty()||
+                    jTextMonto.getText().trim().isEmpty()||
+                    jDateChooserFecha.getDate() == null){ 
+
+                JOptionPane.showMessageDialog(null,"Por favor, selecciona el taller y el grupo"
+                        + "\ntambien escribe el nombre, apellido, el monto y la fecha",
+                            "ADVERTENCIA",
+                            JOptionPane.ERROR_MESSAGE);
+                } else {
+                              try {    
+                                Date  fecha=(Date) jDateChooserFecha.getDate();
+                                DateFormat f1=new SimpleDateFormat("yyyy-MM-dd");
+                                String fechadonacion=f1.format(fecha);
+
+
+                                    Class.forName(driver); 
+                                    cx=DriverManager.getConnection(url+bd,user, password); 
+                                    PreparedStatement consulta;
+                                    consulta=cx.prepareStatement("INSERT INTO donaciones (nombre, apellido, monto, fecha_donacion, id_grupo) "
+                                                               + "VALUES (?, ?, ?, ?, ?)");
+                                    // Establecer los valores para la consulta (debes obtenerlos de los JTextField)
+
+                                    consulta.setString(1, jTextNombre.getText()); // motivo
+                                    consulta.setString(2, jTextApellido.getText()); // monto
+                                     consulta.setDouble(3, Double.parseDouble(jTextMonto.getText())); // monto
+                                    consulta.setDate(4, java.sql.Date.valueOf(fechadonacion)); // fecha_pago
+                                    consulta.setInt(5, Integer.parseInt(jTextField2.getText())); // id_alumno
+                                    consulta.executeUpdate();
+                                    consulta.close();
+                                    cx.close();     
+
+                              jTextMonto.setText("");
+                              jTextNombre.setText("");
+                              jTextApellido.setText("");
+                              jDateChooserFecha.setDate(null);
+                              CargarAlumnos al = new CargarAlumnos(jComboBoxTalleres, jComboBoxGrupos,jComboBoxAlumnos, jTextField1.getText(),jTextField2.getText());
+                              al.cargarTalleres();
+                              
+                              JOptionPane.showMessageDialog(null, "Donación registrada con éxito");
             }
             catch(ClassNotFoundException | SQLException ex)
             {
                 System.out.println("No se conectó a la BD " + ex.getMessage());
                 Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
-            } 
-            JOptionPane.showMessageDialog(null, "Alumno dado de alta exitosamente.");
-        } else {
-            // Si el usuario elige "No", simplemente no hace nada o muestra otro mensaje
-            JOptionPane.showMessageDialog(null, "Operación cancelada.");
+                    } 
+                }
+            
         }
     }//GEN-LAST:event_jButtonRegistrarActionPerformed
 
-    private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
+    private void jLabelnformacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelnformacionMouseClicked
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null,"Has click en lo que deseas administrar",
+        // Este método se ejecuta cuando el usuario hace clic en el label de información.
+        JOptionPane.showMessageDialog(null,"Usa esta ventana para registrar una donación.\n" +
+                            "*Selecciona el taller y el grupo correspondientes.\n" +
+                            "*Ingresa el monto pagado y la fecha del pago.\n" +
+                            "*Ingresa el nombre y apellido de quien realiza la donación.\n" +
+                            "*Haz clic en Registrar para guardar la información.\n" +
+                            "*Asegúrate de que todos los datos sean correctos antes de confirmar.",
             "Información",
             JOptionPane.INFORMATION_MESSAGE);
-    }//GEN-LAST:event_jLabel10MouseClicked
+    }//GEN-LAST:event_jLabelnformacionMouseClicked
 
     private void jButtonRegresarInicioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegresarInicioMouseEntered
         // TODO add your handling code here:
+        // Cambia el fondo del botón a verde cuando el mouse pasa por encima.
         jButtonRegresarInicio.setBackground(Color.GREEN);
     }//GEN-LAST:event_jButtonRegresarInicioMouseEntered
 
     private void jButtonRegresarInicioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegresarInicioMouseExited
         // TODO add your handling code here:
+        // Restaura el fondo del botón a gris claro cuando el mouse sale.
         jButtonRegresarInicio.setBackground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_jButtonRegresarInicioMouseExited
 
     private void jButtonRegresarInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegresarInicioActionPerformed
         // TODO add your handling code here:
         JFMenuAdministrador JFMenuAdministrador =new JFMenuAdministrador();
-        JFMenuAdministrador.setDefaultCloseOperation(JFMenuAdministrador.EXIT_ON_CLOSE);
         JFMenuAdministrador.setVisible(true);
         JFMenuAdministrador.setLocationRelativeTo(null); // Centra la ventana en la pantalla
         JOptionPane.showMessageDialog(null,"Has regresado al inicio",
@@ -449,7 +505,7 @@ public class JFRegistrarDonaciones extends javax.swing.JFrame {
                 cx = DriverManager.getConnection(url + bd, user, password);
 
                 // Preparar la consulta para obtener el id_taller
-                PreparedStatement consulta = cx.prepareStatement("SELECT id_taller FROM talleres WHERE nombre=?");
+                PreparedStatement consulta = cx.prepareStatement("SELECT id_taller FROM talleres WHERE nombre=? AND activo = TRUE");
 
                 // Establecer el parámetro de la consulta
                 consulta.setString(1, seleccionado);  // Usamos directamente el nombre seleccionado
@@ -463,7 +519,6 @@ public class JFRegistrarDonaciones extends javax.swing.JFrame {
                     int idTaller = rs.getInt("id_taller");
 
                     // Establecer el id_taller en otro JTextField
-                    // Si quieres mostrar el id_taller en otro JTextField
                     jTextField1.setText(String.valueOf(idTaller));
 
                     // Llamar a cargarGrupos() pasando el id del taller y el JComboBox2 para cargar los grupos
@@ -515,7 +570,7 @@ public class JFRegistrarDonaciones extends javax.swing.JFrame {
                 cx = DriverManager.getConnection(url + bd, user, password);
 
                 // Preparar la consulta para obtener el id_taller
-                PreparedStatement consulta = cx.prepareStatement("SELECT id_grupo FROM grupos WHERE nombre=?");
+                PreparedStatement consulta = cx.prepareStatement("SELECT id_grupo FROM grupos WHERE nombre=? AND activo = TRUE");
 
                 // Establecer el parámetro de la consulta
                 consulta.setString(1, seleccionado);  // Usamos directamente el nombre seleccionado
@@ -529,7 +584,6 @@ public class JFRegistrarDonaciones extends javax.swing.JFrame {
                     int idGrupo = rs.getInt("id_grupo");
 
                     // Establecer el id_taller en otro JTextField
-                    // Si quieres mostrar el id_taller en otro JTextField
                     jTextField2.setText(String.valueOf(idGrupo));
                     
                     // Llamar a cargarGrupos() pasando el id del taller y el JComboBox2 para cargar los grupos
@@ -553,11 +607,44 @@ public class JFRegistrarDonaciones extends javax.swing.JFrame {
         } else {
             // Si se selecciona "Taller" o si el valor es null, limpiar el JTextField
             jTextField2.setText("");
-            // Limpiar el JComboBox de grupos y agregar solo "Grupos"
-            //jComboBoxGrupos.removeAllItems();
-            //jComboBoxGrupos.addItem("Grupos");
         }
     }//GEN-LAST:event_jComboBoxGruposActionPerformed
+
+    private void jTextMontoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextMontoKeyTyped
+        // TODO add your handling code here:
+        //Validamos que en el campo no se puedan ingresar letras.
+        char c = evt.getKeyChar(); //llamamos al evento
+            if (Character.isLetter(c)){ //comparamos si ingresamos una letra
+                evt.consume(); //evitar que se capture la letra
+                JOptionPane.showMessageDialog(null,"Solo puedes ingresar números en este campo",
+                        "ADVERTENCIA",
+                        JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jTextMontoKeyTyped
+
+    private void jTextNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextNombreKeyTyped
+        // TODO add your handling code here:
+            //Validamos que en el campo no se puedan ingresar números.
+            char c = evt.getKeyChar(); //llamamos al evento
+            if (Character.isDigit(c)){ //comparamos si ingresamos un digito
+                evt.consume(); //evitar que se capture el digito
+                JOptionPane.showMessageDialog(null,"No puedes ingresar números en este campo",
+                        "ADVERTENCIA",
+                        JOptionPane.ERROR_MESSAGE);
+       }
+    }//GEN-LAST:event_jTextNombreKeyTyped
+
+    private void jTextApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextApellidoKeyTyped
+        // TODO add your handling code here:
+            //Validamos que en el campo no se puedan ingresar números.
+            char c = evt.getKeyChar(); //llamamos al evento
+            if (Character.isDigit(c)){ //comparamos si ingresamos un digito
+                evt.consume(); //evitar que se capture el digito
+                JOptionPane.showMessageDialog(null,"No puedes ingresar números en este campo",
+                        "ADVERTENCIA",
+                        JOptionPane.ERROR_MESSAGE);
+       }
+    }//GEN-LAST:event_jTextApellidoKeyTyped
 
     /**
      * @param args the command line arguments
@@ -603,12 +690,12 @@ public class JFRegistrarDonaciones extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBoxTalleres;
     private com.toedter.calendar.JDateChooser jDateChooserFecha;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabelnformacion;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jTextApellido;

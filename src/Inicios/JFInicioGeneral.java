@@ -4,13 +4,13 @@
  */
 package Inicios;
 
-import Clases.Conexion;
-import java.awt.Color;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import javax.swing.JOptionPane;
+// Paquetes a utilizar
+import java.awt.Color; // Permite usar la clase Color para cambiar colores en componentes gráficos.
+import java.awt.Image; // Permite manejar imágenes, por ejemplo, para íconos o imágenes en la interfaz.
+import java.awt.Toolkit; // Proporciona acceso a recursos del sistema como imágenes, sonidos, etc.
+import java.awt.event.WindowAdapter; // Clase que se puede extender para manejar eventos de ventana sin implementar todos los métodos.
+import java.awt.event.WindowEvent; // Representa un evento que ocurre en una ventana, como cerrar, abrir, minimizar, etc.
+import javax.swing.JOptionPane; // Permite mostrar cuadros de diálogo (mensajes, confirmaciones, entradas de texto, etc.).
 
 /**
  *
@@ -22,19 +22,20 @@ public class JFInicioGeneral extends javax.swing.JFrame {
      * Creates new form JFInicio
      */
     public JFInicioGeneral() {
-        initComponents();
-        setLocationRelativeTo(null); // Centra la ventana en la pantalla
-        //tranparenciabutton();
-        cerrar();
-        
-        setIconImage(getIconImage());
+        initComponents(); // Método que configura y organiza todos los componentes gráficos en la ventana.
+        setLocationRelativeTo(null); // Centra la ventana en la pantalla.
+        cerrar(); // Llama al método cerrar(), que configura la acción al cerrar la ventana.
+        setIconImage(getIconImage()); // Establece un ícono personalizado para la ventana.
     }
     
     //Icono del JFrame
-    @Override
+    @Override // Indica que este método sobrescribe el método getIconImage() de la clase JFrame
+    
+    // Usa Toolkit (una clase de utilidades gráficas de AWT) para obtener una imagen ubicada en la ruta interna del proyecto
+    // ClassLoader.getSystemResource() localiza el archivo dentro del classpath (dentro de src o el .jar).
     public Image getIconImage(){
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("workshopadmin/Imagenes/LogoIcono.png"));
-        return retValue;
+        return retValue; // Devuelve la imagen para que sea usada como ícono del JFrame
     }
 
     /**
@@ -57,6 +58,7 @@ public class JFInicioGeneral extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Inicio de sesón general");
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -155,7 +157,7 @@ public class JFInicioGeneral extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabelInformación)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,13 +166,12 @@ public class JFInicioGeneral extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22))
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(111, 111, 111)
+                        .addGap(90, 90, 90)
                         .addComponent(jLabel3))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jLabelInformación)))
+                    .addComponent(jLabelInformación))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -190,75 +191,78 @@ public class JFInicioGeneral extends javax.swing.JFrame {
 
     public void cerrar(){
         try {
+            // Evita que la ventana se cierre automáticamente al presionar la "X".
             this.setDefaultCloseOperation(JFInicioGeneral.DO_NOTHING_ON_CLOSE);
+            // Añade un "escuchador" que detecta cuando se intenta cerrar la ventana.
             addWindowListener(new WindowAdapter(){
                 public void windowClosing(WindowEvent e){
+                    // Cuando se detecta el intento de cierre, se llama al método confirmarSalida().
                     confirmarSalida();
                 }
-            });
-            this.setVisible(true);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+              }
+            );
+            this.setVisible(true); // Hace visible la ventana (por si no se hizo antes).
+        } catch (Exception e) { 
+            e.printStackTrace(); // Si ocurre algún error, se imprime el error en consola.
     }
+}
     
     public void confirmarSalida(){
-        int valor = JOptionPane.showConfirmDialog(this, "¿Esta seguro de que quiere salir", 
+        // Muestra un cuadro de diálogo de confirmación al usuario.
+        int valor = JOptionPane.showConfirmDialog(this, "¿Está seguro de que desea cerrar la aplicación?", 
                 "Advertencia", 
                 JOptionPane.YES_NO_OPTION, 
                 JOptionPane.WARNING_MESSAGE);
+        // Si el usuario hace clic en "Sí", el programa se cierra completamente.
         if (valor==JOptionPane.YES_OPTION){
-            System.exit(0);
+            System.exit(0); // Termina la ejecución de la aplicación.
         }
     }
     
-    /*public void tranparenciabutton(){
-        jButtonInformacion.setOpaque(false);
-        jButtonInformacion.setContentAreaFilled(false);
-        jButtonInformacion.setBorderPainted(false);
-    }*/
-    
     private void jButtonAdministradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdministradorActionPerformed
         // TODO add your handling code here:
-        JFInicioAdministrador JFInicioAdministrador =new JFInicioAdministrador();  
-                JFInicioAdministrador.setDefaultCloseOperation(JFInicioAdministrador.EXIT_ON_CLOSE);
-                JFInicioAdministrador.setVisible(true);
-                JFInicioAdministrador.setLocationRelativeTo(null); // Centra la ventana en la pantalla
-                this.setVisible(false); 
+        JFInicioAdministrador JFInicioAdministrador =new JFInicioAdministrador(); // Crea una nueva instancia de la ventana para el administrador
+                JFInicioAdministrador.setVisible(true); // Muestra la ventana del administrador
+                JFInicioAdministrador.setLocationRelativeTo(null); // Centra la ventana
+                this.setVisible(false); // Oculta la ventana actual
     }//GEN-LAST:event_jButtonAdministradorActionPerformed
 
     private void jButtonAdministradorMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonAdministradorMouseEntered
         // TODO add your handling code here:
+         // Cambia el fondo del botón a verde cuando el mouse pasa por encima.
         jButtonAdministrador.setBackground(Color.GREEN);
     }//GEN-LAST:event_jButtonAdministradorMouseEntered
 
     private void jButtonAdministradorMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonAdministradorMouseExited
         // TODO add your handling code here:
+        // Restaura el fondo del botón a gris claro cuando el mouse sale.
         jButtonAdministrador.setBackground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_jButtonAdministradorMouseExited
 
     private void jButtonDocenteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonDocenteMouseEntered
         // TODO add your handling code here:
+        // Cambia el fondo del botón a verde cuando el mouse pasa por encima.
         jButtonDocente.setBackground(Color.GREEN);
     }//GEN-LAST:event_jButtonDocenteMouseEntered
 
     private void jButtonDocenteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonDocenteMouseExited
         // TODO add your handling code here:
+        // Restaura el fondo del botón a gris claro cuando el mouse sale.
         jButtonDocente.setBackground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_jButtonDocenteMouseExited
 
     private void jButtonDocenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDocenteActionPerformed
         // TODO add your handling code here:
-        JFInicioDocente JFInicioDocente =new JFInicioDocente();  
-                JFInicioDocente.setDefaultCloseOperation(JFInicioDocente.EXIT_ON_CLOSE);
-                JFInicioDocente.setVisible(true);
-                JFInicioDocente.setLocationRelativeTo(null); // Centra la ventana en la pantalla
-                this.setVisible(false); 
+        JFInicioDocente JFInicioDocente =new JFInicioDocente(); // Crea una nueva instancia de la ventana para el Docente
+                JFInicioDocente.setVisible(true); // Muestra la ventana del docente
+                JFInicioDocente.setLocationRelativeTo(null); // Centra la ventana
+                this.setVisible(false); // Oculta la ventana actual
     }//GEN-LAST:event_jButtonDocenteActionPerformed
 
     private void jLabelInformaciónMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelInformaciónMouseClicked
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null,"Has click en tu usuario correspondiente",
+        // Muestra un cuadro de diálogo informativo cuando se hace clic en el ícono de información.
+        JOptionPane.showMessageDialog(null,"Por favor, selecciona un tipo de usuario para continuar.",
             "Información",
             JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jLabelInformaciónMouseClicked

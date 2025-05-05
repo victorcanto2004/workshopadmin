@@ -4,20 +4,21 @@
  */
 package Administrador;
 
-import Clases.CargarGrupos;
-import Clases.Conexion;
-import Clases.TextPrompt;
-import java.awt.Color;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.event.KeyEvent;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import Clases.CargarGrupos; // Importa la clase CargarGrupos
+import Clases.Conexion; // Importa la clase conexion para gestionar la conexion con la base de datos
+import Clases.TextPrompt; // Importa la clase TextPrompt para utilizar placeholders
+import java.awt.Color; // Permite usar la clase Color para cambiar colores en componentes gráficos.
+import java.awt.Image; // Permite manejar imágenes, por ejemplo, para íconos o imágenes en la interfaz.
+import java.awt.Toolkit; // Proporciona acceso a recursos del sistema como imágenes, sonidos, etc.
+import java.sql.Connection; // Importa Connection, que representa la conexión activa con la base de datos.
+import java.sql.DriverManager; // Importa DriverManager, que se usa para establecer conexiones con la base de datos.
+import java.sql.PreparedStatement; // Importa PreparedStatement, que permite ejecutar consultas SQL seguras con parámetros.
+import java.sql.SQLException;  // Importa SQLException, que captura errores relacionados con la base de datos.
+// Importa Logger y Level, herramientas para registrar mensajes en la consola o en archivos de log.
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane; // Permite mostrar cuadros de diálogo (mensajes, confirmaciones, entradas de texto, etc.).
 
 /**
  *
@@ -28,29 +29,35 @@ public class JFModificarTaller extends javax.swing.JFrame {
     /**
      * Creates new form JFModificarGrupo
      */
-    String bd="workshopadmin";
-    String url="jdbc:mysql://localhost:3306/";
-    String user="root";
-    String password="sqloracle";
-    String driver="com.mysql.cj.jdbc.Driver";
-    Connection cx=null;
-    PreparedStatement ps=null; 
+    // Datos de configuración para la conexión con la base de datos
+    String bd="workshopadmin"; // Nombre de la base de datos a la que se desea conectar.
+    String url="jdbc:mysql://localhost:3306/"; // URL de conexión para MySQL. Incluye el host (localhost) y el puerto (3306), pero no la base de datos todavía.
+    String user="root"; // Usuario de la base de datos. En muchos entornos locales, "root" es el usuario por defecto.
+    String password="sqloracle"; // Contraseña del usuario "root". Aquí se ha puesto "sqloracle", pero debe coincidir con la contraseña real en tu servidor MySQL.
+    String driver="com.mysql.cj.jdbc.Driver"; // Nombre del driver JDBC que se utiliza para conectar a MySQL. Este driver debe estar incluido en el classpath del proyecto.
+    Connection cx=null; // Objeto de conexión. Se utilizará para establecer la conexión con la base de datos.
+    PreparedStatement ps=null; // Objeto que permite ejecutar sentencias SQL con parámetros (consultas preparadas) 
     
     public JFModificarTaller() {
         initComponents();
-             CargarGrupos cg = new CargarGrupos(jComboBox1, jComboBox2, jTextField1.getText());
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // Desactiva la X de cierre
+        // Llamar a CargarGrupos
+        CargarGrupos cg = new CargarGrupos(jComboBoxTalleres, jComboBox2, jTextField1.getText());
         cg.cargarTalleres();
+        // Oculta inicialmente el jTextField
         jComboBox2.setVisible(false);
         jTextField1.setVisible(false);
         
-        TextPrompt nuevonombre = new TextPrompt("Danza Regional",jTextNuevoNombre);
-        setIconImage(getIconImage());
+        TextPrompt nuevonombre = new TextPrompt("Danza Regional",jTextNuevoNombre); // Establece textos de sugerencia ("placeholders")
+        setIconImage(getIconImage()); // Establece un ícono personalizado para la ventana.
     }
     //Icono del JFrame
-    @Override
-    public Image getIconImage(){
+    @Override // Indica que este método sobrescribe el método getIconImage() de la clase JFrame
+    // Usa Toolkit (una clase de utilidades gráficas de AWT) para obtener una imagen ubicada en la ruta interna del proyecto
+    // ClassLoader.getSystemResource() localiza el archivo dentro del classpath (dentro de src o el .jar).
+    public Image getIconImage(){ 
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("workshopadmin/Imagenes/LogoIcono.png"));
-        return retValue;
+        return retValue; // Devuelve la imagen para que sea usada como ícono del JFrame
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -69,17 +76,18 @@ public class JFModificarTaller extends javax.swing.JFrame {
         jButtonActualizar = new javax.swing.JButton();
         jTextNombre = new javax.swing.JTextField();
         jTextNuevoNombre = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBoxTalleres = new javax.swing.JComboBox<>();
         jTextField1 = new javax.swing.JTextField();
         jComboBox2 = new javax.swing.JComboBox<>();
         jButtonRegresar = new javax.swing.JButton();
         jButtonRegresarInicio = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        jLabelnformacion = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Actualizar datos de un taller");
+        setResizable(false);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -92,7 +100,7 @@ public class JFModificarTaller extends javax.swing.JFrame {
         jButtonActualizar.setBackground(java.awt.Color.lightGray);
         jButtonActualizar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jButtonActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/Registrar.png"))); // NOI18N
-        jButtonActualizar.setText("Actualiza");
+        jButtonActualizar.setText("Actualizar");
         jButtonActualizar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jButtonActualizarMouseEntered(evt);
@@ -111,16 +119,11 @@ public class JFModificarTaller extends javax.swing.JFrame {
         jTextNombre.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
         jTextNuevoNombre.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jTextNuevoNombre.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextNuevoNombreKeyReleased(evt);
-            }
-        });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        jComboBoxTalleres.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxTalleres.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                jComboBoxTalleresActionPerformed(evt);
             }
         });
 
@@ -146,7 +149,7 @@ public class JFModificarTaller extends javax.swing.JFrame {
                                     .addComponent(jTextNuevoNombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jTextNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jComboBoxTalleres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(33, 33, 33)
@@ -161,7 +164,7 @@ public class JFModificarTaller extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxTalleres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -218,10 +221,10 @@ public class JFModificarTaller extends javax.swing.JFrame {
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Imagenes/Talleres.png"))); // NOI18N
 
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/Informacion.png"))); // NOI18N
-        jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelnformacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/Informacion.png"))); // NOI18N
+        jLabelnformacion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel10MouseClicked(evt);
+                jLabelnformacionMouseClicked(evt);
             }
         });
 
@@ -248,7 +251,7 @@ public class JFModificarTaller extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1)
                         .addGap(113, 113, 113)
-                        .addComponent(jLabel10)))
+                        .addComponent(jLabelnformacion)))
                 .addGap(29, 29, 29))
         );
         jPanel2Layout.setVerticalGroup(
@@ -257,7 +260,7 @@ public class JFModificarTaller extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
-                        .addComponent(jLabel10)
+                        .addComponent(jLabelnformacion)
                         .addGap(30, 30, 30))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
@@ -303,45 +306,59 @@ public class JFModificarTaller extends javax.swing.JFrame {
 
     private void jButtonActualizarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonActualizarMouseEntered
         // TODO add your handling code here:
+        // Cambia el fondo del botón a verde cuando el mouse pasa por encima.
         jButtonActualizar.setBackground(Color.GREEN);
     }//GEN-LAST:event_jButtonActualizarMouseEntered
 
     private void jButtonActualizarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonActualizarMouseExited
         // TODO add your handling code here:
+        // Restaura el fondo del botón a gris claro cuando el mouse sale.
         jButtonActualizar.setBackground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_jButtonActualizarMouseExited
 
     private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
         // TODO add your handling code here:
-        int respuesta = JOptionPane.showConfirmDialog(null, "Realmente desea dar de alta a este alumno?",
+        int respuesta = JOptionPane.showConfirmDialog(null, "Realmente desea actualizar el nombre de este taller?",
             "Confirmar salida",
             JOptionPane.YES_NO_OPTION,
             JOptionPane.QUESTION_MESSAGE);
-        if (respuesta == JOptionPane.YES_OPTION) {
-            // Aquí colocas la lógica para dar de alta al alumno
-            CargarGrupos cg = new CargarGrupos(jComboBox1, jComboBox2, jTextField1.getText());
-            cg.ModificarTalleres(jTextField1, jTextNuevoNombre);
-            JOptionPane.showMessageDialog(null, "Alumno dado de alta exitosamente.");
-        } else {
+        if (respuesta == JOptionPane.NO_OPTION) {
             // Si el usuario elige "No", simplemente no hace nada o muestra otro mensaje
             JOptionPane.showMessageDialog(null, "Operación cancelada.");
+            } else {
+                // Validación: Verifica si algún campo obligatorio está vacío
+                if (jComboBoxTalleres.getSelectedItem().toString().equals("Taller") ||
+                    jTextNuevoNombre.getText().trim().isEmpty()){ 
+
+                JOptionPane.showMessageDialog(null,"Por favor, selecciona el taller y"
+                        + "\ntambien escribe el nuevo nombre del taller",
+                            "ADVERTENCIA",
+                            JOptionPane.ERROR_MESSAGE);
+                } else {
+                    // Aquí colocas la lógica para dar de alta al alumno
+                    CargarGrupos cg = new CargarGrupos(jComboBoxTalleres, jComboBox2, jTextField1.getText());
+                    cg.ModificarTalleres(jTextField1, jTextNuevoNombre);
+                    jTextNuevoNombre.setText("");   
+                    jTextNombre.setText(""); 
+                        }
         }
     }//GEN-LAST:event_jButtonActualizarActionPerformed
 
     private void jButtonRegresarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegresarMouseEntered
         // TODO add your handling code here:
+        // Cambia el fondo del botón a verde cuando el mouse pasa por encima.
         jButtonRegresar.setBackground(Color.GREEN);
     }//GEN-LAST:event_jButtonRegresarMouseEntered
 
     private void jButtonRegresarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegresarMouseExited
         // TODO add your handling code here:
+        // Restaura el fondo del botón a gris claro cuando el mouse sale.
         jButtonRegresar.setBackground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_jButtonRegresarMouseExited
 
     private void jButtonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegresarActionPerformed
         // TODO add your handling code here:
         JFAdministrarTalleres JFAdministrarTalleres =new JFAdministrarTalleres();
-        JFAdministrarTalleres.setDefaultCloseOperation(JFAdministrarTalleres.EXIT_ON_CLOSE);
         JFAdministrarTalleres.setVisible(true);
         JFAdministrarTalleres.setLocationRelativeTo(null); // Centra la ventana en la pantalla
         this.setVisible(false);
@@ -349,18 +366,19 @@ public class JFModificarTaller extends javax.swing.JFrame {
 
     private void jButtonRegresarInicioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegresarInicioMouseEntered
         // TODO add your handling code here:
+        // Cambia el fondo del botón a verde cuando el mouse pasa por encima.
         jButtonRegresarInicio.setBackground(Color.GREEN);
     }//GEN-LAST:event_jButtonRegresarInicioMouseEntered
 
     private void jButtonRegresarInicioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegresarInicioMouseExited
         // TODO add your handling code here:
+        // Restaura el fondo del botón a gris claro cuando el mouse sale.
         jButtonRegresarInicio.setBackground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_jButtonRegresarInicioMouseExited
 
     private void jButtonRegresarInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegresarInicioActionPerformed
         // TODO add your handling code here:
         JFMenuAdministrador JFMenuAdministrador =new JFMenuAdministrador();
-        JFMenuAdministrador.setDefaultCloseOperation(JFMenuAdministrador.EXIT_ON_CLOSE);
         JFMenuAdministrador.setVisible(true);
         JFMenuAdministrador.setLocationRelativeTo(null); // Centra la ventana en la pantalla
         JOptionPane.showMessageDialog(null,"Has regresado al inicio",
@@ -369,16 +387,19 @@ public class JFModificarTaller extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButtonRegresarInicioActionPerformed
 
-    private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
+    private void jLabelnformacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelnformacionMouseClicked
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null,"Has click en lo que deseas administrar",
+        // Este método se ejecuta cuando el usuario hace clic en el label de información.
+        JOptionPane.showMessageDialog(null,"Utiliza esta ventana para modificar el nombre de un taller existente.\n" +
+                    "Selecciona el taller al que deseas actualizar\n" +
+                    "Revisa y edita el nombre. Haz clic en Actualizar para guardar los cambios.",
             "Información",
             JOptionPane.INFORMATION_MESSAGE);
-    }//GEN-LAST:event_jLabel10MouseClicked
+    }//GEN-LAST:event_jLabelnformacionMouseClicked
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void jComboBoxTalleresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTalleresActionPerformed
         // TODO add your handling code here:
-        String seleccionado = (String) jComboBox1.getSelectedItem();
+        String seleccionado = (String) jComboBoxTalleres.getSelectedItem();
 
         // Verificar si el valor seleccionado no es "Taller"
         if (seleccionado != null && !seleccionado.equals("Taller")) {
@@ -391,7 +412,7 @@ public class JFModificarTaller extends javax.swing.JFrame {
                 cx = DriverManager.getConnection(url + bd, user, password);
 
                 // Preparar la consulta para obtener el id_taller
-                PreparedStatement consulta = cx.prepareStatement("SELECT id_taller FROM talleres WHERE nombre=?");
+                PreparedStatement consulta = cx.prepareStatement("SELECT id_taller FROM talleres WHERE nombre=? AND activo = TRUE");
 
                 // Establecer el parámetro de la consulta
                 consulta.setString(1, seleccionado);  // Usamos directamente el nombre seleccionado
@@ -405,11 +426,10 @@ public class JFModificarTaller extends javax.swing.JFrame {
                     int idTaller = rs.getInt("id_taller");
 
                     // Establecer el id_taller en otro JTextField
-                    // Si quieres mostrar el id_taller en otro JTextField
                     jTextField1.setText(String.valueOf(idTaller));
 
                     // Llamar a cargarGrupos() pasando el id del taller y el JComboBox2 para cargar los grupos
-                    CargarGrupos cg = new CargarGrupos(jComboBox1, jComboBox2, jTextField1.getText());
+                    CargarGrupos cg = new CargarGrupos(jComboBoxTalleres, jComboBox2, jTextField1.getText());
                     cg.cargarGrupos(); // Pasar el id del taller
 
                 } else {
@@ -433,16 +453,7 @@ public class JFModificarTaller extends javax.swing.JFrame {
             jComboBox2.removeAllItems();
             jComboBox2.addItem("Grupos");
         }
-    }//GEN-LAST:event_jComboBox1ActionPerformed
-
-    private void jTextNuevoNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextNuevoNombreKeyReleased
-        // TODO add your handling code here:
-                 if(evt.getKeyCode()==KeyEvent.VK_ENTER)
-        {
-            CargarGrupos cg = new CargarGrupos(jComboBox1, jComboBox2, jTextField1.getText());
-            cg.ModificarTalleres(jTextField1, jTextNuevoNombre);
-        }
-    }//GEN-LAST:event_jTextNuevoNombreKeyReleased
+    }//GEN-LAST:event_jComboBoxTalleresActionPerformed
 
     /**
      * @param args the command line arguments
@@ -484,13 +495,13 @@ public class JFModificarTaller extends javax.swing.JFrame {
     private javax.swing.JButton jButtonActualizar;
     private javax.swing.JButton jButtonRegresar;
     private javax.swing.JButton jButtonRegresarInicio;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jComboBoxTalleres;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelnformacion;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

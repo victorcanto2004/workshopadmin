@@ -4,187 +4,182 @@
  */
 package Clases;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+// Paquetes a utilizar
+import java.sql.Connection; // Importa la clase conexion para gestionar la conexion con la base de datos
+import java.sql.DriverManager; // Importa DriverManager, que se usa para establecer conexiones con la base de datos.
+import java.sql.PreparedStatement; // Importa PreparedStatement, que permite ejecutar consultas SQL seguras con parámetros.
+import java.sql.SQLException; // Importa SQLException, que captura errores relacionados con la base de datos.
+// Importa Logger y Level, herramientas para registrar mensajes en la consola o en archivos de log.
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JComboBox;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
+import javax.swing.JComboBox; // Importa la clase JComboBox que permite crear listas desplegables en la interfaz gráfica
+import javax.swing.JOptionPane; // Permite mostrar cuadros de diálogo (mensajes, confirmaciones, entradas de texto, etc.).
+import javax.swing.JTextField; // Importa la clase JTextField que permite crear campos de texto en la interfaz gráfica
 
 /**
  *
  * @author canto
  */
 public class CargarGrupos {
-    String bd="workshopadmin";
-    String url="jdbc:mysql://localhost:3306/";
-    String user="root";
-    String password="sqloracle";
-    String driver="com.mysql.cj.jdbc.Driver";
-    Connection cx=null;
-    PreparedStatement ps=null;
+    String bd="workshopadmin"; // Nombre de la base de datos a la que se desea conectar.
+    String url="jdbc:mysql://localhost:3306/"; // URL de conexión para MySQL. Incluye el host (localhost) y el puerto (3306), pero no la base de datos todavía.
+    String user="root"; // Usuario de la base de datos. En muchos entornos locales, "root" es el usuario por defecto.
+    String password="sqloracle"; // Contraseña del usuario "root". Aquí se ha puesto "sqloracle", pero debe coincidir con la contraseña real en tu servidor MySQL.
+    String driver="com.mysql.cj.jdbc.Driver"; // Nombre del driver JDBC que se utiliza para conectar a MySQL. Este driver debe estar incluido en el classpath del proyecto.
+    Connection cx=null; // Objeto de conexión. Se utilizará para establecer la conexión con la base de datos.
+    PreparedStatement ps=null; // Objeto que permite ejecutar sentencias SQL con parámetros (consultas preparadas)
     
     private JComboBox<String> jComboBox1; // JComboBox de talleres
     private JComboBox<String> jComboBox2; // JComboBox de grupos
-    private String idguardado; 
+    private String idguardado; // Id de los talleres
     
-    // Constructor para inicializar el JComboBox
+    // Constructor que inicializa los JComboBox y el ID de taller.
     public CargarGrupos(JComboBox<String> comboBox, JComboBox<String> comboBox2, String idregistrado) {
         this.jComboBox1 = comboBox;
         this.jComboBox2 = comboBox2;
         this.idguardado = idregistrado;
     }
 
+    // Método para cargar los talleres en el JComboBox jComboBox1.
     public void cargarTalleres() {
-    try {
-        // Establecer la conexión
-        Class.forName(driver);
-        cx = DriverManager.getConnection(url + bd, user, password);
-
-        // Consulta SQL
-        String query = "SELECT nombre FROM talleres";  // Cambia esto según tu tabla
-        PreparedStatement stmt = cx.prepareStatement(query);
-        var rs = stmt.executeQuery();
-
-        // Limpiar el JComboBox antes de agregar nuevos elementos
-        jComboBox1.removeAllItems();
-        
-        // Agregar la opción "Taller"
-        jComboBox1.addItem("Taller");
-
-        // Agregar los datos al JComboBox
-        while (rs.next()) {
-            jComboBox1.addItem(rs.getString("nombre"));  // Asegúrate de que el campo exista en la tabla
-        }
-
-        rs.close();
-        stmt.close();
-        cx.close();
-        
-        jComboBox1.updateUI();  // Refrescar visualmente
-        } catch (ClassNotFoundException | SQLException e) {
-        JOptionPane.showMessageDialog(null, "Error al cargar los datos: " + e.getMessage());
-        }
-    }
-    
-    public void cargarGrupos(){
-try {
-        // Verificar que el TextField no esté vacío
-        if (idguardado != null && !idguardado.trim().isEmpty()) {
-            // Establecer la conexión a la base de datos
-            Class.forName(driver);
+        try {
+            // Establecer la conexión
+            Class.forName(driver); // Cargar el driver JDBC para MySQL
             cx = DriverManager.getConnection(url + bd, user, password);
 
-            // Consulta SQL para obtener los grupos asociados a ese id_taller
-            String query = "SELECT nombre FROM grupos WHERE id_taller = ?";
+            // Consulta SQL para obtener los nombres de los talleres
+            String query = "SELECT nombre FROM talleres WHERE activo = TRUE"; 
             PreparedStatement stmt = cx.prepareStatement(query);
-            stmt.setString(1, idguardado);  // Establecer el parámetro id_taller
+            var rs = stmt.executeQuery(); // Ejecuta la consulta
+
+            // Limpiar el JComboBox antes de agregar nuevos elementos
+            jComboBox1.removeAllItems();
+
+            // Agregar la opción "Taller"
+            jComboBox1.addItem("Taller");
+
+            // Agregar los nombres de los talleres al JComboBox
+            while (rs.next()) {
+                jComboBox1.addItem(rs.getString("nombre"));  
+            }
+
+            // Cierra la consulta y la conexión
+            rs.close();
+            stmt.close();
+            cx.close();
+
+            jComboBox1.updateUI();  // Refrescar el JComboBox visualmente
+            } catch (ClassNotFoundException | SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al cargar los datos: " + e.getMessage());
+            }
+    }
+    
+    // Método para cargar los grupos en el JComboBox jComboBox2, basado en el ID del taller.
+    public void cargarGrupos(){
+        try {
+            // Establecer la conexión a la base de datos
+            Class.forName(driver); // Cargar el driver JDBC para MySQL
+            cx = DriverManager.getConnection(url + bd, user, password);
+
+            // Consulta SQL para obtener los grupos asociados al ID del taller
+            String query = "SELECT nombre FROM grupos WHERE id_taller = ? AND activo = TRUE";
+            PreparedStatement stmt = cx.prepareStatement(query);
+            stmt.setString(1, idguardado);  // Asignar el ID del taller al parámetro
 
             // Ejecutar la consulta
             var rs = stmt.executeQuery();
 
             // Limpiar el JComboBox antes de agregar nuevos elementos
             jComboBox2.removeAllItems();
-            
+
             // Agregar la opción "Grupo"
             jComboBox2.addItem("Grupos");
 
-            // Agregar los grupos al JComboBox
+            // Agregar los nombres de los grupos al JComboBox
             while (rs.next()) {
                 jComboBox2.addItem(rs.getString("nombre"));
             }
 
-            // Cerrar los recursos
+            // Cierra la consulta y la conexión
             rs.close();
             stmt.close();
             cx.close();
 
             jComboBox2.updateUI();  // Refrescar el JComboBox visualmente
-        } else {
-            // Si el TextField está vacío, mostrar un mensaje
+            
+        // Si ocurre un error al conectar o ejecutar la consulta, se imprime en consola
+        } catch (ClassNotFoundException | SQLException e) {
+             JOptionPane.showMessageDialog(null, "Error al cargar los datos: " + e.getMessage());
         }
-    } catch (ClassNotFoundException | SQLException e) {
-        JOptionPane.showMessageDialog(null, "Error al cargar los datos: " + e.getMessage());
     }
-}
-    public void Modificar(JTextField jTextidgrupo,
-            JTextField jTextNuevoNombre){
-          try
-            {
-                if(jTextidgrupo.getText().isEmpty())
-                {
-                    JOptionPane.showMessageDialog(null,"Primero debe buscar al estudiante para poder actualizar");
-                    jTextidgrupo.requestFocus();
-                }
-                else
-                {         
-                    Class.forName(driver); 
-                    cx=DriverManager.getConnection(url+bd,user, password); 
-                    PreparedStatement consulta;
+    
+    // Método para modificar el nombre de un grupo en la base de datos
+    public void Modificar(JTextField jTextidgrupo, JTextField jTextNuevoNombre){
+        try {
+            // Verifica si el campo de ID del grupo está vacío
+            if(jTextidgrupo.getText().isEmpty()){
+                // Muestra un mensaje si no se ha ingresado el ID
+                JOptionPane.showMessageDialog(null,"Primero debe buscar al estudiante para poder actualizar");
+                jTextidgrupo.requestFocus(); // Coloca el foco en el campo del ID
+                } else {
+                    Class.forName(driver);  // Carga el driver JDBC de MySQL
+                    cx=DriverManager.getConnection(url+bd,user, password);  // Establece la conexión con la base de datos
+                    PreparedStatement consulta; // Prepara la consulta SQL para actualizar el nombre del grupo
                     consulta=cx.prepareStatement("UPDATE grupos "
                                                 + "SET nombre=? "
                                                 + "WHERE id_grupo=?");
                     
-                consulta.setString(1, jTextNuevoNombre.getText());      
-                consulta.setString(2, jTextidgrupo.getText()); // Para el WHERE
+                consulta.setString(1, jTextNuevoNombre.getText()); // Asigna el nuevo nombre al primer parámetro de la consulta   
+                consulta.setString(2, jTextidgrupo.getText()); // Asigna el ID del grupo al segundo parámetro de la consulta (para el WHERE)
 
-                consulta.executeUpdate();
-                consulta.close();
-                cx.close();
+                consulta.executeUpdate(); // Ejecuta la actualización en la base de datos
+                consulta.close(); // Cierra la consulta
+                cx.close(); // Cierra la conexión
+                 
+                cargarTalleres(); // Recarga los talleres en la interfaz (si este método existe)
                 
-                cargarTalleres();
-                
-                JOptionPane.showMessageDialog(null, "El estudiante se ha actualizado con éxito");
-                jTextidgrupo.requestFocus();
+                JOptionPane.showMessageDialog(null, "El nombre del grupo se ha actualizado con éxito"); // Muestra mensaje de éxito
+                jTextidgrupo.requestFocus();  // Coloca el foco en el campo de ID
                 }
-                
-       
-            }
-                catch (ClassNotFoundException | SQLException ex) {
+        // En caso de error, muestra mensaje por consola y log
+        } catch (ClassNotFoundException | SQLException ex) {
                 System.out.println("No se conectó a la BD " + ex.getMessage());
                 Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
             }
     }
     
-    public void ModificarTalleres(JTextField jTextidgrupo,
-            JTextField jTextNuevoNombre){
-          try
-            {
-                if(jTextidgrupo.getText().isEmpty())
-                {
-                    JOptionPane.showMessageDialog(null,"Primero debe buscar al estudiante para poder actualizar");
-                    jTextidgrupo.requestFocus();
-                }
-                else
-                {         
-                    Class.forName(driver); 
-                    cx=DriverManager.getConnection(url+bd,user, password); 
-                    PreparedStatement consulta;
-                    consulta=cx.prepareStatement("UPDATE talleres "
-                                                + "SET nombre=? "
-                                                + "WHERE id_taller=?");
+    // Método para modificar el nombre de un taller en la base de datos
+    public void ModificarTalleres(JTextField jTextidgrupo, JTextField jTextNuevoNombre){
+        try {
+            // Verifica si el campo de ID del taller está vacío
+            if(jTextidgrupo.getText().isEmpty()){
+                // Muestra un mensaje si no se ha ingresado el ID
+                JOptionPane.showMessageDialog(null,"Primero debe buscar al estudiante para poder actualizar");
+                jTextidgrupo.requestFocus();  // Coloca el foco en el campo del ID
+            } else {
+                Class.forName(driver);  // Carga el driver JDBC de MySQL
+                cx=DriverManager.getConnection(url+bd,user, password);  // Establece la conexión con la base de datos
+                PreparedStatement consulta; // Prepara la consulta SQL para actualizar el nombre del taller
+                consulta=cx.prepareStatement("UPDATE talleres "
+                                            + "SET nombre=? "
+                                            + "WHERE id_taller=?");
                     
-                consulta.setString(1, jTextNuevoNombre.getText());      
-                consulta.setString(2, jTextidgrupo.getText()); // Para el WHERE
+                consulta.setString(1, jTextNuevoNombre.getText()); // Asigna el nuevo nombre al primer parámetro de la consulta 
+                consulta.setString(2, jTextidgrupo.getText()); // Asigna el ID del taller al segundo parámetro de la consulta (para el WHERE)
 
-                consulta.executeUpdate();
-                consulta.close();
-                cx.close();
+                consulta.executeUpdate();  // Ejecuta la actualización en la base de datos
+                consulta.close(); // Cierra la consulta
+                cx.close(); // Cierra la conexión
                 
-                cargarTalleres();
+                cargarTalleres(); // Recarga los talleres en la interfaz
                 
-                JOptionPane.showMessageDialog(null, "El estudiante se ha actualizado con éxito");
-                jTextidgrupo.requestFocus();
-                }
-                
-       
-            }
-                catch (ClassNotFoundException | SQLException ex) {
+                JOptionPane.showMessageDialog(null, "La información del taller se ha actualizado con éxito"); // Muestra mensaje de éxito
+                jTextidgrupo.requestFocus(); // Coloca el foco en el campo de ID
+                }      
+        // En caso de error, muestra mensaje por consola y log
+        } catch (ClassNotFoundException | SQLException ex) {
                 System.out.println("No se conectó a la BD " + ex.getMessage());
                 Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        }
     }
 }  

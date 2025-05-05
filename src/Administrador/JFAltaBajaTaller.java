@@ -4,15 +4,16 @@
  */
 package Administrador;
 
-import Clases.Talleres;
-import Clases.CargarTalleres;
-import Clases.TextPrompt;
-import java.awt.Color;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import javax.swing.JOptionPane;
+import Clases.Talleres; // Importa la clase Talleres
+import Clases.CargarTalleres; // Importa la clase CargarTalleres
+import Clases.TextPrompt; // Importa la clase TextPrompt para utilizar placeholders
+import java.awt.Color; // Permite usar la clase Color para cambiar colores en componentes gráficos.
+import java.awt.Image; // Permite manejar imágenes, por ejemplo, para íconos o imágenes en la interfaz.
+import java.awt.Toolkit; // Proporciona acceso a recursos del sistema como imágenes, sonidos, etc.
+import java.sql.Connection; // Importa Connection, que representa la conexión activa con la base de datos.
+import java.sql.PreparedStatement; // Importa PreparedStatement, que permite ejecutar consultas SQL seguras con parámetros.
+import javax.swing.JFrame;
+import javax.swing.JOptionPane; // Permite mostrar cuadros de diálogo (mensajes, confirmaciones, entradas de texto, etc.).
 
 /**
  *
@@ -20,33 +21,38 @@ import javax.swing.JOptionPane;
  */
 public class JFAltaBajaTaller extends javax.swing.JFrame {
 
-    String bd="workshopadmin";
-    String url="jdbc:mysql://localhost:3306/";
-    String user="root";
-    String password="sqloracle";
-    String driver="com.mysql.cj.jdbc.Driver";
-    Connection cx=null;
-    PreparedStatement ps=null;    
+    // Datos de configuración para la conexión con la base de datos
+    String bd="workshopadmin"; // Nombre de la base de datos a la que se desea conectar.
+    String url="jdbc:mysql://localhost:3306/"; // URL de conexión para MySQL. Incluye el host (localhost) y el puerto (3306), pero no la base de datos todavía.
+    String user="root"; // Usuario de la base de datos. En muchos entornos locales, "root" es el usuario por defecto.
+    String password="sqloracle"; // Contraseña del usuario "root". Aquí se ha puesto "sqloracle", pero debe coincidir con la contraseña real en tu servidor MySQL.
+    String driver="com.mysql.cj.jdbc.Driver"; // Nombre del driver JDBC que se utiliza para conectar a MySQL. Este driver debe estar incluido en el classpath del proyecto.
+    Connection cx=null; // Objeto de conexión. Se utilizará para establecer la conexión con la base de datos.
+    PreparedStatement ps=null; // Objeto que permite ejecutar sentencias SQL con parámetros (consultas preparadas)  
     
     /**
      * Creates new form JFAltaGrupo
      */
     public JFAltaBajaTaller() {
         initComponents();
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // Desactiva la X de cierre
         // Llamar a CargarTalleres
-        CargarTalleres ct = new CargarTalleres(jComboBox1, jComboBox2, jTextField2.getText());
+        CargarTalleres ct = new CargarTalleres(jComboBoxTalleresEliminar, jComboBox2, jTextField2.getText());
         ct.cargarTalleres();
+        // Oculta inicialmente el jTextField
         jComboBox2.setVisible(false);
         jTextField2.setVisible(false);
         
-        TextPrompt taller = new TextPrompt("Carpintería",jTextNombre);
-        setIconImage(getIconImage());
+        TextPrompt taller = new TextPrompt("Carpintería",jTextNombre); // Establece texto de sugerencia ("placeholder")
+        setIconImage(getIconImage()); // Establece un ícono personalizado para la ventana.
     }
     //Icono del JFrame
-    @Override
-    public Image getIconImage(){
+    @Override // Indica que este método sobrescribe el método getIconImage() de la clase JFrame
+    // Usa Toolkit (una clase de utilidades gráficas de AWT) para obtener una imagen ubicada en la ruta interna del proyecto
+    // ClassLoader.getSystemResource() localiza el archivo dentro del classpath (dentro de src o el .jar).
+    public Image getIconImage(){ 
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("workshopadmin/Imagenes/LogoIcono.png"));
-        return retValue;
+        return retValue; // Devuelve la imagen para que sea usada como ícono del JFrame
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -62,21 +68,22 @@ public class JFAltaBajaTaller extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jButtonRegistrar = new javax.swing.JButton();
         jTextNombre = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
+        jLabelnformacion = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jButtonRegresarInicio = new javax.swing.JButton();
         jButtonRegresar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jTextNombreEliminar = new javax.swing.JTextField();
+        jButtonEliminar = new javax.swing.JButton();
         jComboBox2 = new javax.swing.JComboBox<>();
         jTextField2 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBoxTalleresEliminar = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registro de talleres");
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -134,10 +141,10 @@ public class JFAltaBajaTaller extends javax.swing.JFrame {
                 .addContainerGap(9, Short.MAX_VALUE))
         );
 
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/Informacion.png"))); // NOI18N
-        jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelnformacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/Informacion.png"))); // NOI18N
+        jLabelnformacion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel10MouseClicked(evt);
+                jLabelnformacionMouseClicked(evt);
             }
         });
 
@@ -187,16 +194,16 @@ public class JFAltaBajaTaller extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel2.setText("Taller");
 
-        jTextField1.setEditable(false);
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jTextNombreEliminar.setEditable(false);
+        jTextNombreEliminar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
-        jButton1.setBackground(java.awt.Color.lightGray);
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/Registrar.png"))); // NOI18N
-        jButton1.setText("Eliminar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonEliminar.setBackground(java.awt.Color.lightGray);
+        jButtonEliminar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jButtonEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/Registrar.png"))); // NOI18N
+        jButtonEliminar.setText("Eliminar");
+        jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonEliminarActionPerformed(evt);
             }
         });
 
@@ -204,11 +211,11 @@ public class JFAltaBajaTaller extends javax.swing.JFrame {
 
         jTextField2.setText("jTextField2");
 
-        jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        jComboBoxTalleresEliminar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jComboBoxTalleresEliminar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxTalleresEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                jComboBoxTalleresEliminarActionPerformed(evt);
             }
         });
 
@@ -220,7 +227,7 @@ public class JFAltaBajaTaller extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButtonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -234,10 +241,10 @@ public class JFAltaBajaTaller extends javax.swing.JFrame {
                                     .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addComponent(jLabel2)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(jTextNombreEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(20, 20, 20)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jComboBoxTalleresEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 95, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -248,13 +255,13 @@ public class JFAltaBajaTaller extends javax.swing.JFrame {
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jComboBoxTalleresEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextNombreEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
+                .addComponent(jButtonEliminar)
                 .addContainerGap())
         );
 
@@ -278,7 +285,7 @@ public class JFAltaBajaTaller extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel10)
+                        .addComponent(jLabelnformacion)
                         .addGap(29, 29, 29))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -300,7 +307,7 @@ public class JFAltaBajaTaller extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
-                        .addComponent(jLabel10))
+                        .addComponent(jLabelnformacion))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addComponent(jLabel1)))
@@ -327,123 +334,143 @@ public class JFAltaBajaTaller extends javax.swing.JFrame {
 
     private void jButtonRegistrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegistrarMouseEntered
         // TODO add your handling code here:
+        // Cambia el fondo del botón a verde cuando el mouse pasa por encima.
         jButtonRegistrar.setBackground(Color.GREEN);
     }//GEN-LAST:event_jButtonRegistrarMouseEntered
 
     private void jButtonRegistrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegistrarMouseExited
         // TODO add your handling code here:
+        // Restaura el fondo del botón a gris claro cuando el mouse sale.
         jButtonRegistrar.setBackground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_jButtonRegistrarMouseExited
 
     private void jButtonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarActionPerformed
         // TODO add your handling code here:
-        int respuesta = JOptionPane.showConfirmDialog(null, "Realmente desea dar de alta a este alumno?",
+        int respuesta = JOptionPane.showConfirmDialog(null, "Realmente desea dar de alta a este taller?",
             "Confirmar salida",
             JOptionPane.YES_NO_OPTION,
             JOptionPane.QUESTION_MESSAGE);
-        if (respuesta == JOptionPane.YES_OPTION) {
-            
+        if (respuesta == JOptionPane.NO_OPTION) {
+            // Si el usuario elige "No", simplemente no hace nada o muestra otro mensaje
+            JOptionPane.showMessageDialog(null, "Operación cancelada.");
+            } else {
+            // Validación: Verifica si no se ha llenado todos los campos
+            if (jTextNombre.getText().trim().isEmpty()){          
+            JOptionPane.showMessageDialog(null,"Por favor, escriba el nombre del taller que desea agregar.",
+                        "ADVERTENCIA",
+                        JOptionPane.ERROR_MESSAGE);
+            } else {
+            // Si todas las validaciones son correctas, se extraen los datos de los campos
             String nombreIngresado;
             nombreIngresado = jTextNombre.getText();
             
             // Llamar a la clase
-            Talleres at = new Talleres(jComboBox1, nombreIngresado);
+            Talleres at = new Talleres(jComboBoxTalleresEliminar, nombreIngresado);
             at.AltaTaller();
             
             jTextNombre.setText("");
             jTextNombre.requestFocus();
-            
-        } else {
-            // Si el usuario elige "No", simplemente no hace nada o muestra otro mensaje
-            JOptionPane.showMessageDialog(null, "Operación cancelada.");
+            }
         }
     }//GEN-LAST:event_jButtonRegistrarActionPerformed
 
-    private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
+    private void jLabelnformacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelnformacionMouseClicked
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null,"Has click en lo que deseas administrar",
+        // Este método se ejecuta cuando el usuario hace clic en el label de información.
+        JOptionPane.showMessageDialog(null,"Dar de alta un taller:\n" +
+                                    "Primero escriba el nombre del taller que deseas agregar\n" +
+                                    "y confírmalo con Registrar.\n"
+                                    + "Dar de baja un taller:\n" +
+                                    "Selecciona el taller que deseas eliminar\n"
+                                    + "y confirmalo con el boton Eliminar",
             "Información",
             JOptionPane.INFORMATION_MESSAGE);
-    }//GEN-LAST:event_jLabel10MouseClicked
+    }//GEN-LAST:event_jLabelnformacionMouseClicked
 
     private void jButtonRegresarInicioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegresarInicioMouseEntered
         // TODO add your handling code here:
+        // Cambia el fondo del botón a verde cuando el mouse pasa por encima.
         jButtonRegresarInicio.setBackground(Color.GREEN);
     }//GEN-LAST:event_jButtonRegresarInicioMouseEntered
 
     private void jButtonRegresarInicioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegresarInicioMouseExited
         // TODO add your handling code here:
+        // Restaura el fondo del botón a gris claro cuando el mouse sale.
         jButtonRegresarInicio.setBackground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_jButtonRegresarInicioMouseExited
 
     private void jButtonRegresarInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegresarInicioActionPerformed
         // TODO add your handling code here:
-        JFMenuAdministrador JFMenuAdministrador =new JFMenuAdministrador();
-        JFMenuAdministrador.setDefaultCloseOperation(JFMenuAdministrador.EXIT_ON_CLOSE);
-        JFMenuAdministrador.setVisible(true);
+        JFMenuAdministrador JFMenuAdministrador =new JFMenuAdministrador(); // Crea una nueva instancia
+        JFMenuAdministrador.setVisible(true); // Muestra la ventana.
         JFMenuAdministrador.setLocationRelativeTo(null); // Centra la ventana en la pantalla
-        JOptionPane.showMessageDialog(null,"Has regresado al inicio",
-            "Informacion",
-            JOptionPane.INFORMATION_MESSAGE);
-        this.setVisible(false);
+        this.setVisible(false); // Oculta la ventana actual.
     }//GEN-LAST:event_jButtonRegresarInicioActionPerformed
 
     private void jButtonRegresarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegresarMouseEntered
         // TODO add your handling code here:
+        // Cambia el fondo del botón a verde cuando el mouse pasa por encima.
         jButtonRegresar.setBackground(Color.GREEN);
     }//GEN-LAST:event_jButtonRegresarMouseEntered
 
     private void jButtonRegresarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegresarMouseExited
         // TODO add your handling code here:
+        // Restaura el fondo del botón a gris claro cuando el mouse sale.
         jButtonRegresar.setBackground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_jButtonRegresarMouseExited
 
     private void jButtonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegresarActionPerformed
         // TODO add your handling code here:
-        JFAdministrarTalleres JFAdministrarTalleres =new JFAdministrarTalleres();
-        JFAdministrarTalleres.setDefaultCloseOperation(JFAdministrarTalleres.EXIT_ON_CLOSE);
-        JFAdministrarTalleres.setVisible(true);
+        JFAdministrarTalleres JFAdministrarTalleres =new JFAdministrarTalleres(); // Crea una nueva instancia
+        JFAdministrarTalleres.setVisible(true); // Muestra la ventana.
         JFAdministrarTalleres.setLocationRelativeTo(null); // Centra la ventana en la pantalla
-        this.setVisible(false);
+        this.setVisible(false); // Oculta la ventana actual.
     }//GEN-LAST:event_jButtonRegresarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
         // TODO add your handling code here:
+        // Muestra un cuadro de diálogo para confirmar si el usuario realmente desea dar de dar de baja un taller
             int respuesta = JOptionPane.showConfirmDialog(null, "Realmente desea eliminar este taller?",
             "Confirmar salida",
             JOptionPane.YES_NO_OPTION,
             JOptionPane.QUESTION_MESSAGE);
-        if (respuesta == JOptionPane.YES_OPTION) {
-            
-            String nombreIngresado;
-            nombreIngresado = jTextField1.getText();
-            
-            // Llamar a la clase
-            Talleres at = new Talleres(jComboBox1, nombreIngresado);
-            at.BajaTaller();
-            
-            jTextField1.setText("");
-            jTextNombre.requestFocus();
-            
-        } else {
+        if (respuesta == JOptionPane.NO_OPTION) {
             // Si el usuario elige "No", simplemente no hace nada o muestra otro mensaje
             JOptionPane.showMessageDialog(null, "Operación cancelada.");
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
+            } else {
+                    // Validación: Verifica si no se ha seleccionado taller y grupo
+                    if (jComboBoxTalleresEliminar.getSelectedItem().toString().equals("Taller")){          
+                    JOptionPane.showMessageDialog(null,"Por favor, selecciona el taller que necesita eliminar.",
+                                "ADVERTENCIA",
+                                JOptionPane.ERROR_MESSAGE);
+            } else {
+            // Si todas las validaciones son correctas, se extraen los datos de los campos
+            String nombreIngresado;
+            nombreIngresado = jTextNombreEliminar.getText();
+            
+            // Llamar a la clase
+            Talleres at = new Talleres(jComboBoxTalleresEliminar, nombreIngresado);
+            at.BajaTaller();
+            
+            jTextNombreEliminar.setText("");
+            jTextNombre.requestFocus();  
+                    }
+            }
+    }//GEN-LAST:event_jButtonEliminarActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void jComboBoxTalleresEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTalleresEliminarActionPerformed
         // TODO add your handling code here:
         // Obtener el valor seleccionado del JComboBox
-        String seleccionado = (String) jComboBox1.getSelectedItem();
+        String seleccionado = (String) jComboBoxTalleresEliminar.getSelectedItem();
 
         // Verificar si el valor seleccionado es null
         if (seleccionado != null && !seleccionado.equals("Taller")) {
-            jTextField1.setText(seleccionado);
+            jTextNombreEliminar.setText(seleccionado);
         } else {
             // Si se selecciona "Taller" o si el valor es null, limpiar el JTextField
-            jTextField1.setText("");
+            jTextNombreEliminar.setText("");
         }
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_jComboBoxTalleresEliminarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -484,22 +511,22 @@ public class JFAltaBajaTaller extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonEliminar;
     private javax.swing.JButton jButtonRegistrar;
     private javax.swing.JButton jButtonRegresar;
     private javax.swing.JButton jButtonRegresarInicio;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jComboBoxTalleresEliminar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelnformacion;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextNombre;
+    private javax.swing.JTextField jTextNombreEliminar;
     // End of variables declaration//GEN-END:variables
 }

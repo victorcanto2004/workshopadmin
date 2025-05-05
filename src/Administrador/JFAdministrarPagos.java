@@ -4,10 +4,12 @@
  */
 package Administrador;
 
-import java.awt.Color;
-import java.awt.Image;
-import java.awt.Toolkit;
-import javax.swing.JOptionPane;
+// Paquetes a utilizar
+import java.awt.Color; // Importa la clase Color para manejar colores
+import java.awt.Image; // Importa la clase Image para trabajar con imágenes
+import java.awt.Toolkit; // Importa la clase Toolkit para obtener imágenes del sistema
+import javax.swing.JFrame;
+import javax.swing.JOptionPane; // Importa JOptionPane para mostrar cuadros de diálogo
 
 /**
  *
@@ -19,14 +21,17 @@ public class JFAdministrarPagos extends javax.swing.JFrame {
      * Creates new form JDAdministrarPagos
      */
     public JFAdministrarPagos() {
-        initComponents();
-        setIconImage(getIconImage());
+        initComponents(); // Método que configura y organiza todos los componentes gráficos en la ventana.
+        setIconImage(getIconImage()); // Establece un ícono personalizado para la ventana.
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // Desactiva la X de cierre
     }
     //Icono del JFrame
-    @Override
-    public Image getIconImage(){
+    @Override // Indica que este método sobrescribe el método getIconImage() de la clase JFrame
+    // Usa Toolkit (una clase de utilidades gráficas de AWT) para obtener una imagen ubicada en la ruta interna del proyecto
+    // ClassLoader.getSystemResource() localiza el archivo dentro del classpath (dentro de src o el .jar).
+    public Image getIconImage(){ 
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("workshopadmin/Imagenes/LogoIcono.png"));
-        return retValue;
+        return retValue; // Devuelve la imagen para que sea usada como ícono del JFrame
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -39,32 +44,33 @@ public class JFAdministrarPagos extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jButtonCursos = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
+        jButtonCursosLibros = new javax.swing.JButton();
+        jLabelnformacion = new javax.swing.JLabel();
         jButtonRegresar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Administrar pagos");
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jButtonCursos.setBackground(java.awt.Color.lightGray);
-        jButtonCursos.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jButtonCursos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/Cursos.png"))); // NOI18N
-        jButtonCursos.setText("Cursos o Libros");
-        jButtonCursos.addMouseListener(new java.awt.event.MouseAdapter() {
+        jButtonCursosLibros.setBackground(java.awt.Color.lightGray);
+        jButtonCursosLibros.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jButtonCursosLibros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/Cursos.png"))); // NOI18N
+        jButtonCursosLibros.setText("Cursos o Libros");
+        jButtonCursosLibros.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButtonCursosMouseEntered(evt);
+                jButtonCursosLibrosMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButtonCursosMouseExited(evt);
+                jButtonCursosLibrosMouseExited(evt);
             }
         });
-        jButtonCursos.addActionListener(new java.awt.event.ActionListener() {
+        jButtonCursosLibros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCursosActionPerformed(evt);
+                jButtonCursosLibrosActionPerformed(evt);
             }
         });
 
@@ -72,23 +78,23 @@ public class JFAdministrarPagos extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(79, 79, 79)
-                .addComponent(jButtonCursos)
-                .addContainerGap(82, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(56, Short.MAX_VALUE)
+                .addComponent(jButtonCursosLibros)
+                .addGap(49, 49, 49))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(163, 163, 163)
-                .addComponent(jButtonCursos)
-                .addContainerGap(188, Short.MAX_VALUE))
+                .addGap(165, 165, 165)
+                .addComponent(jButtonCursosLibros)
+                .addContainerGap(186, Short.MAX_VALUE))
         );
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/Informacion.png"))); // NOI18N
-        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelnformacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/Informacion.png"))); // NOI18N
+        jLabelnformacion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel5MouseClicked(evt);
+                jLabelnformacionMouseClicked(evt);
             }
         });
 
@@ -135,7 +141,7 @@ public class JFAdministrarPagos extends javax.swing.JFrame {
                         .addGap(96, 96, 96)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel5)))
+                        .addComponent(jLabelnformacion)))
                 .addGap(37, 37, 37))
         );
         jPanel1Layout.setVerticalGroup(
@@ -144,7 +150,7 @@ public class JFAdministrarPagos extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel5))
+                    .addComponent(jLabelnformacion))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(36, 36, 36)
@@ -154,7 +160,7 @@ public class JFAdministrarPagos extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addGap(31, 31, 31)
                         .addComponent(jButtonRegresar)))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -171,50 +177,53 @@ public class JFAdministrarPagos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+    private void jLabelnformacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelnformacionMouseClicked
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null,"Has click en lo que deseas administrar",
+        // Este método se ejecuta cuando el usuario hace clic en el label de información.
+        JOptionPane.showMessageDialog(null,"Selecciona la acción que deseas realizar respecto a los pagos",
             "Información",
             JOptionPane.INFORMATION_MESSAGE);
-    }//GEN-LAST:event_jLabel5MouseClicked
+    }//GEN-LAST:event_jLabelnformacionMouseClicked
 
     private void jButtonRegresarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegresarMouseEntered
         // TODO add your handling code here:
+        // Cambia el fondo del botón a verde cuando el mouse pasa por encima.
         jButtonRegresar.setBackground(Color.GREEN);
     }//GEN-LAST:event_jButtonRegresarMouseEntered
 
     private void jButtonRegresarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegresarMouseExited
         // TODO add your handling code here:
+        // Restaura el fondo del botón a gris claro cuando el mouse sale.
         jButtonRegresar.setBackground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_jButtonRegresarMouseExited
 
     private void jButtonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegresarActionPerformed
         // TODO add your handling code here:
-        JFMenuAdministrador JFMenuAdministrador =new JFMenuAdministrador();
-        JFMenuAdministrador.setDefaultCloseOperation(JFMenuAdministrador.EXIT_ON_CLOSE);
-        JFMenuAdministrador.setVisible(true);
+        JFMenuAdministrador JFMenuAdministrador =new JFMenuAdministrador(); // Llama a la ventana
+        JFMenuAdministrador.setVisible(true); // Muestra la ventana
         JFMenuAdministrador.setLocationRelativeTo(null); // Centra la ventana en la pantalla
-        this.setVisible(false);
+        this.setVisible(false); // Oculta la ventana actual
     }//GEN-LAST:event_jButtonRegresarActionPerformed
 
-    private void jButtonCursosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonCursosMouseEntered
+    private void jButtonCursosLibrosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonCursosLibrosMouseEntered
         // TODO add your handling code here:
-        jButtonCursos.setBackground(Color.GREEN);
-    }//GEN-LAST:event_jButtonCursosMouseEntered
+        // Cambia el fondo del botón a verde cuando el mouse pasa por encima.
+        jButtonCursosLibros.setBackground(Color.GREEN);
+    }//GEN-LAST:event_jButtonCursosLibrosMouseEntered
 
-    private void jButtonCursosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonCursosMouseExited
+    private void jButtonCursosLibrosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonCursosLibrosMouseExited
         // TODO add your handling code here:
-        jButtonCursos.setBackground(Color.LIGHT_GRAY);
-    }//GEN-LAST:event_jButtonCursosMouseExited
+        // Restaura el fondo del botón a gris claro cuando el mouse sale.
+        jButtonCursosLibros.setBackground(Color.LIGHT_GRAY);
+    }//GEN-LAST:event_jButtonCursosLibrosMouseExited
 
-    private void jButtonCursosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCursosActionPerformed
+    private void jButtonCursosLibrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCursosLibrosActionPerformed
         // TODO add your handling code here:
-        JFPagosCursosLibros JFPagosCursos =new JFPagosCursosLibros();
-        JFPagosCursos.setDefaultCloseOperation(JFPagosCursos.EXIT_ON_CLOSE);
-        JFPagosCursos.setVisible(true);
+        JFPagosCursosLibros JFPagosCursos =new JFPagosCursosLibros(); // Llama a la ventana
+        JFPagosCursos.setVisible(true); // Muestra la ventana
         JFPagosCursos.setLocationRelativeTo(null); // Centra la ventana en la pantalla
-        this.setVisible(false);
-    }//GEN-LAST:event_jButtonCursosActionPerformed
+        this.setVisible(false); // Oculta la ventana actual
+    }//GEN-LAST:event_jButtonCursosLibrosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -253,11 +262,11 @@ public class JFAdministrarPagos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonCursos;
+    private javax.swing.JButton jButtonCursosLibros;
     private javax.swing.JButton jButtonRegresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabelnformacion;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables

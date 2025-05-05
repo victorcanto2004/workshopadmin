@@ -4,18 +4,22 @@
  */
 package Inicios;
 
-import Clases.Conexion;
-import Clases.TextPrompt;
-import javax.swing.JOptionPane;
-import Docente.JFMenuDocente;
-import java.awt.Color;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+// Paquetes a utilizar
+import Clases.Conexion; // Importa la clase conexion para gestionar la conexion con la base de datos
+import Clases.TextPrompt; // Importa la clase TextPrompt para utilizar placeholders
+import javax.swing.JOptionPane; // Permite mostrar cuadros de diálogo (mensajes, confirmaciones, entradas de texto, etc.).
+import Docente.JFMenuDocente; // Importa la interfaz del menú del docente desde el paquete 'Docente'.
+import java.awt.Color; // Permite usar la clase Color para cambiar colores en componentes gráficos.
+import java.awt.Image; // Permite manejar imágenes, por ejemplo, para íconos o imágenes en la interfaz.
+import java.awt.Toolkit; // Proporciona acceso a recursos del sistema como imágenes, sonidos, etc.
+import java.awt.event.WindowAdapter; // Clase que se puede extender para manejar eventos de ventana sin implementar todos los métodos.
+import java.awt.event.WindowEvent; // Representa un evento que ocurre en una ventana, como cerrar, abrir, minimizar, etc.
+import java.sql.Connection; // Importa Connection, que representa la conexión activa con la base de datos.
+import java.sql.DriverManager; // Importa DriverManager, que se usa para establecer conexiones con la base de datos.
+import java.sql.PreparedStatement; // Importa PreparedStatement, que permite ejecutar consultas SQL seguras con parámetros.
+import java.sql.ResultSet; // Importa ResultSet, que se utiliza para almacenar los resultados obtenidos de una consulta SQL.
+import java.sql.SQLException; // Importa SQLException, que captura errores relacionados con la base de datos.
+// Importa Logger y Level, herramientas para registrar mensajes en la consola o en archivos de log.
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -29,28 +33,32 @@ public class JFInicioDocente extends javax.swing.JFrame {
      * Creates new form JFInicio
      */
     
-    String bd="workshopadmin";
-    String url="jdbc:mysql://localhost:3306/";
-    String user="root";
-    String password="sqloracle";
-    String driver="com.mysql.cj.jdbc.Driver";
-    Connection cx=null;
-    PreparedStatement ps=null;
+    // Datos de configuración para la conexión con la base de datos
+    String bd="workshopadmin"; // Nombre de la base de datos a la que se desea conectar.
+    String url="jdbc:mysql://localhost:3306/"; // URL de conexión para MySQL. Incluye el host (localhost) y el puerto (3306), pero no la base de datos todavía.
+    String user="root"; // Usuario de la base de datos. En muchos entornos locales, "root" es el usuario por defecto.
+    String password="sqloracle"; // Contraseña del usuario "root". Aquí se ha puesto "sqloracle", pero debe coincidir con la contraseña real en tu servidor MySQL.
+    String driver="com.mysql.cj.jdbc.Driver"; // Nombre del driver JDBC que se utiliza para conectar a MySQL. Este driver debe estar incluido en el classpath del proyecto.
+    Connection cx=null; // Objeto de conexión. Se utilizará para establecer la conexión con la base de datos.
+    PreparedStatement ps=null; // Objeto que permite ejecutar sentencias SQL con parámetros (consultas preparadas)
     
     public JFInicioDocente() {
-        initComponents();
-        jLabelOcultar.setVisible(false);
-        TextPrompt usuario = new TextPrompt("12345678",jTextNoControl);
-        TextPrompt contrasenia = new TextPrompt("unodos12",jPasswordContraseña);
-        
-        setIconImage(getIconImage());
+        initComponents(); // Método que configura y organiza todos los componentes gráficos en la ventana.
+        cerrar(); // Llama al método cerrar(), que configura la acción al cerrar la ventana.
+        setLocationRelativeTo(null); // Centra la ventana en la pantalla.
+        jLabelOcultar.setVisible(false); // Oculta inicialmente el ícono o etiqueta para mostrar/ocultar contraseña (u otro propósito visual).
+        TextPrompt usuario = new TextPrompt("12345678",jTextUsuario); // Establece un texto de sugerencia ("placeholder") en el campo de usuario.
+        TextPrompt contrasenia = new TextPrompt("unodos12",jPasswordContrasenia); // Establece un texto de sugerencia en el campo de contraseña.
+        setIconImage(getIconImage()); // Establece un ícono personalizado para la ventana.
     }
     
     //Icono del JFrame
-    @Override
-    public Image getIconImage(){
+    @Override // Indica que este método sobrescribe el método getIconImage() de la clase JFrame
+    // Usa Toolkit (una clase de utilidades gráficas de AWT) para obtener una imagen ubicada en la ruta interna del proyecto
+    // ClassLoader.getSystemResource() localiza el archivo dentro del classpath (dentro de src o el .jar).
+    public Image getIconImage(){ 
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("workshopadmin/Imagenes/LogoIcono.png"));
-        return retValue;
+        return retValue; // Devuelve la imagen para que sea usada como ícono del JFrame
     }
 
     /**
@@ -59,6 +67,37 @@ public class JFInicioDocente extends javax.swing.JFrame {
      * regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
+    
+    public void cerrar(){
+        try {
+            // Evita que la ventana se cierre automáticamente al presionar la "X".
+            this.setDefaultCloseOperation(JFInicioGeneral.DO_NOTHING_ON_CLOSE);
+            // Añade un "escuchador" que detecta cuando se intenta cerrar la ventana.
+            addWindowListener(new WindowAdapter(){
+                public void windowClosing(WindowEvent e){
+                    // Cuando se detecta el intento de cierre, se llama al método confirmarSalida().
+                    confirmarSalida();
+                }
+              }
+            );
+            this.setVisible(true); // Hace visible la ventana (por si no se hizo antes).
+        }
+        catch (Exception e) { 
+            e.printStackTrace(); // Si ocurre algún error, se imprime el error en consola.
+    }
+}
+    
+    public void confirmarSalida(){
+        // Muestra un cuadro de diálogo de confirmación al usuario.
+        int valor = JOptionPane.showConfirmDialog(this, "¿Está seguro de que desea cerrar la aplicación?", 
+                "Advertencia", 
+                JOptionPane.YES_NO_OPTION, 
+                JOptionPane.WARNING_MESSAGE);
+        // Si el usuario hace clic en "Sí", el programa se cierra completamente.
+        if (valor==JOptionPane.YES_OPTION){
+            System.exit(0); // Termina la ejecución de la aplicación.
+        }
+    }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -69,16 +108,17 @@ public class JFInicioDocente extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextNoControl = new javax.swing.JTextField();
+        jTextUsuario = new javax.swing.JTextField();
         jButtonIngresar = new javax.swing.JButton();
-        jPasswordContraseña = new javax.swing.JPasswordField();
+        jPasswordContrasenia = new javax.swing.JPasswordField();
         jLabelVer = new javax.swing.JLabel();
         jLabelOcultar = new javax.swing.JLabel();
         jButtonRegresar = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
+        jLabelnformacion = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Inicio de sesión del docente");
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -103,8 +143,8 @@ public class JFInicioDocente extends javax.swing.JFrame {
         jLabel3.setText("Contraseña");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 172, -1, -1));
 
-        jTextNoControl.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPanel2.add(jTextNoControl, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 150, 30));
+        jTextUsuario.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPanel2.add(jTextUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 150, 30));
 
         jButtonIngresar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButtonIngresar.setText("Ingresar");
@@ -123,8 +163,8 @@ public class JFInicioDocente extends javax.swing.JFrame {
         });
         jPanel2.add(jButtonIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 230, -1, -1));
 
-        jPasswordContraseña.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPanel2.add(jPasswordContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, 150, 30));
+        jPasswordContrasenia.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPanel2.add(jPasswordContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, 150, 30));
 
         jLabelVer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/Visible.png"))); // NOI18N
         jLabelVer.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -158,10 +198,10 @@ public class JFInicioDocente extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/Informacion.png"))); // NOI18N
-        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelnformacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/Informacion.png"))); // NOI18N
+        jLabelnformacion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel6MouseClicked(evt);
+                jLabelnformacionMouseClicked(evt);
             }
         });
 
@@ -174,36 +214,35 @@ public class JFInicioDocente extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel5)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(29, 29, 29)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel6))))
-                    .addComponent(jButtonRegresar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(36, 36, 36)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(81, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButtonRegresar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabelnformacion)
+                        .addGap(33, 33, 33))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addGap(89, 89, 89))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(16, 16, 16)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabelnformacion)
+                    .addComponent(jButtonRegresar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(36, 36, 36)
-                                .addComponent(jLabel4))
-                            .addComponent(jLabel6))
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButtonRegresar)
-                        .addGap(40, 40, 40)
-                        .addComponent(jLabel5)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(47, 47, 47)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel5))
+                .addContainerGap(107, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -222,113 +261,119 @@ public class JFInicioDocente extends javax.swing.JFrame {
 
     private void jButtonIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIngresarActionPerformed
         // TODO add your handling code here:
-        if(jTextNoControl.getText().isEmpty()){
+        // Verifica si el campo de texto del usuario está vacío
+        if(jTextUsuario.getText().isEmpty()){
+            // Muestra un mensaje de error si no se ha introducido el número de control
             JOptionPane.showMessageDialog(null,"Inserte su número de control",
             "Error",
             JOptionPane.ERROR_MESSAGE);
-            jTextNoControl.requestFocus();
+            jTextUsuario.requestFocus(); // Pone el foco en el campo de texto para que el usuario lo complete.
         } else {
-            if(jPasswordContraseña.getPassword().length == 0){
+            if(jPasswordContrasenia.getPassword().length == 0){ // Verifica si el campo de contraseña está vacío
+                // Muestra un mensaje de error si no se ha introducido la contraseña
                 JOptionPane.showMessageDialog(null,"Inserte su contraseña",
                 "Error",
                 JOptionPane.ERROR_MESSAGE);
-                jPasswordContraseña.requestFocus();
+                jPasswordContrasenia.requestFocus(); // Pone el foco en el campo de texto para que el usuario lo complete.
             }else{  
-                try
-                {
-                    Class.forName(driver); 
-                    cx=DriverManager.getConnection(url+bd,user, password); 
+                try {
+                    Class.forName(driver); // Carga el controlador JDBC para la conexión a la base de datos
+                    cx=DriverManager.getConnection(url+bd,user, password);  // Establece la conexión con la base de datos usando la URL, usuario y contraseña configurados
+                    // Prepara una consulta SQL para verificar si el usuario existe
                     PreparedStatement consulta;
                     consulta=cx.prepareStatement("SELECT no_usuario, contra_docente FROM docentes WHERE no_usuario = ?");
-                    consulta.setString(1, jTextNoControl.getText());
-                    ResultSet resultado = consulta.executeQuery();
-                   // cx.close();
-                    String contraseniaReal = "";
+                    consulta.setString(1, jTextUsuario.getText()); // Establece el número de control en la consulta
+                    ResultSet resultado = consulta.executeQuery(); // Ejecuta la consulta
+                    String contraseniaReal = ""; // Variable para almacenar la contraseña real obtenida de la base de datos
 
-                    if(resultado.next())
-                    {
-                        contraseniaReal=resultado.getString("contra_docente");
-                        String contraseniaCapturada = new String(jPasswordContraseña.getPassword());
+                    // Si se encontró el usuario en la base de datos
+                    if(resultado.next()){
+                        contraseniaReal=resultado.getString("contra_docente"); // Recupera la contraseña real
+                        String contraseniaCapturada = new String(jPasswordContrasenia.getPassword()); // Convierte la contraseña capturada a texto
                         
-                    if (contraseniaReal.equals(contraseniaCapturada))
-                    {
-                        //JOptionPane.showMessageDialog(null, "Bienvenido al sistema");
-                        JFMenuDocente JFMenuDocente =new JFMenuDocente();  
-                        JFMenuDocente.setDefaultCloseOperation(JFMenuDocente.EXIT_ON_CLOSE); 
-                        JFMenuDocente.setVisible(true);
-                        JFMenuDocente.setLocationRelativeTo(null); // Centra la ventana en la pantalla
-                        this.setVisible(false); 
-                    }
-                    else
-                    {
-                        JOptionPane.showMessageDialog(null,"Contraseña incorrecta",
-                        "Error",
-                        JOptionPane.ERROR_MESSAGE);
-                        }
-                    }
-                    else{
-                            JOptionPane.showMessageDialog(null,"Usuario incorrecto",
+                        // Compara la contraseña ingresada con la almacenada en la base de dato
+                        if (contraseniaReal.equals(contraseniaCapturada)){
+                            // Si las contraseñas coinciden, se abre la siguiente ventana (menú del docente)
+                            JFMenuDocente JFMenuDocente =new JFMenuDocente(); 
+                            JFMenuDocente.setVisible(true); // Muestra la ventana del menú
+                            JFMenuDocente.setLocationRelativeTo(null); // Centra la ventana en la pantalla
+                            this.setVisible(false); // Oculta la ventana actual
+                        } else {
+                            // Si la contraseña es incorrecta, muestra un mensaje de error
+                            JOptionPane.showMessageDialog(null,"Contraseña incorrecta",
                             "Error",
                             JOptionPane.ERROR_MESSAGE);
                             }
-                }
-                catch(ClassNotFoundException | SQLException ex)
-                {
-                   // System.out.println("No se conectó a la BD" + ex.getMessage());
+                    } else {
+                        // Si el usuario no existe en la base de datos, muestra un mensaje de error
+                        JOptionPane.showMessageDialog(null,"Usuario incorrecto",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
+                            }
+                } catch(ClassNotFoundException | SQLException ex){
+                    // En caso de un error al conectar con la base de datos, muestra el error
                     JOptionPane.showMessageDialog(null, "No se conectó a la BD" + ex.getMessage());
                     Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
-                        } 
-                    }
-                }
+                } 
+           }
+        }
     }//GEN-LAST:event_jButtonIngresarActionPerformed
 
     private void jLabelVerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelVerMouseClicked
         // TODO add your handling code here:
-        jLabelVer.setVisible(false);
-        jLabelOcultar.setVisible(true);
-        jPasswordContraseña.setEchoChar((char)0);
+        // Este método se ejecuta cuando el usuario hace clic en el label para ver la contraseña.
+        jLabelVer.setVisible(false); // Oculta el label de "ver" la contraseña.
+        jLabelOcultar.setVisible(true); // Muestra el label de "ocultar" la contraseña.
+        jPasswordContrasenia.setEchoChar((char)0); // Establece que los caracteres de la contraseña sean visibles (sin máscara).
     }//GEN-LAST:event_jLabelVerMouseClicked
 
     private void jLabelOcultarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelOcultarMouseClicked
         // TODO add your handling code here:
-        jLabelVer.setVisible(true);
-        jLabelOcultar.setVisible(false);
-        jPasswordContraseña.setEchoChar(('*'));
+        // Este método se ejecuta cuando el usuario hace clic en el label para ocultar la contraseña.
+        jLabelVer.setVisible(true); // Muestra el label para "ver" la contraseña.
+        jLabelOcultar.setVisible(false); // Oculta el label para "ocultar" la contraseña.
+        jPasswordContrasenia.setEchoChar(('*')); // Restaura el caracter de máscara ('*') para ocultar la contraseña.
     }//GEN-LAST:event_jLabelOcultarMouseClicked
 
     private void jButtonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegresarActionPerformed
         // TODO add your handling code here:
-        JFInicioGeneral JFUsuarios =new JFInicioGeneral();
-        JFUsuarios.setDefaultCloseOperation(JFUsuarios.EXIT_ON_CLOSE);
-        JFUsuarios.setVisible(true);
+        // Este método se ejecuta cuando el usuario hace clic en el botón "Regresar".
+        JFInicioGeneral JFUsuarios =new JFInicioGeneral(); // Crea una nueva instancia de la ventana de inicio.
+        JFUsuarios.setVisible(true); // Muestra la ventana de inicio.
         JFUsuarios.setLocationRelativeTo(null); // Centra la ventana en la pantalla
-        this.setVisible(false);
+        this.setVisible(false); // Oculta la ventana actual.
     }//GEN-LAST:event_jButtonRegresarActionPerformed
 
-    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+    private void jLabelnformacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelnformacionMouseClicked
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null,"Has click en lo que deseas administrar",
-            "Información",
-            JOptionPane.INFORMATION_MESSAGE);
-    }//GEN-LAST:event_jLabel6MouseClicked
+        // Este método se ejecuta cuando el usuario hace clic en el label de información.
+        JOptionPane.showMessageDialog(null,"Ingresa tu nombre de usuario y contraseña tal como te los proporcionaron"
+                + "\nSi olvidaste o tienes problemas, contacta al administrador.",
+                "Información",
+                JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_jLabelnformacionMouseClicked
 
     private void jButtonRegresarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegresarMouseEntered
         // TODO add your handling code here:
+        // Cambia el fondo del botón a verde cuando el mouse pasa por encima.
         jButtonRegresar.setBackground(Color.GREEN);
     }//GEN-LAST:event_jButtonRegresarMouseEntered
 
     private void jButtonRegresarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegresarMouseExited
         // TODO add your handling code here:
+        // Restaura el fondo del botón a gris claro cuando el mouse sale.
         jButtonRegresar.setBackground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_jButtonRegresarMouseExited
 
     private void jButtonIngresarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonIngresarMouseExited
         // TODO add your handling code here:
+        // Cambia el fondo del botón a verde cuando el mouse pasa por encima.
         jButtonIngresar.setBackground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_jButtonIngresarMouseExited
 
     private void jButtonIngresarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonIngresarMouseEntered
         // TODO add your handling code here:
+        // Restaura el fondo del botón a gris claro cuando el mouse sale.
         jButtonIngresar.setBackground(Color.GREEN);
     }//GEN-LAST:event_jButtonIngresarMouseEntered
 
@@ -378,12 +423,12 @@ public class JFInicioDocente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabelOcultar;
     private javax.swing.JLabel jLabelVer;
+    private javax.swing.JLabel jLabelnformacion;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPasswordField jPasswordContraseña;
-    private javax.swing.JTextField jTextNoControl;
+    private javax.swing.JPasswordField jPasswordContrasenia;
+    private javax.swing.JTextField jTextUsuario;
     // End of variables declaration//GEN-END:variables
 }

@@ -9,12 +9,11 @@ package Clases;
 
 /**
  *
- * @author 
+ * @author canto
  */
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*; 
-import javax.swing.border.*;
 import javax.swing.event.*;
 import javax.swing.text.*;
 
@@ -37,13 +36,14 @@ public class TextPrompt extends JLabel implements FocusListener, DocumentListene
 		ALWAYS, FOCUS_GAINED, FOCUS_LOST;
 	}
 
-	private JTextComponent component;
-	private Document document;
+	private JTextComponent component; // El componente de texto al que se aplica el prompt
+	private Document document;  // El documento del componente (para detectar cambi
 
-	private Show show;
-	private boolean showPromptOnce;
-	private int focusLost;
+	private Show show; // Define cuándo se muestra el prompt (ALWAYS, FOCUS_GAINED, FOCUS_LOST)
+	private boolean showPromptOnce; // Si es true, solo muestra el prompt una vez
+	private int focusLost; // Cuenta las veces que se ha perdido el foco
 
+        // Constructor
 	public TextPrompt(String text, JTextComponent component) {
 		this(text, component, Show.ALWAYS);
 	}
@@ -53,13 +53,11 @@ public class TextPrompt extends JLabel implements FocusListener, DocumentListene
 		setShow(show);
 		document = component.getDocument();
 
-		setText(text);
-		setFont(component.getFont());
+		setText(text); // Texto del prompt
+		setFont(component.getFont()); // Iguala la fuente del prompt con la del componente
                 
-//		setForeground(component.getForeground());
-		setForeground(Color.gray);
-//		setBorder(new EmptyBorder(component.getInsets()));
-		setHorizontalAlignment(JLabel.LEADING);
+		setForeground(Color.gray); // Color gris para simular placeholder
+		setHorizontalAlignment(JLabel.LEADING); // Alineación del texto del prompt
 
 		component.addFocusListener(this);
 		document.addDocumentListener(this);
@@ -164,14 +162,14 @@ public class TextPrompt extends JLabel implements FocusListener, DocumentListene
 	private void checkForPrompt() {
 		// Text has been entered, remove the prompt
 
-		if (document.getLength() > 0) {
+		if (document.getLength() > 0) { // Hay texto: ocultar prompt
 			setVisible(false);
 			return;
 		}
 
 		// Prompt has already been shown once, remove it
 
-		if (showPromptOnce && focusLost > 0) {
+		if (showPromptOnce && focusLost > 0) { // Ya se mostró una vez: ocultar
 			setVisible(false);
 			return;
 		}
@@ -193,7 +191,7 @@ public class TextPrompt extends JLabel implements FocusListener, DocumentListene
 	}
 
 	// Implement FocusListener
-
+        // Maneja cambios de foco
 	public void focusGained(FocusEvent e) {
 		checkForPrompt();
 	}
@@ -204,7 +202,7 @@ public class TextPrompt extends JLabel implements FocusListener, DocumentListene
 	}
 
 	// Implement DocumentListener
-
+        // Detecta inserciones o eliminaciones de texto
 	public void insertUpdate(DocumentEvent e) {
 		checkForPrompt();
 	}

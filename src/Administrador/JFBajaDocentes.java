@@ -4,19 +4,20 @@
  */
 package Administrador;
 
-import Clases.CargarAlumnos;
-import Clases.Conexion;
-import Clases.Docentes;
-import java.awt.Color;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import Clases.CargarAlumnos; // Importa la clase CargarAlumnos
+import Clases.Conexion; // Importa la clase conexion para gestionar la conexion con la base de datos
+import java.awt.Color; // Permite usar la clase Color para cambiar colores en componentes gráficos.
+import java.awt.Image; // Permite manejar imágenes, por ejemplo, para íconos o imágenes en la interfaz.
+import java.awt.Toolkit; // Proporciona acceso a recursos del sistema como imágenes, sonidos, etc.
+import java.sql.Connection; // Importa Connection, que representa la conexión activa con la base de datos.
+import java.sql.DriverManager; // Importa DriverManager, que se usa para establecer conexiones con la base de datos.
+import java.sql.PreparedStatement; // Importa PreparedStatement, que permite ejecutar consultas SQL seguras con parámetros.
+import java.sql.SQLException;  // Importa SQLException, que captura errores relacionados con la base de datos.
+// Importa Logger y Level, herramientas para registrar mensajes en la consola o en archivos de log.
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane; // Permite mostrar cuadros de diálogo (mensajes, confirmaciones, entradas de texto, etc.).
 
 /**
  *
@@ -27,31 +28,37 @@ public class JFBajaDocentes extends javax.swing.JFrame {
     /**
      * Creates new form JFBajaDocentes
      */
-    String bd="workshopadmin";
-    String url="jdbc:mysql://localhost:3306/";
-    String user="root";
-    String password="sqloracle";
-    String driver="com.mysql.cj.jdbc.Driver";
-    Connection cx=null;
-    PreparedStatement ps=null;
+    // Datos de configuración para la conexión con la base de datos
+    String bd="workshopadmin"; // Nombre de la base de datos a la que se desea conectar.
+    String url="jdbc:mysql://localhost:3306/"; // URL de conexión para MySQL. Incluye el host (localhost) y el puerto (3306), pero no la base de datos todavía.
+    String user="root"; // Usuario de la base de datos. En muchos entornos locales, "root" es el usuario por defecto.
+    String password="sqloracle"; // Contraseña del usuario "root". Aquí se ha puesto "sqloracle", pero debe coincidir con la contraseña real en tu servidor MySQL.
+    String driver="com.mysql.cj.jdbc.Driver"; // Nombre del driver JDBC que se utiliza para conectar a MySQL. Este driver debe estar incluido en el classpath del proyecto.
+    Connection cx=null; // Objeto de conexión. Se utilizará para establecer la conexión con la base de datos.
+    PreparedStatement ps=null; // Objeto que permite ejecutar sentencias SQL con parámetros (consultas preparadas)
     
     public JFBajaDocentes() {
         initComponents();
-        CargarAlumnos al = new CargarAlumnos(jComboBoxTalleres, jComboBoxGrupos,jComboBoxDocentes, jTextField1.getText(),jTextField2.getText());
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // Desactiva la X de cierre
+        // Llamar a CargarAlumnos
+        CargarAlumnos al = new CargarAlumnos(jComboBoxTalleres, jComboBoxGrupos,jComboBoxDocentes, jTextidtaller.getText(),jTextidgrupo.getText());
         al.cargarTalleres(); 
         
+        // Oculta inicialmente el jTextField
         jTextField3.setVisible(false);
         jTextNOUsuario.setVisible(false);
-        jTextField1.setVisible(false);
-        jTextField2.setVisible(false);
+        jTextidtaller.setVisible(false);
+        jTextidgrupo.setVisible(false);
         
-        setIconImage(getIconImage());
+        setIconImage(getIconImage()); // Establece un ícono personalizado para la ventana.
     }
     //Icono del JFrame
-    @Override
-    public Image getIconImage(){
+    @Override // Indica que este método sobrescribe el método getIconImage() de la clase JFrame
+    // Usa Toolkit (una clase de utilidades gráficas de AWT) para obtener una imagen ubicada en la ruta interna del proyecto
+    // ClassLoader.getSystemResource() localiza el archivo dentro del classpath (dentro de src o el .jar).
+    public Image getIconImage(){ 
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("workshopadmin/Imagenes/LogoIcono.png"));
-        return retValue;
+        return retValue; // Devuelve la imagen para que sea usada como ícono del JFrame
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -83,20 +90,21 @@ public class JFBajaDocentes extends javax.swing.JFrame {
         jComboBoxDocentes = new javax.swing.JComboBox<>();
         jComboBoxTalleres = new javax.swing.JComboBox<>();
         jComboBoxGrupos = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        jTextidtaller = new javax.swing.JTextField();
+        jTextidgrupo = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
         jTextNOUsuario = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableTalleresGrupos = new javax.swing.JTable();
-        jButtonRegistrar = new javax.swing.JButton();
-        jLabel10 = new javax.swing.JLabel();
-        jButtonRegistrarInicio = new javax.swing.JButton();
+        jButtonRegresar = new javax.swing.JButton();
+        jLabelnformacion = new javax.swing.JLabel();
+        jButtonRegresarInicio = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Baja de docentes");
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -184,9 +192,9 @@ public class JFBajaDocentes extends javax.swing.JFrame {
             }
         });
 
-        jTextField1.setText("jTextField1");
+        jTextidtaller.setText("jTextField1");
 
-        jTextField2.setText("jTextField2");
+        jTextidgrupo.setText("jTextField2");
 
         jTextField3.setText("jTextField3");
 
@@ -222,11 +230,11 @@ public class JFBajaDocentes extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jComboBoxGrupos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jTextidgrupo, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jComboBoxTalleres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jTextidtaller, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jTextContacto, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(jPanel2Layout.createSequentialGroup()
@@ -307,57 +315,57 @@ public class JFBajaDocentes extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jComboBoxTalleres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextidtaller, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jComboBoxGrupos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextidgrupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
                 .addComponent(jButtonDarDeBaja)
                 .addGap(26, 26, 26))
         );
 
-        jButtonRegistrar.setBackground(java.awt.Color.lightGray);
-        jButtonRegistrar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButtonRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/Atras.png"))); // NOI18N
-        jButtonRegistrar.setText("Regresar");
-        jButtonRegistrar.addMouseListener(new java.awt.event.MouseAdapter() {
+        jButtonRegresar.setBackground(java.awt.Color.lightGray);
+        jButtonRegresar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jButtonRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/Atras.png"))); // NOI18N
+        jButtonRegresar.setText("Regresar");
+        jButtonRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButtonRegistrarMouseEntered(evt);
+                jButtonRegresarMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButtonRegistrarMouseExited(evt);
+                jButtonRegresarMouseExited(evt);
             }
         });
-        jButtonRegistrar.addActionListener(new java.awt.event.ActionListener() {
+        jButtonRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonRegistrarActionPerformed(evt);
+                jButtonRegresarActionPerformed(evt);
             }
         });
 
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/Informacion.png"))); // NOI18N
-        jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelnformacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/Informacion.png"))); // NOI18N
+        jLabelnformacion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel10MouseClicked(evt);
+                jLabelnformacionMouseClicked(evt);
             }
         });
 
-        jButtonRegistrarInicio.setBackground(java.awt.Color.lightGray);
-        jButtonRegistrarInicio.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButtonRegistrarInicio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/Atras.png"))); // NOI18N
-        jButtonRegistrarInicio.setText("Regresar al inicio");
-        jButtonRegistrarInicio.addMouseListener(new java.awt.event.MouseAdapter() {
+        jButtonRegresarInicio.setBackground(java.awt.Color.lightGray);
+        jButtonRegresarInicio.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jButtonRegresarInicio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/Atras.png"))); // NOI18N
+        jButtonRegresarInicio.setText("Regresar al inicio");
+        jButtonRegresarInicio.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButtonRegistrarInicioMouseEntered(evt);
+                jButtonRegresarInicioMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButtonRegistrarInicioMouseExited(evt);
+                jButtonRegresarInicioMouseExited(evt);
             }
         });
-        jButtonRegistrarInicio.addActionListener(new java.awt.event.ActionListener() {
+        jButtonRegresarInicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonRegistrarInicioActionPerformed(evt);
+                jButtonRegresarInicioActionPerformed(evt);
             }
         });
 
@@ -378,8 +386,8 @@ public class JFBajaDocentes extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(92, 92, 92)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButtonRegistrarInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonRegistrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jButtonRegresarInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonRegresar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -389,7 +397,7 @@ public class JFBajaDocentes extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(63, 63, 63)
-                        .addComponent(jLabel10)
+                        .addComponent(jLabelnformacion)
                         .addGap(29, 29, 29))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -398,15 +406,15 @@ public class JFBajaDocentes extends javax.swing.JFrame {
                 .addGap(32, 32, 32)
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
-                .addComponent(jButtonRegistrar)
+                .addComponent(jButtonRegresar)
                 .addGap(18, 18, 18)
-                .addComponent(jButtonRegistrarInicio)
+                .addComponent(jButtonRegresarInicio)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
-                        .addComponent(jLabel10))
+                        .addComponent(jLabelnformacion))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addComponent(jLabel1)))
@@ -431,103 +439,121 @@ public class JFBajaDocentes extends javax.swing.JFrame {
 
     private void jButtonDarDeBajaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonDarDeBajaMouseEntered
         // TODO add your handling code here:
+        // Cambia el fondo del botón a verde cuando el mouse pasa por encima.
         jButtonDarDeBaja.setBackground(Color.GREEN);
     }//GEN-LAST:event_jButtonDarDeBajaMouseEntered
 
     private void jButtonDarDeBajaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonDarDeBajaMouseExited
         // TODO add your handling code here:
+        // Restaura el fondo del botón a gris claro cuando el mouse sale.
         jButtonDarDeBaja.setBackground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_jButtonDarDeBajaMouseExited
 
     private void jButtonDarDeBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDarDeBajaActionPerformed
         // TODO add your handling code here:
-        int respuesta = JOptionPane.showConfirmDialog(null, "Realmente desea dar de alta a este alumno?",
+        // Muestra un cuadro de diálogo para confirmar si el usuario realmente desea dar de baja al docente
+        int respuesta = JOptionPane.showConfirmDialog(null, "Realmente desea dar de baja a este docente?",
             "Confirmar salida",
             JOptionPane.YES_NO_OPTION,
             JOptionPane.QUESTION_MESSAGE);
-        if (respuesta == JOptionPane.YES_OPTION) {
-          try
-            {    
-                    Class.forName(driver); 
-                    cx=DriverManager.getConnection(url+bd,user, password); 
-                    PreparedStatement consulta;
-                    consulta=cx.prepareStatement("DELETE FROM docentes "
-                                               + "WHERE id_docente=?");
-                    consulta.setInt(1, Integer.parseInt(jTextField3.getText()));
-                    consulta.executeUpdate();
-                    consulta.close();
-                    cx.close();     
-            }
-            catch(ClassNotFoundException | SQLException ex)
-            {
-                System.out.println("No se conectó a la BD " + ex.getMessage());
-                Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
-            }      
-            JOptionPane.showMessageDialog(null, "Docente dado de baja exitosamente.");
-            jTextField3.setText("");
-            jTextNombres.setText("");
-            jTextApellidos.setText("");
-            jTextEdad.setText("");
-            jTextContacto.setText("");
-            jTextCampo.setText("");
-            jTextContraseña.setText("");
-            jComboBoxTalleres.removeAllItems();
-            jComboBoxTalleres.addItem("Taller");
-            jComboBoxGrupos.removeAllItems();
-            jComboBoxGrupos.addItem("Grupos");
-        } else {
+        if (respuesta == JOptionPane.NO_OPTION) {
             // Si el usuario elige "No", simplemente no hace nada o muestra otro mensaje
             JOptionPane.showMessageDialog(null, "Operación cancelada.");
+        } else {
+            // Validación: Verifica si algún campo obligatorio está vacío o si no se ha seleccionado taller y grupo
+            if (jComboBoxTalleres.getSelectedItem().toString().equals("Taller") ||
+                    jComboBoxGrupos.getSelectedItem().toString().equals("Grupos")||
+                    jComboBoxDocentes.getSelectedItem().toString().equals("No_Usuario")){ 
+            
+            JOptionPane.showMessageDialog(null,"Por favor, selecciona el taller y el grupo al que pertenece el docente"
+                    + "\ny el docente que desea dar de baja.",
+                        "ADVERTENCIA",
+                        JOptionPane.ERROR_MESSAGE);
+            } else {
+                    try
+                    {   
+                            // Si todas las validaciones son correctas, se extraen los datos de los campos
+                            Class.forName(driver); 
+                            cx=DriverManager.getConnection(url+bd,user, password); 
+                            PreparedStatement consulta;
+                            consulta=cx.prepareStatement("UPDATE docentes SET activo = FALSE WHERE id_docente=?");
+                            consulta.setInt(1, Integer.parseInt(jTextField3.getText()));
+                            consulta.executeUpdate();
+                            consulta.close();
+                            cx.close();     
+                            JOptionPane.showMessageDialog(null, "Docente dado de baja exitosamente.");
+                    }
+                    catch(ClassNotFoundException | SQLException ex)
+                    {
+                        System.out.println("No se conectó a la BD " + ex.getMessage());
+                        Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+                    }                         
+                    //Limpiar los campos
+                    jTextField3.setText("");
+                    jTextNombres.setText("");
+                    jTextApellidos.setText("");
+                    jTextEdad.setText("");
+                    jTextContacto.setText("");
+                    jTextCampo.setText("");
+                    jTextContraseña.setText("");
+                    jComboBoxTalleres.removeAllItems();
+                    jComboBoxTalleres.addItem("Taller");
+                    jComboBoxGrupos.removeAllItems();
+                    jComboBoxGrupos.addItem("Grupos");
+                    CargarAlumnos al = new CargarAlumnos(jComboBoxTalleres, jComboBoxGrupos,jComboBoxDocentes, jTextidtaller.getText(),jTextidgrupo.getText());
+                    al.cargarTalleres(); 
+            }
         }
     }//GEN-LAST:event_jButtonDarDeBajaActionPerformed
 
-    private void jButtonRegistrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegistrarMouseEntered
+    private void jButtonRegresarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegresarMouseEntered
         // TODO add your handling code here:
-        jButtonRegistrar.setBackground(Color.GREEN);
-    }//GEN-LAST:event_jButtonRegistrarMouseEntered
+        // Cambia el fondo del botón a verde cuando el mouse pasa por encima.
+        jButtonRegresar.setBackground(Color.GREEN);
+    }//GEN-LAST:event_jButtonRegresarMouseEntered
 
-    private void jButtonRegistrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegistrarMouseExited
+    private void jButtonRegresarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegresarMouseExited
         // TODO add your handling code here:
-        jButtonRegistrar.setBackground(Color.LIGHT_GRAY);
-    }//GEN-LAST:event_jButtonRegistrarMouseExited
+        // Restaura el fondo del botón a gris claro cuando el mouse sale.
+        jButtonRegresar.setBackground(Color.LIGHT_GRAY);
+    }//GEN-LAST:event_jButtonRegresarMouseExited
 
-    private void jButtonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarActionPerformed
+    private void jButtonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegresarActionPerformed
         // TODO add your handling code here:
-        JFAdministrarDocentes JFAdministrarDocentes =new JFAdministrarDocentes();
-        JFAdministrarDocentes.setDefaultCloseOperation(JFAdministrarDocentes.EXIT_ON_CLOSE);
-        JFAdministrarDocentes.setVisible(true);
+        JFAdministrarDocentes JFAdministrarDocentes =new JFAdministrarDocentes(); // Crea una nueva instancia
+        JFAdministrarDocentes.setVisible(true); // Muestra la ventana de inicio
         JFAdministrarDocentes.setLocationRelativeTo(null); // Centra la ventana en la pantalla
-        this.setVisible(false);
-    }//GEN-LAST:event_jButtonRegistrarActionPerformed
+        this.setVisible(false);  // Oculta la ventana actual.
+    }//GEN-LAST:event_jButtonRegresarActionPerformed
 
-    private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
+    private void jLabelnformacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelnformacionMouseClicked
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null,"Has click en lo que deseas administrar",
+        // Este método se ejecuta cuando el usuario hace clic en el label de información.
+        JOptionPane.showMessageDialog(null,"Selecciona el taller y el grupo al que pertenece el docente"
+                    + "\ny el docente que desea dar de baja, luego confirma con el boton dar de baja",
             "Información",
             JOptionPane.INFORMATION_MESSAGE);
-    }//GEN-LAST:event_jLabel10MouseClicked
+    }//GEN-LAST:event_jLabelnformacionMouseClicked
 
-    private void jButtonRegistrarInicioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegistrarInicioMouseEntered
+    private void jButtonRegresarInicioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegresarInicioMouseEntered
         // TODO add your handling code here:
-        jButtonRegistrarInicio.setBackground(Color.GREEN);
-    }//GEN-LAST:event_jButtonRegistrarInicioMouseEntered
+        // Cambia el fondo del botón a verde cuando el mouse pasa por encima.
+        jButtonRegresarInicio.setBackground(Color.GREEN);
+    }//GEN-LAST:event_jButtonRegresarInicioMouseEntered
 
-    private void jButtonRegistrarInicioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegistrarInicioMouseExited
+    private void jButtonRegresarInicioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegresarInicioMouseExited
         // TODO add your handling code here:
-        jButtonRegistrarInicio.setBackground(Color.LIGHT_GRAY);
-    }//GEN-LAST:event_jButtonRegistrarInicioMouseExited
+        // Restaura el fondo del botón a gris claro cuando el mouse sale.
+        jButtonRegresarInicio.setBackground(Color.LIGHT_GRAY);
+    }//GEN-LAST:event_jButtonRegresarInicioMouseExited
 
-    private void jButtonRegistrarInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarInicioActionPerformed
+    private void jButtonRegresarInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegresarInicioActionPerformed
         // TODO add your handling code here:
-        JFMenuAdministrador JFMenuAdministrador =new JFMenuAdministrador();
-        JFMenuAdministrador.setDefaultCloseOperation(JFMenuAdministrador.EXIT_ON_CLOSE);
-        JFMenuAdministrador.setVisible(true);
+        JFMenuAdministrador JFMenuAdministrador =new JFMenuAdministrador(); // Crea una nueva instancia
+        JFMenuAdministrador.setVisible(true); // Muestra la ventana de inicio
         JFMenuAdministrador.setLocationRelativeTo(null); // Centra la ventana en la pantalla
-        JOptionPane.showMessageDialog(null,"Has regresado al inicio",
-            "Informacion",
-            JOptionPane.INFORMATION_MESSAGE);
-        this.setVisible(false);
-    }//GEN-LAST:event_jButtonRegistrarInicioActionPerformed
+        this.setVisible(false);  // Oculta la ventana actual.
+    }//GEN-LAST:event_jButtonRegresarInicioActionPerformed
 
     private void jComboBoxTalleresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTalleresActionPerformed
         // TODO add your handling code here:
@@ -537,7 +563,7 @@ public class JFBajaDocentes extends javax.swing.JFrame {
         // Verificar si el valor seleccionado no es "Taller"
         if (seleccionado != null && !seleccionado.equals("Taller")) {
             // Establecer el nombre del taller en el JTextField
-            jTextField1.setText(seleccionado);
+            jTextidtaller.setText(seleccionado);
 
             try {
                 // Establecer la conexión a la base de datos
@@ -545,7 +571,7 @@ public class JFBajaDocentes extends javax.swing.JFrame {
                 cx = DriverManager.getConnection(url + bd, user, password);
 
                 // Preparar la consulta para obtener el id_taller
-                PreparedStatement consulta = cx.prepareStatement("SELECT id_taller FROM talleres WHERE nombre=?");
+                PreparedStatement consulta = cx.prepareStatement("SELECT id_taller FROM talleres WHERE nombre=? AND activo = TRUE");
 
                 // Establecer el parámetro de la consulta
                 consulta.setString(1, seleccionado);  // Usamos directamente el nombre seleccionado
@@ -559,11 +585,10 @@ public class JFBajaDocentes extends javax.swing.JFrame {
                     int idTaller = rs.getInt("id_taller");
 
                     // Establecer el id_taller en otro JTextField
-                    // Si quieres mostrar el id_taller en otro JTextField
-                    jTextField1.setText(String.valueOf(idTaller));
+                    jTextidtaller.setText(String.valueOf(idTaller));
 
                     // Llamar a cargarGrupos() pasando el id del taller y el JComboBox2 para cargar los grupos
-                    CargarAlumnos al = new CargarAlumnos(jComboBoxTalleres, jComboBoxGrupos,jComboBoxDocentes, jTextField1.getText(),jTextField2.getText());
+                    CargarAlumnos al = new CargarAlumnos(jComboBoxTalleres, jComboBoxGrupos,jComboBoxDocentes, jTextidtaller.getText(),jTextidgrupo.getText());
                     al.cargarGrupos(); // Pasar el id del taller
 
                 } else {
@@ -582,7 +607,7 @@ public class JFBajaDocentes extends javax.swing.JFrame {
             }
         } else {
             // Si se selecciona "Taller" o si el valor es null, limpiar el JTextField
-            jTextField1.setText("");
+            jTextidtaller.setText("");
             // Limpiar el JComboBox de grupos y agregar solo "Grupos"
             jComboBoxGrupos.removeAllItems();
             jComboBoxGrupos.addItem("Grupos");
@@ -604,7 +629,7 @@ public class JFBajaDocentes extends javax.swing.JFrame {
         // Verificar si el valor seleccionado no es "Taller"
         if (seleccionado != null && !seleccionado.equals("Grupos")) {
             // Establecer el nombre del taller en el JTextField
-            jTextField2.setText(seleccionado);
+            jTextidgrupo.setText(seleccionado);
 
             try {
                 // Establecer la conexión a la base de datos
@@ -612,7 +637,7 @@ public class JFBajaDocentes extends javax.swing.JFrame {
                 cx = DriverManager.getConnection(url + bd, user, password);
 
                 // Preparar la consulta para obtener el id_taller
-                PreparedStatement consulta = cx.prepareStatement("SELECT id_grupo FROM grupos WHERE nombre=?");
+                PreparedStatement consulta = cx.prepareStatement("SELECT id_grupo FROM grupos WHERE nombre=? AND activo = TRUE");
 
                 // Establecer el parámetro de la consulta
                 consulta.setString(1, seleccionado);  // Usamos directamente el nombre seleccionado
@@ -626,11 +651,10 @@ public class JFBajaDocentes extends javax.swing.JFrame {
                     int idGrupo = rs.getInt("id_grupo");
 
                     // Establecer el id_taller en otro JTextField
-                    // Si quieres mostrar el id_taller en otro JTextField
-                    jTextField2.setText(String.valueOf(idGrupo));
+                    jTextidgrupo.setText(String.valueOf(idGrupo));
                     
                     // Llamar a cargarGrupos() pasando el id del taller y el JComboBox2 para cargar los grupos
-                    CargarAlumnos al = new CargarAlumnos(jComboBoxTalleres, jComboBoxGrupos,jComboBoxDocentes, jTextField1.getText(),jTextField2.getText());
+                    CargarAlumnos al = new CargarAlumnos(jComboBoxTalleres, jComboBoxGrupos,jComboBoxDocentes, jTextidtaller.getText(),jTextidgrupo.getText());
                     al.CargarDocentes(); // Pasar el id del taller
 
                 } else {
@@ -649,10 +673,7 @@ public class JFBajaDocentes extends javax.swing.JFrame {
             }
         } else {
             // Si se selecciona "Taller" o si el valor es null, limpiar el JTextField
-            jTextField2.setText("");
-            // Limpiar el JComboBox de grupos y agregar solo "Grupos"
-            //jComboBoxGrupos.removeAllItems();
-            //jComboBoxGrupos.addItem("Grupos");
+            jTextidgrupo.setText("");
         }
     }//GEN-LAST:event_jComboBoxGruposActionPerformed
 
@@ -679,11 +700,11 @@ public class JFBajaDocentes extends javax.swing.JFrame {
                         + "edad,"
                         + "contacto_docente, "
                         + "especialidad "
-                        + "FROM docentes WHERE no_usuario=? AND id_grupo=?");
+                        + "FROM docentes WHERE no_usuario=? AND id_grupo=? AND activo = TRUE");
 
                 // Establecer el parámetro de la consulta
                 consulta.setString(1, seleccionado);  // Usamos directamente el nombre seleccionado
-                consulta.setString(2, jTextField2.getText());
+                consulta.setString(2, jTextidgrupo.getText());
                 
                 // Ejecutar la consulta
                 var rs = consulta.executeQuery();
@@ -693,7 +714,6 @@ public class JFBajaDocentes extends javax.swing.JFrame {
                     // Obtener el id_taller desde el ResultSet
                     int iddocente = rs.getInt("id_docente");
                     // Establecer el id_taller en otro JTextField
-                    // Si quieres mostrar el id_taller en otro JTextField
                     jTextField3.setText(String.valueOf(iddocente));  
                     jTextContraseña.setText(rs.getString("contra_docente"));
                     jTextNombres.setText(rs.getString("nombre"));
@@ -765,13 +785,12 @@ public class JFBajaDocentes extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonDarDeBaja;
-    private javax.swing.JButton jButtonRegistrar;
-    private javax.swing.JButton jButtonRegistrarInicio;
+    private javax.swing.JButton jButtonRegresar;
+    private javax.swing.JButton jButtonRegresarInicio;
     private javax.swing.JComboBox<String> jComboBoxDocentes;
     private javax.swing.JComboBox<String> jComboBoxGrupos;
     private javax.swing.JComboBox<String> jComboBoxTalleres;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -782,6 +801,7 @@ public class JFBajaDocentes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelnformacion;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -791,10 +811,10 @@ public class JFBajaDocentes extends javax.swing.JFrame {
     private javax.swing.JTextField jTextContacto;
     private javax.swing.JTextField jTextContraseña;
     private javax.swing.JTextField jTextEdad;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextNOUsuario;
     private javax.swing.JTextField jTextNombres;
+    private javax.swing.JTextField jTextidgrupo;
+    private javax.swing.JTextField jTextidtaller;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,13 +4,15 @@
  */
 package Administrador;
 
-import Clases.ConsultarTalleres;
-import Clases.TextPrompt;
-import java.awt.Color;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.event.KeyEvent;
-import javax.swing.JOptionPane;
+import Clases.ConsultarTalleres; // Importa la clase ConsultarTalleres
+import Clases.TextPrompt; // Importa la clase TextPrompt para utilizar placeholders
+import java.awt.Color; // Permite usar la clase Color para cambiar colores en componentes gráficos.
+import java.awt.Image; // Permite manejar imágenes, por ejemplo, para íconos o imágenes en la interfaz.
+import java.awt.Toolkit; // Proporciona acceso a recursos del sistema como imágenes, sonidos, etc.
+import java.awt.event.KeyEvent; // Permite detectar y manejar eventos del teclado, como presionar, soltar o escribir una tecla.
+import javax.swing.JFrame;
+import javax.swing.JOptionPane; // Permite mostrar cuadros de diálogo (mensajes, confirmaciones, entradas de texto, etc.).
+import javax.swing.table.DefaultTableModel; // Permite trabajar con la tabla
 
 /**
  *
@@ -23,16 +25,17 @@ public class JFConsultarTaller extends javax.swing.JFrame {
      */
     public JFConsultarTaller() {
         initComponents();
-  
-        TextPrompt taller = new TextPrompt("Inglés",jTextNombre);
-        
-        setIconImage(getIconImage());
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // Desactiva la X de cierre
+        TextPrompt taller = new TextPrompt("Inglés",jTextNombre); // Establece textos de sugerencia ("placeholders")      
+        setIconImage(getIconImage()); // Establece un ícono personalizado para la ventana.
     }
     //Icono del JFrame
-    @Override
-    public Image getIconImage(){
+    @Override // Indica que este método sobrescribe el método getIconImage() de la clase JFrame
+    // Usa Toolkit (una clase de utilidades gráficas de AWT) para obtener una imagen ubicada en la ruta interna del proyecto
+    // ClassLoader.getSystemResource() localiza el archivo dentro del classpath (dentro de src o el .jar).
+    public Image getIconImage(){ 
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("workshopadmin/Imagenes/LogoIcono.png"));
-        return retValue;
+        return retValue; // Devuelve la imagen para que sea usada como ícono del JFrame
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -52,14 +55,16 @@ public class JFConsultarTaller extends javax.swing.JFrame {
         jButtonGenerarListas = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableTalleresGrupos = new javax.swing.JTable();
+        jButtonLimpiar = new javax.swing.JButton();
         jButtonRegresar = new javax.swing.JButton();
         jButtonRegresarInicio = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
+        jLabelnformacion = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Consulta de talleres");
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -86,8 +91,8 @@ public class JFConsultarTaller extends javax.swing.JFrame {
 
         jTextNombre.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jTextNombre.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextNombreKeyReleased(evt);
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextNombreKeyPressed(evt);
             }
         });
 
@@ -124,37 +129,54 @@ public class JFConsultarTaller extends javax.swing.JFrame {
 
         jTableTalleresGrupos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nombre Docente", "No_Usuario", "Grupo"
             }
         ));
         jScrollPane1.setViewportView(jTableTalleresGrupos);
+
+        jButtonLimpiar.setBackground(java.awt.Color.lightGray);
+        jButtonLimpiar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jButtonLimpiar.setText("Limpiar");
+        jButtonLimpiar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonLimpiarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonLimpiarMouseExited(evt);
+            }
+        });
+        jButtonLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLimpiarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jButtonGenerarListas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonHorario, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(65, 65, 65)
-                .addComponent(jButtonConsultar)
-                .addContainerGap(43, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(39, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
-                        .addComponent(jTextNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(21, 21, 21)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jButtonGenerarListas, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonHorario, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonConsultar, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButtonLimpiar, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap(39, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(34, 34, 34)
+                                .addComponent(jTextNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(33, 33, 33))
         );
         jPanel2Layout.setVerticalGroup(
@@ -166,16 +188,15 @@ public class JFConsultarTaller extends javax.swing.JFrame {
                     .addComponent(jTextNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonHorario)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonHorario)
+                    .addComponent(jButtonConsultar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButtonGenerarListas)
-                        .addGap(14, 14, 14))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButtonConsultar)
-                        .addGap(47, 47, 47))))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonGenerarListas)
+                    .addComponent(jButtonLimpiar))
+                .addGap(42, 42, 42))
         );
 
         jButtonRegresar.setBackground(java.awt.Color.lightGray);
@@ -219,10 +240,10 @@ public class JFConsultarTaller extends javax.swing.JFrame {
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Imagenes/Talleres.png"))); // NOI18N
 
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/Informacion.png"))); // NOI18N
-        jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelnformacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/Informacion.png"))); // NOI18N
+        jLabelnformacion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel11MouseClicked(evt);
+                jLabelnformacionMouseClicked(evt);
             }
         });
 
@@ -249,7 +270,7 @@ public class JFConsultarTaller extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(116, 116, 116)
-                        .addComponent(jLabel11)
+                        .addComponent(jLabelnformacion)
                         .addGap(29, 29, 29))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -258,7 +279,7 @@ public class JFConsultarTaller extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
-                        .addComponent(jLabel11))
+                        .addComponent(jLabelnformacion))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addComponent(jLabel1)))
@@ -292,32 +313,37 @@ public class JFConsultarTaller extends javax.swing.JFrame {
 
     private void jButtonConsultarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonConsultarMouseEntered
         // TODO add your handling code here:
+        // Cambia el fondo del botón a verde cuando el mouse pasa por encima.
         jButtonConsultar.setBackground(Color.GREEN);
     }//GEN-LAST:event_jButtonConsultarMouseEntered
 
     private void jButtonConsultarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonConsultarMouseExited
         // TODO add your handling code here:
+        // Restaura el fondo del botón a gris claro cuando el mouse sale.
         jButtonConsultar.setBackground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_jButtonConsultarMouseExited
 
     private void jButtonConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarActionPerformed
         // TODO add your handling code here:
-        int respuesta = JOptionPane.showConfirmDialog(null, "Realmente desea dar de alta a este alumno?",
+        // Muestra un cuadro de diálogo para confirmar si el usuario realmente desea
+        int respuesta = JOptionPane.showConfirmDialog(null, "Realmente desea consultar este taller?",
             "Confirmar salida",
             JOptionPane.YES_NO_OPTION,
             JOptionPane.QUESTION_MESSAGE);
         if (respuesta == JOptionPane.YES_OPTION) {
-        
-        String nombreTaller = jTextNombre.getText(); 
-        if (!nombreTaller.isEmpty()) {
 
-        ConsultarTalleres consultar = new ConsultarTalleres();
-      
-        consultar.Consultar(nombreTaller, jTableTalleresGrupos);
-    } else {
-        JOptionPane.showMessageDialog(null, "Por favor ingrese el nombre del taller.");
-    }            
-            JOptionPane.showMessageDialog(null, "Alumno dado de alta exitosamente.");
+             // Verifica que el nombre no esté vacío
+            String nombreTaller = jTextNombre.getText(); 
+            if (!nombreTaller.isEmpty()) {
+
+            ConsultarTalleres consultar = new ConsultarTalleres();
+
+            consultar.Consultar(nombreTaller, jTableTalleresGrupos);
+            
+            } else {
+                JOptionPane.showMessageDialog(null, "Por favor ingrese el nombre del taller.");
+                jTextNombre.requestFocus();
+            }        
         } else {
             // Si el usuario elige "No", simplemente no hace nada o muestra otro mensaje
             JOptionPane.showMessageDialog(null, "Operación cancelada.");
@@ -326,89 +352,119 @@ public class JFConsultarTaller extends javax.swing.JFrame {
 
     private void jButtonRegresarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegresarMouseEntered
         // TODO add your handling code here:
+        // Cambia el fondo del botón a verde cuando el mouse pasa por encima.
         jButtonRegresar.setBackground(Color.GREEN);
     }//GEN-LAST:event_jButtonRegresarMouseEntered
 
     private void jButtonRegresarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegresarMouseExited
         // TODO add your handling code here:
+        // Restaura el fondo del botón a gris claro cuando el mouse sale.
         jButtonRegresar.setBackground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_jButtonRegresarMouseExited
 
     private void jButtonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegresarActionPerformed
         // TODO add your handling code here:
-        JFAdministrarTalleres JFAdministrarTalleres =new JFAdministrarTalleres();
-        JFAdministrarTalleres.setDefaultCloseOperation(JFAdministrarTalleres.EXIT_ON_CLOSE);
-        JFAdministrarTalleres.setVisible(true);
+        JFAdministrarTalleres JFAdministrarTalleres =new JFAdministrarTalleres(); // Crea una nueva instancia
+        JFAdministrarTalleres.setVisible(true); // Muestra la ventana de inicio
         JFAdministrarTalleres.setLocationRelativeTo(null); // Centra la ventana en la pantalla
-        this.setVisible(false);
+        this.setVisible(false); // Oculta la ventana actual.
     }//GEN-LAST:event_jButtonRegresarActionPerformed
 
     private void jButtonRegresarInicioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegresarInicioMouseEntered
         // TODO add your handling code here:
+        // Cambia el fondo del botón a verde cuando el mouse pasa por encima.
         jButtonRegresarInicio.setBackground(Color.GREEN);
     }//GEN-LAST:event_jButtonRegresarInicioMouseEntered
 
     private void jButtonRegresarInicioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegresarInicioMouseExited
         // TODO add your handling code here:
+        // Restaura el fondo del botón a gris claro cuando el mouse sale.
         jButtonRegresarInicio.setBackground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_jButtonRegresarInicioMouseExited
 
     private void jButtonRegresarInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegresarInicioActionPerformed
         // TODO add your handling code here:
-        JFMenuAdministrador JFMenuAdministrador =new JFMenuAdministrador();
-        JFMenuAdministrador.setDefaultCloseOperation(JFMenuAdministrador.EXIT_ON_CLOSE);
-        JFMenuAdministrador.setVisible(true);
+        JFMenuAdministrador JFMenuAdministrador =new JFMenuAdministrador(); // Crea una nueva instancia
+        JFMenuAdministrador.setVisible(true); // Muestra la ventana de inicio
         JFMenuAdministrador.setLocationRelativeTo(null); // Centra la ventana en la pantalla
-        JOptionPane.showMessageDialog(null,"Has regresado al inicio",
-            "Informacion",
-            JOptionPane.INFORMATION_MESSAGE);
-        this.setVisible(false);
+        this.setVisible(false); // Oculta la ventana actual.
     }//GEN-LAST:event_jButtonRegresarInicioActionPerformed
 
-    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
+    private void jLabelnformacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelnformacionMouseClicked
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null,"Has click en lo que deseas administrar",
+        // Este método se ejecuta cuando el usuario hace clic en el label de información.
+        JOptionPane.showMessageDialog(null,"Escribe el nombre del taller que deseas consultar. "
+                + "\nPuedes usar Enter para consultar el taller",
             "Información",
             JOptionPane.INFORMATION_MESSAGE);
-    }//GEN-LAST:event_jLabel11MouseClicked
-
-    private void jButtonHorarioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonHorarioMouseEntered
-        // TODO add your handling code here:
-        jButtonHorario.setBackground(Color.GREEN);
-    }//GEN-LAST:event_jButtonHorarioMouseEntered
-
-    private void jButtonHorarioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonHorarioMouseExited
-        // TODO add your handling code here:
-        jButtonHorario.setBackground(Color.LIGHT_GRAY);
-    }//GEN-LAST:event_jButtonHorarioMouseExited
-
-    private void jButtonHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHorarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonHorarioActionPerformed
+    }//GEN-LAST:event_jLabelnformacionMouseClicked
 
     private void jButtonGenerarListasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonGenerarListasMouseEntered
         // TODO add your handling code here:
+        // Cambia el fondo del botón a verde cuando el mouse pasa por encima.
         jButtonGenerarListas.setBackground(Color.GREEN);
     }//GEN-LAST:event_jButtonGenerarListasMouseEntered
 
     private void jButtonGenerarListasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonGenerarListasMouseExited
         // TODO add your handling code here:
+        // Restaura el fondo del botón a gris claro cuando el mouse sale.
         jButtonGenerarListas.setBackground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_jButtonGenerarListasMouseExited
 
-    private void jTextNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextNombreKeyReleased
+    private void jButtonHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHorarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonHorarioActionPerformed
+
+    private void jButtonHorarioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonHorarioMouseExited
+        // TODO add your handling code here:
+        // Restaura el fondo del botón a gris claro cuando el mouse sale.
+        jButtonHorario.setBackground(Color.LIGHT_GRAY);
+    }//GEN-LAST:event_jButtonHorarioMouseExited
+
+    private void jButtonHorarioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonHorarioMouseEntered
+        // TODO add your handling code here:
+        // Cambia el fondo del botón a verde cuando el mouse pasa por encima.
+        jButtonHorario.setBackground(Color.GREEN);
+    }//GEN-LAST:event_jButtonHorarioMouseEntered
+
+    private void jTextNombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextNombreKeyPressed
         // TODO add your handling code here:
         if(evt.getKeyCode()==KeyEvent.VK_ENTER)
         {
-        String nombreTaller = jTextNombre.getText(); 
-        if (!nombreTaller.isEmpty()) {
+             // Verifica que el nombre no esté vacío
+            String nombreTaller = jTextNombre.getText(); 
+            if (!nombreTaller.isEmpty()) {
 
-        ConsultarTalleres consultar = new ConsultarTalleres();
-      
-        consultar.Consultar(nombreTaller, jTableTalleresGrupos);
+            ConsultarTalleres consultar = new ConsultarTalleres();
+
+            consultar.Consultar(nombreTaller, jTableTalleresGrupos);
+            } else {
+                    JOptionPane.showMessageDialog(null, "Por favor ingrese el nombre del taller.");
+                    jTextNombre.requestFocus();
+                }
         }
-        }
-    }//GEN-LAST:event_jTextNombreKeyReleased
+    }//GEN-LAST:event_jTextNombreKeyPressed
+
+    private void jButtonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimpiarActionPerformed
+        // TODO add your handling code here:
+        // Limpiar campos
+        jTextNombre.setText("");
+        DefaultTableModel model = (DefaultTableModel) jTableTalleresGrupos.getModel();
+        model.setRowCount(0);
+        jTextNombre.requestFocus();
+    }//GEN-LAST:event_jButtonLimpiarActionPerformed
+
+    private void jButtonLimpiarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonLimpiarMouseEntered
+        // TODO add your handling code here:
+        // Cambia el fondo del botón a verde cuando el mouse pasa por encima.
+        jButtonLimpiar.setBackground(Color.GREEN);
+    }//GEN-LAST:event_jButtonLimpiarMouseEntered
+
+    private void jButtonLimpiarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonLimpiarMouseExited
+        // TODO add your handling code here:
+        // Restaura el fondo del botón a gris claro cuando el mouse sale.
+        jButtonLimpiar.setBackground(Color.LIGHT_GRAY);
+    }//GEN-LAST:event_jButtonLimpiarMouseExited
 
     /**
      * @param args the command line arguments
@@ -450,12 +506,13 @@ public class JFConsultarTaller extends javax.swing.JFrame {
     private javax.swing.JButton jButtonConsultar;
     private javax.swing.JButton jButtonGenerarListas;
     private javax.swing.JButton jButtonHorario;
+    private javax.swing.JButton jButtonLimpiar;
     private javax.swing.JButton jButtonRegresar;
     private javax.swing.JButton jButtonRegresarInicio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabelnformacion;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
