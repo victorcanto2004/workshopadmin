@@ -54,8 +54,16 @@
                           <Component id="jButtonRegresarInicio" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="jButtonRecibo" min="-2" pref="186" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                           <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -79,9 +87,13 @@
                       <Component id="jLabelnformacion" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jPanel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="jButtonRecibo" min="-2" pref="68" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -129,12 +141,19 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="jTextField3" min="-2" pref="71" max="-2" attributes="0"/>
-                                  <Component id="jTextField1" min="-2" pref="71" max="-2" attributes="0"/>
                                   <Component id="jTextMotivo" alignment="0" pref="219" max="32767" attributes="0"/>
                                   <Component id="jTextMonto" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jTextNombre" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jTextApellido" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jDateChooserFecha" max="32767" attributes="0"/>
+                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                      <Component id="jTextField5" min="-2" pref="71" max="-2" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <Component id="jTextField1" min="-2" pref="71" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                                          <Component id="jTextField4" min="-2" pref="71" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
                               </Group>
                           </Group>
                       </Group>
@@ -179,11 +198,13 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jComboBoxTalleres" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextField4" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jComboBoxGrupos" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextField5" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -382,6 +403,16 @@
                 </Property>
               </Properties>
             </Component>
+            <Component class="javax.swing.JTextField" name="jTextField4">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="jTextField4"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jTextField5">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="jTextField5"/>
+              </Properties>
+            </Component>
           </SubComponents>
         </Container>
         <Component class="javax.swing.JLabel" name="jLabel1">
@@ -445,6 +476,27 @@
             <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonRegresarInicioMouseEntered"/>
             <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonRegresarInicioMouseExited"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonRegresarInicioActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButtonRecibo">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="c0" green="c0" id="lightGray" palette="1" red="c0" type="palette"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="24" style="0"/>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/workshopadmin/Iconos/imprimir.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="&quot;&lt;html&gt;Recibo&lt;/html&gt;&quot;" type="code"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonReciboMouseEntered"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonReciboMouseExited"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonReciboActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

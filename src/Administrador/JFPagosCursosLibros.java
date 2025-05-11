@@ -7,9 +7,19 @@ package Administrador;
 import Clases.CargarAlumnos; // Importa la clase CargarAlumnos
 import Clases.Conexion; // Importa la clase conexion para gestionar la conexion con la base de datos
 import Clases.TextPrompt; // Importa la clase TextPrompt para utilizar placeholders
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.Color; // Permite usar la clase Color para cambiar colores en componentes gráficos.
 import java.awt.Image; // Permite manejar imágenes, por ejemplo, para íconos o imágenes en la interfaz.
 import java.awt.Toolkit; // Proporciona acceso a recursos del sistema como imágenes, sonidos, etc.
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.sql.Connection; // Importa Connection, que representa la conexión activa con la base de datos.
 import java.sql.DriverManager; // Importa DriverManager, que se usa para establecer conexiones con la base de datos.
 import java.sql.PreparedStatement; // Importa PreparedStatement, que permite ejecutar consultas SQL seguras con parámetros.
@@ -52,7 +62,8 @@ public class JFPagosCursosLibros extends javax.swing.JFrame {
         jTextField1.setVisible(false);
         jTextField2.setVisible(false);
         jTextField3.setVisible(false);
-        
+        jTextField4.setVisible(false);
+        jTextField5.setVisible(false);
         TextPrompt motivo = new TextPrompt("Pago curso o libro",jTextMotivo); // Establece textos de sugerencia ("placeholders")
         TextPrompt costo = new TextPrompt("$520.00",jTextMonto); 
         
@@ -95,11 +106,14 @@ public class JFPagosCursosLibros extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jTextApellido = new javax.swing.JTextField();
         jDateChooserFecha = new com.toedter.calendar.JDateChooser();
+        jTextField4 = new javax.swing.JTextField();
+        jTextField5 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabelnformacion = new javax.swing.JLabel();
         jButtonRegresar = new javax.swing.JButton();
         jButtonRegresarInicio = new javax.swing.JButton();
+        jButtonRecibo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registrar pagos de cursos");
@@ -197,6 +211,10 @@ public class JFPagosCursosLibros extends javax.swing.JFrame {
 
         jDateChooserFecha.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
+        jTextField4.setText("jTextField4");
+
+        jTextField5.setText("jTextField5");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -227,12 +245,17 @@ public class JFPagosCursosLibros extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextMotivo, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
                             .addComponent(jTextMonto)
                             .addComponent(jTextNombre)
                             .addComponent(jTextApellido)
-                            .addComponent(jDateChooserFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jDateChooserFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(27, 27, 27)
+                                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -265,11 +288,13 @@ public class JFPagosCursosLibros extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxTalleres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxGrupos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonRegistrar)
@@ -325,6 +350,24 @@ public class JFPagosCursosLibros extends javax.swing.JFrame {
             }
         });
 
+        jButtonRecibo.setBackground(java.awt.Color.lightGray);
+        jButtonRecibo.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jButtonRecibo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/imprimir.png"))); // NOI18N
+        jButtonRecibo.setText("<html>Recibo</html>");
+        jButtonRecibo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonReciboMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonReciboMouseExited(evt);
+            }
+        });
+        jButtonRecibo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonReciboActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -337,8 +380,13 @@ public class JFPagosCursosLibros extends javax.swing.JFrame {
                         .addGap(35, 35, 35)
                         .addComponent(jButtonRegresarInicio))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(56, 56, 56)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(56, 56, 56))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButtonRecibo, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)))
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(26, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -356,9 +404,12 @@ public class JFPagosCursosLibros extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(jLabelnformacion))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonRecibo, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonRegresarInicio)
@@ -516,9 +567,6 @@ public class JFPagosCursosLibros extends javax.swing.JFrame {
         JFMenuAdministrador JFMenuAdministrador =new JFMenuAdministrador();
         JFMenuAdministrador.setVisible(true);
         JFMenuAdministrador.setLocationRelativeTo(null); // Centra la ventana en la pantalla
-        JOptionPane.showMessageDialog(null,"Has regresado al inicio",
-            "Informacion",
-            JOptionPane.INFORMATION_MESSAGE);
         this.setVisible(false);
     }//GEN-LAST:event_jButtonRegresarInicioActionPerformed
 
@@ -537,7 +585,7 @@ public class JFPagosCursosLibros extends javax.swing.JFrame {
                 cx = DriverManager.getConnection(url + bd, user, password);
 
                 // Preparar la consulta para obtener el id_taller
-                PreparedStatement consulta = cx.prepareStatement("SELECT id_taller FROM talleres WHERE nombre=? AND activo = TRUE");
+                PreparedStatement consulta = cx.prepareStatement("SELECT id_taller, nombre FROM talleres WHERE nombre=? AND activo = TRUE");
 
                 // Establecer el parámetro de la consulta
                 consulta.setString(1, seleccionado);  // Usamos directamente el nombre seleccionado
@@ -549,9 +597,11 @@ public class JFPagosCursosLibros extends javax.swing.JFrame {
                 if (rs.next()) {
                     // Obtener el id_taller desde el ResultSet
                     int idTaller = rs.getInt("id_taller");
+                    String nombre = rs.getString("nombre");
 
                     // Establecer el id_taller en otro JTextField
                     jTextField1.setText(String.valueOf(idTaller));
+                    jTextField4.setText(String.valueOf(nombre));
 
                     // Llamar a cargarGrupos() pasando el id del taller y el JComboBox2 para cargar los grupos
                     CargarAlumnos al = new CargarAlumnos(jComboBoxTalleres, jComboBoxGrupos,jComboBoxAlumnos, jTextField1.getText(),jTextField2.getText());
@@ -599,7 +649,7 @@ public class JFPagosCursosLibros extends javax.swing.JFrame {
                 cx = DriverManager.getConnection(url + bd, user, password);
 
                 // Preparar la consulta para obtener el id_taller
-                PreparedStatement consulta = cx.prepareStatement("SELECT id_grupo FROM grupos WHERE nombre=? AND activo = TRUE");
+                PreparedStatement consulta = cx.prepareStatement("SELECT id_grupo, nombre FROM grupos WHERE nombre=? AND activo = TRUE");
 
                 // Establecer el parámetro de la consulta
                 consulta.setString(1, seleccionado);  // Usamos directamente el nombre seleccionado
@@ -611,10 +661,12 @@ public class JFPagosCursosLibros extends javax.swing.JFrame {
                 if (rs.next()) {
                     // Obtener el id_taller desde el ResultSet
                     int idGrupo = rs.getInt("id_grupo");
+                    String nombre = rs.getString("nombre");
 
                     // Establecer el id_taller en otro JTextField
                     // Si quieres mostrar el id_taller en otro JTextField
                     jTextField2.setText(String.valueOf(idGrupo));
+                    jTextField5.setText(String.valueOf(nombre));
                     
                     // Llamar a cargarGrupos() pasando el id del taller y el JComboBox2 para cargar los grupos
                     CargarAlumnos al = new CargarAlumnos(jComboBoxTalleres, jComboBoxGrupos,jComboBoxAlumnos, jTextField1.getText(),jTextField2.getText());
@@ -712,6 +764,137 @@ public class JFPagosCursosLibros extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTextMontoKeyTyped
 
+    private void jButtonReciboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReciboActionPerformed
+        // TODO add your handling code here:
+        if (jTextMotivo.getText().isEmpty()||
+            jTextMonto.getText().isEmpty()||
+            jTextMonto.getText().isEmpty()||
+            jTextMonto.getText().isEmpty()||
+            jTextNombre.getText().isEmpty()||
+            jTextApellido.getText().isEmpty()||
+            jDateChooserFecha.getDate() == null||
+            jComboBoxTalleres.getSelectedItem().toString().equals("Taller") ||
+            jComboBoxGrupos.getSelectedItem().toString().equals("Grupos") ||
+            jComboBoxAlumnos.getSelectedItem().toString().equals("Matriculas")) {
+                    JOptionPane.showMessageDialog(null, "Por favor, ingresa todos los datos correspondientes"
+                            + "\ny elige un taller, un grupo y la matrícula del alumno.");
+                    jTextNombre.requestFocus();
+                    return;
+                } else{
+        try {
+             // Obtener el nombre de la persona que pagó y el motivo
+            String nombrePersona = jTextNombre.getText();
+            String motivo = jTextMotivo.getText();
+
+            // Formatear el nombre del archivo con el formato requerido
+            String nombreArchivo = "ReciboPago("+nombrePersona+ "_" +motivo+").pdf";
+            
+            // Definir la ruta de la carpeta de descargas (esto puede variar dependiendo del sistema operativo)
+            String userHome = System.getProperty("user.home");
+            String downloadPath = userHome + File.separator + "Downloads" + File.separator + nombreArchivo;
+            
+            Document document = new Document();
+            FileOutputStream fos = new FileOutputStream(downloadPath);
+            PdfWriter writer = PdfWriter.getInstance(document, fos);
+
+            document.open();
+
+            // Estilos
+            Font tituloFont = new Font(Font.FontFamily.HELVETICA, 18, Font.BOLD);
+            Font subFont = new Font(Font.FontFamily.HELVETICA, 14, Font.BOLD);
+            Font etiquetaFont = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD);
+            Font valorFont = new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL);
+
+            // Título
+            Paragraph titulo = new Paragraph("Centro Cultural Green Nekk'", tituloFont);
+            titulo.setAlignment(Element.ALIGN_CENTER);
+            document.add(titulo);
+            document.add(new Paragraph(" "));
+
+            // Subtítulo
+            Paragraph subtitulo = new Paragraph("RECIBO DE PAGO", subFont);
+            subtitulo.setAlignment(Element.ALIGN_CENTER);
+            document.add(subtitulo);
+            document.add(new Paragraph(" "));
+
+            // Motivos
+            Paragraph motivo2 = new Paragraph();
+            motivo2.add(new Chunk("Motivo: ", etiquetaFont));
+            motivo2.add(new Chunk(jTextMotivo.getText(), valorFont));
+            document.add(motivo2);
+
+            // Monto
+            Paragraph monto = new Paragraph();
+            monto.add(new Chunk("Monto: ", etiquetaFont));
+            monto.add(new Chunk("$" + jTextMonto.getText(), valorFont));
+            document.add(monto);
+
+            // Fecha
+            Paragraph fecha = new Paragraph();
+            fecha.add(new Chunk("Fecha: ", etiquetaFont));
+            fecha.add(new Chunk(new SimpleDateFormat("dd/MM/yyyy").format(jDateChooserFecha.getDate()), valorFont));
+            document.add(fecha);
+
+            document.add(new Paragraph(" ")); // Espacio
+
+            // Datos del alumno
+            Paragraph datos = new Paragraph("Datos del Alumno", subFont);
+            datos.setAlignment(Element.ALIGN_LEFT);
+            document.add(datos);
+
+            Paragraph nombre = new Paragraph();
+            nombre.add(new Chunk("Nombres: ", etiquetaFont));
+            nombre.add(new Chunk(jTextNombre.getText(), valorFont));
+            document.add(nombre);
+
+            Paragraph apellido = new Paragraph();
+            apellido.add(new Chunk("Apellidos: ", etiquetaFont));
+            apellido.add(new Chunk(jTextApellido.getText(), valorFont));
+            document.add(apellido);
+
+            Paragraph taller = new Paragraph();
+            taller.add(new Chunk("Taller: ", etiquetaFont));
+            taller.add(new Chunk(jTextField4.getText(), valorFont));
+            document.add(taller);
+
+            Paragraph grupo = new Paragraph();
+            grupo.add(new Chunk("Grupo: ", etiquetaFont));
+            grupo.add(new Chunk(jTextField5.getText(), valorFont));
+            document.add(grupo);
+
+            document.add(new Paragraph(" "));
+            document.add(new Paragraph("Gracias por su pago.", valorFont));
+
+            document.close();
+
+            JOptionPane.showMessageDialog(null, "PDF generado exitosamente en la carpeta de descargas.");
+
+                    // Verificar si el archivo existe antes de intentar abrirlo
+        File archivoPDF = new File(downloadPath);
+        if (archivoPDF.exists()) {
+            // Abrir el archivo PDF generado
+            java.awt.Desktop.getDesktop().open(archivoPDF);
+        } else {
+            JOptionPane.showMessageDialog(null, "El archivo no se ha generado correctamente.");
+        }
+        
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al guardar o abrir el PDF: " + ex.getMessage());
+            }
+        }
+    }//GEN-LAST:event_jButtonReciboActionPerformed
+
+    private void jButtonReciboMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonReciboMouseEntered
+        // TODO add your handling code here:
+        jButtonRecibo.setBackground(Color.GREEN);
+    }//GEN-LAST:event_jButtonReciboMouseEntered
+
+    private void jButtonReciboMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonReciboMouseExited
+        // TODO add your handling code here:
+        jButtonRecibo.setBackground(Color.LIGHT_GRAY);
+    }//GEN-LAST:event_jButtonReciboMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -750,6 +933,7 @@ public class JFPagosCursosLibros extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonHistorial;
+    private javax.swing.JButton jButtonRecibo;
     private javax.swing.JButton jButtonRegistrar;
     private javax.swing.JButton jButtonRegresar;
     private javax.swing.JButton jButtonRegresarInicio;
@@ -771,6 +955,8 @@ public class JFPagosCursosLibros extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextMonto;
     private javax.swing.JTextField jTextMotivo;
     private javax.swing.JTextField jTextNombre;

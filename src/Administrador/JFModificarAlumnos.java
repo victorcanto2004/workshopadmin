@@ -224,6 +224,7 @@ public class JFModificarAlumnos extends javax.swing.JFrame {
 
         jButtonLimpiar.setBackground(java.awt.Color.lightGray);
         jButtonLimpiar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jButtonLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/limpiar.png"))); // NOI18N
         jButtonLimpiar.setText("Limpiar");
         jButtonLimpiar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {

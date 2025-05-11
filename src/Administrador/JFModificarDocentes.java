@@ -216,6 +216,7 @@ public class JFModificarDocentes extends javax.swing.JFrame {
 
         jButtonLimpiar.setBackground(java.awt.Color.lightGray);
         jButtonLimpiar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jButtonLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/limpiar.png"))); // NOI18N
         jButtonLimpiar.setText("Limpiar");
         jButtonLimpiar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -274,7 +275,7 @@ public class JFModificarDocentes extends javax.swing.JFrame {
                         .addComponent(jTextContacto, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -309,10 +310,10 @@ public class JFModificarDocentes extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jTextContacto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(128, 128, 128)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButtonActualizar)
-                    .addComponent(jButtonLimpiar))
+                .addGap(33, 33, 33)
+                .addComponent(jButtonActualizar)
+                .addGap(54, 54, 54)
+                .addComponent(jButtonLimpiar)
                 .addGap(26, 26, 26))
         );
 
@@ -499,9 +500,6 @@ public class JFModificarDocentes extends javax.swing.JFrame {
         JFMenuAdministrador JFMenuAdministrador =new JFMenuAdministrador();
         JFMenuAdministrador.setVisible(true);
         JFMenuAdministrador.setLocationRelativeTo(null); // Centra la ventana en la pantalla
-        JOptionPane.showMessageDialog(null,"Has regresado al inicio",
-            "Informacion",
-            JOptionPane.INFORMATION_MESSAGE);
         this.setVisible(false);
     }//GEN-LAST:event_jButtonRegresarInicioActionPerformed
 

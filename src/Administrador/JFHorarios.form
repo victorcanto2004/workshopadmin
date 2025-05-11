@@ -1,0 +1,1581 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="resizable" type="boolean" value="false"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jPanel6" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="jScrollPane1" alignment="1" max="32767" attributes="0"/>
+                  <Component id="jScrollPane2" alignment="1" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                      <Component id="jTextField1" min="-2" pref="71" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="453" max="-2" attributes="0"/>
+                      <Component id="jButton1" min="-2" pref="166" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="jButton2" min="-2" pref="134" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="374" max="-2" attributes="0"/>
+                      <Component id="imprimirTabla" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jPanel6" alignment="0" min="-2" pref="254" max="-2" attributes="0"/>
+                  <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jPanel2" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jPanel5" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jPanel4" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jPanel3" alignment="0" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButton1" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="29" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jScrollPane2" min="-2" pref="171" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="imprimirTabla" alignment="3" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Container class="javax.swing.JPanel" name="jPanel4">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="cc" type="rgb"/>
+        </Property>
+      </Properties>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                  <Component id="jLabel23" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="54" max="32767" attributes="0"/>
+                  <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jComboBoxTalleres4" alignment="1" min="-2" pref="158" max="-2" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="horaInicio4" min="-2" pref="78" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="minInicio4" min="-2" pref="78" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="horaFin4" min="-2" pref="78" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabel42" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="minFin4" alignment="0" min="-2" pref="78" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jLabel43" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jComboBoxTalleres4" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="minInicio4" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="horaInicio4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                          <Component id="jLabel22" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel23" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel43" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel42" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="minFin4" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="horaFin4" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="jLabel10">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="18" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="JUEVES"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel5">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Elija un taller"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel22">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="MINUTOS"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel23">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="HORAS"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="horaInicio4">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;01&quot;, &quot;02&quot;, &quot;03&quot;, &quot;04&quot;,&quot;05&quot;,&quot;06&quot;,&quot;07&quot;,&quot;08&quot;,&quot;09&quot;,&quot;10&quot;,&quot;11&quot;,&quot;12&quot;,&quot;13&quot;,&quot;14&quot;,&quot;15&quot;, &quot;16&quot;,&quot;17&quot;,&quot;18&quot;,&quot;19&quot;,&quot;20&quot;,&quot;21&quot;,&quot;22&quot;,&quot;23&quot; })" type="code"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="horaInicio4ActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="minInicio4">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;01&quot;, &quot;02&quot;, &quot;03&quot;, &quot;04&quot;, &quot;05&quot;, &quot;06&quot;, &quot;07&quot;, &quot;08&quot;, &quot;09&quot;, &quot;10&quot;, &quot;11&quot;, &quot;12&quot;, &quot;13&quot;, &quot;14&quot;, &quot;15&quot;, &quot;16&quot;, &quot;17&quot;, &quot;18&quot;, &quot;19&quot;, &quot;20&quot;, &quot;21&quot;, &quot;22&quot;, &quot;23&quot;, &quot;24&quot;, &quot;25&quot;, &quot;26&quot;, &quot;27&quot;, &quot;28&quot;, &quot;29&quot;, &quot;30&quot;, &quot;31&quot;, &quot;32&quot;, &quot;33&quot;, &quot;34&quot;, &quot;35&quot;, &quot;36&quot;, &quot;37&quot;, &quot;38&quot;, &quot;39&quot;, &quot;40&quot;, &quot;41&quot;, &quot;42&quot;, &quot;43&quot;, &quot;44&quot;, &quot;45&quot;, &quot;46&quot;, &quot;47&quot;, &quot;48&quot;, &quot;49&quot;, &quot;50&quot;, &quot;51&quot;, &quot;52&quot;, &quot;53&quot;, &quot;54&quot;, &quot;55&quot;, &quot;56&quot;, &quot;57&quot;, &quot;58&quot;, &quot;59&quot;&#xa;})" type="code"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="minInicio4ActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="horaFin4">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;01&quot;, &quot;02&quot;, &quot;03&quot;, &quot;04&quot;,&quot;05&quot;,&quot;06&quot;,&quot;07&quot;,&quot;08&quot;,&quot;09&quot;,&quot;10&quot;,&quot;11&quot;,&quot;12&quot;,&quot;13&quot;,&quot;14&quot;,&quot;15&quot;, &quot;16&quot;,&quot;17&quot;,&quot;18&quot;,&quot;19&quot;,&quot;20&quot;,&quot;21&quot;,&quot;22&quot;,&quot;23&quot; })" type="code"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="horaFin4ActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="minFin4">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;01&quot;, &quot;02&quot;, &quot;03&quot;, &quot;04&quot;, &quot;05&quot;, &quot;06&quot;, &quot;07&quot;, &quot;08&quot;, &quot;09&quot;, &quot;10&quot;, &quot;11&quot;, &quot;12&quot;, &quot;13&quot;, &quot;14&quot;, &quot;15&quot;, &quot;16&quot;, &quot;17&quot;, &quot;18&quot;, &quot;19&quot;, &quot;20&quot;, &quot;21&quot;, &quot;22&quot;, &quot;23&quot;, &quot;24&quot;, &quot;25&quot;, &quot;26&quot;, &quot;27&quot;, &quot;28&quot;, &quot;29&quot;, &quot;30&quot;, &quot;31&quot;, &quot;32&quot;, &quot;33&quot;, &quot;34&quot;, &quot;35&quot;, &quot;36&quot;, &quot;37&quot;, &quot;38&quot;, &quot;39&quot;, &quot;40&quot;, &quot;41&quot;, &quot;42&quot;, &quot;43&quot;, &quot;44&quot;, &quot;45&quot;, &quot;46&quot;, &quot;47&quot;, &quot;48&quot;, &quot;49&quot;, &quot;50&quot;, &quot;51&quot;, &quot;52&quot;, &quot;53&quot;, &quot;54&quot;, &quot;55&quot;, &quot;56&quot;, &quot;57&quot;, &quot;58&quot;, &quot;59&quot;&#xa;})" type="code"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="minFin4ActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel42">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="MINUTOS"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel43">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="HORAS"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="jComboBoxTalleres4">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;Ingl&#xe9;s&quot;, &quot;Maya&quot;, &quot;Jarana&quot;, &quot;Moldeado Barro&quot;,&quot;Jazz&quot; })" type="code"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="jPanel5">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="cc" type="rgb"/>
+        </Property>
+      </Properties>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                  <Component id="jComboBoxTalleres5" min="-2" pref="154" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jLabel15" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel13" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="75" max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                  <Component id="jLabel24" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="horaInicio5" alignment="0" max="32767" attributes="0"/>
+                              <Component id="horaFin5" alignment="0" min="-2" pref="88" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabel25" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel45" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="minInicio5" alignment="0" pref="101" max="32767" attributes="0"/>
+                                      <Component id="minFin5" alignment="0" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                          <Component id="jLabel44" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="69" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jComboBoxTalleres5" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                          <Component id="jLabel24" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="jLabel25" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="minInicio5" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="horaInicio5" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel45" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel44" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="horaFin5" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="minFin5" alignment="0" min="-2" pref="22" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="jLabel13">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="18" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="VIERNES"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel24">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="HORAS"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel25">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="MINUTOS"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="horaInicio5">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;01&quot;, &quot;02&quot;, &quot;03&quot;, &quot;04&quot;,&quot;05&quot;,&quot;06&quot;,&quot;07&quot;,&quot;08&quot;,&quot;09&quot;,&quot;10&quot;,&quot;11&quot;,&quot;12&quot;,&quot;13&quot;,&quot;14&quot;,&quot;15&quot;, &quot;16&quot;,&quot;17&quot;,&quot;18&quot;,&quot;19&quot;,&quot;20&quot;,&quot;21&quot;,&quot;22&quot;,&quot;23&quot; })" type="code"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="horaInicio5ActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="minInicio5">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;01&quot;, &quot;02&quot;, &quot;03&quot;, &quot;04&quot;, &quot;05&quot;, &quot;06&quot;, &quot;07&quot;, &quot;08&quot;, &quot;09&quot;, &quot;10&quot;, &quot;11&quot;, &quot;12&quot;, &quot;13&quot;, &quot;14&quot;, &quot;15&quot;, &quot;16&quot;, &quot;17&quot;, &quot;18&quot;, &quot;19&quot;, &quot;20&quot;, &quot;21&quot;, &quot;22&quot;, &quot;23&quot;, &quot;24&quot;, &quot;25&quot;, &quot;26&quot;, &quot;27&quot;, &quot;28&quot;, &quot;29&quot;, &quot;30&quot;, &quot;31&quot;, &quot;32&quot;, &quot;33&quot;, &quot;34&quot;, &quot;35&quot;, &quot;36&quot;, &quot;37&quot;, &quot;38&quot;, &quot;39&quot;, &quot;40&quot;, &quot;41&quot;, &quot;42&quot;, &quot;43&quot;, &quot;44&quot;, &quot;45&quot;, &quot;46&quot;, &quot;47&quot;, &quot;48&quot;, &quot;49&quot;, &quot;50&quot;, &quot;51&quot;, &quot;52&quot;, &quot;53&quot;, &quot;54&quot;, &quot;55&quot;, &quot;56&quot;, &quot;57&quot;, &quot;58&quot;, &quot;59&quot;&#xa;})" type="code"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="minInicio5ActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="horaFin5">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;01&quot;, &quot;02&quot;, &quot;03&quot;, &quot;04&quot;,&quot;05&quot;,&quot;06&quot;,&quot;07&quot;,&quot;08&quot;,&quot;09&quot;,&quot;10&quot;,&quot;11&quot;,&quot;12&quot;,&quot;13&quot;,&quot;14&quot;,&quot;15&quot;, &quot;16&quot;,&quot;17&quot;,&quot;18&quot;,&quot;19&quot;,&quot;20&quot;,&quot;21&quot;,&quot;22&quot;,&quot;23&quot; })" type="code"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="horaFin5ActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel44">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="HORAS"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel45">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="MINUTOS"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="minFin5">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;01&quot;, &quot;02&quot;, &quot;03&quot;, &quot;04&quot;, &quot;05&quot;, &quot;06&quot;, &quot;07&quot;, &quot;08&quot;, &quot;09&quot;, &quot;10&quot;, &quot;11&quot;, &quot;12&quot;, &quot;13&quot;, &quot;14&quot;, &quot;15&quot;, &quot;16&quot;, &quot;17&quot;, &quot;18&quot;, &quot;19&quot;, &quot;20&quot;, &quot;21&quot;, &quot;22&quot;, &quot;23&quot;, &quot;24&quot;, &quot;25&quot;, &quot;26&quot;, &quot;27&quot;, &quot;28&quot;, &quot;29&quot;, &quot;30&quot;, &quot;31&quot;, &quot;32&quot;, &quot;33&quot;, &quot;34&quot;, &quot;35&quot;, &quot;36&quot;, &quot;37&quot;, &quot;38&quot;, &quot;39&quot;, &quot;40&quot;, &quot;41&quot;, &quot;42&quot;, &quot;43&quot;, &quot;44&quot;, &quot;45&quot;, &quot;46&quot;, &quot;47&quot;, &quot;48&quot;, &quot;49&quot;, &quot;50&quot;, &quot;51&quot;, &quot;52&quot;, &quot;53&quot;, &quot;54&quot;, &quot;55&quot;, &quot;56&quot;, &quot;57&quot;, &quot;58&quot;, &quot;59&quot;&#xa;})" type="code"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="minFin5ActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="jComboBoxTalleres5">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;Ingl&#xe9;s&quot;, &quot;Maya&quot;, &quot;Jarana&quot;, &quot;Moldeado Barro&quot;,&quot;Jazz&quot; })" type="code"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel15">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Elija un taller"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTable" name="tablaEncabezado">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="cc" red="cc" type="rgb"/>
+            </Property>
+            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+              <Table columnCount="6" rowCount="4">
+                <Column editable="true" title="LUNES" type="java.lang.Object"/>
+                <Column editable="true" title="MARTES" type="java.lang.Object"/>
+                <Column editable="true" title="MI&#xc9;RCOLES" type="java.lang.Object"/>
+                <Column editable="true" title="JUEVES" type="java.lang.Object"/>
+                <Column editable="true" title="VIERNES" type="java.lang.Object"/>
+                <Column editable="true" title="SABADO" type="java.lang.Object"/>
+              </Table>
+            </Property>
+            <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+              <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+            </Property>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="jPanel6">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="cc" type="rgb"/>
+        </Property>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
+            <BevelBorder/>
+          </Border>
+        </Property>
+      </Properties>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace pref="35" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabel14" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="jComboBoxTalleres6" alignment="1" min="-2" pref="154" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Component id="jLabel47" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                                  <Component id="jLabel48" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="jLabel49" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="horaInicio6" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jLabel50" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="horaFin6" alignment="0" min="-2" pref="84" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="minFin6" min="-2" pref="82" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                                  <Component id="minInicio6" pref="92" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jComboBoxTalleres6" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel48" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel49" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="minInicio6" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="horaInicio6" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jLabel50" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel47" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="horaFin6" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="minFin6" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="jLabel6">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Elija un taller"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel14">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="18" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="SABADO"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="horaFin6">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;01&quot;, &quot;02&quot;, &quot;03&quot;, &quot;04&quot;,&quot;05&quot;,&quot;06&quot;,&quot;07&quot;,&quot;08&quot;,&quot;09&quot;,&quot;10&quot;,&quot;11&quot;,&quot;12&quot;,&quot;13&quot;,&quot;14&quot;,&quot;15&quot;, &quot;16&quot;,&quot;17&quot;,&quot;18&quot;,&quot;19&quot;,&quot;20&quot;,&quot;21&quot;,&quot;22&quot;,&quot;23&quot; })" type="code"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="horaFin6ActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="minFin6">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;01&quot;, &quot;02&quot;, &quot;03&quot;, &quot;04&quot;, &quot;05&quot;, &quot;06&quot;, &quot;07&quot;, &quot;08&quot;, &quot;09&quot;, &quot;10&quot;, &quot;11&quot;, &quot;12&quot;, &quot;13&quot;, &quot;14&quot;, &quot;15&quot;, &quot;16&quot;, &quot;17&quot;, &quot;18&quot;, &quot;19&quot;, &quot;20&quot;, &quot;21&quot;, &quot;22&quot;, &quot;23&quot;, &quot;24&quot;, &quot;25&quot;, &quot;26&quot;, &quot;27&quot;, &quot;28&quot;, &quot;29&quot;, &quot;30&quot;, &quot;31&quot;, &quot;32&quot;, &quot;33&quot;, &quot;34&quot;, &quot;35&quot;, &quot;36&quot;, &quot;37&quot;, &quot;38&quot;, &quot;39&quot;, &quot;40&quot;, &quot;41&quot;, &quot;42&quot;, &quot;43&quot;, &quot;44&quot;, &quot;45&quot;, &quot;46&quot;, &quot;47&quot;, &quot;48&quot;, &quot;49&quot;, &quot;50&quot;, &quot;51&quot;, &quot;52&quot;, &quot;53&quot;, &quot;54&quot;, &quot;55&quot;, &quot;56&quot;, &quot;57&quot;, &quot;58&quot;, &quot;59&quot;&#xa;})" type="code"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="minFin6ActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="horaInicio6">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;01&quot;, &quot;02&quot;, &quot;03&quot;, &quot;04&quot;,&quot;05&quot;,&quot;06&quot;,&quot;07&quot;,&quot;08&quot;,&quot;09&quot;,&quot;10&quot;,&quot;11&quot;,&quot;12&quot;,&quot;13&quot;,&quot;14&quot;,&quot;15&quot;, &quot;16&quot;,&quot;17&quot;,&quot;18&quot;,&quot;19&quot;,&quot;20&quot;,&quot;21&quot;,&quot;22&quot;,&quot;23&quot; })" type="code"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="horaInicio6ActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="minInicio6">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;01&quot;, &quot;02&quot;, &quot;03&quot;, &quot;04&quot;, &quot;05&quot;, &quot;06&quot;, &quot;07&quot;, &quot;08&quot;, &quot;09&quot;, &quot;10&quot;, &quot;11&quot;, &quot;12&quot;, &quot;13&quot;, &quot;14&quot;, &quot;15&quot;, &quot;16&quot;, &quot;17&quot;, &quot;18&quot;, &quot;19&quot;, &quot;20&quot;, &quot;21&quot;, &quot;22&quot;, &quot;23&quot;, &quot;24&quot;, &quot;25&quot;, &quot;26&quot;, &quot;27&quot;, &quot;28&quot;, &quot;29&quot;, &quot;30&quot;, &quot;31&quot;, &quot;32&quot;, &quot;33&quot;, &quot;34&quot;, &quot;35&quot;, &quot;36&quot;, &quot;37&quot;, &quot;38&quot;, &quot;39&quot;, &quot;40&quot;, &quot;41&quot;, &quot;42&quot;, &quot;43&quot;, &quot;44&quot;, &quot;45&quot;, &quot;46&quot;, &quot;47&quot;, &quot;48&quot;, &quot;49&quot;, &quot;50&quot;, &quot;51&quot;, &quot;52&quot;, &quot;53&quot;, &quot;54&quot;, &quot;55&quot;, &quot;56&quot;, &quot;57&quot;, &quot;58&quot;, &quot;59&quot;&#xa;})" type="code"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="minInicio6ActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel47">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="MINUTOS"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel48">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="HORAS"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel49">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="MINUTOS"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel50">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="HORAS"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="jComboBoxTalleres6">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;Ingl&#xe9;s&quot;, &quot;Maya&quot;, &quot;Jarana&quot;, &quot;Moldeado Barro&quot;,&quot;Jazz&quot; })" type="code"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTable" name="tablaHorarios">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="cc" type="rgb"/>
+            </Property>
+            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+              <Table columnCount="12" rowCount="0">
+                <Column editable="true" title="HORA" type="java.lang.Object"/>
+                <Column editable="true" title="TALLER" type="java.lang.Object"/>
+                <Column editable="true" title="HORA" type="java.lang.Object"/>
+                <Column editable="true" title="TALLER" type="java.lang.Object"/>
+                <Column editable="true" title="HORA" type="java.lang.Object"/>
+                <Column editable="true" title="TALLER" type="java.lang.Object"/>
+                <Column editable="true" title="HORA" type="java.lang.Object"/>
+                <Column editable="true" title="TALLER" type="java.lang.Object"/>
+                <Column editable="true" title="HORA" type="java.lang.Object"/>
+                <Column editable="true" title="TALLER" type="java.lang.Object"/>
+                <Column editable="true" title="HORA" type="java.lang.Object"/>
+                <Column editable="true" title="TALLER" type="java.lang.Object"/>
+              </Table>
+            </Property>
+            <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+              <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+            </Property>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JButton" name="jButton1">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="c0" green="c0" id="lightGray" palette="1" red="c0" type="palette"/>
+        </Property>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/workshopadmin/Iconos/Registrar.png"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="GUARDAR"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton1MouseEntered"/>
+        <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton1MouseExited"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="imprimirTabla">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="c0" green="c0" id="lightGray" palette="1" red="c0" type="palette"/>
+        </Property>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/workshopadmin/Iconos/imprimir.png"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="IMPRIMIR HORARIO"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="imprimirTablaMouseEntered"/>
+        <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="imprimirTablaMouseExited"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="imprimirTablaActionPerformed"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JPanel" name="jPanel1">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="cc" type="rgb"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="cc" type="rgb"/>
+        </Property>
+      </Properties>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+                          <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="jComboBoxTalleres1" min="-2" pref="158" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                                  <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="horaInicio1" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                                  <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="minInicio1" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="jLabel37" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="jLabel36" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="horaFin1" max="32767" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="minFin1" min="-2" pref="73" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                  <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jComboBoxTalleres1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jLabel16" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel17" alignment="1" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="horaInicio1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="minInicio1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel36" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel37" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="minFin1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="horaFin1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="jLabel7">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="18" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="LUNES"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="horaInicio1">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;01&quot;, &quot;02&quot;, &quot;03&quot;, &quot;04&quot;,&quot;05&quot;,&quot;06&quot;,&quot;07&quot;,&quot;08&quot;,&quot;09&quot;,&quot;10&quot;,&quot;11&quot;,&quot;12&quot;,&quot;13&quot;,&quot;14&quot;,&quot;15&quot;, &quot;16&quot;,&quot;17&quot;,&quot;18&quot;,&quot;19&quot;,&quot;20&quot;,&quot;21&quot;,&quot;22&quot;,&quot;23&quot; })" type="code"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="horaInicio1ActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="minFin1">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;01&quot;, &quot;02&quot;, &quot;03&quot;, &quot;04&quot;, &quot;05&quot;, &quot;06&quot;, &quot;07&quot;, &quot;08&quot;, &quot;09&quot;, &quot;10&quot;, &quot;11&quot;, &quot;12&quot;, &quot;13&quot;, &quot;14&quot;, &quot;15&quot;, &quot;16&quot;, &quot;17&quot;, &quot;18&quot;, &quot;19&quot;, &quot;20&quot;, &quot;21&quot;, &quot;22&quot;, &quot;23&quot;, &quot;24&quot;, &quot;25&quot;, &quot;26&quot;, &quot;27&quot;, &quot;28&quot;, &quot;29&quot;, &quot;30&quot;, &quot;31&quot;, &quot;32&quot;, &quot;33&quot;, &quot;34&quot;, &quot;35&quot;, &quot;36&quot;, &quot;37&quot;, &quot;38&quot;, &quot;39&quot;, &quot;40&quot;, &quot;41&quot;, &quot;42&quot;, &quot;43&quot;, &quot;44&quot;, &quot;45&quot;, &quot;46&quot;, &quot;47&quot;, &quot;48&quot;, &quot;49&quot;, &quot;50&quot;, &quot;51&quot;, &quot;52&quot;, &quot;53&quot;, &quot;54&quot;, &quot;55&quot;, &quot;56&quot;, &quot;57&quot;, &quot;58&quot;, &quot;59&quot;&#xa;})" type="code"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="minFin1ActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="horaFin1">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;01&quot;, &quot;02&quot;, &quot;03&quot;, &quot;04&quot;,&quot;05&quot;,&quot;06&quot;,&quot;07&quot;,&quot;08&quot;,&quot;09&quot;,&quot;10&quot;,&quot;11&quot;,&quot;12&quot;,&quot;13&quot;,&quot;14&quot;,&quot;15&quot;, &quot;16&quot;,&quot;17&quot;,&quot;18&quot;,&quot;19&quot;,&quot;20&quot;,&quot;21&quot;,&quot;22&quot;,&quot;23&quot; })" type="code"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="horaFin1ActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel36">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="MINUTOS"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel37">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="HORAS"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="minInicio1">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;01&quot;, &quot;02&quot;, &quot;03&quot;, &quot;04&quot;, &quot;05&quot;, &quot;06&quot;, &quot;07&quot;, &quot;08&quot;, &quot;09&quot;, &quot;10&quot;, &quot;11&quot;, &quot;12&quot;, &quot;13&quot;, &quot;14&quot;, &quot;15&quot;, &quot;16&quot;, &quot;17&quot;, &quot;18&quot;, &quot;19&quot;, &quot;20&quot;, &quot;21&quot;, &quot;22&quot;, &quot;23&quot;, &quot;24&quot;, &quot;25&quot;, &quot;26&quot;, &quot;27&quot;, &quot;28&quot;, &quot;29&quot;, &quot;30&quot;, &quot;31&quot;, &quot;32&quot;, &quot;33&quot;, &quot;34&quot;, &quot;35&quot;, &quot;36&quot;, &quot;37&quot;, &quot;38&quot;, &quot;39&quot;, &quot;40&quot;, &quot;41&quot;, &quot;42&quot;, &quot;43&quot;, &quot;44&quot;, &quot;45&quot;, &quot;46&quot;, &quot;47&quot;, &quot;48&quot;, &quot;49&quot;, &quot;50&quot;, &quot;51&quot;, &quot;52&quot;, &quot;53&quot;, &quot;54&quot;, &quot;55&quot;, &quot;56&quot;, &quot;57&quot;, &quot;58&quot;, &quot;59&quot;&#xa;})" type="code"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="minInicio1ActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel16">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="MINUTOS"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel17">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="HORAS"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="jComboBoxTalleres1">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;Ingl&#xe9;s&quot;, &quot;Maya&quot;, &quot;Jarana&quot;, &quot;Moldeado Barro&quot;,&quot;Jazz&quot; })" type="code"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel1">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Elija un taller"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="jPanel2">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="cc" type="rgb"/>
+        </Property>
+      </Properties>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                          <Component id="jLabel39" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                          <Component id="jLabel38" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                          <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                          <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="jLabel8" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel2" alignment="1" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jComboBoxTalleres2" min="-2" pref="191" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="horaInicio2" alignment="0" pref="77" max="32767" attributes="0"/>
+                              <Component id="horaFin2" alignment="0" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="minFin2" alignment="0" max="32767" attributes="0"/>
+                              <Component id="minInicio2" alignment="0" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <EmptySpace pref="13" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jComboBoxTalleres2" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel18" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel19" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="minInicio2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="horaInicio2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jLabel38" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="jLabel39" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="horaFin2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="minFin2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="jLabel8">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="18" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="MARTES"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel2">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Elija un taller"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="jComboBoxTalleres2">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;Ingl&#xe9;s&quot;, &quot;Maya&quot;, &quot;Jarana&quot;, &quot;Moldeado Barro&quot;,&quot;Jazz&quot; })" type="code"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="horaInicio2">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;01&quot;, &quot;02&quot;, &quot;03&quot;, &quot;04&quot;,&quot;05&quot;,&quot;06&quot;,&quot;07&quot;,&quot;08&quot;,&quot;09&quot;,&quot;10&quot;,&quot;11&quot;,&quot;12&quot;,&quot;13&quot;,&quot;14&quot;,&quot;15&quot;, &quot;16&quot;,&quot;17&quot;,&quot;18&quot;,&quot;19&quot;,&quot;20&quot;,&quot;21&quot;,&quot;22&quot;,&quot;23&quot; })" type="code"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="horaInicio2ActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="minInicio2">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;01&quot;, &quot;02&quot;, &quot;03&quot;, &quot;04&quot;, &quot;05&quot;, &quot;06&quot;, &quot;07&quot;, &quot;08&quot;, &quot;09&quot;, &quot;10&quot;, &quot;11&quot;, &quot;12&quot;, &quot;13&quot;, &quot;14&quot;, &quot;15&quot;, &quot;16&quot;, &quot;17&quot;, &quot;18&quot;, &quot;19&quot;, &quot;20&quot;, &quot;21&quot;, &quot;22&quot;, &quot;23&quot;, &quot;24&quot;, &quot;25&quot;, &quot;26&quot;, &quot;27&quot;, &quot;28&quot;, &quot;29&quot;, &quot;30&quot;, &quot;31&quot;, &quot;32&quot;, &quot;33&quot;, &quot;34&quot;, &quot;35&quot;, &quot;36&quot;, &quot;37&quot;, &quot;38&quot;, &quot;39&quot;, &quot;40&quot;, &quot;41&quot;, &quot;42&quot;, &quot;43&quot;, &quot;44&quot;, &quot;45&quot;, &quot;46&quot;, &quot;47&quot;, &quot;48&quot;, &quot;49&quot;, &quot;50&quot;, &quot;51&quot;, &quot;52&quot;, &quot;53&quot;, &quot;54&quot;, &quot;55&quot;, &quot;56&quot;, &quot;57&quot;, &quot;58&quot;, &quot;59&quot;&#xa;})" type="code"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="minInicio2ActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="horaFin2">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;01&quot;, &quot;02&quot;, &quot;03&quot;, &quot;04&quot;,&quot;05&quot;,&quot;06&quot;,&quot;07&quot;,&quot;08&quot;,&quot;09&quot;,&quot;10&quot;,&quot;11&quot;,&quot;12&quot;,&quot;13&quot;,&quot;14&quot;,&quot;15&quot;, &quot;16&quot;,&quot;17&quot;,&quot;18&quot;,&quot;19&quot;,&quot;20&quot;,&quot;21&quot;,&quot;22&quot;,&quot;23&quot; })" type="code"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="horaFin2ActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="minFin2">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;01&quot;, &quot;02&quot;, &quot;03&quot;, &quot;04&quot;, &quot;05&quot;, &quot;06&quot;, &quot;07&quot;, &quot;08&quot;, &quot;09&quot;, &quot;10&quot;, &quot;11&quot;, &quot;12&quot;, &quot;13&quot;, &quot;14&quot;, &quot;15&quot;, &quot;16&quot;, &quot;17&quot;, &quot;18&quot;, &quot;19&quot;, &quot;20&quot;, &quot;21&quot;, &quot;22&quot;, &quot;23&quot;, &quot;24&quot;, &quot;25&quot;, &quot;26&quot;, &quot;27&quot;, &quot;28&quot;, &quot;29&quot;, &quot;30&quot;, &quot;31&quot;, &quot;32&quot;, &quot;33&quot;, &quot;34&quot;, &quot;35&quot;, &quot;36&quot;, &quot;37&quot;, &quot;38&quot;, &quot;39&quot;, &quot;40&quot;, &quot;41&quot;, &quot;42&quot;, &quot;43&quot;, &quot;44&quot;, &quot;45&quot;, &quot;46&quot;, &quot;47&quot;, &quot;48&quot;, &quot;49&quot;, &quot;50&quot;, &quot;51&quot;, &quot;52&quot;, &quot;53&quot;, &quot;54&quot;, &quot;55&quot;, &quot;56&quot;, &quot;57&quot;, &quot;58&quot;, &quot;59&quot;&#xa;})" type="code"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="minFin2ActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel18">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="MINUTOS"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel19">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="HORAS"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel38">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="MINUTOS"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel39">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="HORAS"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="jPanel3">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="cc" type="rgb"/>
+        </Property>
+      </Properties>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="minFin3" alignment="1" min="-2" pref="82" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                                  <Component id="jLabel21" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="horaInicio3" alignment="0" pref="82" max="32767" attributes="0"/>
+                                      <Component id="horaFin3" alignment="0" max="32767" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                          <Component id="jLabel41" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                                  <Component id="jLabel20" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="minInicio3" min="-2" pref="85" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jLabel40" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                          <Component id="jComboBoxTalleres3" min="-2" pref="176" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace min="0" pref="8" max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="jLabel3" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel9" alignment="1" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jComboBoxTalleres3" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="28" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jLabel20" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel21" alignment="1" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="horaInicio3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="minInicio3" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel40" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel41" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="minFin3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="horaFin3" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="jLabel9">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="18" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="MI&#xc9;RCOLES"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel3">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Elija un taller"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel20">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="MINUTOS"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel21">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="HORAS"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="horaInicio3">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;01&quot;, &quot;02&quot;, &quot;03&quot;, &quot;04&quot;,&quot;05&quot;,&quot;06&quot;,&quot;07&quot;,&quot;08&quot;,&quot;09&quot;,&quot;10&quot;,&quot;11&quot;,&quot;12&quot;,&quot;13&quot;,&quot;14&quot;,&quot;15&quot;, &quot;16&quot;,&quot;17&quot;,&quot;18&quot;,&quot;19&quot;,&quot;20&quot;,&quot;21&quot;,&quot;22&quot;,&quot;23&quot; })" type="code"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="horaInicio3ActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="minInicio3">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;01&quot;, &quot;02&quot;, &quot;03&quot;, &quot;04&quot;, &quot;05&quot;, &quot;06&quot;, &quot;07&quot;, &quot;08&quot;, &quot;09&quot;, &quot;10&quot;, &quot;11&quot;, &quot;12&quot;, &quot;13&quot;, &quot;14&quot;, &quot;15&quot;, &quot;16&quot;, &quot;17&quot;, &quot;18&quot;, &quot;19&quot;, &quot;20&quot;, &quot;21&quot;, &quot;22&quot;, &quot;23&quot;, &quot;24&quot;, &quot;25&quot;, &quot;26&quot;, &quot;27&quot;, &quot;28&quot;, &quot;29&quot;, &quot;30&quot;, &quot;31&quot;, &quot;32&quot;, &quot;33&quot;, &quot;34&quot;, &quot;35&quot;, &quot;36&quot;, &quot;37&quot;, &quot;38&quot;, &quot;39&quot;, &quot;40&quot;, &quot;41&quot;, &quot;42&quot;, &quot;43&quot;, &quot;44&quot;, &quot;45&quot;, &quot;46&quot;, &quot;47&quot;, &quot;48&quot;, &quot;49&quot;, &quot;50&quot;, &quot;51&quot;, &quot;52&quot;, &quot;53&quot;, &quot;54&quot;, &quot;55&quot;, &quot;56&quot;, &quot;57&quot;, &quot;58&quot;, &quot;59&quot;&#xa;})" type="code"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="minInicio3ActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="horaFin3">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;01&quot;, &quot;02&quot;, &quot;03&quot;, &quot;04&quot;,&quot;05&quot;,&quot;06&quot;,&quot;07&quot;,&quot;08&quot;,&quot;09&quot;,&quot;10&quot;,&quot;11&quot;,&quot;12&quot;,&quot;13&quot;,&quot;14&quot;,&quot;15&quot;, &quot;16&quot;,&quot;17&quot;,&quot;18&quot;,&quot;19&quot;,&quot;20&quot;,&quot;21&quot;,&quot;22&quot;,&quot;23&quot; })" type="code"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="horaFin3ActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="minFin3">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;01&quot;, &quot;02&quot;, &quot;03&quot;, &quot;04&quot;, &quot;05&quot;, &quot;06&quot;, &quot;07&quot;, &quot;08&quot;, &quot;09&quot;, &quot;10&quot;, &quot;11&quot;, &quot;12&quot;, &quot;13&quot;, &quot;14&quot;, &quot;15&quot;, &quot;16&quot;, &quot;17&quot;, &quot;18&quot;, &quot;19&quot;, &quot;20&quot;, &quot;21&quot;, &quot;22&quot;, &quot;23&quot;, &quot;24&quot;, &quot;25&quot;, &quot;26&quot;, &quot;27&quot;, &quot;28&quot;, &quot;29&quot;, &quot;30&quot;, &quot;31&quot;, &quot;32&quot;, &quot;33&quot;, &quot;34&quot;, &quot;35&quot;, &quot;36&quot;, &quot;37&quot;, &quot;38&quot;, &quot;39&quot;, &quot;40&quot;, &quot;41&quot;, &quot;42&quot;, &quot;43&quot;, &quot;44&quot;, &quot;45&quot;, &quot;46&quot;, &quot;47&quot;, &quot;48&quot;, &quot;49&quot;, &quot;50&quot;, &quot;51&quot;, &quot;52&quot;, &quot;53&quot;, &quot;54&quot;, &quot;55&quot;, &quot;56&quot;, &quot;57&quot;, &quot;58&quot;, &quot;59&quot;&#xa;})" type="code"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="minFin3ActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel40">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="MINUTOS"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel41">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="HORAS"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="jComboBoxTalleres3">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;Ingl&#xe9;s&quot;, &quot;Maya&quot;, &quot;Jarana&quot;, &quot;Moldeado Barro&quot;,&quot;Jazz&quot; })" type="code"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JTextField" name="jTextField1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jTextField1"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButton2">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="c0" green="c0" id="lightGray" palette="1" red="c0" type="palette"/>
+        </Property>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/workshopadmin/Iconos/Atras.png"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Regresar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton2MouseEntered"/>
+        <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton2MouseExited"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+      </Events>
+    </Component>
+  </SubComponents>
+</Form>

@@ -63,7 +63,7 @@
                       <Group type="102" attributes="0">
                           <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="283" max="32767" attributes="0"/>
+                          <EmptySpace pref="284" max="32767" attributes="0"/>
                           <Component id="jLabelnformacion" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
@@ -97,7 +97,7 @@
                           <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="28" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -185,15 +185,27 @@
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jTextApellidos" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jTextApellidos" max="32767" attributes="0"/>
+                                          <Group type="102" attributes="0">
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="jTextEdad" min="-2" pref="311" max="-2" attributes="0"/>
+                                                  <Component id="jTextTutor" alignment="0" min="-2" pref="311" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                          </Group>
+                                      </Group>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="jTextTutor" alignment="0" pref="311" max="32767" attributes="0"/>
-                                          <Component id="jTextEdad" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="jTextNombres" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="jTextContactoTutor" alignment="0" max="32767" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                                              <Component id="jTextNombres" min="-2" pref="311" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="jTextContactoTutor" min="-2" pref="311" max="-2" attributes="0"/>
+                                          </Group>
                                       </Group>
                                       <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                                   </Group>
@@ -204,18 +216,16 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jTextMatricula" min="-2" pref="311" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="jScrollPane2" min="-2" pref="416" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="jScrollPane2" min="-2" pref="416" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="27" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jButtonHistorial" alignment="1" min="-2" pref="207" max="-2" attributes="0"/>
                           <Component id="jButtonConsultarActivo" alignment="1" min="-2" pref="207" max="-2" attributes="0"/>
                           <Component id="jButtonGenerarCredencial" alignment="1" min="-2" pref="207" max="-2" attributes="0"/>
                           <Component id="jButtonConsultarInactivo" alignment="1" min="-2" pref="207" max="-2" attributes="0"/>
                           <Component id="jButtonLimpiar" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonImprimirCredencial" alignment="1" min="-2" pref="207" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   </Group>
@@ -226,7 +236,21 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jButtonConsultarActivo" min="-2" pref="67" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="jButtonConsultarInactivo" min="-2" pref="67" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="jButtonHistorial" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="jButtonGenerarCredencial" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jButtonImprimirCredencial" min="-2" pref="75" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="jButtonLimpiar" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jTextMatricula" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -241,38 +265,26 @@
                                   <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jTextApellidos" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace type="separate" pref="29" max="32767" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jTextEdad" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jTextTutor" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jTextContactoTutor" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="jButtonConsultarActivo" min="-2" pref="67" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jButtonConsultarInactivo" min="-2" pref="67" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jButtonHistorial" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jButtonGenerarCredencial" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                              <Component id="jScrollPane2" min="-2" pref="114" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jScrollPane2" min="-2" pref="114" max="-2" attributes="0"/>
-                          <Component id="jButtonLimpiar" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -417,6 +429,7 @@
               <Events>
                 <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonHistorialMouseEntered"/>
                 <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonHistorialMouseExited"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonHistorialActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButtonGenerarCredencial">
@@ -437,6 +450,7 @@
               <Events>
                 <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonGenerarCredencialMouseEntered"/>
                 <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonGenerarCredencialMouseExited"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonGenerarCredencialActionPerformed"/>
               </Events>
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane2">
@@ -458,6 +472,25 @@
                 </Component>
               </SubComponents>
             </Container>
+            <Component class="javax.swing.JButton" name="jButtonLimpiar">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="c0" green="c0" id="lightGray" palette="1" red="c0" type="palette"/>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="24" style="0"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/workshopadmin/Iconos/limpiar.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Limpiar"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonLimpiarMouseEntered"/>
+                <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonLimpiarMouseExited"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonLimpiarActionPerformed"/>
+              </Events>
+            </Component>
             <Component class="javax.swing.JButton" name="jButtonConsultarInactivo">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -482,7 +515,7 @@
                 <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="JFConsultarAlumnos_jButtonConsultar"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JButton" name="jButtonLimpiar">
+            <Component class="javax.swing.JButton" name="jButtonImprimirCredencial">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="c0" green="c0" id="lightGray" palette="1" red="c0" type="palette"/>
@@ -490,12 +523,17 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="24" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Limpiar"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/workshopadmin/Iconos/imprimir.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="&quot;&lt;html&gt;Imprimir credencial&lt;/html&gt;&quot;" type="code"/>
+                </Property>
               </Properties>
               <Events>
-                <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonLimpiarMouseEntered"/>
-                <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonLimpiarMouseExited"/>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonLimpiarActionPerformed"/>
+                <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonImprimirCredencialMouseEntered"/>
+                <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonImprimirCredencialMouseExited"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonImprimirCredencialActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

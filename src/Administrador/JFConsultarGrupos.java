@@ -77,7 +77,6 @@ public class JFConsultarGrupos extends javax.swing.JFrame {
         jTextApellidos = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         jTextNoDocente = new javax.swing.JTextField();
-        jButtonGenerarListas = new javax.swing.JButton();
         jComboBoxTalleres = new javax.swing.JComboBox<>();
         jComboBoxGrupos = new javax.swing.JComboBox<>();
         jTextField1 = new javax.swing.JTextField();
@@ -131,19 +130,6 @@ public class JFConsultarGrupos extends javax.swing.JFrame {
         jTextNoDocente.setEditable(false);
         jTextNoDocente.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
-        jButtonGenerarListas.setBackground(java.awt.Color.lightGray);
-        jButtonGenerarListas.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButtonGenerarListas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/Lista.png"))); // NOI18N
-        jButtonGenerarListas.setText("<html>Generar listas</html>");
-        jButtonGenerarListas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButtonGenerarListasMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButtonGenerarListasMouseExited(evt);
-            }
-        });
-
         jComboBoxTalleres.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBoxTalleres.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -169,6 +155,7 @@ public class JFConsultarGrupos extends javax.swing.JFrame {
 
         jButtonLimpiar.setBackground(java.awt.Color.lightGray);
         jButtonLimpiar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jButtonLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/limpiar.png"))); // NOI18N
         jButtonLimpiar.setText("Limpiar");
         jButtonLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -191,10 +178,11 @@ public class JFConsultarGrupos extends javax.swing.JFrame {
                         .addComponent(jComboBoxTalleres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(jPanel3Layout.createSequentialGroup()
                                     .addComponent(jLabel7)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -205,11 +193,10 @@ public class JFConsultarGrupos extends javax.swing.JFrame {
                                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(jTextApellidos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
                                         .addComponent(jTextNombre, javax.swing.GroupLayout.Alignment.TRAILING)))
-                                .addComponent(jButtonConsultar)
-                                .addComponent(jButtonLimpiar)))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                            .addComponent(jButtonGenerarListas, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(263, 263, 263))))
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addComponent(jButtonLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButtonConsultar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                 .addContainerGap(42, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -235,13 +222,11 @@ public class JFConsultarGrupos extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextNoDocente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
-                .addGap(89, 89, 89)
-                .addComponent(jButtonConsultar)
-                .addGap(27, 27, 27)
+                .addGap(29, 29, 29)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonGenerarListas)
+                    .addComponent(jButtonConsultar)
                     .addComponent(jButtonLimpiar))
-                .addGap(26, 26, 26))
+                .addGap(169, 169, 169))
         );
 
         jButtonRegresar.setBackground(java.awt.Color.lightGray);
@@ -443,18 +428,6 @@ public class JFConsultarGrupos extends javax.swing.JFrame {
             JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jLabel1nformacionMouseClicked
 
-    private void jButtonGenerarListasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonGenerarListasMouseEntered
-        // TODO add your handling code here:
-         // Cambia el fondo del botón a verde cuando el mouse pasa por encima.
-        jButtonGenerarListas.setBackground(Color.GREEN);
-    }//GEN-LAST:event_jButtonGenerarListasMouseEntered
-
-    private void jButtonGenerarListasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonGenerarListasMouseExited
-        // TODO add your handling code here:
-        // Restaura el fondo del botón a gris claro cuando el mouse sale.
-        jButtonGenerarListas.setBackground(Color.LIGHT_GRAY);
-    }//GEN-LAST:event_jButtonGenerarListasMouseExited
-
     private void jComboBoxTalleresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTalleresActionPerformed
         // TODO add your handling code here:
     String seleccionado = (String) jComboBoxTalleres.getSelectedItem();
@@ -624,7 +597,6 @@ public class JFConsultarGrupos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonConsultar;
-    private javax.swing.JButton jButtonGenerarListas;
     private javax.swing.JButton jButtonLimpiar;
     private javax.swing.JButton jButtonRegresar;
     private javax.swing.JButton jButtonRegresarInicio;

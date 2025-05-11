@@ -4,14 +4,39 @@
  */
 package Administrador;
 
+import Clases.Carnet;
+import Clases.Conexion;
 import Clases.ConsultarAlumnos; // Importa la clase ConsultarAlumnos
 import Clases.TextPrompt; // Importa la clase TextPrompt para utilizar placeholders
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.Color; // Permite usar la clase Color para cambiar colores en componentes gráficos.
+import java.awt.Desktop;
 import java.awt.Image; // Permite manejar imágenes, por ejemplo, para íconos o imágenes en la interfaz.
 import java.awt.Toolkit; // Proporciona acceso a recursos del sistema como imágenes, sonidos, etc.
 import java.awt.event.KeyEvent; // Permite detectar y manejar eventos del teclado, como presionar, soltar o escribir una tecla.
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane; // Permite mostrar cuadros de diálogo (mensajes, confirmaciones, entradas de texto, etc.).
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel; // Permite trabajar con la tabla
 
 /**
@@ -19,7 +44,7 @@ import javax.swing.table.DefaultTableModel; // Permite trabajar con la tabla
  * @author canto
  */
 public class JFConsultarAlumnos extends javax.swing.JFrame {
-
+    private Carnet carnetGen;
     /**
      * Creates new form JFConsultarAlumno
      */
@@ -73,8 +98,9 @@ public class JFConsultarAlumnos extends javax.swing.JFrame {
         jButtonGenerarCredencial = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableTalleresGrupos = new javax.swing.JTable();
-        jButtonConsultarInactivo = new javax.swing.JButton();
         jButtonLimpiar = new javax.swing.JButton();
+        jButtonConsultarInactivo = new javax.swing.JButton();
+        jButtonImprimirCredencial = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Consula de alumnos");
@@ -203,6 +229,11 @@ public class JFConsultarAlumnos extends javax.swing.JFrame {
                 jButtonHistorialMouseExited(evt);
             }
         });
+        jButtonHistorial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonHistorialActionPerformed(evt);
+            }
+        });
 
         jButtonGenerarCredencial.setBackground(java.awt.Color.lightGray);
         jButtonGenerarCredencial.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -216,6 +247,11 @@ public class JFConsultarAlumnos extends javax.swing.JFrame {
                 jButtonGenerarCredencialMouseExited(evt);
             }
         });
+        jButtonGenerarCredencial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonGenerarCredencialActionPerformed(evt);
+            }
+        });
 
         jTableTalleresGrupos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -226,6 +262,24 @@ public class JFConsultarAlumnos extends javax.swing.JFrame {
             }
         ));
         jScrollPane2.setViewportView(jTableTalleresGrupos);
+
+        jButtonLimpiar.setBackground(java.awt.Color.lightGray);
+        jButtonLimpiar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jButtonLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/limpiar.png"))); // NOI18N
+        jButtonLimpiar.setText("Limpiar");
+        jButtonLimpiar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonLimpiarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonLimpiarMouseExited(evt);
+            }
+        });
+        jButtonLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLimpiarActionPerformed(evt);
+            }
+        });
 
         jButtonConsultarInactivo.setBackground(java.awt.Color.lightGray);
         jButtonConsultarInactivo.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -245,20 +299,21 @@ public class JFConsultarAlumnos extends javax.swing.JFrame {
             }
         });
 
-        jButtonLimpiar.setBackground(java.awt.Color.lightGray);
-        jButtonLimpiar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButtonLimpiar.setText("Limpiar");
-        jButtonLimpiar.addMouseListener(new java.awt.event.MouseAdapter() {
+        jButtonImprimirCredencial.setBackground(java.awt.Color.lightGray);
+        jButtonImprimirCredencial.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jButtonImprimirCredencial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/imprimir.png"))); // NOI18N
+        jButtonImprimirCredencial.setText("<html>Imprimir credencial</html>");
+        jButtonImprimirCredencial.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButtonLimpiarMouseEntered(evt);
+                jButtonImprimirCredencialMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButtonLimpiarMouseExited(evt);
+                jButtonImprimirCredencialMouseExited(evt);
             }
         });
-        jButtonLimpiar.addActionListener(new java.awt.event.ActionListener() {
+        jButtonImprimirCredencial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonLimpiarActionPerformed(evt);
+                jButtonImprimirCredencialActionPerformed(evt);
             }
         });
 
@@ -279,29 +334,35 @@ public class JFConsultarAlumnos extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextApellidos))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextApellidos)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jTextEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jTextTutor, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(0, 0, Short.MAX_VALUE))))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(7, 7, 7)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextTutor, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
-                                    .addComponent(jTextEdad)
-                                    .addComponent(jTextNombres)
-                                    .addComponent(jTextContactoTutor))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGap(7, 7, 7)
+                                        .addComponent(jTextNombres, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextContactoTutor, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(2, 2, 2))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonHistorial, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonConsultarActivo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonGenerarCredencial, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonConsultarInactivo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonLimpiar, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(jButtonLimpiar, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButtonImprimirCredencial, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18))
         );
         jPanel2Layout.setVerticalGroup(
@@ -309,6 +370,19 @@ public class JFConsultarAlumnos extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jButtonConsultarActivo, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonConsultarInactivo, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonHistorial)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonGenerarCredencial)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonImprimirCredencial, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonLimpiar)
+                        .addGap(22, 22, 22))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
@@ -321,31 +395,21 @@ public class JFConsultarAlumnos extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel11)
                             .addComponent(jTextApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 29, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(jTextEdad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(jTextTutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jTextTutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(jTextContactoTutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButtonConsultarActivo, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonConsultarInactivo, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonHistorial)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonGenerarCredencial)))
-                .addGap(29, 29, 29)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonLimpiar))
-                .addGap(22, 22, 22))
+                            .addComponent(jTextContactoTutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
+                        .addGap(34, 34, 34)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(50, 50, 50))))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -366,7 +430,7 @@ public class JFConsultarAlumnos extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(45, 45, 45)
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 283, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 284, Short.MAX_VALUE)
                         .addComponent(jLabelnformacion))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -391,7 +455,7 @@ public class JFConsultarAlumnos extends javax.swing.JFrame {
                             .addComponent(jLabel1))
                         .addGap(18, 18, 18)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -472,7 +536,7 @@ public class JFConsultarAlumnos extends javax.swing.JFrame {
     private void jButtonConsultarActivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarActivoActionPerformed
         // TODO add your handling code here:
         // Muestra un cuadro de diálogo para confirmar si el usuario realmente desea 
-        int respuesta = JOptionPane.showConfirmDialog(null, "Realmente desea dar de alta a este alumno?",
+        int respuesta = JOptionPane.showConfirmDialog(null, "Realmente desea consultar a este alumno?",
             "Confirmar salida",
             JOptionPane.YES_NO_OPTION,
             JOptionPane.QUESTION_MESSAGE);
@@ -610,6 +674,209 @@ public class JFConsultarAlumnos extends javax.swing.JFrame {
         jButtonLimpiar.setBackground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_jButtonLimpiarMouseExited
 
+    private void jButtonGenerarCredencialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGenerarCredencialActionPerformed
+        // TODO add your handling code here:
+            // Validación: Verifica si algún campo obligatorio está vacío o si no se ha seleccionado taller y grupo
+            if (jTextMatricula.getText().trim().isEmpty()||
+                    jTextNombres.getText().trim().isEmpty()||
+                    jTextApellidos.getText().trim().isEmpty()||
+                    jTextEdad.getText().trim().isEmpty()||
+                    jTextTutor.getText().trim().isEmpty()||
+                    jTextContactoTutor.getText().trim().isEmpty()){ 
+            
+            JOptionPane.showMessageDialog(null,"Por favor, consulta un alumno",
+                        "ADVERTENCIA",
+                        JOptionPane.ERROR_MESSAGE);
+            } else {
+                try {
+              // Si el objeto carnetGen aún no ha sido inicializado, lo inicializamos
+              if (carnetGen == null) {
+                  carnetGen = new Carnet(); // Instancia la clase que maneja la generación de carnets
+              }
+
+              // Llamamos al método para generar un nuevo carnet, pasando los datos desde los campos de texto
+              carnetGen.agregarCarnet(
+                  jTextMatricula.getText(),      // Matricula del estudiante
+                  jTextNombres.getText(),        // Nombre del estudiante
+                  jTextApellidos.getText(),      // Apellido del estudiante
+                  jTextTutor.getText(),          // Nombre del tutor
+                  jTextContactoTutor.getText(),  // Contacto del tutor
+                  jTableTalleresGrupos           // JTable de talleres y grupos
+              );
+
+              // Mostrar mensaje de éxito
+              JOptionPane.showMessageDialog(this, "Credencial generada, presione imprimir para tener acceso a ella."
+                      + "\nRecuerde que puede agregar más de una credencial antes de impirmir.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+          } catch (Exception ex) {
+              // Captura cualquier excepción y muestra un mensaje de error
+              ex.printStackTrace();
+              JOptionPane.showMessageDialog(this, "Error al generar carnet: " + ex.getMessage());
+                      } 
+                  }
+    }//GEN-LAST:event_jButtonGenerarCredencialActionPerformed
+
+    private void jButtonImprimirCredencialMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonImprimirCredencialMouseEntered
+        // TODO add your handling code here:
+        jButtonImprimirCredencial.setBackground(Color.GREEN);
+    }//GEN-LAST:event_jButtonImprimirCredencialMouseEntered
+
+    private void jButtonImprimirCredencialMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonImprimirCredencialMouseExited
+        // TODO add your handling code here:
+        jButtonImprimirCredencial.setBackground(Color.LIGHT_GRAY);
+    }//GEN-LAST:event_jButtonImprimirCredencialMouseExited
+
+    private void jButtonImprimirCredencialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonImprimirCredencialActionPerformed
+        // TODO add your handling code here:
+        if (carnetGen != null) {
+            carnetGen.cerrarDocumento();
+            carnetGen = null;
+            JOptionPane.showMessageDialog(this, "PDF generado exitosamente en la carpeta de descargas.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+          }
+    }//GEN-LAST:event_jButtonImprimirCredencialActionPerformed
+
+    private void jButtonHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHistorialActionPerformed
+      // Obtener la matrícula ingresada en el campo de texto jTextMatricula
+        String matricula = jTextMatricula.getText().trim(); 
+
+        // Validación: Verifica si algún campo obligatorio está vacío o si no se ha seleccionado taller y grupo
+            if (jTextMatricula.getText().trim().isEmpty()||
+                    jTextNombres.getText().trim().isEmpty()||
+                    jTextApellidos.getText().trim().isEmpty()||
+                    jTextEdad.getText().trim().isEmpty()||
+                    jTextTutor.getText().trim().isEmpty()||
+                    jTextContactoTutor.getText().trim().isEmpty()){ 
+            
+            JOptionPane.showMessageDialog(null,"Por favor, consulta un alumno",
+                        "ADVERTENCIA",
+                        JOptionPane.ERROR_MESSAGE);
+            } else {
+        // Crear una nueva instancia de la clase Conexion para establecer conexión con la base de datos
+        Conexion conexion = new Conexion();
+        Connection conn = conexion.conectar(); // Establece la conexión a la base de datos
+
+        // Si no se pudo conectar a la base de datos, mostrar un mensaje de error y salir
+        if (conn == null) {
+            JOptionPane.showMessageDialog(this, "No se pudo establecer conexión con la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
+            return; // Detiene la ejecución si no se pudo conectar
+        }
+
+        try {
+            // Consulta SQL para obtener el historial del alumno con base en la matrícula
+            String sql = "SELECT a.nombre, a.apellido, a.edad, a.tutor, a.contacto_tutor, g.nombre AS grupo, t.nombre AS taller, p.monto, p.fecha_pago, p.motivo "
+                       + "FROM alumnos a "
+                       + "JOIN grupos g ON a.id_grupo = g.id_grupo "
+                       + "JOIN talleres t ON g.id_taller = t.id_taller "
+                       + "LEFT JOIN pagos p ON a.id_alumno = p.id_alumno "
+                       + "WHERE a.matricula = ? AND a.activo = TRUE"; // Busca los datos del alumno y sus pagos
+            PreparedStatement stmt = conn.prepareStatement(sql); // Prepara la consulta
+            stmt.setString(1, matricula); // Establece el valor de la matrícula en la consulta SQL
+
+            // Ejecutar la consulta y obtener el resultado
+            ResultSet rs = stmt.executeQuery();
+
+            // Crear el documento PDF
+            com.itextpdf.text.Document document = new com.itextpdf.text.Document(); // Crea un documento en blanco
+            // Obtener la ruta a la carpeta Descargas del usuario
+            String userHome = System.getProperty("user.home");
+            File fileToSave = new File(userHome + File.separator + "Downloads" + File.separator + "Historial_" + matricula + ".pdf");
+
+                // Crear el escritor de PDF y asociarlo con el archivo de salida
+              PdfWriter.getInstance(document, new FileOutputStream(fileToSave));
+              document.open(); // Abre el documento para agregar contenido
+
+                // Añadir un título al PDF
+                Font titleFont = new Font(Font.FontFamily.HELVETICA, 18, Font.BOLD); // Define el formato del título
+                Paragraph title = new Paragraph("Historial de Alumno - Matrícula: " + matricula, titleFont); // Crea el título
+                title.setAlignment(Element.ALIGN_CENTER); // Centra el título
+                document.add(title); // Añadir el título al documento
+                document.add(new Chunk("\n")); // Agrega un salto de línea
+
+                // Si se encuentran datos del alumno en la base de datos
+                if (rs.next()) {
+                    // Agregar información del alumno al PDF
+                    Paragraph alumnoInfo = new Paragraph("Nombre: " + rs.getString("nombre") + " " + rs.getString("apellido"));
+                    document.add(alumnoInfo); // Añadir nombre del alumno
+                    Paragraph edadInfo = new Paragraph("Edad: " + rs.getInt("edad"));
+                    document.add(edadInfo); // Añadir edad del alumno
+                    Paragraph tutorInfo = new Paragraph("Tutor: " + rs.getString("tutor"));
+                    document.add(tutorInfo); // Añadir nombre del tutor
+                    Paragraph contactoTutorInfo = new Paragraph("Contacto Tutor: " + rs.getString("contacto_tutor"));
+                    document.add(contactoTutorInfo); // Añadir contacto del tutor
+
+                    // Agregar espacio antes de la tabla (se añaden dos saltos de línea)
+                    document.add(new Chunk("\n"));
+                    
+                    // Primero agregar la tabla de talleres y grupos
+                    PdfPTable tablaTalleresGruposPDF = crearTablaDesdeJTable(jTableTalleresGrupos); // tu JTable real
+                    document.add(tablaTalleresGruposPDF);
+                    document.add(new Chunk("\n\n"));
+
+                    // Crear una tabla en el PDF con tres columnas: Motivo, Monto y Fecha de Pago
+                    PdfPTable table = new PdfPTable(3); // Definir el número de columnas
+                    table.addCell("Motivo"); // Título de la primera columna
+                    table.addCell("Monto"); // Título de la segunda columna
+                    table.addCell("Fecha de Pago"); // Título de la tercera columna
+
+                    do {
+                    String motivo = rs.getString("motivo");
+                    double monto = rs.getDouble("monto");
+                    Date fechaPago = rs.getDate("fecha_pago");
+
+                    // Verificar que al menos uno de los campos tenga un valor real antes de agregar a la tabla
+                    if ((motivo != null && !motivo.trim().isEmpty()) || monto != 0.0 || fechaPago != null) {
+                        table.addCell(motivo != null ? motivo : "Sin motivo");
+                        table.addCell(String.valueOf(monto));
+                        table.addCell(fechaPago != null ? fechaPago.toString() : "Sin fecha");
+                    }
+                } while (rs.next());
+
+                    // Añadir la tabla al documento PDF
+                    document.add(table);
+                } else {
+                    // Si no se encuentran datos, mostrar un mensaje en el PDF
+                    document.add(new Paragraph("No se encontraron registros para esta matrícula."));
+                }
+
+                // Cerrar el documento y finalizar el archivo PDF
+                document.close();
+              // Mostrar un mensaje de éxito
+              JOptionPane.showMessageDialog(this, "PDF generado exitosamente en la carpeta de descargas.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+      } catch (Exception e) {
+          // Si ocurre un error en cualquier parte del proceso, mostrar un mensaje de error
+          JOptionPane.showMessageDialog(this, "Error al generar el historial: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+      } finally {
+          // Desconectar de la base de datos
+          conexion.desconectar();
+        }
+      }
+    }//GEN-LAST:event_jButtonHistorialActionPerformed
+public PdfPTable crearTablaDesdeJTable(JTable jTable) {
+    PdfPTable table = new PdfPTable(jTable.getColumnCount());
+    table.setWidthPercentage(100);
+
+    Font fontCabecera = new Font(Font.FontFamily.HELVETICA, 8, Font.BOLD);
+    Font fontCelda = new Font(Font.FontFamily.HELVETICA, 8);
+
+    // Encabezados
+    for (int i = 0; i < jTable.getColumnCount(); i++) {
+        PdfPCell header = new PdfPCell(new Phrase(jTable.getColumnName(i), fontCabecera));
+        header.setHorizontalAlignment(Element.ALIGN_CENTER);
+        header.setPadding(3f);
+        table.addCell(header);
+    }
+
+    // Filas
+    for (int row = 0; row < jTable.getRowCount(); row++) {
+        for (int col = 0; col < jTable.getColumnCount(); col++) {
+            Object value = jTable.getValueAt(row, col);
+            PdfPCell cell = new PdfPCell(new Phrase(value != null ? value.toString() : "", fontCelda));
+            cell.setPadding(2f);
+            table.addCell(cell);
+        }
+    }
+
+    return table;
+}
     /**
      * @param args the command line arguments
      */
@@ -651,6 +918,7 @@ public class JFConsultarAlumnos extends javax.swing.JFrame {
     private javax.swing.JButton jButtonConsultarInactivo;
     private javax.swing.JButton jButtonGenerarCredencial;
     private javax.swing.JButton jButtonHistorial;
+    private javax.swing.JButton jButtonImprimirCredencial;
     private javax.swing.JButton jButtonLimpiar;
     private javax.swing.JButton jButtonRegresar;
     private javax.swing.JButton jButtonRegresarInicio;

@@ -6,10 +6,20 @@ package Administrador;
 
 import Clases.ConsultarTalleres; // Importa la clase ConsultarTalleres
 import Clases.TextPrompt; // Importa la clase TextPrompt para utilizar placeholders
+import com.itextpdf.text.Document;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.Color; // Permite usar la clase Color para cambiar colores en componentes gráficos.
 import java.awt.Image; // Permite manejar imágenes, por ejemplo, para íconos o imágenes en la interfaz.
 import java.awt.Toolkit; // Proporciona acceso a recursos del sistema como imágenes, sonidos, etc.
 import java.awt.event.KeyEvent; // Permite detectar y manejar eventos del teclado, como presionar, soltar o escribir una tecla.
+import java.io.FileOutputStream;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane; // Permite mostrar cuadros de diálogo (mensajes, confirmaciones, entradas de texto, etc.).
 import javax.swing.table.DefaultTableModel; // Permite trabajar con la tabla
@@ -126,6 +136,11 @@ public class JFConsultarTaller extends javax.swing.JFrame {
                 jButtonGenerarListasMouseExited(evt);
             }
         });
+        jButtonGenerarListas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonGenerarListasActionPerformed(evt);
+            }
+        });
 
         jTableTalleresGrupos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -139,6 +154,7 @@ public class JFConsultarTaller extends javax.swing.JFrame {
 
         jButtonLimpiar.setBackground(java.awt.Color.lightGray);
         jButtonLimpiar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jButtonLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/limpiar.png"))); // NOI18N
         jButtonLimpiar.setText("Limpiar");
         jButtonLimpiar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -188,11 +204,11 @@ public class JFConsultarTaller extends javax.swing.JFrame {
                     .addComponent(jTextNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonHorario)
-                    .addComponent(jButtonConsultar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButtonHorario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonConsultar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonGenerarListas)
                     .addComponent(jButtonLimpiar))
@@ -413,6 +429,10 @@ public class JFConsultarTaller extends javax.swing.JFrame {
 
     private void jButtonHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHorarioActionPerformed
         // TODO add your handling code here:
+        JFHorarios JFHorarios =new JFHorarios(); // Crea una nueva instancia
+        JFHorarios.setVisible(true); // Muestra la ventana de inicio
+        JFHorarios.setLocationRelativeTo(null); // Centra la ventana en la pantalla
+        this.setVisible(false); // Oculta la ventana actual. 
     }//GEN-LAST:event_jButtonHorarioActionPerformed
 
     private void jButtonHorarioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonHorarioMouseExited
@@ -465,6 +485,108 @@ public class JFConsultarTaller extends javax.swing.JFrame {
         // Restaura el fondo del botón a gris claro cuando el mouse sale.
         jButtonLimpiar.setBackground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_jButtonLimpiarMouseExited
+
+    private void jButtonGenerarListasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGenerarListasActionPerformed
+        // TODO add your handling code here:
+           String nombreTaller = jTextNombre.getText().trim();
+                if (nombreTaller.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Por favor, ingresa el nombre del taller.");
+                    jTextNombre.requestFocus();
+                    return;
+                }
+                
+
+                // Atributos de conexión
+                String bd = "workshopadmin";
+                String url = "jdbc:mysql://localhost:3306/" + bd;
+                String user = "root";
+                String password = "sqloracle";
+                String driver = "com.mysql.cj.jdbc.Driver";
+
+                java.sql.Connection cx = null;
+                PreparedStatement ps = null;
+                ResultSet rs = null;
+
+                
+                try {
+                   
+                  
+                    // Cargar el controlador JDBC
+                    Class.forName(driver);
+                    cx = DriverManager.getConnection(url, user, password);
+
+                    // Consulta SQL para obtener los alumnos inscritos en el taller solicitado
+                    String sql =
+                        "SELECT a.matricula, a.nombre, a.apellido, t.nombre AS taller, g.nombre AS grupo " +
+                        "FROM alumnos a " +
+                        "JOIN grupos g ON a.id_grupo = g.id_grupo " +                 // AQUI SE REALIZAN LAS CONSULTAS PARA OBTENER LOS DATOS DEL ALUMNO QUE PERTENEZCA AL TALLER SOLICITADO
+                        "JOIN talleres t ON g.id_taller = t.id_taller " +
+                        "WHERE t.nombre = ? AND a.activo = TRUE";
+
+                    ps = cx.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY); // Cambiar el tipo de ResultSet
+                    ps.setString(1, nombreTaller);
+                    rs = ps.executeQuery();
+
+                    // Verificar si hay resultados antes de crear el archivo PDF
+                    boolean hayResultados = false;
+                    while (rs.next()) {
+                        hayResultados = true;
+                    }
+
+                    if (!hayResultados) {
+                        JOptionPane.showMessageDialog(null, "No se encontraron alumnos para ese taller.");
+                        jTextNombre.setText("");
+                        jTextNombre.requestFocus();
+                        return; // Si no hay alumnos, no se genera el archivo PDF
+                    }
+
+                    // Si hay resultados, entonces crear el archivo PDF
+                    Document document = new Document();
+                    // Definir la ruta de la carpeta de descargas (esto puede variar dependiendo del sistema operativo)
+                    String userHome = System.getProperty("user.home");
+                    String downloadPath = userHome + "/Downloads/";
+                    String filePath = downloadPath + "ListaAlumnos_" + nombreTaller + ".pdf"; // Crea el documento.
+                    PdfWriter.getInstance(document, new FileOutputStream(filePath));
+                    document.open();
+
+                    document.add(new Paragraph("Lista de Alumnos del Taller: " + nombreTaller,
+                            FontFactory.getFont(FontFactory.HELVETICA_BOLD, 16)));    // Fuente
+                    document.add(new Paragraph(" "));
+
+                    PdfPTable table = new PdfPTable(4); // Matrícula, Nombre, Apellido
+                    table.addCell("Matrícula");
+                    table.addCell("Nombre");
+                    table.addCell("Apellido");
+                    table.addCell("Grupo");
+
+                    // Mover el cursor a la primera fila
+                    rs.beforeFirst();
+
+                    // Si existen alumnos en el taller, se realiza la obtención de datos de la BD
+                    while (rs.next()) {
+                        table.addCell(String.valueOf(rs.getInt("matricula")));
+                        table.addCell(rs.getString("nombre"));
+                        table.addCell(rs.getString("apellido"));
+                        table.addCell(rs.getString("grupo"));
+                    }
+
+                    document.add(table);
+                    JOptionPane.showMessageDialog(null, "PDF generado exitosamente en la carpeta de descargas.");
+                    document.close();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Error al generar PDF: " + e.getMessage());
+                } finally {
+                    try {
+                        if (rs != null) rs.close();
+                        if (ps != null) ps.close();
+                        if (cx != null) cx.close();
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+    }//GEN-LAST:event_jButtonGenerarListasActionPerformed
 
     /**
      * @param args the command line arguments
