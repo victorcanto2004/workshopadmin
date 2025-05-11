@@ -5,11 +5,23 @@
 package Administrador;
 
 // Paquetes a utilizar
+import com.itextpdf.text.Document;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.Color; // Importa la clase Color para manejar colores
 import java.awt.Image; // Importa la clase Image para trabajar con imágenes
 import java.awt.Toolkit; // Importa la clase Toolkit para obtener imágenes del sistema
+import java.io.FileOutputStream;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane; // Importa JOptionPane para mostrar cuadros de diálogo
+import java.sql.*;
+import com.itextpdf.text.*;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 /**
  *
@@ -20,6 +32,7 @@ public class JFAdministrarDonaciones extends javax.swing.JFrame {
     /**
      * Creates new form JFAdministrarDonaciones
      */
+    
     public JFAdministrarDonaciones() {
         initComponents(); // Método que configura y organiza todos los componentes gráficos en la ventana.
         setIconImage(getIconImage()); // Establece un ícono personalizado para la ventana.
@@ -92,6 +105,11 @@ public class JFAdministrarDonaciones extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 jButtonHistorialMouseExited(evt);
+            }
+        });
+        jButtonHistorial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonHistorialActionPerformed(evt);
             }
         });
 
@@ -253,6 +271,115 @@ public class JFAdministrarDonaciones extends javax.swing.JFrame {
         JFMenuAdministrador.setLocationRelativeTo(null); // Centra la ventana en la pantalla
         this.setVisible(false); // Oculta la ventana actual
     }//GEN-LAST:event_jButtonRegresarActionPerformed
+
+    private void jButtonHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHistorialActionPerformed
+    // TODO add your handling code here: 
+    // Atributos de conexión
+    String bd = "workshopadmin"; // Nombre de la base de datos
+    String url = "jdbc:mysql://localhost:3306/" + bd; // URL de conexión a la base de datos MySQL en localhost
+    String user = "root"; // Usuario de la base de datos
+    String password = "sqloracle"; // Contraseña del usuario
+    String driver = "com.mysql.cj.jdbc.Driver"; // Driver JDBC para MySQL
+
+    // Declaración de objetos para conexión, consulta y resultados
+    java.sql.Connection cx = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+
+    try {
+        Class.forName(driver); // Carga el driver JDBC
+        cx = DriverManager.getConnection(url, user, password); // Establece la conexión con la base de datos
+
+        // Consulta para obtener historial de donaciones con nombres de grupo y taller
+        String sql = "SELECT d.id_donacion, d.nombre AS nombre_donante, d.apellido AS apellido_donante, " +
+                     "d.monto, d.fecha_donacion, g.nombre AS nombre_grupo, t.nombre AS nombre_taller " +
+                     "FROM donaciones d " +
+                     "JOIN grupos g ON d.id_grupo = g.id_grupo " +
+                     "JOIN talleres t ON g.id_taller = t.id_taller " +
+                     "ORDER BY d.fecha_donacion DESC";
+
+        // Prepara la consulta con soporte para desplazamiento y solo lectura
+        ps = cx.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        rs = ps.executeQuery();
+
+        // Obtiene la ruta de descargas del usuario
+        String userHome = System.getProperty("user.home");
+        String downloadPath = userHome + "/Downloads/";
+        String filePath = downloadPath + "HistorialDonaciones.pdf";
+
+        // Crear documento PDF
+        Document document = new Document();
+        PdfWriter.getInstance(document, new FileOutputStream(filePath));
+        document.open();
+        
+        // Formato de fecha y hora en español para la fecha de "Generado" con formato de 24 horas
+        SimpleDateFormat sdfGenerado = new SimpleDateFormat("dd MMMM yyyy HH:mm:ss", new Locale("es", "ES"));
+        String fechaGenerado = sdfGenerado.format(new java.util.Date());
+        
+        // Centrar el título
+        Paragraph title = new Paragraph("Historial de Donaciones", FontFactory.getFont(FontFactory.HELVETICA_BOLD, 16));
+        title.setAlignment(Element.ALIGN_CENTER);
+        document.add(title); // Añade el título
+        document.add(new Paragraph(" ")); // Espacio en blanco
+        document.add(new Paragraph("Generado: " + fechaGenerado)); // Fecha de generación
+        document.add(new Paragraph(" ")); // Espacio en blanco
+
+         // Crear tabla con 5 columnas para mostrar los datos
+        PdfPTable table = new PdfPTable(5); // 5 columnas: Donante, Monto, Fecha, Grupo, Taller
+        table.setWidthPercentage(100);  // Ancho completo
+ 
+        // Cabeceras de la tabla
+        table.addCell("Donante");
+        table.addCell("Monto");
+        table.addCell("Fecha");
+        table.addCell("Grupo");
+        table.addCell("Taller");
+
+        boolean hayResultados = false; // Bandera para verificar si hay datos
+        
+       // Formato de fecha en español para la fecha en la tabla
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy", new Locale("es", "ES"));
+         
+        // Iterar sobre los resultados
+        while (rs.next()) {
+            hayResultados = true;
+            String donante = rs.getString("nombre_donante") + " " + rs.getString("apellido_donante"); // Concatenar nombre y apellido del donante
+            table.addCell(donante);
+            table.addCell("$" + String.format("%.2f", rs.getDouble("monto"))); // Formatear el monto como moneda
+            
+            // Convertir fecha a formato en español
+            String fecha = sdf.format(rs.getDate("fecha_donacion"));
+            table.addCell(fecha);
+            
+            table.addCell(rs.getString("nombre_grupo"));
+            table.addCell(rs.getString("nombre_taller"));
+        }
+        
+         // Si no hay resultados, muestra mensaje y cierra documento
+        if (!hayResultados) {
+            JOptionPane.showMessageDialog(null, "No hay registros de donaciones.");
+            document.close();
+            return;
+        }
+
+        document.add(table);
+        document.close();
+        JOptionPane.showMessageDialog(null, "PDF generado exitosamente en la carpeta de descargas.");
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(null, "Error al generar PDF: " + e.getMessage());
+    } finally {
+        try {
+            // Cierra los recursos en caso de haber sido abiertos
+            if (rs != null) rs.close();
+            if (ps != null) ps.close();
+            if (cx != null) cx.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    }//GEN-LAST:event_jButtonHistorialActionPerformed
 
     /**
      * @param args the command line arguments

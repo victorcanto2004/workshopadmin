@@ -11,13 +11,13 @@ import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.Color; // Permite usar la clase Color para cambiar colores en componentes gráficos.
 import java.awt.Image; // Permite manejar imágenes, por ejemplo, para íconos o imágenes en la interfaz.
 import java.awt.Toolkit; // Proporciona acceso a recursos del sistema como imágenes, sonidos, etc.
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.sql.Connection; // Importa Connection, que representa la conexión activa con la base de datos.
@@ -27,12 +27,13 @@ import java.sql.SQLException;  // Importa SQLException, que captura errores rela
 import java.text.DateFormat; // Clase base para formateo de fechas genérico
 import java.text.SimpleDateFormat; // Clase concreta que permite definir el formato de la fecha (por ejemplo: dd/MM/yyyy)
 import java.util.Date; // Clase que representa una fecha y hora
+import java.util.Locale;
 // Importa Logger y Level, herramientas para registrar mensajes en la consola o en archivos de log.
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane; // Permite mostrar cuadros de diálogo (mensajes, confirmaciones, entradas de texto, etc.).
-
+import java.sql.*;
 /**
  *
  * @author canto
@@ -167,6 +168,11 @@ public class JFPagosCursosLibros extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 jButtonHistorialMouseExited(evt);
+            }
+        });
+        jButtonHistorial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonHistorialActionPerformed(evt);
             }
         });
 
@@ -766,6 +772,7 @@ public class JFPagosCursosLibros extends javax.swing.JFrame {
 
     private void jButtonReciboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReciboActionPerformed
         // TODO add your handling code here:
+        // Validar que todos los campos estén completos antes de generar el PDF
         if (jTextMotivo.getText().isEmpty()||
             jTextMonto.getText().isEmpty()||
             jTextMonto.getText().isEmpty()||
@@ -776,6 +783,7 @@ public class JFPagosCursosLibros extends javax.swing.JFrame {
             jComboBoxTalleres.getSelectedItem().toString().equals("Taller") ||
             jComboBoxGrupos.getSelectedItem().toString().equals("Grupos") ||
             jComboBoxAlumnos.getSelectedItem().toString().equals("Matriculas")) {
+                     // Mostrar mensaje de advertencia si falta algún campo
                     JOptionPane.showMessageDialog(null, "Por favor, ingresa todos los datos correspondientes"
                             + "\ny elige un taller, un grupo y la matrícula del alumno.");
                     jTextNombre.requestFocus();
@@ -793,11 +801,12 @@ public class JFPagosCursosLibros extends javax.swing.JFrame {
             String userHome = System.getProperty("user.home");
             String downloadPath = userHome + File.separator + "Downloads" + File.separator + nombreArchivo;
             
+            // Crear documento PDF
             Document document = new Document();
-            FileOutputStream fos = new FileOutputStream(downloadPath);
-            PdfWriter writer = PdfWriter.getInstance(document, fos);
+            FileOutputStream fos = new FileOutputStream(downloadPath); // Ruta del archivo
+            PdfWriter writer = PdfWriter.getInstance(document, fos); // Asociar PDFWriter
 
-            document.open();
+            document.open();  // Abrir el documento para escribir
 
             // Estilos
             Font tituloFont = new Font(Font.FontFamily.HELVETICA, 18, Font.BOLD);
@@ -869,7 +878,7 @@ public class JFPagosCursosLibros extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(null, "PDF generado exitosamente en la carpeta de descargas.");
 
-                    // Verificar si el archivo existe antes de intentar abrirlo
+        // Verificar si el archivo existe antes de intentar abrirlo
         File archivoPDF = new File(downloadPath);
         if (archivoPDF.exists()) {
             // Abrir el archivo PDF generado
@@ -894,6 +903,124 @@ public class JFPagosCursosLibros extends javax.swing.JFrame {
         // TODO add your handling code here:
         jButtonRecibo.setBackground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_jButtonReciboMouseExited
+
+    private void jButtonHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHistorialActionPerformed
+        // TODO add your handling code here:
+    // Atributos de conexión
+    String bd = "workshopadmin";  // Nombre de la base de datos
+    String url = "jdbc:mysql://localhost:3306/" + bd; // URL de conexión a MySQL
+    String user = "root"; // Usuario de la base de datos
+    String password = "sqloracle"; // Contraseña del usuario
+    String driver = "com.mysql.cj.jdbc.Driver"; // Driver JDBC para MySQL
+
+    // Objetos para conexión, consulta y resultados
+    java.sql.Connection cx = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+
+    try {
+        Class.forName(driver); // Cargar el driver JDBC
+        cx = DriverManager.getConnection(url, user, password); // Establecer conexión a la base de datos
+
+        // Consulta para obtener historial de pagos con nombres de grupo y taller
+        String sql = "SELECT p.id_pago, " +
+             "a.nombre AS nombre_alumno, a.apellido AS apellido_alumno, " +
+             "p.monto, p.fecha_pago, p.motivo, " +
+             "g.nombre AS nombre_grupo, t.nombre AS nombre_taller " +
+             "FROM pagos p " +
+             "JOIN alumnos a ON p.id_alumno = a.id_alumno " +
+             "JOIN grupos g ON a.id_grupo = g.id_grupo " +
+             "JOIN talleres t ON g.id_taller = t.id_taller " +
+             "ORDER BY p.fecha_pago DESC";
+
+        // Preparar la consulta con desplazamiento sin sensibilidad y solo lectura
+        ps = cx.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        rs = ps.executeQuery(); // Ejecutar la consulta
+
+        // Ruta para guardar el PDF en la carpeta de descargas del usuario
+        String userHome = System.getProperty("user.home");
+        String downloadPath = userHome + "/Downloads/";
+        String filePath = downloadPath + "HistorialPagos.pdf";
+
+        // Crear documento PDF
+        Document document = new Document(); 
+        PdfWriter.getInstance(document, new FileOutputStream(filePath));  // Vincular PDF con archivo físico
+        document.open(); // Abrir el documento para escribir
+        
+        // Formato de fecha y hora en español para la fecha de "Generado" con formato de 24 horas
+        SimpleDateFormat sdfGenerado = new SimpleDateFormat("dd MMMM yyyy HH:mm:ss", new Locale("es", "ES"));
+        String fechaGenerado = sdfGenerado.format(new java.util.Date());
+        
+        // Centrar el título
+        Paragraph title = new Paragraph("Historial de Pagos", FontFactory.getFont(FontFactory.HELVETICA_BOLD, 16));
+        title.setAlignment(Element.ALIGN_CENTER);
+        document.add(title);
+        document.add(new Paragraph(" ")); // Espacio en blanco
+        document.add(new Paragraph("Generado: " + fechaGenerado)); // Fecha y hora de generación
+        document.add(new Paragraph(" ")); // Espacio en blanco
+
+        // Crear tabla con 6 columnas: Pagador, Monto, Fecha, Motivo, Grupo, Taller
+        PdfPTable table = new PdfPTable(6); // 6 columnas: Pagador, Monto, Fecha, Motivo, Grupo, Taller
+        table.setWidthPercentage(100);
+
+        // Agregar encabezados de la tabla
+        table.addCell("Pagador");
+        table.addCell("Monto");
+        table.addCell("Fecha");
+        table.addCell("Motivo");
+        table.addCell("Grupo");
+        table.addCell("Taller");
+
+        boolean hayResultados = false;
+
+        // Formato de fecha en español para la fecha en la tabla
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy", new Locale("es", "ES"));
+
+        // Recorrer los resultados de la consulta
+        while (rs.next()) {
+            hayResultados = true;
+
+            // Obtener los datos de cada columna
+            String pagador = rs.getString("nombre_alumno") + " " + rs.getString("apellido_alumno");
+            String monto = "$" + String.format("%.2f", rs.getDouble("monto"));
+            String fecha = sdf.format(rs.getDate("fecha_pago"));
+            String motivo = rs.getString("motivo");
+            String grupo = rs.getString("nombre_grupo");
+            String taller = rs.getString("nombre_taller");
+
+            // Agregar fila con los datos obtenidos
+            table.addCell(pagador);
+            table.addCell(monto);
+            table.addCell(fecha);
+            table.addCell(motivo);
+            table.addCell(grupo);
+            table.addCell(taller);
+        }
+
+         // Si no hay resultados, mostrar mensaje y salir
+        if (!hayResultados) {
+            JOptionPane.showMessageDialog(null, "No hay registros de pagos.");
+            document.close(); // Cerrar el documento sin guardar tabla vacía
+            return;
+        }
+
+        document.add(table); // Agregar la tabla al PDF
+        document.close();  // Cerrar y guardar el documento
+        JOptionPane.showMessageDialog(null, "PDF generado exitosamente en la carpeta de descargas.");
+    } catch (Exception e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(null, "Error al generar PDF: " + e.getMessage()); // Mostrar mensaje de error
+    } finally {
+        try {
+            // Cerrar recursos si fueron abiertos
+            if (rs != null) rs.close();
+            if (ps != null) ps.close();
+            if (cx != null) cx.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    }//GEN-LAST:event_jButtonHistorialActionPerformed
 
     /**
      * @param args the command line arguments
