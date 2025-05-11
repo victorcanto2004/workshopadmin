@@ -8,6 +8,9 @@ import Administrador.*;
 import Inicios.JFInicioAdministrador;
 import Inicios.JFInicioDocente;
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.Toolkit;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,8 +24,17 @@ public class JFMenuDocente extends javax.swing.JFrame {
      */
     public JFMenuDocente() {
         initComponents();
+        setIconImage(getIconImage()); // Establece un ícono personalizado para la ventana.
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // Desactiva la X de cierre
     }
-
+    //Icono del JFrame
+    @Override // Indica que este método sobrescribe el método getIconImage() de la clase JFrame
+    // Usa Toolkit (una clase de utilidades gráficas de AWT) para obtener una imagen ubicada en la ruta interna del proyecto
+    // ClassLoader.getSystemResource() localiza el archivo dentro del classpath (dentro de src o el .jar).
+    public Image getIconImage(){ 
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("workshopadmin/Imagenes/LogoIcono.png"));
+        return retValue; // Devuelve la imagen para que sea usada como ícono del JFrame
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,6 +56,7 @@ public class JFMenuDocente extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menú de docentes");
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -205,10 +218,9 @@ public class JFMenuDocente extends javax.swing.JFrame {
     
     private void jButtonAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlumnosActionPerformed
         // TODO add your handling code here:
-        JFDocenteAdministrarAlumnos JFDocenteAdministrarAlumnos =new JFDocenteAdministrarAlumnos();  
-                JFDocenteAdministrarAlumnos.setDefaultCloseOperation(JFDocenteAdministrarAlumnos.EXIT_ON_CLOSE);
-                JFDocenteAdministrarAlumnos.setVisible(true);
-                JFDocenteAdministrarAlumnos.setLocationRelativeTo(null); // Centra la ventana en la pantalla
+        JFDocenAdministrarAlumnos JFDocenAdministrarAlumnos =new JFDocenAdministrarAlumnos();  
+                JFDocenAdministrarAlumnos.setVisible(true);
+                JFDocenAdministrarAlumnos.setLocationRelativeTo(null); // Centra la ventana en la pantalla
                 this.setVisible(false); 
     }//GEN-LAST:event_jButtonAlumnosActionPerformed
 
@@ -269,10 +281,9 @@ public class JFMenuDocente extends javax.swing.JFrame {
 
     private void jButtonGruposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGruposActionPerformed
         // TODO add your handling code here:
-        JFDocenteAdministrarGrupos JFDocenteAdministrarGrupos =new JFDocenteAdministrarGrupos();  
-                JFDocenteAdministrarGrupos.setDefaultCloseOperation(JFDocenteAdministrarGrupos.EXIT_ON_CLOSE);
-                JFDocenteAdministrarGrupos.setVisible(true);
-                JFDocenteAdministrarGrupos.setLocationRelativeTo(null); // Centra la ventana en la pantalla
+        JFDocenAdministrarGrupos JFDocenAdministrarGrupos =new JFDocenAdministrarGrupos();  
+                JFDocenAdministrarGrupos.setVisible(true);
+                JFDocenAdministrarGrupos.setLocationRelativeTo(null); // Centra la ventana en la pantalla
                 this.setVisible(false); 
     }//GEN-LAST:event_jButtonGruposActionPerformed
 

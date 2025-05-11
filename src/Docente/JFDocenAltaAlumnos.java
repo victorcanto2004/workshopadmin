@@ -1,0 +1,941 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
+package Docente;
+
+// Paquetes a utilizar
+import Administrador.*;
+import Clases.Alumnos; // Importa la clase Alumnos
+import Clases.CargarTalleres; // Importa la clase CargarTalleres
+import Clases.Conexion; // Importa la clase conexion para gestionar la conexion con la base de datos
+import Clases.ConsultarAlumnos;  // Importa la clase ConsultarAlumnos
+import Clases.TextPrompt; // Importa la clase TextPrompt para utilizar placeholders
+import java.awt.Color; // Permite usar la clase Color para cambiar colores en componentes gráficos.
+import java.awt.Image; // Permite manejar imágenes, por ejemplo, para íconos o imágenes en la interfaz.
+import java.awt.Toolkit; // Proporciona acceso a recursos del sistema como imágenes, sonidos, etc.
+import java.awt.event.KeyEvent; // Permite detectar y manejar eventos del teclado, como presionar, soltar o escribir una tecla.
+import java.sql.Connection; // Importa Connection, que representa la conexión activa con la base de datos.
+import java.sql.DriverManager; // Importa DriverManager, que se usa para establecer conexiones con la base de datos.
+import java.sql.PreparedStatement; // Importa PreparedStatement, que permite ejecutar consultas SQL seguras con parámetros.
+import java.sql.SQLException;  // Importa SQLException, que captura errores relacionados con la base de datos.
+// Importa Logger y Level, herramientas para registrar mensajes en la consola o en archivos de log.
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane; // Permite mostrar cuadros de diálogo (mensajes, confirmaciones, entradas de texto, etc.).
+
+/**
+ *
+ * @author canto
+ */
+public class JFDocenAltaAlumnos extends javax.swing.JFrame {
+
+    /**
+     * Creates new form JFMaestro
+     */
+    
+    // Datos de configuración para la conexión con la base de datos
+    String bd="workshopadmin"; // Nombre de la base de datos a la que se desea conectar.
+    String url="jdbc:mysql://localhost:3306/"; // URL de conexión para MySQL. Incluye el host (localhost) y el puerto (3306), pero no la base de datos todavía.
+    String user="root"; // Usuario de la base de datos. En muchos entornos locales, "root" es el usuario por defecto.
+    String password="sqloracle"; // Contraseña del usuario "root". Aquí se ha puesto "sqloracle", pero debe coincidir con la contraseña real en tu servidor MySQL.
+    String driver="com.mysql.cj.jdbc.Driver"; // Nombre del driver JDBC que se utiliza para conectar a MySQL. Este driver debe estar incluido en el classpath del proyecto.
+    Connection cx=null; // Objeto de conexión. Se utilizará para establecer la conexión con la base de datos.
+    PreparedStatement ps=null; // Objeto que permite ejecutar sentencias SQL con parámetros (consultas preparadas)
+    
+    public JFDocenAltaAlumnos() {
+        initComponents(); // Método que configura y organiza todos los componentes gráficos en la ventana.
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // Desactiva la X de cierre
+        // Llamar a CargarTalleres
+        CargarTalleres ct = new CargarTalleres(jComboBoxTalleres, jComboBoxGrupos, jTextIDTaller.getText());
+        ct.cargarTalleres();  
+        
+        jTextIDTaller.setVisible(false); // Oculta inicialmente el jTextField
+        jTextIDGrupo.setVisible(false); // Oculta inicialmente el jTextField
+        
+        // Establece textos de sugerencia ("placeholders")
+        TextPrompt matricula = new TextPrompt("22070065",jTextMatricula);
+        TextPrompt nombres = new TextPrompt("Juan Adolfo",jTextNombres);
+        TextPrompt apellidos = new TextPrompt("Pech Batun",jTextApellidos);
+        TextPrompt edad = new TextPrompt("21",jTextEdad);
+        TextPrompt tutor = new TextPrompt("Rodolfo Israel Pech Sosa",jTextTutor);
+        TextPrompt contacto = new TextPrompt("Correo, telefóno, otros...",jTextContactoTutor);
+        
+        setIconImage(getIconImage()); // Establece un ícono personalizado para la ventana.
+    }
+    //Icono del JFrame
+    @Override // Indica que este método sobrescribe el método getIconImage() de la clase JFrame
+    // Usa Toolkit (una clase de utilidades gráficas de AWT) para obtener una imagen ubicada en la ruta interna del proyecto
+    // ClassLoader.getSystemResource() localiza el archivo dentro del classpath (dentro de src o el .jar).
+    public Image getIconImage(){ 
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("workshopadmin/Imagenes/LogoIcono.png"));
+        return retValue; // Devuelve la imagen para que sea usada como ícono del JFrame
+    }
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jTextContactoTutor = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jButtonRegistrar = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        jTextMatricula = new javax.swing.JTextField();
+        jTextNombres = new javax.swing.JTextField();
+        jTextEdad = new javax.swing.JTextField();
+        jTextTutor = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        jTextApellidos = new javax.swing.JTextField();
+        jComboBoxTalleres = new javax.swing.JComboBox<>();
+        jComboBoxGrupos = new javax.swing.JComboBox<>();
+        jTextIDTaller = new javax.swing.JTextField();
+        jTextIDGrupo = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableTalleresGrupos = new javax.swing.JTable();
+        jButtonRegresar = new javax.swing.JButton();
+        jButtonRegresarInicio = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabelnformacion = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Registro de alumnos");
+        setResizable(false);
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel2.setText("Matrícula");
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel3.setText("Nombres");
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel4.setText("Edad");
+
+        jTextContactoTutor.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel5.setText("Tutor");
+
+        jButtonRegistrar.setBackground(java.awt.Color.lightGray);
+        jButtonRegistrar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jButtonRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/Registrar.png"))); // NOI18N
+        jButtonRegistrar.setText("Registrar");
+        jButtonRegistrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonRegistrarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonRegistrarMouseExited(evt);
+            }
+        });
+        jButtonRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRegistrarActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel8.setText("Contacto");
+
+        jTextMatricula.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jTextMatricula.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextMatriculaKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextMatriculaKeyTyped(evt);
+            }
+        });
+
+        jTextNombres.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jTextNombres.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextNombresKeyTyped(evt);
+            }
+        });
+
+        jTextEdad.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jTextEdad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextEdadKeyTyped(evt);
+            }
+        });
+
+        jTextTutor.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jTextTutor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextTutorKeyTyped(evt);
+            }
+        });
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel11.setText("Apellidos");
+
+        jTextApellidos.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jTextApellidos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextApellidosKeyTyped(evt);
+            }
+        });
+
+        jComboBoxTalleres.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Taller" }));
+        jComboBoxTalleres.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxTalleresActionPerformed(evt);
+            }
+        });
+
+        jComboBoxGrupos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxGrupos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxGruposActionPerformed(evt);
+            }
+        });
+
+        jTextIDTaller.setText("jTextField1");
+
+        jTextIDGrupo.setText("jTextField2");
+
+        jTableTalleresGrupos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTableTalleresGrupos);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextMatricula))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel5)
+                                            .addComponent(jLabel8)
+                                            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                                .addGap(7, 7, 7)
+                                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jTextTutor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jTextEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jTextNombres, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jTextContactoTutor, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                                        .addComponent(jComboBoxGrupos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addGap(18, 18, 18)
+                                                        .addComponent(jTextIDTaller, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addGap(18, 18, 18)
+                                                        .addComponent(jTextIDGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jTextApellidos))))
+                                    .addComponent(jComboBoxTalleres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(256, 256, 256)
+                        .addComponent(jButtonRegistrar)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(28, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jTextMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jTextNombres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(jTextApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jTextEdad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel5)
+                        .addComponent(jTextTutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(jTextContactoTutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBoxTalleres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxGrupos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextIDTaller, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextIDGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(78, 78, 78)
+                .addComponent(jButtonRegistrar)
+                .addGap(26, 26, 26))
+        );
+
+        jButtonRegresar.setBackground(java.awt.Color.lightGray);
+        jButtonRegresar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jButtonRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/Atras.png"))); // NOI18N
+        jButtonRegresar.setText("Regresar");
+        jButtonRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonRegresarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonRegresarMouseExited(evt);
+            }
+        });
+        jButtonRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRegresarActionPerformed(evt);
+            }
+        });
+
+        jButtonRegresarInicio.setBackground(java.awt.Color.lightGray);
+        jButtonRegresarInicio.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jButtonRegresarInicio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/Atras.png"))); // NOI18N
+        jButtonRegresarInicio.setText("Regresar al inicio");
+        jButtonRegresarInicio.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonRegresarInicioMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonRegresarInicioMouseExited(evt);
+            }
+        });
+        jButtonRegresarInicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRegresarInicioActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel1.setText("Registra un alumno");
+
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Imagenes/Alumno.png"))); // NOI18N
+
+        jLabelnformacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workshopadmin/Iconos/Informacion.png"))); // NOI18N
+        jLabelnformacion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelnformacionMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(13, Short.MAX_VALUE)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(92, 92, 92)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButtonRegresarInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonRegresar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(50, 50, 50))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(63, 63, 63)
+                        .addComponent(jLabelnformacion)
+                        .addGap(29, 29, 29))))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addComponent(jButtonRegresar)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonRegresarInicio)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(jLabelnformacion))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(jLabel1)))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(33, 33, 33))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarActionPerformed
+        // TODO add your handling code here:
+        // Muestra un cuadro de diálogo para confirmar si el usuario realmente desea dar de alta al alumno
+        int respuesta = JOptionPane.showConfirmDialog(null, "Realmente desea dar de alta a este alumno?", 
+                "Confirmar salida", 
+                JOptionPane.YES_NO_OPTION, 
+                JOptionPane.QUESTION_MESSAGE);
+        if (respuesta == JOptionPane.NO_OPTION) {
+            // Si el usuario elige "No", simplemente no hace nada
+            JOptionPane.showMessageDialog(null, "Operación cancelada.");
+        } else {
+            // Validación: Verifica si algún campo obligatorio está vacío o si no se ha seleccionado taller y grupo
+            if (jTextMatricula.getText().trim().isEmpty()||
+                    jTextNombres.getText().trim().isEmpty()||
+                    jTextApellidos.getText().trim().isEmpty()||
+                    jTextEdad.getText().trim().isEmpty()||
+                    jTextTutor.getText().trim().isEmpty()||
+                    jTextContactoTutor.getText().trim().isEmpty()||
+                    jComboBoxTalleres.getSelectedItem().toString().equals("Taller") ||
+                    jComboBoxGrupos.getSelectedItem().toString().equals("Grupos")){ 
+            
+            JOptionPane.showMessageDialog(null,"Por favor, completa todos los campos correctamente"
+                    + "\ny selecciona un taller y grupo.",
+                        "ADVERTENCIA",
+                        JOptionPane.ERROR_MESSAGE);
+            } else {
+                    // Validación: La matrícula debe tener exactamente 8 dígitos numéricos
+                    if (!jTextMatricula.getText().matches("\\d{8}")) {
+                        JOptionPane.showMessageDialog(null,"La matrícula solo puede contener 8 números",
+                                    "ADVERTENCIA",
+                                    JOptionPane.ERROR_MESSAGE);
+                    } else {
+                             // Si todas las validaciones son correctas, se extraen los datos de los campos
+                            String matriculaingresada;
+                            String nombreingresado;
+                            String apellidoingresado;
+                            int edadingresada;
+                            String tutoringresado;
+                            String contactotutoringresado;
+                            int idgrupo;
+
+                            matriculaingresada = jTextMatricula.getText();
+                            nombreingresado = jTextNombres.getText();
+                            apellidoingresado = jTextApellidos.getText();
+                            edadingresada = Integer.parseInt(jTextEdad.getText()); 
+                            tutoringresado  = jTextTutor.getText();
+                            contactotutoringresado = jTextContactoTutor.getText();
+                            idgrupo = Integer.parseInt(jTextIDGrupo.getText()); // El ID de grupo ya se supone que está definido
+
+                            // Se crea un objeto de tipo Alumnos con los datos obtenidos
+                            Alumnos aa = new Alumnos(matriculaingresada, nombreingresado, apellidoingresado, 
+                                                     edadingresada, tutoringresado, contactotutoringresado, idgrupo);
+                            aa.AltaAlumno(); // Llama al método AltaAlumno() para registrar al alumno en la base de datos
+                            
+                            jTextMatricula.setText("");
+                            jTextNombres.setText("");
+                            jTextApellidos.setText("");
+                            jTextEdad.setText("");
+                            jTextTutor.setText("");
+                            jTextContactoTutor.setText("");
+                            jTextIDGrupo.setText("");
+                            jTextMatricula.requestFocus();
+                            
+                            CargarTalleres ct = new CargarTalleres(jComboBoxTalleres, jComboBoxGrupos, jTextIDTaller.getText());
+                            ct.cargarTalleres();
+                            }
+                    }          
+            }
+    }//GEN-LAST:event_jButtonRegistrarActionPerformed
+
+    private void jButtonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegresarActionPerformed
+        // TODO add your handling code here:
+        // Este método se ejecuta cuando el usuario hace clic en el botón "Regresar".
+        JFDocenAdministrarAlumnos JFDocenAdministrarAlumnos =new JFDocenAdministrarAlumnos(); // Crea una nueva instancia
+                JFDocenAdministrarAlumnos.setVisible(true); // Muestra la ventana de inicio.
+                JFDocenAdministrarAlumnos.setLocationRelativeTo(null); // Centra la ventana en la pantalla
+                this.setVisible(false);  // Oculta la ventana actual.
+    }//GEN-LAST:event_jButtonRegresarActionPerformed
+
+    private void jButtonRegresarInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegresarInicioActionPerformed
+        // TODO add your handling code here:
+        // Este método se ejecuta cuando el usuario hace clic en el botón "Regresar al inicio".
+        JFMenuDocente JFMenuDocente =new JFMenuDocente();  // Crea una nueva instancia de la ventana
+                JFMenuDocente.setVisible(true); // Muestra la ventana de inicio.
+                JFMenuDocente.setLocationRelativeTo(null); // Centra la ventana en la pantalla
+                this.setVisible(false); // Oculta la ventana actual.                
+    }//GEN-LAST:event_jButtonRegresarInicioActionPerformed
+
+    private void jLabelnformacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelnformacionMouseClicked
+        // TODO add your handling code here:
+        // Este método se ejecuta cuando el usuario hace clic en el label de información.
+        JOptionPane.showMessageDialog(null,"Ingresa los datos del nuevo alumno"
+                + "\ny selecciona su taller y grupo. "
+                + "\nLuego haz clic en Guardar."
+                + "\nEn caso de tener al alumno ya registrado y quieres darlo de alta"
+                + "\nen otro taller o grupo, coloca su matrícula y presiona enter"
+                + "\npara cargar al alumno ya inscrito"
+                + "\nRecuerda que la matrícula del alumno deben ser 8 números",
+            "Información",
+            JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_jLabelnformacionMouseClicked
+
+    private void jButtonRegistrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegistrarMouseEntered
+        // TODO add your handling code here:
+        // Cambia el fondo del botón a verde cuando el mouse pasa por encima.
+        jButtonRegistrar.setBackground(Color.GREEN);
+    }//GEN-LAST:event_jButtonRegistrarMouseEntered
+
+    private void jButtonRegistrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegistrarMouseExited
+        // TODO add your handling code here:
+        // Restaura el fondo del botón a gris claro cuando el mouse sale.
+        jButtonRegistrar.setBackground(Color.LIGHT_GRAY);
+    }//GEN-LAST:event_jButtonRegistrarMouseExited
+
+    private void jButtonRegresarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegresarMouseEntered
+        // TODO add your handling code here:
+        // Cambia el fondo del botón a verde cuando el mouse pasa por encima.
+        jButtonRegresar.setBackground(Color.GREEN);
+    }//GEN-LAST:event_jButtonRegresarMouseEntered
+
+    private void jButtonRegresarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegresarMouseExited
+        // TODO add your handling code here:
+        // Restaura el fondo del botón a gris claro cuando el mouse sale.
+        jButtonRegresar.setBackground(Color.LIGHT_GRAY);
+    }//GEN-LAST:event_jButtonRegresarMouseExited
+
+    private void jButtonRegresarInicioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegresarInicioMouseEntered
+        // TODO add your handling code here:
+        // Cambia el fondo del botón a verde cuando el mouse pasa por encima.
+        jButtonRegresarInicio.setBackground(Color.GREEN);
+    }//GEN-LAST:event_jButtonRegresarInicioMouseEntered
+
+    private void jButtonRegresarInicioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegresarInicioMouseExited
+        // TODO add your handling code here:
+        // Restaura el fondo del botón a gris claro cuando el mouse sale.
+        jButtonRegresarInicio.setBackground(Color.LIGHT_GRAY);
+    }//GEN-LAST:event_jButtonRegresarInicioMouseExited
+
+    private void jComboBoxTalleresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTalleresActionPerformed
+    // TODO add your handling code here:      
+    // Obtener el valor seleccionado del JComboBox
+    String seleccionado = (String) jComboBoxTalleres.getSelectedItem();
+
+    // Verificar si el valor seleccionado no es "Taller"
+    if (seleccionado != null && !seleccionado.equals("Taller")) {
+        // Establecer el nombre del taller en el JTextField
+        jTextIDTaller.setText(seleccionado);
+
+        try {
+            // Establecer la conexión a la base de datos
+            Class.forName(driver);
+            cx = DriverManager.getConnection(url + bd, user, password);
+            
+            // Preparar la consulta para obtener el id_taller
+            PreparedStatement consulta = cx.prepareStatement("SELECT id_taller FROM talleres WHERE nombre=? AND activo = TRUE");
+
+            // Establecer el parámetro de la consulta
+            consulta.setString(1, seleccionado);  // Usamos directamente el nombre seleccionado
+
+            // Ejecutar la consulta
+            var rs = consulta.executeQuery();
+
+            // Verificar si el ResultSet tiene resultados
+            if (rs.next()) {
+                // Obtener el id_taller desde el ResultSet
+                int idTaller = rs.getInt("id_taller");
+
+                // Establecer el id_taller en otro JTextField
+                jTextIDTaller.setText(String.valueOf(idTaller));
+                
+                // Llamar a cargarGrupos() pasando el id del taller y el JComboBox2 para cargar los grupos
+                CargarTalleres ct = new CargarTalleres(jComboBoxTalleres, jComboBoxGrupos, jTextIDTaller.getText());
+                ct.cargarGrupos(); 
+
+            } else {
+                // Si no se encuentra el taller, mostrar un mensaje
+                JOptionPane.showMessageDialog(null, "Taller no encontrado.");
+            }
+
+            // Cerrar los recursos
+            rs.close();
+            consulta.close();
+            cx.close();
+
+        } catch (ClassNotFoundException | SQLException ex) {
+            System.out.println("No se conectó a la BD " + ex.getMessage());
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    } else {
+        // Si se selecciona "Taller" o si el valor es null, limpiar el JTextField
+        jTextIDTaller.setText("");
+        // Limpiar el JComboBox de grupos y agregar solo "Grupos"
+        jComboBoxGrupos.removeAllItems();
+        jComboBoxGrupos.addItem("Grupos");
+    }
+    }//GEN-LAST:event_jComboBoxTalleresActionPerformed
+
+    private void jComboBoxGruposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxGruposActionPerformed
+    // TODO add your handling code here:
+    // Obtener el valor seleccionado del JComboBox
+    String seleccionado = (String) jComboBoxGrupos.getSelectedItem();
+
+    // Verificar si el valor seleccionado no es "Taller"
+    if (seleccionado != null && !seleccionado.equals("Grupos")) {
+        // Establecer el nombre del taller en el JTextField
+        jTextIDGrupo.setText(seleccionado);
+
+        try {
+            // Establecer la conexión a la base de datos
+            Class.forName(driver);
+            cx = DriverManager.getConnection(url + bd, user, password);
+ 
+            // Preparar la consulta para obtener el id_taller
+            PreparedStatement consulta = cx.prepareStatement("SELECT id_grupo FROM grupos WHERE nombre=? AND activo = TRUE");
+
+            // Establecer el parámetro de la consulta
+            consulta.setString(1, seleccionado);  // Usamos directamente el nombre seleccionado
+
+            // Ejecutar la consulta
+            var rs = consulta.executeQuery();
+
+            // Verificar si el ResultSet tiene resultados
+            if (rs.next()) {
+                // Obtener el id_taller desde el ResultSet
+                int idGrupo = rs.getInt("id_grupo");
+
+                // Establecer el id_taller en otro JTextField
+                jTextIDGrupo.setText(String.valueOf(idGrupo));
+
+            } else {
+                // Si no se encuentra el taller, mostrar un mensaje
+                JOptionPane.showMessageDialog(null, "Taller no encontrado.");
+            }
+
+            // Cerrar los recursos
+            rs.close();
+            consulta.close();
+            cx.close();
+
+        } catch (ClassNotFoundException | SQLException ex) {
+            System.out.println("No se conectó a la BD " + ex.getMessage());
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    } else {
+        // Si se selecciona "Taller" o si el valor es null, limpiar el JTextField
+        jTextIDGrupo.setText("");
+    }
+    }//GEN-LAST:event_jComboBoxGruposActionPerformed
+
+    private void jTextMatriculaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextMatriculaKeyTyped
+        // TODO add your handling code here:
+        //Validamos que en el campo no se puedan ingresar letras.
+        char c = evt.getKeyChar(); //llamamos al evento
+            if (Character.isLetter(c)){ //comparamos si ingresamos una letra
+                evt.consume(); //evitar que se capture la letra
+                JOptionPane.showMessageDialog(null,"Solo puedes ingresar números en este campo",
+                        "ADVERTENCIA",
+                        JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jTextMatriculaKeyTyped
+
+    private void jTextEdadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextEdadKeyTyped
+        // TODO add your handling code here:
+        //Validamos que en el campo no se puedan ingresar letras.
+        char c = evt.getKeyChar(); //llamamos al evento
+            if (Character.isLetter(c)){ //comparamos si ingresamos una letra
+                evt.consume(); //evitar que se capture la letra
+                JOptionPane.showMessageDialog(null,"Solo puedes ingresar números en este campo",
+                        "ADVERTENCIA",
+                        JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jTextEdadKeyTyped
+
+    private void jTextNombresKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextNombresKeyTyped
+        // TODO add your handling code here:
+            //Validamos que en el campo no se puedan ingresar números.
+            char c = evt.getKeyChar(); //llamamos al evento
+            if (Character.isDigit(c)){ //comparamos si ingresamos un digito
+                evt.consume(); //evitar que se capture el digito
+                JOptionPane.showMessageDialog(null,"No puedes ingresar números en este campo",
+                        "ADVERTENCIA",
+                        JOptionPane.ERROR_MESSAGE);
+       }
+    }//GEN-LAST:event_jTextNombresKeyTyped
+
+    private void jTextApellidosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextApellidosKeyTyped
+        // TODO add your handling code here:
+            //Validamos que en el campo no se puedan ingresar números.
+            char c = evt.getKeyChar(); //llamamos al evento
+            if (Character.isDigit(c)){ //comparamos si ingresamos un digito
+                evt.consume(); //evitar que se capture el digito
+                JOptionPane.showMessageDialog(null,"No puedes ingresar números en este campo",
+                        "ADVERTENCIA",
+                        JOptionPane.ERROR_MESSAGE);
+       }
+    }//GEN-LAST:event_jTextApellidosKeyTyped
+
+    private void jTextTutorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextTutorKeyTyped
+        // TODO add your handling code here:
+            //Validamos que en el campo no se puedan ingresar números.
+            char c = evt.getKeyChar(); //llamamos al evento
+            if (Character.isDigit(c)){ //comparamos si ingresamos un digito
+                evt.consume(); //evitar que se capture el digito
+                JOptionPane.showMessageDialog(null,"No puedes ingresar números en este campo",
+                        "ADVERTENCIA",
+                        JOptionPane.ERROR_MESSAGE);
+       }
+    }//GEN-LAST:event_jTextTutorKeyTyped
+
+    private void jTextMatriculaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextMatriculaKeyPressed
+        // TODO add your handling code here:
+        // Al presionar enter realiza la busqueda en caso de solo querer agregar a un alumno a otro taller
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER)
+        {
+        // Validación: Verifica si algún campo obligatorio está vacío 
+            if (jTextMatricula.getText().trim().isEmpty()){ 
+            
+            JOptionPane.showMessageDialog(null,"Por favor, escribe una matrícula",
+                        "ADVERTENCIA",
+                        JOptionPane.ERROR_MESSAGE);
+            } else {
+                  ConsultarAlumnos ca = new ConsultarAlumnos();
+                  ca.Consultar(jTextMatricula, jTextNombres, jTextApellidos, jTextEdad, jTextTutor, jTextContactoTutor, jTableTalleresGrupos);
+                }
+        }
+    }//GEN-LAST:event_jTextMatriculaKeyPressed
+
+    
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(JFDocenAltaAlumnos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(JFDocenAltaAlumnos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(JFDocenAltaAlumnos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(JFDocenAltaAlumnos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new JFDocenAltaAlumnos().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonRegistrar;
+    private javax.swing.JButton jButtonRegresar;
+    private javax.swing.JButton jButtonRegresarInicio;
+    private javax.swing.JComboBox<String> jComboBoxGrupos;
+    public javax.swing.JComboBox<String> jComboBoxTalleres;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelnformacion;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTableTalleresGrupos;
+    private javax.swing.JTextField jTextApellidos;
+    private javax.swing.JTextField jTextContactoTutor;
+    private javax.swing.JTextField jTextEdad;
+    private javax.swing.JTextField jTextIDGrupo;
+    private javax.swing.JTextField jTextIDTaller;
+    private javax.swing.JTextField jTextMatricula;
+    private javax.swing.JTextField jTextNombres;
+    private javax.swing.JTextField jTextTutor;
+    // End of variables declaration//GEN-END:variables
+}
